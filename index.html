@@ -144,6 +144,107 @@
     <ul class="post-list">
     
         <li class="post-list-item">
+            <article id="post-seaweedfs源码阅读记录"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-11-22T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-11-22
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/11/22/seaweedfs源码阅读记录/">seaweedfs源码阅读记录1</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
+目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
+学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm ...
+    
+    
+        <a href="/2016/11/22/seaweedfs源码阅读记录/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-seaweedfs源码阅读记录2"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-11-22T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-11-22
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/11/22/seaweedfs源码阅读记录2/">seaweedfs源码阅读记录2</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        调试过程使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.
+
+    
+    
+        <a href="/2016/11/22/seaweedfs源码阅读记录2/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
             <article id="post-nodeJS入门总结"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -193,6 +294,108 @@ bootstrap + jquery (前端页面是在网上找的,随便改了一下)
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Express/">Express</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodeJS/">nodeJS</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-cloudstack搭建总结"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-11-20T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-11-20
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/cloudsatck搭建/">cloudsatck搭建</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/11/20/cloudstack搭建总结/">cloudstack 搭建总结</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        按照官网的教程搭建cloudstack,稍不注意,就出现错误.总结一下.
+子节点状态不对123[root@node3 ~]# service cloudstack-agent statuscloudstack-agent dead but subsys locked
+解决：管理节点防火墙问题，正常状态下计算节点应通过NFS挂载主存储,管理节点应开放8250端口
+执行完后把cloudstack...
+    
+    
+        <a href="/2016/11/20/cloudstack搭建总结/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloudsatck/">cloudsatck</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-ubuntu下如何优雅地使用翻译"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-10-26T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-10-26
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/有道字典修改/">有道字典修改</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/10/26/ubuntu下如何优雅地使用翻译/">ubuntu下如何优雅地使用翻译</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        最近看英文文档比较多，但英语水平不咋地，需要借助翻译工具。在ubuntu下，有startdict、goldendict等字典，但字典毕竟是字典，解释太多，用着不太爽。平时喜欢用谷歌翻译，最近谷歌翻译的水平也的确提升了不少，可惜没有客户端，平时看个PDF啥的也用不了，github 上的发现mtranslate模块，把网址改为中国的网址，得到结果还挺快.
+本来想写个接口封装一下，直接用golde...
+    
+    
+        <a href="/2016/10/26/ubuntu下如何优雅地使用翻译/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
 
     </div>
     
