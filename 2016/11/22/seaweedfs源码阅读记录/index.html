@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="seaweedfs,go">
+  <meta name="keywords" content="go,seaweedfs">
   <meta name="description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
 目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
 学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需">
@@ -22,7 +22,7 @@
 <meta property="og:description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
 目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
 学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需">
-<meta property="og:updated_time" content="2016-11-22T12:45:33.905Z">
+<meta property="og:updated_time" content="2016-11-26T14:02:43.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="seaweedfs源码阅读记录1">
 <meta name="twitter:description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
@@ -184,6 +184,8 @@
 <h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
 <p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
+<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
+<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
 
         </div>
         
@@ -259,7 +261,14 @@
     </div>   
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/11/23/golang学习/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">golang学习</h4>
+      </a>
+    </div>
   
 
   
