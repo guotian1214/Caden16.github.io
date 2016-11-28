@@ -20,11 +20,13 @@
 <meta property="og:site_name" content="MakeItPossible16">
 <meta property="og:description" content="master启动过程使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,参考文章： weed-fs 源码解读
 12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, u">
-<meta property="og:updated_time" content="2016-11-26T15:43:25.066Z">
+<meta property="og:image" content="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg">
+<meta property="og:updated_time" content="2016-11-28T11:57:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="seaweedfs源码阅读记录2">
 <meta name="twitter:description" content="master启动过程使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,参考文章： weed-fs 源码解读
 12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, u">
+<meta name="twitter:image" content="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -177,7 +179,7 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="master启动过程"><a href="#master启动过程" class="headerlink" title="master启动过程"></a>master启动过程</h2><p>使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.<br>opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,<br>参考文章： <a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">	NextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">	SetMax(<span class="keyword">uint64</span>)</div><div class="line">	Peek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg" alt="master启动-20161128"><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">	NextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">	SetMax(<span class="keyword">uint64</span>)</div><div class="line">	Peek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>topology中包含Sequencer , sequence 负责FileID的全局有序生成</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Topology <span class="keyword">struct</span> &#123;</div><div class="line">	NodeImpl   <span class="comment">//指向NodeImpl对象，即Topology和node相互指向</span></div><div class="line"></div><div class="line">	collectionMap *util.ConcurrentReadMap</div><div class="line"></div><div class="line">	pulse <span class="keyword">int64</span></div><div class="line"></div><div class="line">	volumeSizeLimit <span class="keyword">uint64</span></div><div class="line"></div><div class="line">	Sequence sequence.Sequencer</div><div class="line"></div><div class="line">	chanDeadDataNodes      <span class="keyword">chan</span> *DataNode</div><div class="line">	chanRecoveredDataNodes <span class="keyword">chan</span> *DataNode</div><div class="line">	chanFullVolumes        <span class="keyword">chan</span> storage.VolumeInfo</div><div class="line"></div><div class="line">	configuration *Configuration</div><div class="line"></div><div class="line">	RaftServer raft.Server</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>NodeImpl结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> NodeImpl <span class="keyword">struct</span> &#123;</div><div class="line">	id                NodeId</div><div class="line">	volumeCount       <span class="keyword">int</span></div><div class="line">	activeVolumeCount <span class="keyword">int</span></div><div class="line">	maxVolumeCount    <span class="keyword">int</span></div><div class="line">	parent            Node</div><div class="line">	sync.RWMutex      <span class="comment">// lock children</span></div><div class="line">	children          <span class="keyword">map</span>[NodeId]Node</div><div class="line">	maxVolumeId       storage.VolumeId</div><div class="line"></div><div class="line">	<span class="comment">//for rack, data center, topology</span></div><div class="line">	nodeType <span class="keyword">string</span></div><div class="line">	value    <span class="keyword">interface</span>&#123;&#125;  <span class="comment">//指向Topology对象，即Topology和node相互指向</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -262,18 +264,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2016/11/22/seaweedfs源码阅读记录/" id="post-prev" class="post-nav-link">
+      <a href="/2016/11/23/golang学习/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">seaweedfs源码阅读记录1</h4>
+        <h4 class="title">golang学习</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/11/20/cloudstack搭建总结/" id="post-next" class="post-nav-link">
+      <a href="/2016/11/22/seaweedfs源码阅读记录/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">cloudstack 搭建总结</h4>
+        <h4 class="title">seaweedfs源码阅读记录1</h4>
       </a>
     </div>
   
