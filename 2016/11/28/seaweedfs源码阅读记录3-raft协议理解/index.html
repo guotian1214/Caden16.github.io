@@ -5,29 +5,29 @@
   
   
   
-  <title>seaweedfs源码阅读记录1 | MakeItPossible16 | 写点东西吧,程序员</title>
+  <title>seaweedfs源码阅读记录3-raft协议理解 | MakeItPossible16 | 写点东西吧,程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="go,seaweedfs">
-  <meta name="description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
-目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
-学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需">
+  <meta name="keywords" content="go,seaweedfs,raft">
+  <meta name="description" content="raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理.
+参考文章Raft一致性算法raft动画演示raft介绍go-raft源码解析go-raft文档
+阅读记录本文按照参考文章中的go-raft源码解析中的文章阅读,记录阅读过程.12345678910111213141516// The request se">
 <meta property="og:type" content="article">
-<meta property="og:title" content="seaweedfs源码阅读记录1">
-<meta property="og:url" content="https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/index.html">
+<meta property="og:title" content="seaweedfs源码阅读记录3-raft协议理解">
+<meta property="og:url" content="https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
-目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
-学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需">
-<meta property="og:updated_time" content="2016-11-26T14:02:43.639Z">
+<meta property="og:description" content="raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理.
+参考文章Raft一致性算法raft动画演示raft介绍go-raft源码解析go-raft文档
+阅读记录本文按照参考文章中的go-raft源码解析中的文章阅读,记录阅读过程.12345678910111213141516// The request se">
+<meta property="og:updated_time" content="2016-11-30T12:04:18.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="seaweedfs源码阅读记录1">
-<meta name="twitter:description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
-目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
-学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需">
+<meta name="twitter:title" content="seaweedfs源码阅读记录3-raft协议理解">
+<meta name="twitter:description" content="raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理.
+参考文章Raft一致性算法raft动画演示raft介绍go-raft源码解析go-raft文档
+阅读记录本文按照参考文章中的go-raft源码解析中的文章阅读,记录阅读过程.12345678910111213141516// The request se">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -112,7 +112,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">seaweedfs源码阅读记录1</div>
+        <div class="flex-col header-title ellipsis">seaweedfs源码阅读记录3-raft协议理解</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -134,11 +134,11 @@
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">seaweedfs源码阅读记录1</h1>
+        <h1 class="title">seaweedfs源码阅读记录3-raft协议理解</h1>
         <h5 class="subtitle">
             
-                <time datetime="2016-11-22T00:00:00.000Z" itemprop="datePublished" class="page-time">
-  2016-11-22
+                <time datetime="2016-11-28T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2016-11-28
 </time>
 
 
@@ -158,18 +158,18 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标-学习seaweedfs-的文件合并存储"><span class="post-toc-number">1.</span> <span class="post-toc-text">目标:学习seaweedfs 的文件合并存储</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习方式-google-调试"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习方式: google + 调试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">1.</span> <span class="post-toc-text">参考文章</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#阅读记录"><span class="post-toc-number">2.</span> <span class="post-toc-text">阅读记录</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-seaweedfs源码阅读记录" 
+<article id="post-seaweedfs源码阅读记录3-raft协议理解" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">seaweedfs源码阅读记录1</h1>
+        <h1 class="post-card-title">seaweedfs源码阅读记录3-raft协议理解</h1>
         <div class="post-meta">
-            <time datetime="2016-11-22T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-11-22
+            <time datetime="2016-11-28T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-11-28
 </time>
 
             
@@ -179,13 +179,9 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
-<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
-<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
-<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
-<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
-<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+            <p>raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理.</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://blog.csdn.net/cszhouwei/article/details/38374603" target="_blank" rel="external">Raft一致性算法</a><br><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="external">raft动画演示</a><br><a href="https://raft.github.io/" target="_blank" rel="external">raft介绍</a><br><a href="https://ayende.com/blog/165858/reviewing-go-raft-part-i" target="_blank" rel="external">go-raft源码解析</a><br><a href="https://godoc.org/github.com/coreos/etcd/raft" target="_blank" rel="external">go-raft文档</a></p>
+<h2 id="阅读记录"><a href="#阅读记录" class="headerlink" title="阅读记录"></a>阅读记录</h2><p>本文按照参考文章中的go-raft源码解析中的文章阅读,记录阅读过程.<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// The request sent to a server to append entries to the log.</span></div><div class="line"><span class="keyword">type</span> AppendEntriesRequest <span class="keyword">struct</span> &#123;</div><div class="line">	Term         <span class="keyword">uint64</span></div><div class="line">	PrevLogIndex <span class="keyword">uint64</span></div><div class="line">	PrevLogTerm  <span class="keyword">uint64</span></div><div class="line">	CommitIndex  <span class="keyword">uint64</span></div><div class="line">	LeaderName   <span class="keyword">string</span></div><div class="line">	Entries      []*protobuf.LogEntry  <span class="comment">// 定义在protobuf中的LogEntry</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// The response returned from a server appending entries to the log.</span></div><div class="line"><span class="keyword">type</span> AppendEntriesResponse <span class="keyword">struct</span> &#123;</div><div class="line">	pb     *protobuf.AppendEntriesResponse</div><div class="line">	peer   <span class="keyword">string</span></div><div class="line">	<span class="built_in">append</span> <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -205,7 +201,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raft/">raft</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
 
 
             
@@ -216,7 +212,7 @@
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/&title=《seaweedfs源码阅读记录1》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/&title=《seaweedfs源码阅读记录3-raft协议理解》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -226,22 +222,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/&title=《seaweedfs源码阅读记录1》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/&title=《seaweedfs源码阅读记录3-raft协议理解》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录1》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录3-raft协议理解》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -264,18 +260,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2016/11/22/seaweedfs源码阅读记录2/" id="post-prev" class="post-nav-link">
+      <a href="/2016/11/29/golang学习/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">seaweedfs源码阅读记录2</h4>
+        <h4 class="title">golang学习</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/11/20/cloudstack搭建总结/" id="post-next" class="post-nav-link">
+      <a href="/2016/11/22/seaweedfs源码阅读记录2/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">cloudstack 搭建总结</h4>
+        <h4 class="title">seaweedfs源码阅读记录2</h4>
       </a>
     </div>
   
@@ -285,7 +281,7 @@
             
     
 <div class="duoshuo" id="comments">
-	<div class="ds-thread" data-thread-key="seaweedfs源码阅读记录" data-title="seaweedfs源码阅读记录1" data-url="https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/"></div>
+	<div class="ds-thread" data-thread-key="seaweedfs源码阅读记录3-raft协议理解" data-title="seaweedfs源码阅读记录3-raft协议理解" data-url="https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.2"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -315,7 +311,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/&title=《seaweedfs源码阅读记录1》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/&title=《seaweedfs源码阅读记录3-raft协议理解》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -325,22 +321,22 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/&title=《seaweedfs源码阅读记录1》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/&title=《seaweedfs源码阅读记录3-raft协议理解》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录1》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录3-raft协议理解》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -351,7 +347,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/" alt="微信分享二维码"/>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/" alt="微信分享二维码"/>
 </div>
 
 
