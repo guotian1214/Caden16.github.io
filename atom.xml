@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2016-11-30T11:59:44.763Z</updated>
+  <updated>2016-12-11T04:42:08.898Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -14,6 +14,98 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>golang 反射机制</title>
+    <link href="https://makeitpossible16.github.io/2016/12/11/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
+    <id>https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/</id>
+    <published>2016-12-11T00:00:00.000Z</published>
+    <updated>2016-12-11T04:42:08.898Z</updated>
+    
+    <content type="html"><![CDATA[<p>根据文章<a href="http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">使用delve调试Golang程序技巧</a><br>使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试</p>
+<p>通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/03.4.md" target="_blank" rel="external">go http ServeMux介绍</a>,<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">volumeMux := http.NewServeMux()</div><div class="line">publicVolumeMux := volumeMux</div><div class="line"><span class="keyword">if</span> isSeperatedPublicPort &#123;</div><div class="line">	publicVolumeMux = http.NewServeMux()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>根据参数VolumeServerOptions 中的 indexType,选择volume Needle Map 的存储位置,默认使用内存<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">volumeNeedleMapKind := storage.NeedleMapInMemory</div><div class="line"><span class="keyword">switch</span> *v.indexType &#123;</div><div class="line"><span class="keyword">case</span> <span class="string">"leveldb"</span>:</div><div class="line">  volumeNeedleMapKind = storage.NeedleMapLevelDb</div><div class="line"><span class="keyword">case</span> <span class="string">"boltdb"</span>:</div><div class="line">  volumeNeedleMapKind = storage.NeedleMapBoltDb</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调试信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(dlv) p *v.indexType</div><div class="line"><span class="string">"memory"</span></div></pre></td></tr></table></figure></p>
+<p>根据参数生成volumeServer,使用volume_server.go 中的NewVolumeServer 生成volumeServer<br>在volume_server.go 中,设置masterNode ,store, guard<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vs.SetMasterNode(masterNode)</div><div class="line">vs.store = storage.NewStore(port, ip, publicUrl, folders, maxCounts, vs.needleMapKind)</div><div class="line"></div><div class="line">vs.guard = security.NewGuard(whiteList, <span class="string">""</span>)</div></pre></td></tr></table></figure></p>
+<p>生成store时会加载已有的volume<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// store.go</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewStore</span><span class="params">(port <span class="keyword">int</span>, ip, publicUrl <span class="keyword">string</span>, dirnames []<span class="keyword">string</span>, maxVolumeCounts []<span class="keyword">int</span>, needleMapKind NeedleMapType)</span> <span class="params">(s *Store)</span></span> &#123;</div><div class="line">	s = &amp;Store&#123;Port: port, Ip: ip, PublicUrl: publicUrl&#125;</div><div class="line">	s.Locations = <span class="built_in">make</span>([]*DiskLocation, <span class="number">0</span>)</div><div class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(dirnames); i++ &#123;</div><div class="line">		location := NewDiskLocation(dirnames[i], maxVolumeCounts[i])</div><div class="line">		location.loadExistingVolumes(needleMapKind)</div><div class="line">		s.Locations = <span class="built_in">append</span>(s.Locations, location)</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;根据文章&lt;a href=&quot;http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;amp;utm_medium=referral&quot; target=&quot;_blank&quot; 
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>golang调试技巧</title>
+    <link href="https://makeitpossible16.github.io/2016/12/10/golang%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/"/>
+    <id>https://makeitpossible16.github.io/2016/12/10/golang调试技巧/</id>
+    <published>2016-12-10T00:00:00.000Z</published>
+    <updated>2016-12-11T02:52:49.574Z</updated>
+    
+    <content type="html"><![CDATA[<p>在阅读seaweedfs过程中,发现对于复杂程序,跟踪调试相当困难,不过,在看了<a href="http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">使用delve调试Golang程序技巧</a>这篇文章后,调试问题得到很好的改善.</p>
+<p>首先,liteIDE简直让人眼前一亮,使用它并结合delve实现图形化界面调试,使用命令行多少有点不太方便,特别是当你想在源码中加入注释的时候.</p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><ol>
+<li><p>安装delve,liteIDE</p>
+</li>
+<li><p>加入参数关闭编译器优化,如 go install -gcflags “-N -l” 程序名称</p>
+</li>
+<li><p>按照文章<a href="http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">使用delve调试Golang程序技巧</a>, 调试外部程序</p>
+</li>
+<li><p>调试启动后,可在Console设置断点, 命令为 : b packageName.functionName 或 b lineNum</p>
+</li>
+<li><p>使用命令c ,运行到断点停止,进行操作,具体命令可参照delve</p>
+</li>
+</ol>
+<p>还不清楚liteIDE能不能使用delve 进行图形化attach,如果可以就非常完美</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在阅读seaweedfs过程中,发现对于复杂程序,跟踪调试相当困难,不过,在看了&lt;a href=&quot;http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;amp;u
+    
+    </summary>
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/categories/go/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>golang 反射机制</title>
+    <link href="https://makeitpossible16.github.io/2016/12/02/golang%20%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+    <id>https://makeitpossible16.github.io/2016/12/02/golang 反射机制/</id>
+    <published>2016-12-02T00:00:00.000Z</published>
+    <updated>2016-12-04T07:55:20.022Z</updated>
+    
+    <content type="html"><![CDATA[<p>在阅读seaweedfs过程中,当程序在运行过程中,想要进行跟踪调试不好实现,目前也没找到很好的解决方案,只能跟踪程序的启动过程.不过回归最原始的方法,使用printf倒是可以查看变量的值,因此打算编写程序,把struct中的变量转化为json,发送给搭建的服务器,实现查看struct变量的方法.其中就了解到go的反射机制.</p>
+<p><a href="https://blog.golang.org/laws-of-reflection" target="_blank" rel="external">laws-of-reflection</a><br><a href="http://blog.csdn.net/liuxinmingcode/article/details/50480097" target="_blank" rel="external">Golang之反射reflect包</a></p>
+<p>使用反射可以得到struct中的变量及变量的值,前提是该变量是export的,即首字母大写,类似java中的public.    </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在阅读seaweedfs过程中,当程序在运行过程中,想要进行跟踪调试不好实现,目前也没找到很好的解决方案,只能跟踪程序的启动过程.不过回归最原始的方法,使用printf倒是可以查看变量的值,因此打算编写程序,把struct中的变量转化为json,发送给搭建的服务器,实现查看
+    
+    </summary>
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/categories/go/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+  </entry>
   
   <entry>
     <title>golang学习</title>
@@ -74,10 +166,10 @@
     <link href="https://makeitpossible16.github.io/2016/11/28/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%953-raft%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/"/>
     <id>https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/</id>
     <published>2016-11-28T00:00:00.000Z</published>
-    <updated>2016-11-30T12:04:18.543Z</updated>
+    <updated>2016-11-30T15:52:37.951Z</updated>
     
     <content type="html"><![CDATA[<p>raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理.</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://blog.csdn.net/cszhouwei/article/details/38374603" target="_blank" rel="external">Raft一致性算法</a><br><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="external">raft动画演示</a><br><a href="https://raft.github.io/" target="_blank" rel="external">raft介绍</a><br><a href="https://ayende.com/blog/165858/reviewing-go-raft-part-i" target="_blank" rel="external">go-raft源码解析</a><br><a href="https://godoc.org/github.com/coreos/etcd/raft" target="_blank" rel="external">go-raft文档</a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://blog.csdn.net/cszhouwei/article/details/38374603" target="_blank" rel="external">Raft一致性算法</a><br><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="external">raft动画演示</a><br><a href="https://raft.github.io/" target="_blank" rel="external">raft介绍</a><br><a href="https://ayende.com/blog/165858/reviewing-go-raft-part-i" target="_blank" rel="external">go-raft源码解析</a><br><a href="https://godoc.org/github.com/coreos/etcd/raft" target="_blank" rel="external">go-raft文档</a><br><a href="https://github.com/goraft/raftd" target="_blank" rel="external">goraft的简单实现</a></p>
 <h2 id="阅读记录"><a href="#阅读记录" class="headerlink" title="阅读记录"></a>阅读记录</h2><p>本文按照参考文章中的go-raft源码解析中的文章阅读,记录阅读过程.<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// The request sent to a server to append entries to the log.</span></div><div class="line"><span class="keyword">type</span> AppendEntriesRequest <span class="keyword">struct</span> &#123;</div><div class="line">	Term         <span class="keyword">uint64</span></div><div class="line">	PrevLogIndex <span class="keyword">uint64</span></div><div class="line">	PrevLogTerm  <span class="keyword">uint64</span></div><div class="line">	CommitIndex  <span class="keyword">uint64</span></div><div class="line">	LeaderName   <span class="keyword">string</span></div><div class="line">	Entries      []*protobuf.LogEntry  <span class="comment">// 定义在protobuf中的LogEntry</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// The response returned from a server appending entries to the log.</span></div><div class="line"><span class="keyword">type</span> AppendEntriesResponse <span class="keyword">struct</span> &#123;</div><div class="line">	pb     *protobuf.AppendEntriesResponse</div><div class="line">	peer   <span class="keyword">string</span></div><div class="line">	<span class="built_in">append</span> <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 ]]></content>
     
