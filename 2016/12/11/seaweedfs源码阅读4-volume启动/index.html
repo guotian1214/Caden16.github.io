@@ -5,7 +5,7 @@
   
   
   
-  <title>golang 反射机制 | MakeItPossible16 | 写点东西吧,程序员</title>
+  <title>seaweedfs源码阅读4-volume启动过程 | MakeItPossible16 | 写点东西吧,程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
@@ -15,14 +15,14 @@
   <meta name="description" content="根据文章使用delve调试Golang程序技巧使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试
 通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关go http ServeMux介绍,12345volumeMux := http.NewServeMux()publicVolumeMux := vo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="golang 反射机制">
+<meta property="og:title" content="seaweedfs源码阅读4-volume启动过程">
 <meta property="og:url" content="https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
 <meta property="og:description" content="根据文章使用delve调试Golang程序技巧使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试
 通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关go http ServeMux介绍,12345volumeMux := http.NewServeMux()publicVolumeMux := vo">
-<meta property="og:updated_time" content="2016-12-11T04:42:08.898Z">
+<meta property="og:updated_time" content="2016-12-11T04:47:50.162Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="golang 反射机制">
+<meta name="twitter:title" content="seaweedfs源码阅读4-volume启动过程">
 <meta name="twitter:description" content="根据文章使用delve调试Golang程序技巧使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试
 通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关go http ServeMux介绍,12345volumeMux := http.NewServeMux()publicVolumeMux := vo">
   
@@ -116,7 +116,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">golang 反射机制</div>
+        <div class="flex-col header-title ellipsis">seaweedfs源码阅读4-volume启动过程</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -138,7 +138,7 @@
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">golang 反射机制</h1>
+        <h1 class="title">seaweedfs源码阅读4-volume启动过程</h1>
         <h5 class="subtitle">
             
                 <time datetime="2016-12-11T00:00:00.000Z" itemprop="datePublished" class="page-time">
@@ -163,7 +163,7 @@
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">golang 反射机制</h1>
+        <h1 class="post-card-title">seaweedfs源码阅读4-volume启动过程</h1>
         <div class="post-meta">
             <time datetime="2016-12-11T00:00:00.000Z" itemprop="datePublished" class="post-time">
   2016-12-11
@@ -212,7 +212,7 @@
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&title=《golang 反射机制》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&title=《seaweedfs源码阅读4-volume启动过程》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -222,7 +222,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&title=《golang 反射机制》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&title=《seaweedfs源码阅读4-volume启动过程》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -232,7 +232,7 @@
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《golang 反射机制》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读4-volume启动过程》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
@@ -274,7 +274,7 @@
             
     
 <div class="duoshuo" id="comments">
-	<div class="ds-thread" data-thread-key="seaweedfs源码阅读4-volume启动" data-title="golang 反射机制" data-url="https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/"></div>
+	<div class="ds-thread" data-thread-key="seaweedfs源码阅读4-volume启动" data-title="seaweedfs源码阅读4-volume启动过程" data-url="https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.2"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -304,7 +304,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&title=《golang 反射机制》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&title=《seaweedfs源码阅读4-volume启动过程》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -314,7 +314,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&title=《golang 反射机制》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&title=《seaweedfs源码阅读4-volume启动过程》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -324,7 +324,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《golang 反射机制》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读4-volume启动过程》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2016-12-11T04:42:08.898Z</updated>
+  <updated>2016-12-11T04:47:50.162Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>golang 反射机制</title>
+    <title>seaweedfs源码阅读4-volume启动过程</title>
     <link href="https://makeitpossible16.github.io/2016/12/11/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
     <id>https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/</id>
     <published>2016-12-11T00:00:00.000Z</published>
-    <updated>2016-12-11T04:42:08.898Z</updated>
+    <updated>2016-12-11T04:47:50.162Z</updated>
     
     <content type="html"><![CDATA[<p>根据文章<a href="http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">使用delve调试Golang程序技巧</a><br>使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试</p>
 <p>通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/03.4.md" target="_blank" rel="external">go http ServeMux介绍</a>,<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">volumeMux := http.NewServeMux()</div><div class="line">publicVolumeMux := volumeMux</div><div class="line"><span class="keyword">if</span> isSeperatedPublicPort &#123;</div><div class="line">	publicVolumeMux = http.NewServeMux()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -166,7 +166,7 @@
     <link href="https://makeitpossible16.github.io/2016/11/28/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%953-raft%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/"/>
     <id>https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/</id>
     <published>2016-11-28T00:00:00.000Z</published>
-    <updated>2016-11-30T15:52:37.951Z</updated>
+    <updated>2016-12-03T15:29:42.344Z</updated>
     
     <content type="html"><![CDATA[<p>raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理.</p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://blog.csdn.net/cszhouwei/article/details/38374603" target="_blank" rel="external">Raft一致性算法</a><br><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="external">raft动画演示</a><br><a href="https://raft.github.io/" target="_blank" rel="external">raft介绍</a><br><a href="https://ayende.com/blog/165858/reviewing-go-raft-part-i" target="_blank" rel="external">go-raft源码解析</a><br><a href="https://godoc.org/github.com/coreos/etcd/raft" target="_blank" rel="external">go-raft文档</a><br><a href="https://github.com/goraft/raftd" target="_blank" rel="external">goraft的简单实现</a></p>
@@ -192,6 +192,37 @@
   </entry>
   
   <entry>
+    <title>seaweedfs源码阅读记录1</title>
+    <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/</id>
+    <published>2016-11-22T00:00:00.000Z</published>
+    <updated>2016-11-26T14:02:43.639Z</updated>
+    
+    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
+<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
+<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
+<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
+<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
+<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>seaweedfs源码阅读记录2</title>
     <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
     <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录2/</id>
@@ -211,37 +242,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>seaweedfs源码阅读记录1</title>
-    <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/</id>
-    <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2016-11-26T14:02:43.639Z</updated>
-    
-    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
-<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
-<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
-<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
-<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
-<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
     
     </summary>
     
