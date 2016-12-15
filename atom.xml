@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2016-12-11T13:30:05.384Z</updated>
+  <updated>2016-12-15T08:50:04.852Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -14,6 +14,108 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="https://makeitpossible16.github.io/2016/12/15/README/"/>
+    <id>https://makeitpossible16.github.io/2016/12/15/README/</id>
+    <published>2016-12-15T08:50:04.852Z</published>
+    <updated>2016-12-15T08:50:04.852Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="blogMarkdownFile"><a href="#blogMarkdownFile" class="headerlink" title="blogMarkdownFile"></a>blogMarkdownFile</h1><h1 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a><a href="http://www.makeitpossible.net.cn" target="_blank" rel="external">myblog</a></h1><h2 id="seaweedfs源码阅读记录"><a href="#seaweedfs源码阅读记录" class="headerlink" title="seaweedfs源码阅读记录"></a><a href="seaweedfs源码阅读记录.md">seaweedfs源码阅读记录</a></h2><h2 id="seaweedfs源码阅读记录2"><a href="#seaweedfs源码阅读记录2" class="headerlink" title="seaweedfs源码阅读记录2"></a><a href="seaweedfs源码阅读记录2.md">seaweedfs源码阅读记录2</a></h2><h2 id="seaweedfs源码阅读4-volume启动"><a href="#seaweedfs源码阅读4-volume启动" class="headerlink" title="seaweedfs源码阅读4-volume启动"></a><a href="seaweedfs源码阅读4-volume启动.md">seaweedfs源码阅读4-volume启动</a></h2><h2 id="seaweedfs源码阅读6-文件存储格式"><a href="#seaweedfs源码阅读6-文件存储格式" class="headerlink" title="seaweedfs源码阅读6-文件存储格式"></a><a href="seaweedfs源码阅读6-文件存储格式.md">seaweedfs源码阅读6-文件存储格式</a></h2><h2 id="seaweedfs源码阅读记录3-raft协议理解"><a href="#seaweedfs源码阅读记录3-raft协议理解" class="headerlink" title="seaweedfs源码阅读记录3-raft协议理解"></a><a href="seaweedfs源码阅读记录3-raft协议理解.md">seaweedfs源码阅读记录3-raft协议理解</a></h2><h2 id="golang-反射机制"><a href="#golang-反射机制" class="headerlink" title="golang 反射机制"></a><a href="golang 反射机制.md">golang 反射机制</a></h2><h2 id="seaweedfs源码阅读5-文件PUT过程"><a href="#seaweedfs源码阅读5-文件PUT过程" class="headerlink" title="seaweedfs源码阅读5-文件PUT过程"></a><a href="seaweedfs源码阅读5-文件PUT过程.md">seaweedfs源码阅读5-文件PUT过程</a></h2><h2 id="golang学习"><a href="#golang学习" class="headerlink" title="golang学习"></a><a href="golang学习.md">golang学习</a></h2><h2 id="golang调试技巧"><a href="#golang调试技巧" class="headerlink" title="golang调试技巧"></a><a href="golang调试技巧.md">golang调试技巧</a></h2><h2 id="cloudstack搭建总结"><a href="#cloudstack搭建总结" class="headerlink" title="cloudstack搭建总结"></a><a href="cloudstack搭建总结.md">cloudstack搭建总结</a></h2><h2 id="nodeJS入门总结"><a href="#nodeJS入门总结" class="headerlink" title="nodeJS入门总结"></a><a href="nodeJS入门总结.md">nodeJS入门总结</a></h2><h2 id="ubuntu下如何优雅地使用翻译"><a href="#ubuntu下如何优雅地使用翻译" class="headerlink" title="ubuntu下如何优雅地使用翻译"></a><a href="ubuntu下如何优雅地使用翻译.md">ubuntu下如何优雅地使用翻译</a></h2><h2 id="seaweedfs源码阅读8-GET-HEAD获取文件过程"><a href="#seaweedfs源码阅读8-GET-HEAD获取文件过程" class="headerlink" title="seaweedfs源码阅读8-GET/HEAD获取文件过程"></a><a href="seaweedfs源码阅读8-GET/HEAD获取文件过程.md">seaweedfs源码阅读8-GET/HEAD获取文件过程</a></h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;blogMarkdownFile&quot;&gt;&lt;a href=&quot;#blogMarkdownFile&quot; class=&quot;headerlink&quot; title=&quot;blogMarkdownFile&quot;&gt;&lt;/a&gt;blogMarkdownFile&lt;/h1&gt;&lt;h1 id=&quot;myblog&quot;&gt;&lt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读8-GET/HEAD获取文件过程</title>
+    <link href="https://makeitpossible16.github.io/2016/12/15/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB8-GET/HEAD%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/2016/12/15/seaweedfs源码阅读8-GET/HEAD获取文件过程/</id>
+    <published>2016-12-15T00:00:00.000Z</published>
+    <updated>2016-12-15T08:49:17.088Z</updated>
+    
+    <content type="html"><![CDATA[<p>GET 文件请求<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://127.0.0.1:8080/27542,10088ee11dccb9</div></pre></td></tr></table></figure></p>
+<p>先生成一个新的needle,然后根据fid:10088ee11dccb9 , 其中,前8位使用16进制转换为uint64 ==&gt; key, 后6位使用16进制转换为uint32 ==&gt; hash,解析结果给新生成的needle赋值,n.Id=key, n.Cookie=hash</p>
+<p>如果当前的volumeServer没有找到请求的volumeId<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> !vs.store.HasVolume(volumeId) &#123;</div><div class="line">		<span class="keyword">if</span> !vs.ReadRedirect &#123;</div><div class="line">			glog.V(<span class="number">2</span>).Infoln(<span class="string">"volume is not local:"</span>, err, r.URL.Path)</div><div class="line">			w.WriteHeader(http.StatusNotFound)</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		lookupResult, err := operation.Lookup(vs.GetMasterNode(), volumeId.String())</div><div class="line">		glog.V(<span class="number">2</span>).Infoln(<span class="string">"volume"</span>, volumeId, <span class="string">"found on"</span>, lookupResult, <span class="string">"error"</span>, err)</div><div class="line">		<span class="keyword">if</span> err == <span class="literal">nil</span> &amp;&amp; <span class="built_in">len</span>(lookupResult.Locations) &gt; <span class="number">0</span> &#123;</div><div class="line">			u, _ := url.Parse(util.NormalizeUrl(lookupResult.Locations[<span class="number">0</span>].PublicUrl))</div><div class="line">			u.Path = r.URL.Path</div><div class="line">			arg := url.Values&#123;&#125;</div><div class="line">			<span class="keyword">if</span> c := r.FormValue(<span class="string">"collection"</span>); c != <span class="string">""</span> &#123;</div><div class="line">				arg.Set(<span class="string">"collection"</span>, c)</div><div class="line">			&#125;</div><div class="line">			u.RawQuery = arg.Encode()</div><div class="line">			http.Redirect(w, r, u.String(), http.StatusMovedPermanently)</div><div class="line"></div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			glog.V(<span class="number">2</span>).Infoln(<span class="string">"lookup error:"</span>, err, r.URL.Path)</div><div class="line">			w.WriteHeader(http.StatusNotFound)</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>在volume_read_write.go 中,调用readNeedle,通过已知的n.Id ,获取存储的needle信息,操作在needle_map_memory.go 中<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(nm *NeedleMap)</span> <span class="title">Get</span><span class="params">(key <span class="keyword">uint64</span>)</span> <span class="params">(element *NeedleValue, ok <span class="keyword">bool</span>)</span></span> &#123;</div><div class="line">	element, ok = nm.m.Get(Key(key))</div><div class="line">	<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(dlv) p element</div><div class="line">*github.com/chrislusf/seaweedfs/weed/storage.NeedleValue &#123;Key: 1050766, Offset: 1, Size: 529810&#125;</div></pre></td></tr></table></figure>
+<p>与上传信息对比<br>上传时返回信息:<br>{“fid”:”27542,10088ee11dccb9”,”fileName”:”raft.pdf”,”fileUrl”:”127.0.0.1:8080/27542,10088ee11dccb9”,”size”:529766}<br>此时信息<br>{Key: 1050766, Offset: 1, Size: 529810}<br>存储时以needle为单位,增加的大小为needle中其他数据的大小,如n.Id,n.Cookie</p>
+<p>获取数据<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Needle)</span> <span class="title">ReadData</span><span class="params">(r *os.File, offset <span class="keyword">int64</span>, size <span class="keyword">uint32</span>, version Version)</span> <span class="params">(err error)</span></span> &#123;</div><div class="line">	bytes, block, err := ReadNeedleBlob(r, offset, size)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">		<span class="keyword">return</span> err</div><div class="line">	&#125;</div><div class="line">	n.rawBlock = block</div><div class="line">	n.ParseNeedleHeader(bytes)</div><div class="line">	<span class="keyword">if</span> n.Size != size &#123;</div><div class="line">		<span class="keyword">return</span> fmt.Errorf(<span class="string">"File Entry Not Found. Needle %d Memory %d"</span>, n.Size, size)</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">switch</span> version &#123;</div><div class="line">	<span class="keyword">case</span> Version1:</div><div class="line">		n.Data = bytes[NeedleHeaderSize : NeedleHeaderSize+size]</div><div class="line">	<span class="keyword">case</span> Version2:</div><div class="line">		n.readNeedleDataVersion2(bytes[NeedleHeaderSize : NeedleHeaderSize+<span class="keyword">int</span>(n.Size)])  <span class="comment">// 从bytes中读取存储数据,并设置needle的属性</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> size == <span class="number">0</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">	&#125;</div><div class="line">	checksum := util.BytesToUint32(bytes[NeedleHeaderSize+size : NeedleHeaderSize+size+NeedleChecksumSize])</div><div class="line">	newChecksum := NewCRC(n.Data)</div><div class="line">	<span class="keyword">if</span> checksum != newChecksum.Value() &#123;</div><div class="line">		<span class="keyword">return</span> errors.New(<span class="string">"CRC error! Data On Disk Corrupted"</span>)</div><div class="line">	&#125;</div><div class="line">	n.Checksum = newChecksum</div><div class="line">	<span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Needle)</span> <span class="title">readNeedleDataVersion2</span><span class="params">(bytes []<span class="keyword">byte</span>)</span></span> &#123;</div><div class="line">	index, lenBytes := <span class="number">0</span>, <span class="built_in">len</span>(bytes)</div><div class="line">	<span class="keyword">if</span> index &lt; lenBytes &#123;</div><div class="line">		n.DataSize = util.BytesToUint32(bytes[index : index+<span class="number">4</span>])</div><div class="line">		index = index + <span class="number">4</span></div><div class="line">		<span class="keyword">if</span> <span class="keyword">int</span>(n.DataSize)+index &gt; lenBytes &#123;</div><div class="line">			<span class="comment">// this if clause is due to bug #87 and #93, fixed in v0.69</span></div><div class="line">			<span class="comment">// remove this clause later</span></div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		n.Data = bytes[index : index+<span class="keyword">int</span>(n.DataSize)]</div><div class="line">		index = index + <span class="keyword">int</span>(n.DataSize)</div><div class="line">		n.Flags = bytes[index]</div><div class="line">		index = index + <span class="number">1</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> index &lt; lenBytes &amp;&amp; n.HasName() &#123;</div><div class="line">		n.NameSize = <span class="keyword">uint8</span>(bytes[index])</div><div class="line">		index = index + <span class="number">1</span></div><div class="line">		n.Name = bytes[index : index+<span class="keyword">int</span>(n.NameSize)]</div><div class="line">		index = index + <span class="keyword">int</span>(n.NameSize)</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> index &lt; lenBytes &amp;&amp; n.HasMime() &#123;</div><div class="line">		n.MimeSize = <span class="keyword">uint8</span>(bytes[index])</div><div class="line">		index = index + <span class="number">1</span></div><div class="line">		n.Mime = bytes[index : index+<span class="keyword">int</span>(n.MimeSize)]</div><div class="line">		index = index + <span class="keyword">int</span>(n.MimeSize)</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> index &lt; lenBytes &amp;&amp; n.HasLastModifiedDate() &#123;</div><div class="line">		n.LastModified = util.BytesToUint64(bytes[index : index+LastModifiedBytesLength])</div><div class="line">		index = index + LastModifiedBytesLength</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> index &lt; lenBytes &amp;&amp; n.HasTtl() &#123;</div><div class="line">		n.Ttl = LoadTTLFromBytes(bytes[index : index+TtlBytesLength])</div><div class="line">		index = index + TtlBytesLength</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>根据请求URL中带有的fid, 解析,得到n.Id, n.Cookie,其中,n.Id 作为needle的唯一标识,在NeedleMapper中找到存储的needle信息,n.Cookie 作为数据验证信息,若找到的needle中的cookie于URL中的cookie不一致,返回错误信息.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;GET 文件请求&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读7-文件存储过程</title>
+    <link href="https://makeitpossible16.github.io/2016/12/13/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB7-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/2016/12/13/seaweedfs源码阅读7-文件存储过程/</id>
+    <published>2016-12-13T00:00:00.000Z</published>
+    <updated>2016-12-15T03:13:10.345Z</updated>
+    
+    <content type="html"><![CDATA[<p>文件在volume_server_handlers_write.go 中的topology.ReplicatedWrite中以needle的形式存储,在store.go 的Write方法中调用writeNeedle写入文件.<br>写入时使用append的方法,在文件中追加<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// needle_read_write.go</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *Needle)</span> <span class="title">Append</span><span class="params">(w io.Writer, version Version)</span> <span class="params">(size <span class="keyword">uint32</span>, err error)</span></span> &#123;</div><div class="line">	<span class="keyword">if</span> s, ok := w.(io.Seeker); ok &#123;</div><div class="line">		<span class="keyword">if</span> end, e := s.Seek(<span class="number">0</span>, <span class="number">1</span>); e == <span class="literal">nil</span> &#123;</div><div class="line">			<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">(s io.Seeker, off <span class="keyword">int64</span>)</span></span> &#123;</div><div class="line">				<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">					<span class="keyword">if</span> _, e = s.Seek(off, <span class="number">0</span>); e != <span class="literal">nil</span> &#123;</div><div class="line">						glog.V(<span class="number">0</span>).Infof(<span class="string">"Failed to seek %s back to %d with error: %v"</span>, w, off, e)</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125;(s, end)</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			err = fmt.Errorf(<span class="string">"Cannot Read Current Volume Position: %v"</span>, e)</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">switch</span> version &#123;</div><div class="line">	<span class="keyword">case</span> Version1:</div><div class="line">		header := <span class="built_in">make</span>([]<span class="keyword">byte</span>, NeedleHeaderSize)</div><div class="line">		util.Uint32toBytes(header[<span class="number">0</span>:<span class="number">4</span>], n.Cookie)</div><div class="line">		util.Uint64toBytes(header[<span class="number">4</span>:<span class="number">12</span>], n.Id)</div><div class="line">		n.Size = <span class="keyword">uint32</span>(<span class="built_in">len</span>(n.Data))</div><div class="line">		size = n.Size</div><div class="line">		util.Uint32toBytes(header[<span class="number">12</span>:<span class="number">16</span>], n.Size)</div><div class="line">		<span class="keyword">if</span> _, err = w.Write(header); err != <span class="literal">nil</span> &#123;</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> _, err = w.Write(n.Data); err != <span class="literal">nil</span> &#123;</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		padding := NeedlePaddingSize - ((NeedleHeaderSize + n.Size + NeedleChecksumSize) % NeedlePaddingSize)</div><div class="line">		util.Uint32toBytes(header[<span class="number">0</span>:NeedleChecksumSize], n.Checksum.Value())</div><div class="line">		_, err = w.Write(header[<span class="number">0</span> : NeedleChecksumSize+padding])</div><div class="line">		<span class="keyword">return</span></div><div class="line">	<span class="keyword">case</span> Version2:</div><div class="line">		header := <span class="built_in">make</span>([]<span class="keyword">byte</span>, NeedleHeaderSize)</div><div class="line">		util.Uint32toBytes(header[<span class="number">0</span>:<span class="number">4</span>], n.Cookie)</div><div class="line">		util.Uint64toBytes(header[<span class="number">4</span>:<span class="number">12</span>], n.Id)</div><div class="line">		n.DataSize, n.NameSize, n.MimeSize = <span class="keyword">uint32</span>(<span class="built_in">len</span>(n.Data)), <span class="keyword">uint8</span>(<span class="built_in">len</span>(n.Name)), <span class="keyword">uint8</span>(<span class="built_in">len</span>(n.Mime))</div><div class="line">		<span class="keyword">if</span> n.DataSize &gt; <span class="number">0</span> &#123;</div><div class="line">			n.Size = <span class="number">4</span> + n.DataSize + <span class="number">1</span></div><div class="line">			<span class="keyword">if</span> n.HasName() &#123;</div><div class="line">				n.Size = n.Size + <span class="number">1</span> + <span class="keyword">uint32</span>(n.NameSize)</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> n.HasMime() &#123;</div><div class="line">				n.Size = n.Size + <span class="number">1</span> + <span class="keyword">uint32</span>(n.MimeSize)</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> n.HasLastModifiedDate() &#123;</div><div class="line">				n.Size = n.Size + LastModifiedBytesLength</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> n.HasTtl() &#123;</div><div class="line">				n.Size = n.Size + TtlBytesLength</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			n.Size = <span class="number">0</span></div><div class="line">		&#125;</div><div class="line">		size = n.DataSize</div><div class="line">		util.Uint32toBytes(header[<span class="number">12</span>:<span class="number">16</span>], n.Size)</div><div class="line">		<span class="keyword">if</span> _, err = w.Write(header); err != <span class="literal">nil</span> &#123;</div><div class="line">			<span class="keyword">return</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> n.DataSize &gt; <span class="number">0</span> &#123;</div><div class="line">			util.Uint32toBytes(header[<span class="number">0</span>:<span class="number">4</span>], n.DataSize)</div><div class="line">			<span class="keyword">if</span> _, err = w.Write(header[<span class="number">0</span>:<span class="number">4</span>]); err != <span class="literal">nil</span> &#123;</div><div class="line">				<span class="keyword">return</span></div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> _, err = w.Write(n.Data); err != <span class="literal">nil</span> &#123;</div><div class="line">				<span class="keyword">return</span></div><div class="line">			&#125;</div><div class="line">			util.Uint8toBytes(header[<span class="number">0</span>:<span class="number">1</span>], n.Flags)</div><div class="line">			<span class="keyword">if</span> _, err = w.Write(header[<span class="number">0</span>:<span class="number">1</span>]); err != <span class="literal">nil</span> &#123;</div><div class="line">				<span class="keyword">return</span></div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> n.HasName() &#123;</div><div class="line">				util.Uint8toBytes(header[<span class="number">0</span>:<span class="number">1</span>], n.NameSize)</div><div class="line">				<span class="keyword">if</span> _, err = w.Write(header[<span class="number">0</span>:<span class="number">1</span>]); err != <span class="literal">nil</span> &#123;</div><div class="line">					<span class="keyword">return</span></div><div class="line">				&#125;</div><div class="line">				<span class="keyword">if</span> _, err = w.Write(n.Name); err != <span class="literal">nil</span> &#123;</div><div class="line">					<span class="keyword">return</span></div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> n.HasMime() &#123;</div><div class="line">				util.Uint8toBytes(header[<span class="number">0</span>:<span class="number">1</span>], n.MimeSize)</div><div class="line">				<span class="keyword">if</span> _, err = w.Write(header[<span class="number">0</span>:<span class="number">1</span>]); err != <span class="literal">nil</span> &#123;</div><div class="line">					<span class="keyword">return</span></div><div class="line">				&#125;</div><div class="line">				<span class="keyword">if</span> _, err = w.Write(n.Mime); err != <span class="literal">nil</span> &#123;</div><div class="line">					<span class="keyword">return</span></div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> n.HasLastModifiedDate() &#123;</div><div class="line">				util.Uint64toBytes(header[<span class="number">0</span>:<span class="number">8</span>], n.LastModified)</div><div class="line">				<span class="keyword">if</span> _, err = w.Write(header[<span class="number">8</span>-LastModifiedBytesLength : <span class="number">8</span>]); err != <span class="literal">nil</span> &#123;</div><div class="line">					<span class="keyword">return</span></div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">if</span> n.HasTtl() &amp;&amp; n.Ttl != <span class="literal">nil</span> &#123;</div><div class="line">				n.Ttl.ToBytes(header[<span class="number">0</span>:TtlBytesLength])</div><div class="line">				<span class="keyword">if</span> _, err = w.Write(header[<span class="number">0</span>:TtlBytesLength]); err != <span class="literal">nil</span> &#123;</div><div class="line">					<span class="keyword">return</span></div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		padding := NeedlePaddingSize - ((NeedleHeaderSize + n.Size + NeedleChecksumSize) % NeedlePaddingSize)</div><div class="line">		util.Uint32toBytes(header[<span class="number">0</span>:NeedleChecksumSize], n.Checksum.Value())</div><div class="line">		_, err = w.Write(header[<span class="number">0</span> : NeedleChecksumSize+padding])</div><div class="line">		<span class="keyword">return</span> n.DataSize, err</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>, fmt.Errorf(<span class="string">"Unsupported Version! (%d)"</span>, version)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;文件在volume_server_handlers_write.go 中的topology.ReplicatedWrite中以needle的形式存储,在store.go 的Write方法中调用writeNeedle写入文件.&lt;br&gt;写入时使用append的方法,在文件中追加
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读6-文件存储格式</title>
+    <link href="https://makeitpossible16.github.io/2016/12/12/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB6-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/"/>
+    <id>https://makeitpossible16.github.io/2016/12/12/seaweedfs源码阅读6-文件存储格式/</id>
+    <published>2016-12-12T00:00:00.000Z</published>
+    <updated>2016-12-13T03:26:44.809Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用put 上传文件到seaweedfs , 具体显示结果<br><img src="http://oh56h8a9l.bkt.clouddn.com/seaweedfs源码阅读6-20161212.png" alt="seaweedfs源码阅读6-20161212"></p>
+<p>上传的所有文件都以单个文件进行存储,后缀为 .dat 和 .idx<br><img src="http://oh56h8a9l.bkt.clouddn.com/seaweefs源码阅读6-2-20161212.png" alt="seaweefs源码阅读6-2-20161212"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用put 上传文件到seaweedfs , 具体显示结果&lt;br&gt;&lt;img src=&quot;http://oh56h8a9l.bkt.clouddn.com/seaweedfs源码阅读6-20161212.png&quot; alt=&quot;seaweedfs源码阅读6-20161212&quot;&gt;&lt;/
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
   
   <entry>
     <title>seaweedfs源码阅读5-文件PUT过程</title>
@@ -141,7 +243,7 @@
     <link href="https://makeitpossible16.github.io/2016/11/29/golang%E5%AD%A6%E4%B9%A0/"/>
     <id>https://makeitpossible16.github.io/2016/11/29/golang学习/</id>
     <published>2016-11-29T00:00:00.000Z</published>
-    <updated>2016-11-30T11:59:44.763Z</updated>
+    <updated>2016-12-15T03:15:17.470Z</updated>
     
     <content type="html"><![CDATA[<p>在看seaweedfs过程中遇到的go 语法,不会的记录一下.</p>
 <h2 id="interface-是一组method的组合-通过interface来定义对象的一组行为"><a href="#interface-是一组method的组合-通过interface来定义对象的一组行为" class="headerlink" title="interface: 是一组method的组合,通过interface来定义对象的一组行为."></a>interface: 是一组method的组合,通过interface来定义对象的一组行为.</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">	NextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">	SetMax(<span class="keyword">uint64</span>)</div><div class="line">	Peek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -174,6 +276,9 @@
 <p>其中,反引号表示字符串,struct后面的字符串用于reflect,具体用法<br>s := AppendEntriesRequest{}<br>st := reflect.TypeOf(s)<br>field := st.Field(0)<br>field.Tag.Get(“protobuf”) // varint,1,req<br>field.Tag.Get(“json”) // Term,omitempty</p>
 <h2 id="go-get-安装程序错误"><a href="#go-get-安装程序错误" class="headerlink" title="go get 安装程序错误"></a>go get 安装程序错误</h2><p>错误提示:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">unrecognized import path <span class="string">"code.google.com/p/goprotobuf/proto"</span></div><div class="line"></div><div class="line">parse https://code.google.com/p/goprotobuf?go-get=1: no go-import meta tags</div></pre></td></tr></table></figure></p>
 <p>错误原因:依赖包已从code.google.com移除, 已重定向到github.com/golang/protobuf/proto,修改程序中的代码即可</p>
+<h2 id="strconv-ParseInt-s-string-base-int-bitSize-int-i-int64-err-error-或strconv-ParseUint"><a href="#strconv-ParseInt-s-string-base-int-bitSize-int-i-int64-err-error-或strconv-ParseUint" class="headerlink" title="strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)  或strconv.ParseUint"></a>strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)  或strconv.ParseUint</h2><p>把字符串转换为整数,<br>参数1 数字的字符串形式</p>
+<p>参数2 数字字符串的进制 比如二进制 八进制 十进制 十六进制</p>
+<p>参数3 返回结果的bit大小 也就是int8 int16 int32 int64</p>
 ]]></content>
     
     <summary type="html">
@@ -221,6 +326,37 @@
   </entry>
   
   <entry>
+    <title>seaweedfs源码阅读记录1</title>
+    <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/</id>
+    <published>2016-11-22T00:00:00.000Z</published>
+    <updated>2016-11-26T14:02:43.639Z</updated>
+    
+    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
+<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
+<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
+<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
+<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
+<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>seaweedfs源码阅读记录2</title>
     <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
     <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录2/</id>
@@ -240,37 +376,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>seaweedfs源码阅读记录1</title>
-    <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/</id>
-    <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2016-11-26T14:02:43.639Z</updated>
-    
-    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
-<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
-<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
-<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
-<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
-<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
     
     </summary>
     

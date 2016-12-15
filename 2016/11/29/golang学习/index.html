@@ -22,7 +22,7 @@ go map1t">
 <meta property="og:description" content="在看seaweedfs过程中遇到的go 语法,不会的记录一下.
 interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, uint64)	SetMax(uint64)	Peek() uint64&amp;#125;
 go map1t">
-<meta property="og:updated_time" content="2016-11-30T11:59:44.763Z">
+<meta property="og:updated_time" content="2016-12-15T03:15:17.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang学习">
 <meta name="twitter:description" content="在看seaweedfs过程中遇到的go 语法,不会的记录一下.
@@ -165,7 +165,7 @@ go map1t">
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#interface-是一组method的组合-通过interface来定义对象的一组行为"><span class="post-toc-number">1.</span> <span class="post-toc-text">interface: 是一组method的组合,通过interface来定义对象的一组行为.</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-map"><span class="post-toc-number">2.</span> <span class="post-toc-text">go map</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-sync-RWMutex和sync-Mutex"><span class="post-toc-number">3.</span> <span class="post-toc-text">go sync.RWMutex和sync.Mutex</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-Routine和Channel"><span class="post-toc-number">4.</span> <span class="post-toc-text">go Routine和Channel</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go反引号"><span class="post-toc-number">5.</span> <span class="post-toc-text">go反引号</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-get-安装程序错误"><span class="post-toc-number">6.</span> <span class="post-toc-text">go get 安装程序错误</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#interface-是一组method的组合-通过interface来定义对象的一组行为"><span class="post-toc-number">1.</span> <span class="post-toc-text">interface: 是一组method的组合,通过interface来定义对象的一组行为.</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-map"><span class="post-toc-number">2.</span> <span class="post-toc-text">go map</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-sync-RWMutex和sync-Mutex"><span class="post-toc-number">3.</span> <span class="post-toc-text">go sync.RWMutex和sync.Mutex</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-Routine和Channel"><span class="post-toc-number">4.</span> <span class="post-toc-text">go Routine和Channel</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go反引号"><span class="post-toc-number">5.</span> <span class="post-toc-text">go反引号</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-get-安装程序错误"><span class="post-toc-number">6.</span> <span class="post-toc-text">go get 安装程序错误</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#strconv-ParseInt-s-string-base-int-bitSize-int-i-int64-err-error-或strconv-ParseUint"><span class="post-toc-number">7.</span> <span class="post-toc-text">strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)  或strconv.ParseUint</span></a></li></ol>
         </nav>
     </aside>
     
@@ -217,6 +217,9 @@ go map1t">
 <p>其中,反引号表示字符串,struct后面的字符串用于reflect,具体用法<br>s := AppendEntriesRequest{}<br>st := reflect.TypeOf(s)<br>field := st.Field(0)<br>field.Tag.Get(“protobuf”) // varint,1,req<br>field.Tag.Get(“json”) // Term,omitempty</p>
 <h2 id="go-get-安装程序错误"><a href="#go-get-安装程序错误" class="headerlink" title="go get 安装程序错误"></a>go get 安装程序错误</h2><p>错误提示:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">unrecognized import path <span class="string">"code.google.com/p/goprotobuf/proto"</span></div><div class="line"></div><div class="line">parse https://code.google.com/p/goprotobuf?go-get=1: no go-import meta tags</div></pre></td></tr></table></figure></p>
 <p>错误原因:依赖包已从code.google.com移除, 已重定向到github.com/golang/protobuf/proto,修改程序中的代码即可</p>
+<h2 id="strconv-ParseInt-s-string-base-int-bitSize-int-i-int64-err-error-或strconv-ParseUint"><a href="#strconv-ParseInt-s-string-base-int-bitSize-int-i-int64-err-error-或strconv-ParseUint" class="headerlink" title="strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)  或strconv.ParseUint"></a>strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)  或strconv.ParseUint</h2><p>把字符串转换为整数,<br>参数1 数字的字符串形式</p>
+<p>参数2 数字字符串的进制 比如二进制 八进制 十进制 十六进制</p>
+<p>参数3 返回结果的bit大小 也就是int8 int16 int32 int64</p>
 
         </div>
         
