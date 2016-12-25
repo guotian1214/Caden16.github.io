@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2016-12-15T12:08:29.759Z</updated>
+  <updated>2016-12-16T14:27:23.010Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -14,6 +14,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>seaweedfs源码阅读记录9-生成fid过程</title>
+    <link href="https://makeitpossible16.github.io/2016/12/16/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%959-%E7%94%9F%E6%88%90fid%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/2016/12/16/seaweedfs源码阅读记录9-生成fid过程/</id>
+    <published>2016-12-16T00:00:00.000Z</published>
+    <updated>2016-12-16T14:27:23.010Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用命令 : curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a></p>
+<p>在topology.go 中<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Topology)</span> <span class="title">PickForWrite</span><span class="params">(count <span class="keyword">uint64</span>, option *VolumeGrowOption)</span> <span class="params">(<span class="keyword">string</span>, <span class="keyword">uint64</span>, *DataNode, error)</span></span> &#123;</div><div class="line">	vid, count, datanodes, err := t.GetVolumeLayout(option.Collection, option.ReplicaPlacement, option.Ttl).PickForWrite(count, option)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> || datanodes.Length() == <span class="number">0</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">""</span>, <span class="number">0</span>, <span class="literal">nil</span>, errors.New(<span class="string">"No writable volumes available!"</span>)</div><div class="line">	&#125;</div><div class="line">	fileId, count := t.Sequence.NextFileId(count)   <span class="comment">// fileId = 1050682, count = 1</span></div><div class="line">	<span class="keyword">return</span> storage.NewFileId(*vid, fileId, rand.Uint32()).String(), count, datanodes.Head(), <span class="literal">nil</span>  <span class="comment">//调用file_id.go中的NewFileId函数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在file_id.go 中<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> FileId <span class="keyword">struct</span> &#123;</div><div class="line">	VolumeId VolumeId</div><div class="line">	Key      <span class="keyword">uint64</span> <span class="comment">// fileId = 1050682</span></div><div class="line">	Hashcode <span class="keyword">uint32</span> <span class="comment">// rand.Uint32()</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewFileId</span><span class="params">(VolumeId VolumeId, Key <span class="keyword">uint64</span>, Hashcode <span class="keyword">uint32</span>)</span> *<span class="title">FileId</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> &amp;FileId&#123;VolumeId: VolumeId, Key: Key, Hashcode: Hashcode&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用memory_sequencer.go中的函数<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *MemorySequencer)</span> <span class="title">NextFileId</span><span class="params">(count <span class="keyword">uint64</span>)</span> <span class="params">(<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</span></span> &#123;  <span class="comment">// count = 1</span></div><div class="line">	m.sequenceLock.Lock()</div><div class="line">	<span class="keyword">defer</span> m.sequenceLock.Unlock()</div><div class="line">	ret := m.counter</div><div class="line">	m.counter += <span class="keyword">uint64</span>(count)</div><div class="line">	<span class="keyword">return</span> ret, count</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调试信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(dlv) p m</div><div class="line">*github.com/chrislusf/seaweedfs/weed/sequence.MemorySequencer &#123;</div><div class="line">	counter: 1050683,</div><div class="line">	sequenceLock: sync.Mutex &#123;state: 1, sema: 0&#125;,&#125;</div></pre></td></tr></table></figure></p>
+<p>在 master_server_handlers.go 中封装信息<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">fid, count, dn, err := ms.Topo.PickForWrite(requestedCount, option)</div><div class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</div><div class="line">		writeJsonQuiet(w, r, http.StatusOK, operation.AssignResult&#123;Fid: fid, Url: dn.Url(), PublicUrl: dn.PublicUrl, Count: count&#125;)</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		writeJsonQuiet(w, r, http.StatusNotAcceptable, operation.AssignResult&#123;Error: err.Error()&#125;)</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用命令 : curl -X POST &lt;a href=&quot;http://localhost:9333/dir/assign&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://localhost:9333/dir/assign&lt;/a&gt;&lt;/p&gt;
+&lt;p
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
   
   <entry>
     <title>seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</title>
@@ -100,6 +131,35 @@
   </entry>
   
   <entry>
+    <title>seaweedfs源码阅读5-文件PUT过程</title>
+    <link href="https://makeitpossible16.github.io/2016/12/11/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读5-文件PUT过程/</id>
+    <published>2016-12-11T00:00:00.000Z</published>
+    <updated>2016-12-11T13:30:05.384Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; curl -X POST http://localhost:9333/dir/assign</div><div class="line">&#123;<span class="string">"count"</span>:1,<span class="string">"fid"</span>:<span class="string">"3,01637037d6"</span>,<span class="string">"url"</span>:<span class="string">"127.0.0.1:8080"</span>,<span class="string">"publicUrl"</span>:<span class="string">"localhost:8080"</span>&#125;</div><div class="line">&gt; curl -X PUT -F file=@/home/chris/myphoto.jpg http://127.0.0.1:8080/3,01637037d6</div><div class="line">&#123;<span class="string">"size"</span>: 43234&#125;</div></pre></td></tr></table></figure></p>
+<p>上传文件,程序调用volume_server_handlers_write.go 中的PostHandler进行处理,根据URL,提取vid,生成新的volumeId<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vid, _, _, _, _ := parseURLPath(r.URL.Path) <span class="comment">//vid 为3</span></div><div class="line">volumeId, ve := storage.NewVolumeId(vid) <span class="comment">// volumeId : 7</span></div></pre></td></tr></table></figure></p>
+<p>根据请求参数,生成needle<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">needle, ne := storage.NewNeedle(r, vs.FixJpgOrientation)</div></pre></td></tr></table></figure></p>
+<p>使用multipartReader读取请求中的数据,有关multipart的介绍: <a href="http://wanlitian.github.io/2014/11/16/multipart_with_golang/" target="_blank" rel="external">golang的multipart包</a><br>使用needle.go 中的ParseUpload方法解析请求,得到上传的文件名和数据;<br>如果上传的数据类型是JPG或jpeg,调用 images.FixJpgOrientation(n.Data)对数据进行处理<br>生成needle过程<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewNeedle</span><span class="params">(r *http.Request, fixJpgOrientation <span class="keyword">bool</span>)</span> <span class="params">(n *Needle, e error)</span></span> &#123;</div><div class="line">	fname, mimeType, isGzipped, isChunkedFile := <span class="string">""</span>, <span class="string">""</span>, <span class="literal">false</span>, <span class="literal">false</span></div><div class="line">	n = <span class="built_in">new</span>(Needle)</div><div class="line">	fname, n.Data, mimeType, isGzipped, n.LastModified, n.Ttl, isChunkedFile, e = ParseUpload(r)</div><div class="line">	<span class="keyword">if</span> e != <span class="literal">nil</span> &#123;</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(fname) &lt; <span class="number">256</span> &#123;</div><div class="line">		n.Name = []<span class="keyword">byte</span>(fname)</div><div class="line">		n.SetHasName()</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(mimeType) &lt; <span class="number">256</span> &#123;</div><div class="line">		n.Mime = []<span class="keyword">byte</span>(mimeType)</div><div class="line">		n.SetHasMime()</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> isGzipped &#123;</div><div class="line">		n.SetGzipped()</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> n.LastModified == <span class="number">0</span> &#123;</div><div class="line">		n.LastModified = <span class="keyword">uint64</span>(time.Now().Unix())</div><div class="line">	&#125;</div><div class="line">	n.SetHasLastModifiedDate()</div><div class="line">	<span class="keyword">if</span> n.Ttl != EMPTY_TTL &#123;</div><div class="line">		n.SetHasTtl()</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> isChunkedFile &#123;</div><div class="line">		n.SetIsChunkManifest()</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> fixJpgOrientation &#123;</div><div class="line">		loweredName := strings.ToLower(fname)</div><div class="line">		<span class="keyword">if</span> mimeType == <span class="string">"image/jpeg"</span> || strings.HasSuffix(loweredName, <span class="string">".jpg"</span>) || strings.HasSuffix(loweredName, <span class="string">".jpeg"</span>) &#123;</div><div class="line">			n.Data = images.FixJpgOrientation(n.Data)</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	n.Checksum = NewCRC(n.Data)</div><div class="line"></div><div class="line">	commaSep := strings.LastIndex(r.URL.Path, <span class="string">","</span>)</div><div class="line">	dotSep := strings.LastIndex(r.URL.Path, <span class="string">"."</span>)</div><div class="line">	fid := r.URL.Path[commaSep+<span class="number">1</span>:]</div><div class="line">	<span class="keyword">if</span> dotSep &gt; <span class="number">0</span> &#123;</div><div class="line">		fid = r.URL.Path[commaSep+<span class="number">1</span> : dotSep]</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	e = n.ParsePath(fid)</div><div class="line"></div><div class="line">	<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>把数据及needle相关属性填充完成后,同步到其他volumeServer中,已needle作为传输载体<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size, errorStatus := topology.ReplicatedWrite(vs.GetMasterNode(),vs.store, volumeId, needle, r)</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用命令&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;l
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>seaweedfs源码阅读4-volume启动过程</title>
     <link href="https://makeitpossible16.github.io/2016/12/11/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
     <id>https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/</id>
@@ -117,35 +177,6 @@
     <summary type="html">
     
       &lt;p&gt;根据文章&lt;a href=&quot;http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;amp;utm_medium=referral&quot; target=&quot;_blank&quot; 
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>seaweedfs源码阅读5-文件PUT过程</title>
-    <link href="https://makeitpossible16.github.io/2016/12/11/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读5-文件PUT过程/</id>
-    <published>2016-12-11T00:00:00.000Z</published>
-    <updated>2016-12-11T13:30:05.384Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; curl -X POST http://localhost:9333/dir/assign</div><div class="line">&#123;<span class="string">"count"</span>:1,<span class="string">"fid"</span>:<span class="string">"3,01637037d6"</span>,<span class="string">"url"</span>:<span class="string">"127.0.0.1:8080"</span>,<span class="string">"publicUrl"</span>:<span class="string">"localhost:8080"</span>&#125;</div><div class="line">&gt; curl -X PUT -F file=@/home/chris/myphoto.jpg http://127.0.0.1:8080/3,01637037d6</div><div class="line">&#123;<span class="string">"size"</span>: 43234&#125;</div></pre></td></tr></table></figure></p>
-<p>上传文件,程序调用volume_server_handlers_write.go 中的PostHandler进行处理,根据URL,提取vid,生成新的volumeId<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vid, _, _, _, _ := parseURLPath(r.URL.Path) <span class="comment">//vid 为3</span></div><div class="line">volumeId, ve := storage.NewVolumeId(vid) <span class="comment">// volumeId : 7</span></div></pre></td></tr></table></figure></p>
-<p>根据请求参数,生成needle<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">needle, ne := storage.NewNeedle(r, vs.FixJpgOrientation)</div></pre></td></tr></table></figure></p>
-<p>使用multipartReader读取请求中的数据,有关multipart的介绍: <a href="http://wanlitian.github.io/2014/11/16/multipart_with_golang/" target="_blank" rel="external">golang的multipart包</a><br>使用needle.go 中的ParseUpload方法解析请求,得到上传的文件名和数据;<br>如果上传的数据类型是JPG或jpeg,调用 images.FixJpgOrientation(n.Data)对数据进行处理<br>生成needle过程<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewNeedle</span><span class="params">(r *http.Request, fixJpgOrientation <span class="keyword">bool</span>)</span> <span class="params">(n *Needle, e error)</span></span> &#123;</div><div class="line">	fname, mimeType, isGzipped, isChunkedFile := <span class="string">""</span>, <span class="string">""</span>, <span class="literal">false</span>, <span class="literal">false</span></div><div class="line">	n = <span class="built_in">new</span>(Needle)</div><div class="line">	fname, n.Data, mimeType, isGzipped, n.LastModified, n.Ttl, isChunkedFile, e = ParseUpload(r)</div><div class="line">	<span class="keyword">if</span> e != <span class="literal">nil</span> &#123;</div><div class="line">		<span class="keyword">return</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(fname) &lt; <span class="number">256</span> &#123;</div><div class="line">		n.Name = []<span class="keyword">byte</span>(fname)</div><div class="line">		n.SetHasName()</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(mimeType) &lt; <span class="number">256</span> &#123;</div><div class="line">		n.Mime = []<span class="keyword">byte</span>(mimeType)</div><div class="line">		n.SetHasMime()</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> isGzipped &#123;</div><div class="line">		n.SetGzipped()</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> n.LastModified == <span class="number">0</span> &#123;</div><div class="line">		n.LastModified = <span class="keyword">uint64</span>(time.Now().Unix())</div><div class="line">	&#125;</div><div class="line">	n.SetHasLastModifiedDate()</div><div class="line">	<span class="keyword">if</span> n.Ttl != EMPTY_TTL &#123;</div><div class="line">		n.SetHasTtl()</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> isChunkedFile &#123;</div><div class="line">		n.SetIsChunkManifest()</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> fixJpgOrientation &#123;</div><div class="line">		loweredName := strings.ToLower(fname)</div><div class="line">		<span class="keyword">if</span> mimeType == <span class="string">"image/jpeg"</span> || strings.HasSuffix(loweredName, <span class="string">".jpg"</span>) || strings.HasSuffix(loweredName, <span class="string">".jpeg"</span>) &#123;</div><div class="line">			n.Data = images.FixJpgOrientation(n.Data)</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	n.Checksum = NewCRC(n.Data)</div><div class="line"></div><div class="line">	commaSep := strings.LastIndex(r.URL.Path, <span class="string">","</span>)</div><div class="line">	dotSep := strings.LastIndex(r.URL.Path, <span class="string">"."</span>)</div><div class="line">	fid := r.URL.Path[commaSep+<span class="number">1</span>:]</div><div class="line">	<span class="keyword">if</span> dotSep &gt; <span class="number">0</span> &#123;</div><div class="line">		fid = r.URL.Path[commaSep+<span class="number">1</span> : dotSep]</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	e = n.ParsePath(fid)</div><div class="line"></div><div class="line">	<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>把数据及needle相关属性填充完成后,同步到其他volumeServer中,已needle作为传输载体<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size, errorStatus := topology.ReplicatedWrite(vs.GetMasterNode(),vs.store, volumeId, needle, r)</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用命令&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;l
     
     </summary>
     
@@ -308,37 +339,6 @@
   </entry>
   
   <entry>
-    <title>seaweedfs源码阅读记录1</title>
-    <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/</id>
-    <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2016-11-26T14:02:43.639Z</updated>
-    
-    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
-<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
-<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
-<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
-<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
-<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>seaweedfs源码阅读记录2</title>
     <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
     <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录2/</id>
@@ -358,6 +358,38 @@
     <summary type="html">
     
       &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读记录1</title>
+    <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/</id>
+    <published>2016-11-22T00:00:00.000Z</published>
+    <updated>2016-12-16T13:55:42.972Z</updated>
+    
+    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
+<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
+<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
+<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1”  -max=100 -mserver=”localhost:9333”  -port=8080<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid </p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
+<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
+<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
+<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
     
     </summary>
     

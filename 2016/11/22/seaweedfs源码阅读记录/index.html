@@ -22,7 +22,7 @@
 <meta property="og:description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
 目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
 学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需">
-<meta property="og:updated_time" content="2016-11-26T14:02:43.639Z">
+<meta property="og:updated_time" content="2016-12-16T13:55:42.972Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="seaweedfs源码阅读记录1">
 <meta name="twitter:description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
@@ -165,7 +165,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标-学习seaweedfs-的文件合并存储"><span class="post-toc-number">1.</span> <span class="post-toc-text">目标:学习seaweedfs 的文件合并存储</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习方式-google-调试"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习方式: google + 调试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标-学习seaweedfs-的文件合并存储"><span class="post-toc-number">1.</span> <span class="post-toc-text">目标:学习seaweedfs 的文件合并存储</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习方式-google-调试"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习方式: google + 调试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试用命令"><span class="post-toc-number">3.</span> <span class="post-toc-text">测试用命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
         </nav>
     </aside>
     
@@ -189,6 +189,7 @@
             <p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
 <h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
 <h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
+<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1”  -max=100 -mserver=”localhost:9333”  -port=8080<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid </p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
 <p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
 <p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
@@ -271,18 +272,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/" id="post-prev" class="post-nav-link">
+      <a href="/2016/11/22/seaweedfs源码阅读记录2/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">seaweedfs源码阅读记录3-raft协议理解</h4>
+        <h4 class="title">seaweedfs源码阅读记录2</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/11/22/seaweedfs源码阅读记录2/" id="post-next" class="post-nav-link">
+      <a href="/2016/11/20/cloudstack搭建总结/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">seaweedfs源码阅读记录2</h4>
+        <h4 class="title">cloudstack 搭建总结</h4>
       </a>
     </div>
   
