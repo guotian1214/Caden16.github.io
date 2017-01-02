@@ -5,38 +5,26 @@
   
   
   
-  <title>golang调试技巧 | MakeItPossible16 | 写点东西吧,程序员</title>
+  <title>linux命令学习 | MakeItPossible16 | 写点东西吧,程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="go">
-  <meta name="description" content="在阅读seaweedfs过程中,发现对于复杂程序,跟踪调试相当困难,不过,在看了使用delve调试Golang程序技巧这篇文章后,调试问题得到很好的改善.
-首先,liteIDE简直让人眼前一亮,使用它并结合delve实现图形化界面调试,使用命令行多少有点不太方便,特别是当你想在源码中加入注释的时候.
-具体实现
-安装delve,liteIDE
-
-加入参数关闭编译器优化,如 go install -g">
+  <meta name="keywords" content="linux">
+  <meta name="description" content="虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下
+awkAWK是一种处理文本文件的语言，是一个强大的文本分析工具。awk使用介绍">
 <meta property="og:type" content="article">
-<meta property="og:title" content="golang调试技巧">
-<meta property="og:url" content="https://makeitpossible16.github.io/2016/12/10/golang调试技巧/index.html">
+<meta property="og:title" content="linux命令学习">
+<meta property="og:url" content="https://makeitpossible16.github.io/2017/01/02/linux命令学习/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="在阅读seaweedfs过程中,发现对于复杂程序,跟踪调试相当困难,不过,在看了使用delve调试Golang程序技巧这篇文章后,调试问题得到很好的改善.
-首先,liteIDE简直让人眼前一亮,使用它并结合delve实现图形化界面调试,使用命令行多少有点不太方便,特别是当你想在源码中加入注释的时候.
-具体实现
-安装delve,liteIDE
-
-加入参数关闭编译器优化,如 go install -g">
-<meta property="og:updated_time" content="2016-12-11T02:52:49.574Z">
+<meta property="og:description" content="虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下
+awkAWK是一种处理文本文件的语言，是一个强大的文本分析工具。awk使用介绍">
+<meta property="og:updated_time" content="2017-01-02T15:55:26.750Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="golang调试技巧">
-<meta name="twitter:description" content="在阅读seaweedfs过程中,发现对于复杂程序,跟踪调试相当困难,不过,在看了使用delve调试Golang程序技巧这篇文章后,调试问题得到很好的改善.
-首先,liteIDE简直让人眼前一亮,使用它并结合delve实现图形化界面调试,使用命令行多少有点不太方便,特别是当你想在源码中加入注释的时候.
-具体实现
-安装delve,liteIDE
-
-加入参数关闭编译器优化,如 go install -g">
+<meta name="twitter:title" content="linux命令学习">
+<meta name="twitter:description" content="虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下
+awkAWK是一种处理文本文件的语言，是一个强大的文本分析工具。awk使用介绍">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -128,7 +116,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">golang调试技巧</div>
+        <div class="flex-col header-title ellipsis">linux命令学习</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -150,15 +138,15 @@
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">golang调试技巧</h1>
+        <h1 class="title">linux命令学习</h1>
         <h5 class="subtitle">
             
-                <time datetime="2016-12-10T00:00:00.000Z" itemprop="datePublished" class="page-time">
-  2016-12-10
+                <time datetime="2017-01-02T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-01-02
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/go/">go</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux命令/">linux命令</a></li></ul>
 
             
         </h5>
@@ -174,42 +162,29 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#具体实现"><span class="post-toc-number">1.</span> <span class="post-toc-text">具体实现</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#awk"><span class="post-toc-number">1.</span> <span class="post-toc-text">awk</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-golang调试技巧" 
+<article id="post-linux命令学习" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">golang调试技巧</h1>
+        <h1 class="post-card-title">linux命令学习</h1>
         <div class="post-meta">
-            <time datetime="2016-12-10T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-12-10
+            <time datetime="2017-01-02T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-01-02
 </time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/go/">go</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux命令/">linux命令</a></li></ul>
 
 
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>在阅读seaweedfs过程中,发现对于复杂程序,跟踪调试相当困难,不过,在看了<a href="http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">使用delve调试Golang程序技巧</a>这篇文章后,调试问题得到很好的改善.</p>
-<p>首先,liteIDE简直让人眼前一亮,使用它并结合delve实现图形化界面调试,使用命令行多少有点不太方便,特别是当你想在源码中加入注释的时候.</p>
-<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><ol>
-<li><p>安装delve,liteIDE</p>
-</li>
-<li><p>加入参数关闭编译器优化,如 go install -gcflags “-N -l” 程序名称</p>
-</li>
-<li><p>按照文章<a href="http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">使用delve调试Golang程序技巧</a>, 调试外部程序</p>
-</li>
-<li><p>调试启动后,可在Console设置断点, 命令为 : b packageName.functionName 或 b lineNum</p>
-</li>
-<li><p>使用命令c ,运行到断点停止,进行操作,具体命令可参照delve</p>
-</li>
-</ol>
-<p>还不清楚liteIDE能不能使用delve 进行图形化attach,如果可以就非常完美</p>
+            <p>虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。<a href="http://www.runoob.com/linux/linux-comm-awk.html" target="_blank" rel="external">awk使用介绍</a></p>
 
         </div>
         
@@ -229,7 +204,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
 
 
             
@@ -240,7 +215,7 @@
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/&title=《golang调试技巧》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/02/linux命令学习/&title=《linux命令学习》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -250,22 +225,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/&title=《golang调试技巧》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/02/linux命令学习/&title=《linux命令学习》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/02/linux命令学习/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《golang调试技巧》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux命令学习》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/02/linux命令学习/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/02/linux命令学习/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -285,21 +260,14 @@
     </div>   
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2016/12/11/seaweedfs源码阅读4-volume启动/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">seaweedfs源码阅读4-volume启动过程</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/12/02/golang 反射机制/" id="post-next" class="post-nav-link">
+      <a href="/2017/01/01/ELKStack搭建问题总结/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">golang 反射机制</h4>
+        <h4 class="title">ELKStack搭建问题总结</h4>
       </a>
     </div>
   
@@ -309,7 +277,7 @@
             
     
 <div class="duoshuo" id="comments">
-	<div class="ds-thread" data-thread-key="golang调试技巧" data-title="golang调试技巧" data-url="https://makeitpossible16.github.io/2016/12/10/golang调试技巧/"></div>
+	<div class="ds-thread" data-thread-key="linux命令学习" data-title="linux命令学习" data-url="https://makeitpossible16.github.io/2017/01/02/linux命令学习/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.2"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -339,7 +307,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/&title=《golang调试技巧》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/02/linux命令学习/&title=《linux命令学习》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -349,22 +317,22 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/&title=《golang调试技巧》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/02/linux命令学习/&title=《linux命令学习》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/02/linux命令学习/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《golang调试技巧》 — MakeItPossible16&url=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux命令学习》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/02/linux命令学习/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/02/linux命令学习/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -375,7 +343,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/2016/12/10/golang调试技巧/" alt="微信分享二维码"/>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/2017/01/02/linux命令学习/" alt="微信分享二维码"/>
 </div>
 
 
