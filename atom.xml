@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-01-01T15:55:22.224Z</updated>
+  <updated>2017-01-02T15:24:31.167Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ELKStack搭建问题总结</title>
+    <link href="https://makeitpossible16.github.io/2017/01/01/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://makeitpossible16.github.io/2017/01/01/ELKStack搭建问题总结/</id>
+    <published>2017-01-01T00:00:00.000Z</published>
+    <updated>2017-01-02T15:24:31.167Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用Docker搭建ELKStack时,elasticsearch自动退出,使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs [dockerName]</div></pre></td></tr></table></figure></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>查看日志, 日志输出为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR: bootstrap checks failed</div><div class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</div></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a href="max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]">Elasticsearch5.0 安装问题集锦</a></p>
+<p>切换到root用户修改配置sysctl.conf</p>
+<p>vi /etc/sysctl.conf</p>
+<p>添加下面配置：</p>
+<p>vm.max_map_count=655360</p>
+<p>并执行命令：</p>
+<p>sysctl -p</p>
+<p>然后，重新启动elasticsearch，即可启动成功。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用Docker搭建ELKStack时,elasticsearch自动退出,使用&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/
+    
+    </summary>
+    
+      <category term="ELKStack" scheme="https://makeitpossible16.github.io/categories/ELKStack/"/>
+    
+    
+      <category term="ELKStack" scheme="https://makeitpossible16.github.io/tags/ELKStack/"/>
+    
+      <category term="日志分析" scheme="https://makeitpossible16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+      <category term="流处理" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
   
   <entry>
     <title>linux学习-linux文件存储</title>
