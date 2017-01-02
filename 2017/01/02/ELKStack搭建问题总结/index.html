@@ -5,26 +5,26 @@
   
   
   
-  <title>linux学习-linux文件存储 | MakeItPossible16 | 写点东西吧,程序员</title>
+  <title>ELKStack搭建问题总结 | MakeItPossible16 | 写点东西吧,程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="linux">
-  <meta name="description" content="linux文件存储一直对文件存储过程不太理解,估计是操作系统没学好,今天看了这篇文章Linux文件存储结构，包括目录项、inode、数据块,感觉思路一下子清晰了. 根据linux一切皆文件的思想,目录项也作为一个文件存储,存储的内容为inode和文件名.
-linux文件查找文件系统中的目录查找Linux中文件名解析处理源码分析">
+  <meta name="keywords" content="ELKStack,日志分析,流处理">
+  <meta name="description" content="使用Docker搭建ELKStack时,elasticsearch自动退出,使用1docker logs [dockerName]
+问题查看日志, 日志输出为12ERROR: bootstrap checks failedmax virtual memory areas vm.max_map_count [65530] is too low, increase to at least [26214">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux学习-linux文件存储">
-<meta property="og:url" content="https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/index.html">
+<meta property="og:title" content="ELKStack搭建问题总结">
+<meta property="og:url" content="https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="linux文件存储一直对文件存储过程不太理解,估计是操作系统没学好,今天看了这篇文章Linux文件存储结构，包括目录项、inode、数据块,感觉思路一下子清晰了. 根据linux一切皆文件的思想,目录项也作为一个文件存储,存储的内容为inode和文件名.
-linux文件查找文件系统中的目录查找Linux中文件名解析处理源码分析">
-<meta property="og:updated_time" content="2017-01-01T15:55:22.224Z">
+<meta property="og:description" content="使用Docker搭建ELKStack时,elasticsearch自动退出,使用1docker logs [dockerName]
+问题查看日志, 日志输出为12ERROR: bootstrap checks failedmax virtual memory areas vm.max_map_count [65530] is too low, increase to at least [26214">
+<meta property="og:updated_time" content="2017-01-02T15:58:17.559Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="linux学习-linux文件存储">
-<meta name="twitter:description" content="linux文件存储一直对文件存储过程不太理解,估计是操作系统没学好,今天看了这篇文章Linux文件存储结构，包括目录项、inode、数据块,感觉思路一下子清晰了. 根据linux一切皆文件的思想,目录项也作为一个文件存储,存储的内容为inode和文件名.
-linux文件查找文件系统中的目录查找Linux中文件名解析处理源码分析">
+<meta name="twitter:title" content="ELKStack搭建问题总结">
+<meta name="twitter:description" content="使用Docker搭建ELKStack时,elasticsearch自动退出,使用1docker logs [dockerName]
+问题查看日志, 日志输出为12ERROR: bootstrap checks failedmax virtual memory areas vm.max_map_count [65530] is too low, increase to at least [26214">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -116,7 +116,7 @@ linux文件查找文件系统中的目录查找Linux中文件名解析处理源�
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">linux学习-linux文件存储</div>
+        <div class="flex-col header-title ellipsis">ELKStack搭建问题总结</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -138,15 +138,15 @@ linux文件查找文件系统中的目录查找Linux中文件名解析处理源�
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">linux学习-linux文件存储</h1>
+        <h1 class="title">ELKStack搭建问题总结</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-01-01T00:00:00.000Z" itemprop="datePublished" class="page-time">
-  2017-01-01
+                <time datetime="2017-01-02T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-01-02
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ELKStack/">ELKStack</a></li></ul>
 
             
         </h5>
@@ -162,29 +162,37 @@ linux文件查找文件系统中的目录查找Linux中文件名解析处理源�
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux文件存储"><span class="post-toc-number">1.</span> <span class="post-toc-text">linux文件存储</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux文件查找"><span class="post-toc-number">2.</span> <span class="post-toc-text">linux文件查找</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方案"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决方案</span></a></li></ol>
         </nav>
     </aside>
     
-<article id="post-linux学习-linux文件存储" 
+<article id="post-ELKStack搭建问题总结" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">linux学习-linux文件存储</h1>
+        <h1 class="post-card-title">ELKStack搭建问题总结</h1>
         <div class="post-meta">
-            <time datetime="2017-01-01T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2017-01-01
+            <time datetime="2017-01-02T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-01-02
 </time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/ELKStack/">ELKStack</a></li></ul>
 
 
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="linux文件存储"><a href="#linux文件存储" class="headerlink" title="linux文件存储"></a>linux文件存储</h2><p>一直对文件存储过程不太理解,估计是操作系统没学好,今天看了这篇文章<a href="http://c.biancheng.net/cpp/html/2780.html" target="_blank" rel="external">Linux文件存储结构，包括目录项、inode、数据块</a>,感觉思路一下子清晰了. 根据linux一切皆文件的思想,目录项也作为一个文件存储,存储的内容为inode和文件名.</p>
-<h2 id="linux文件查找"><a href="#linux文件查找" class="headerlink" title="linux文件查找"></a>linux文件查找</h2><p><a href="http://www.cnblogs.com/cobbliu/p/4888751.html" target="_blank" rel="external">文件系统中的目录查找</a><br><a href="http://alanwu.blog.51cto.com/3652632/1120652" target="_blank" rel="external">Linux中文件名解析处理源码分析</a></p>
+            <p>使用Docker搭建ELKStack时,elasticsearch自动退出,使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs [dockerName]</div></pre></td></tr></table></figure></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>查看日志, 日志输出为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR: bootstrap checks failed</div><div class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</div></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a href="max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]">Elasticsearch5.0 安装问题集锦</a></p>
+<p>切换到root用户修改配置sysctl.conf</p>
+<p>vi /etc/sysctl.conf</p>
+<p>添加下面配置：</p>
+<p>vm.max_map_count=655360</p>
+<p>并执行命令：</p>
+<p>sysctl -p</p>
+<p>然后，重新启动elasticsearch，即可启动成功。</p>
 
         </div>
         
@@ -204,7 +212,7 @@ linux文件查找文件系统中的目录查找Linux中文件名解析处理源�
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ELKStack/">ELKStack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日志分析/">日志分析</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/流处理/">流处理</a></li></ul>
 
 
             
@@ -215,7 +223,7 @@ linux文件查找文件系统中的目录查找Linux中文件名解析处理源�
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/&title=《linux学习-linux文件存储》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/&title=《ELKStack搭建问题总结》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -225,22 +233,22 @@ linux文件查找文件系统中的目录查找Linux中文件名解析处理源�
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/&title=《linux学习-linux文件存储》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/&title=《ELKStack搭建问题总结》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux学习-linux文件存储》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ELKStack搭建问题总结》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -260,21 +268,14 @@ linux文件查找文件系统中的目录查找Linux中文件名解析处理源�
     </div>   
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/01/02/linux命令学习/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">linux命令学习</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/12/16/seaweedfs源码阅读记录9-生成fid过程/" id="post-next" class="post-nav-link">
+      <a href="/2017/01/02/linux命令学习/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">seaweedfs源码阅读记录9-生成fid过程</h4>
+        <h4 class="title">linux命令学习</h4>
       </a>
     </div>
   
@@ -284,7 +285,7 @@ linux文件查找文件系统中的目录查找Linux中文件名解析处理源�
             
     
 <div class="duoshuo" id="comments">
-	<div class="ds-thread" data-thread-key="linux学习-linux文件存储" data-title="linux学习-linux文件存储" data-url="https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/"></div>
+	<div class="ds-thread" data-thread-key="ELKStack搭建问题总结" data-title="ELKStack搭建问题总结" data-url="https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.2"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -314,7 +315,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/&title=《linux学习-linux文件存储》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/&title=《ELKStack搭建问题总结》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -324,22 +325,22 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/&title=《linux学习-linux文件存储》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/&title=《ELKStack搭建问题总结》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux学习-linux文件存储》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ELKStack搭建问题总结》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -350,7 +351,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/" alt="微信分享二维码"/>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/" alt="微信分享二维码"/>
 </div>
 
 
