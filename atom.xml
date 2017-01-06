@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-01-02T15:58:17.559Z</updated>
+  <updated>2017-01-05T12:18:54.336Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -14,6 +14,67 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux内核学习-数据结构</title>
+    <link href="https://makeitpossible16.github.io/2017/01/04/linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://makeitpossible16.github.io/2017/01/04/linux内核学习-数据结构/</id>
+    <published>2017-01-04T00:00:00.000Z</published>
+    <updated>2017-01-05T12:18:54.336Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="container-of"><a href="#container-of" class="headerlink" title="container_of"></a>container_of</h2><p>用于从包含在某个结构中的指针获得结构本身的指针，通俗地讲就是通过结构体变量中某个成员的首地址进而获得整个结构体变量的首地址。<br><a href="http://blog.csdn.net/npy_lp/article/details/7010752" target="_blank" rel="external">Linux内核中的常用宏container_of其实很简单</a></p>
+<h2 id="linux内核Hash-链表"><a href="#linux内核Hash-链表" class="headerlink" title="linux内核Hash 链表"></a>linux内核Hash 链表</h2><p><a href="http://blog.csdn.net/tigerjibo/article/details/8450995" target="_blank" rel="external">Linux内核哈希表分析与应用</a></p>
+<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><p>应用:<br>有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它<br><a href="http://blog.csdn.net/shanzhizi/article/details/7736526#comments" target="_blank" rel="external">暴雪公司关于字符串匹配的hash算法</a></p>
+<p>典型的应用场景(Hbase，Accumulo，Leveldb)：<br>某些存储系统的设计中，会存在空查询缺陷：当查询一个不存在的key时，需要访问慢设备，导致效率低下。<br>比如一个前端页面的缓存系统，可能这样设计：先查询某个页面在本地是否存在，如果存在就直接返回，如果不存在，就从后端获取。但是当频繁从缓存系统查询一个页面时，缓存系统将会频繁请求后端，把压力导入后端。<br>这是只要增加一个bloom算法的服务，后端插入一个key时，在这个服务中设置一次<br>需要查询后端时，先判断key在后端是否存在，这样就能避免后端的压力。<br><a href="http://www.cnblogs.com/liyulong1982/p/6013002.html" target="_blank" rel="external">布隆过滤器(Bloom Filter)详解</a><br><a href="http://blog.csdn.net/alps1992/article/details/44610587" target="_blank" rel="external">算法学习 - Bloom Filter(布隆过滤器)学习实现(C++实现)</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;container-of&quot;&gt;&lt;a href=&quot;#container-of&quot; class=&quot;headerlink&quot; title=&quot;container_of&quot;&gt;&lt;/a&gt;container_of&lt;/h2&gt;&lt;p&gt;用于从包含在某个结构中的指针获得结构本身的指针，通俗地讲就是
+    
+    </summary>
+    
+      <category term="linux内核" scheme="https://makeitpossible16.github.io/categories/linux%E5%86%85%E6%A0%B8/"/>
+    
+    
+      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+      <category term="内核" scheme="https://makeitpossible16.github.io/tags/%E5%86%85%E6%A0%B8/"/>
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习</title>
+    <link href="https://makeitpossible16.github.io/2017/01/02/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://makeitpossible16.github.io/2017/01/02/linux命令学习/</id>
+    <published>2017-01-02T00:00:00.000Z</published>
+    <updated>2017-01-03T12:52:27.902Z</updated>
+    
+    <content type="html"><![CDATA[<p>虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。<br><a href="http://www.runoob.com/linux/linux-comm-awk.html" target="_blank" rel="external">awk使用介绍</a><br><a href="http://blog.csdn.net/andyxm/article/details/5964071" target="_blank" rel="external">awk print 学习</a></p>
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><p>用于排序<br><a href="http://www.cnblogs.com/dong008259/archive/2011/12/08/2281214.html" target="_blank" rel="external">linux之sort用法</a></p>
+<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><p>报告或删除文件中重复的行。<br><a href="http://blog.csdn.net/jesseen/article/details/8005056" target="_blank" rel="external">linux uniq 命令详解</a></p>
+<h2 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h2><p>读取标准输入的数据，并将其内容输出成文件<br><a href="http://liubin.blog.51cto.com/282313/131298" target="_blank" rel="external">linux tee 命令详解</a></p>
+<h2 id="dev-null"><a href="#dev-null" class="headerlink" title="/dev/null"></a>/dev/null</h2><p>可以把/dev/null看作一个”黑洞”，它非常等价于一个只写文件，所有写入它的内容都会永远丢失。<br><a href="http://www.2cto.com/os/201412/361275.html" target="_blank" rel="external">linux下/dev/null的用途</a><br><a href="http://blog.csdn.net/sunrier/article/details/7695839/" target="_blank" rel="external">Linux下” &gt;/dev/null 2&gt;&amp;1 “相关知识说明</a></p>
+<h2 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h2><p>程序后台运行,如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令.<br>命令格式 : nohup command &amp;<br><a href="http://www.2cto.com/os/201301/185701.html" target="_blank" rel="external">linux nohup命令详解</a></p>
+<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><p>screen 算是 linux 运维一个中高级技巧。通过 screen 命令创建的环境下运行的终端命令，其父进程不是 sshd 登录会话，而是 screen 。这样就可以即避免用户退出进程消失的问题，又随时能重新接管回终端继续操作。<br>创建独立的 screen 命令如下：<br>screen -dmS elkscreen_1<br>接管连入创建的 elkscreen_1 命令如下：<br>screen -r elkscreen_1<br>然后你可以看到一个一模一样的终端，运行 logstash 之后，不要按 Ctrl+C，而是按 Ctrl+A+D 键，断开环境。想重新接管，依然 screen -r elkscreen_1 即可。<br>如果创建了多个 screen，查看列表命令如下：<br>screen -list<br><a href="http://kibana.logstash.es/content/logstash/get-start/daemon.html" target="_blank" rel="external">需要长期后台运行的大量程序</a>,使用daemontools</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下&lt;/p&gt;
+&lt;h2 id=&quot;awk&quot;&gt;&lt;a href=&quot;#awk&quot; class=&quot;headerlink&quot; title=&quot;awk&quot;&gt;&lt;/a&gt;awk&lt;/h2&gt;&lt;p&gt;AWK是一种处理文本文件的语言，
+    
+    </summary>
+    
+      <category term="linux命令" scheme="https://makeitpossible16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>ELKStack搭建问题总结</title>
@@ -48,37 +109,6 @@
       <category term="日志分析" scheme="https://makeitpossible16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
     
       <category term="流处理" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux命令学习</title>
-    <link href="https://makeitpossible16.github.io/2017/01/02/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/2017/01/02/linux命令学习/</id>
-    <published>2017-01-02T00:00:00.000Z</published>
-    <updated>2017-01-03T12:52:27.902Z</updated>
-    
-    <content type="html"><![CDATA[<p>虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下</p>
-<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。<br><a href="http://www.runoob.com/linux/linux-comm-awk.html" target="_blank" rel="external">awk使用介绍</a><br><a href="http://blog.csdn.net/andyxm/article/details/5964071" target="_blank" rel="external">awk print 学习</a></p>
-<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><p>用于排序<br><a href="http://www.cnblogs.com/dong008259/archive/2011/12/08/2281214.html" target="_blank" rel="external">linux之sort用法</a></p>
-<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><p>报告或删除文件中重复的行。<br><a href="http://blog.csdn.net/jesseen/article/details/8005056" target="_blank" rel="external">linux uniq 命令详解</a></p>
-<h2 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h2><p>读取标准输入的数据，并将其内容输出成文件<br><a href="http://liubin.blog.51cto.com/282313/131298" target="_blank" rel="external">linux tee 命令详解</a></p>
-<h2 id="dev-null"><a href="#dev-null" class="headerlink" title="/dev/null"></a>/dev/null</h2><p>可以把/dev/null看作一个”黑洞”，它非常等价于一个只写文件，所有写入它的内容都会永远丢失。<br><a href="http://www.2cto.com/os/201412/361275.html" target="_blank" rel="external">linux下/dev/null的用途</a><br><a href="http://blog.csdn.net/sunrier/article/details/7695839/" target="_blank" rel="external">Linux下” &gt;/dev/null 2&gt;&amp;1 “相关知识说明</a></p>
-<h2 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h2><p>程序后台运行,如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令.<br>命令格式 : nohup command &amp;<br><a href="http://www.2cto.com/os/201301/185701.html" target="_blank" rel="external">linux nohup命令详解</a></p>
-<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><p>screen 算是 linux 运维一个中高级技巧。通过 screen 命令创建的环境下运行的终端命令，其父进程不是 sshd 登录会话，而是 screen 。这样就可以即避免用户退出进程消失的问题，又随时能重新接管回终端继续操作。<br>创建独立的 screen 命令如下：<br>screen -dmS elkscreen_1<br>接管连入创建的 elkscreen_1 命令如下：<br>screen -r elkscreen_1<br>然后你可以看到一个一模一样的终端，运行 logstash 之后，不要按 Ctrl+C，而是按 Ctrl+A+D 键，断开环境。想重新接管，依然 screen -r elkscreen_1 即可。<br>如果创建了多个 screen，查看列表命令如下：<br>screen -list<br><a href="http://kibana.logstash.es/content/logstash/get-start/daemon.html" target="_blank" rel="external">需要长期后台运行的大量程序</a>,使用daemontools</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下&lt;/p&gt;
-&lt;h2 id=&quot;awk&quot;&gt;&lt;a href=&quot;#awk&quot; class=&quot;headerlink&quot; title=&quot;awk&quot;&gt;&lt;/a&gt;awk&lt;/h2&gt;&lt;p&gt;AWK是一种处理文本文件的语言，
-    
-    </summary>
-    
-      <category term="linux命令" scheme="https://makeitpossible16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
-    
-    
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
     
   </entry>
   
@@ -605,36 +635,6 @@
       <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
     
       <category term="ubuntu" scheme="https://makeitpossible16.github.io/tags/ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux内核学习-数据结构</title>
-    <link href="https://makeitpossible16.github.io/2016/01/04/linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://makeitpossible16.github.io/2016/01/04/linux内核学习-数据结构/</id>
-    <published>2016-01-04T00:00:00.000Z</published>
-    <updated>2017-01-04T13:29:39.334Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="container-of"><a href="#container-of" class="headerlink" title="container_of"></a>container_of</h2><p>用于从包含在某个结构中的指针获得结构本身的指针，通俗地讲就是通过结构体变量中某个成员的首地址进而获得整个结构体变量的首地址。<br><a href="http://blog.csdn.net/npy_lp/article/details/7010752" target="_blank" rel="external">Linux内核中的常用宏container_of其实很简单</a></p>
-<h2 id="linux内核Hash-链表"><a href="#linux内核Hash-链表" class="headerlink" title="linux内核Hash 链表"></a>linux内核Hash 链表</h2><p><a href="http://blog.csdn.net/tigerjibo/article/details/8450995" target="_blank" rel="external">Linux内核哈希表分析与应用</a></p>
-<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><p>应用:<br>有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它<br><a href="http://blog.csdn.net/shanzhizi/article/details/7736526#comments" target="_blank" rel="external">暴雪公司关于字符串匹配的hash算法</a></p>
-<p>典型的应用场景(Hbase，Accumulo，Leveldb)：<br>某些存储系统的设计中，会存在空查询缺陷：当查询一个不存在的key时，需要访问慢设备，导致效率低下。<br>比如一个前端页面的缓存系统，可能这样设计：先查询某个页面在本地是否存在，如果存在就直接返回，如果不存在，就从后端获取。但是当频繁从缓存系统查询一个页面时，缓存系统将会频繁请求后端，把压力导入后端。<br>这是只要增加一个bloom算法的服务，后端插入一个key时，在这个服务中设置一次<br>需要查询后端时，先判断key在后端是否存在，这样就能避免后端的压力。<br><a href="http://www.cnblogs.com/liyulong1982/p/6013002.html" target="_blank" rel="external">布隆过滤器(Bloom Filter)详解</a><br><a href="http://blog.csdn.net/alps1992/article/details/44610587" target="_blank" rel="external">算法学习 - Bloom Filter(布隆过滤器)学习实现(C++实现)</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;container-of&quot;&gt;&lt;a href=&quot;#container-of&quot; class=&quot;headerlink&quot; title=&quot;container_of&quot;&gt;&lt;/a&gt;container_of&lt;/h2&gt;&lt;p&gt;用于从包含在某个结构中的指针获得结构本身的指针，通俗地讲就是
-    
-    </summary>
-    
-      <category term="linux内核" scheme="https://makeitpossible16.github.io/categories/linux%E5%86%85%E6%A0%B8/"/>
-    
-    
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
-    
-      <category term="内核" scheme="https://makeitpossible16.github.io/tags/%E5%86%85%E6%A0%B8/"/>
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
