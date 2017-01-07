@@ -151,7 +151,7 @@
     <ul class="post-list">
     
         <li class="post-list-item">
-            <article id="post-seaweedfs源码阅读4-volume启动"
+            <article id="post-seaweedfs源码阅读5-文件PUT过程"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -171,7 +171,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/12/11/seaweedfs源码阅读4-volume启动/">seaweedfs源码阅读4-volume启动过程</a>
+      <a class="post-title-link" href="/2016/12/11/seaweedfs源码阅读5-文件PUT过程/">seaweedfs源码阅读5-文件PUT过程</a>
     </h3>
   
 
@@ -181,11 +181,10 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        根据文章使用delve调试Golang程序技巧使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试
-通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关go http ServeMux介绍,12345volumeMux := http.NewServeMux()publicVolumeMux :=...
+        使用命令1234&gt; curl -X POST http://localhost:9333/dir/assign&#123;"count":1,"fid":"3,01637037d6","url":"127.0.0.1:8080","publicUrl":"localhost:8080"&#125;&gt; curl -X PUT -F file=@/home/chris/myphoto...
     
     
-        <a href="/2016/12/11/seaweedfs源码阅读4-volume启动/" class="post-more waves-effect waves-button">
+        <a href="/2016/12/11/seaweedfs源码阅读5-文件PUT过程/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
@@ -508,6 +507,58 @@ go ma...
         </li>
     
         <li class="post-list-item">
+            <article id="post-cloudstack搭建总结"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-11-20T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-11-20
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/cloudsatck搭建/">cloudsatck搭建</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/11/20/cloudstack搭建总结/">cloudstack 搭建总结</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        按照官网的教程搭建cloudstack,稍不注意,就出现错误.总结一下.
+子节点状态不对123[root@node3 ~]# service cloudstack-agent statuscloudstack-agent dead but subsys locked
+解决：管理节点防火墙问题，正常状态下计算节点应通过NFS挂载主存储,管理节点应开放8250端口
+执行完后把cloudstack...
+    
+    
+        <a href="/2016/11/20/cloudstack搭建总结/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloudsatck/">cloudsatck</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
             <article id="post-nodeJS入门总结"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -557,58 +608,6 @@ bootstrap + jquery (前端页面是在网上找的,随便改了一下)
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Express/">Express</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodeJS/">nodeJS</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-cloudstack搭建总结"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-11-20T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-11-20
-</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/cloudsatck搭建/">cloudsatck搭建</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/11/20/cloudstack搭建总结/">cloudstack 搭建总结</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        按照官网的教程搭建cloudstack,稍不注意,就出现错误.总结一下.
-子节点状态不对123[root@node3 ~]# service cloudstack-agent statuscloudstack-agent dead but subsys locked
-解决：管理节点防火墙问题，正常状态下计算节点应通过NFS挂载主存储,管理节点应开放8250端口
-执行完后把cloudstack...
-    
-    
-        <a href="/2016/11/20/cloudstack搭建总结/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cloudsatck/">cloudsatck</a></li></ul>
 
     </div>
     
