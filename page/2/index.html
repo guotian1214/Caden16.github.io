@@ -102,13 +102,6 @@
   <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
   <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
   <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
-  <span id="busuanzi_container_site_pv" style='display:none'>
-    本站总访问量: <span id="busuanzi_value_site_pv"></span>次
-</span>
-<br/>
-<span id="busuanzi_container_site_uv" style='display:none'>
-  本站访客数: <span id="busuanzi_value_site_uv"></span>次
-</span>
   <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
 </footer>
@@ -362,7 +355,7 @@
         </li>
     
         <li class="post-list-item">
-            <article id="post-seaweedfs源码阅读5-文件PUT过程"
+            <article id="post-seaweedfs源码阅读4-volume启动"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -382,7 +375,7 @@
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/12/11/seaweedfs源码阅读5-文件PUT过程/">seaweedfs源码阅读5-文件PUT过程</a>
+      <a class="post-title-link" href="/2016/12/11/seaweedfs源码阅读4-volume启动/">seaweedfs源码阅读4-volume启动过程</a>
     </h3>
   
 
@@ -392,10 +385,11 @@
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        使用命令1234&gt; curl -X POST http://localhost:9333/dir/assign&#123;"count":1,"fid":"3,01637037d6","url":"127.0.0.1:8080","publicUrl":"localhost:8080"&#125;&gt; curl -X PUT -F file=@/home/chris/myphoto...
+        根据文章使用delve调试Golang程序技巧使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试
+通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关go http ServeMux介绍,12345volumeMux := http.NewServeMux()publicVolumeMux :=...
     
     
-        <a href="/2016/12/11/seaweedfs源码阅读5-文件PUT过程/" class="post-more waves-effect waves-button">
+        <a href="/2016/12/11/seaweedfs源码阅读4-volume启动/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
