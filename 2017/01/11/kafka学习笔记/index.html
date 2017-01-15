@@ -24,7 +24,7 @@
 <meta property="og:description" content="学习资源kafka入门介绍
 学习目的构建日志流处理系统，初步实现使用logstash进行日志采集，kafka作为缓存队列，flink进行实时数据分析处理，seaweedfs作为后端存储。
 笔记核心API类型应用程序使用 Producer API 发布消息到1个或多个topic（主题）。应用程序使用 Consumer API 来订阅一个或多个topic，并处理产生的消息。应用程序使用 Streams">
-<meta property="og:updated_time" content="2017-01-11T13:38:17.510Z">
+<meta property="og:updated_time" content="2017-01-15T13:00:55.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kafka学习笔记">
 <meta name="twitter:description" content="学习资源kafka入门介绍
@@ -169,7 +169,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习资源"><span class="post-toc-number">1.</span> <span class="post-toc-text">学习资源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习目的"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习目的</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#笔记"><span class="post-toc-number">3.</span> <span class="post-toc-text">笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#核心API类型"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">核心API类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本术语"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">基本术语</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#消费者"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">消费者</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#kafka有比传统的消息系统更强的顺序保证"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">kafka有比传统的消息系统更强的顺序保证</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习资源"><span class="post-toc-number">1.</span> <span class="post-toc-text">学习资源</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习目的"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习目的</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#笔记"><span class="post-toc-number">3.</span> <span class="post-toc-text">笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#核心API类型"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">核心API类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本术语"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">基本术语</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#消费者"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">消费者</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#kafka有比传统的消息系统更强的顺序保证"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">kafka有比传统的消息系统更强的顺序保证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#kafka可作为存储系统"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">kafka可作为存储系统</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -197,7 +197,7 @@
 <h3 id="基本术语"><a href="#基本术语" class="headerlink" title="基本术语"></a>基本术语</h3><p>Topic<br>  Kafka将消息种子(Feed)分门别类，每一类的消息称之为一个主题(Topic).<br>Producer<br>  发布消息的对象称之为主题生产者(Kafka topic producer)<br>Consumer<br>  订阅消息并处理发布的消息的种子的对象称之为主题消费者(consumers)<br>Broker<br>  已发布的消息保存在一组服务器中，称之为Kafka集群。集群中的每一个服务器都是一个代理(Broker). 消费者可以订阅一个或多个主题（topic），并从Broker拉数据，从而消费这些已发布的消息。</p>
 <h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>通常来讲，消息模型可以分为两种， 队列和发布-订阅式。 队列的处理方式是 一组消费者从服务器读取消息，一条消息只有其中的一个消费者来处理。在发布-订阅模型中，消息被广播给所有的消费者，接收到消息的消费者都可以处理此消息。Kafka为这两种模型提供了单一的消费者抽象模型： 消费者组 （consumer group）。 消费者用一个消费者组名标记自己。 一个发布在Topic上消息被分发给此消费者组中的一个消费者。 假如所有的消费者都在一个组中，那么这就变成了queue模型。 假如所有的消费者都在不同的组中，那么就完全变成了发布-订阅模型。</p>
 <h3 id="kafka有比传统的消息系统更强的顺序保证"><a href="#kafka有比传统的消息系统更强的顺序保证" class="headerlink" title="kafka有比传统的消息系统更强的顺序保证"></a>kafka有比传统的消息系统更强的顺序保证</h3><p>如果多个消费者从队列消费，则服务器按存储的顺序发送消息，但是，尽管服务器按顺序发送，消息异步传递到消费者，因此消息可能乱序到达消费者。<br>kafka通过并行topic的parition —— kafka提供了顺序保证和负载均衡。每个partition仅由同一个消费者组中的一个消费者消费到。并确保消费者是该partition的唯一消费者，并按顺序消费数据。每个topic有多个分区，则需要对多个消费者做负载均衡，但请注意，相同的消费者组中不能有比分区更多的消费者，否则多出的消费者一直处于空等待，不会收到消息。</p>
-
+<h3 id="kafka可作为存储系统"><a href="#kafka可作为存储系统" class="headerlink" title="kafka可作为存储系统"></a>kafka可作为存储系统</h3>
         </div>
         
         <blockquote class="post-copyright">
