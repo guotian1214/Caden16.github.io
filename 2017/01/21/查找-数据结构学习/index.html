@@ -7,26 +7,23 @@
   
   
   
-  <title>openstack-swift调试 | MakeItPossible16 | 寻找实习单位,个人简介:https://makeitpossible16.github.io/about/</title>
+  <title>查找-数据结构学习 | MakeItPossible16 | 寻找实习单位,个人简介:https://makeitpossible16.github.io/about/</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="openstack-swift">
-  <meta name="description" content="最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。
-启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参">
+  <meta name="keywords" content="数据结构">
+  <meta name="description" content="简单清晰的B树、Trie树详解简单清晰的B树、Trie树详解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="openstack-swift调试">
-<meta property="og:url" content="https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/index.html">
+<meta property="og:title" content="查找-数据结构学习">
+<meta property="og:url" content="https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。
-启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参">
-<meta property="og:updated_time" content="2017-01-21T11:58:37.868Z">
+<meta property="og:description" content="简单清晰的B树、Trie树详解简单清晰的B树、Trie树详解">
+<meta property="og:updated_time" content="2017-01-21T13:52:15.975Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="openstack-swift调试">
-<meta name="twitter:description" content="最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。
-启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参">
+<meta name="twitter:title" content="查找-数据结构学习">
+<meta name="twitter:description" content="简单清晰的B树、Trie树详解简单清晰的B树、Trie树详解">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -120,7 +117,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">openstack-swift调试</div>
+        <div class="flex-col header-title ellipsis">查找-数据结构学习</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -142,7 +139,7 @@
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">openstack-swift调试</h1>
+        <h1 class="title">查找-数据结构学习</h1>
         <h5 class="subtitle">
             
                 <time datetime="2017-01-21T00:00:00.000Z" itemprop="datePublished" class="page-time">
@@ -150,7 +147,7 @@
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
 
             
         </h5>
@@ -166,35 +163,29 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启用调试"><span class="post-toc-number">1.</span> <span class="post-toc-text">启用调试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单清晰的B树、Trie树详解"><span class="post-toc-number">1.</span> <span class="post-toc-text">简单清晰的B树、Trie树详解</span></a></li></ol>
         </nav>
     </aside>
     
 
-<article id="post-openstack-swift调试" 
+<article id="post-查找-数据结构学习" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">openstack-swift调试</h1>
+        <h1 class="post-card-title">查找-数据结构学习</h1>
         <div class="post-meta">
             <time datetime="2017-01-21T00:00:00.000Z" itemprop="datePublished" class="post-time">
   2017-01-21
 </time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
 
 
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。</p>
-<h2 id="启用调试"><a href="#启用调试" class="headerlink" title="启用调试"></a>启用调试</h2><p>按照swift all in one的方式搭建，没遇到啥问题。<br>调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。<br> 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参照这两篇文章：<a href="http://yikun.github.io/2016/02/23/%E4%BC%98%E9%9B%85%E5%9C%B0%E8%B0%83%E8%AF%95OpenStack/#4-_启动调试服务器" target="_blank" rel="external">openstack调试</a><br><a href="http://debugopenstack.blogspot.com.tr/" target="_blank" rel="external">远程调试</a><br>其实只要使用NFS把代码挂载到本地，在pycharm中设置远程调试，代码中加入断点即可。加入断点代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import pydevd</div><div class="line">pydevd.settrace(&lt;pycharm所在机子IP&gt;, 设置端口, stdoutToServer=True, stderrToServer=True)</div></pre></td></tr></table></figure>
-<p>使用winpdb调试<br>在代码中加入断点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import rpdb2</div><div class="line">rpdb2.start_embedded_debugger(&apos;12345&apos;,fAllowRemote=True)</div></pre></td></tr></table></figure>
-<p>start_embedded_debugger第一个参数为密码，在winpdb中attach时输入，第二个参数启用远程调试，启用远程调试时，在远程调试的机子上启动winpdb，attach时输入密码，并输入swift部署机子IP即可。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我喜欢用方式一，可以把调试的信息直接标注在代码旁。方式二支持分布式调试，但太轻量化，只能看，不能添加，各有优缺点，按需选择。<br>修改代码后需要重启swift才能生效。<br>调试记录信息会放到github上，<a href="https://github.com/MakeItPossible16/openstack-swift" target="_blank" rel="external">github地址</a></p>
+            <h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
 
         </div>
         
@@ -215,7 +206,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
 
 
             
@@ -226,7 +217,7 @@
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/&title=《openstack-swift调试》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/&title=《查找-数据结构学习》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -236,22 +227,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/&title=《openstack-swift调试》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/&title=《查找-数据结构学习》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《openstack-swift调试》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《查找-数据结构学习》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -271,21 +262,14 @@
     </div>   
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/2017/01/21/查找-数据结构学习/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">查找-数据结构学习</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/01/21/linux文件存储机制/" id="post-next" class="post-nav-link">
+      <a href="/2017/01/21/openstack-swift调试/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">linux文件存储机制</h4>
+        <h4 class="title">openstack-swift调试</h4>
       </a>
     </div>
   
@@ -295,7 +279,7 @@
             
     
 <div class="duoshuo" id="comments">
-	<div class="ds-thread" data-thread-key="openstack-swift调试" data-title="openstack-swift调试" data-url="https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/"></div>
+	<div class="ds-thread" data-thread-key="查找-数据结构学习" data-title="查找-数据结构学习" data-url="https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.2"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -325,7 +309,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/&title=《openstack-swift调试》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/&title=《查找-数据结构学习》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -335,22 +319,22 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/&title=《openstack-swift调试》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/&title=《查找-数据结构学习》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《openstack-swift调试》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《查找-数据结构学习》 — MakeItPossible16&url=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -361,7 +345,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/" alt="微信分享二维码"/>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/" alt="微信分享二维码"/>
 </div>
 
 

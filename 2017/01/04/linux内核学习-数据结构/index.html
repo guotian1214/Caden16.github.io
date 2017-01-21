@@ -24,7 +24,7 @@ Hash应用:有一个庞大的字符串数组，然后给你一个单独的字符
 <meta property="og:description" content="container_of用于从包含在某个结构中的指针获得结构本身的指针，通俗地讲就是通过结构体变量中某个成员的首地址进而获得整个结构体变量的首地址。Linux内核中的常用宏container_of其实很简单
 linux内核Hash 链表Linux内核哈希表分析与应用
 Hash应用:有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它暴雪公司关于字符串匹配的">
-<meta property="og:updated_time" content="2017-01-05T12:18:54.336Z">
+<meta property="og:updated_time" content="2017-01-21T13:35:37.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux内核学习-数据结构">
 <meta name="twitter:description" content="container_of用于从包含在某个结构中的指针获得结构本身的指针，通俗地讲就是通过结构体变量中某个成员的首地址进而获得整个结构体变量的首地址。Linux内核中的常用宏container_of其实很简单
@@ -169,7 +169,7 @@ Hash应用:有一个庞大的字符串数组，然后给你一个单独的字符
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#container-of"><span class="post-toc-number">1.</span> <span class="post-toc-text">container_of</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux内核Hash-链表"><span class="post-toc-number">2.</span> <span class="post-toc-text">linux内核Hash 链表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Hash"><span class="post-toc-number">3.</span> <span class="post-toc-text">Hash</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#container-of"><span class="post-toc-number">1.</span> <span class="post-toc-text">container_of</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linux内核Hash-链表"><span class="post-toc-number">2.</span> <span class="post-toc-text">linux内核Hash 链表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Hash"><span class="post-toc-number">3.</span> <span class="post-toc-text">Hash</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#RadixTree（基数树）"><span class="post-toc-number">4.</span> <span class="post-toc-text">RadixTree（基数树）</span></a></li></ol>
         </nav>
     </aside>
     
@@ -195,6 +195,7 @@ Hash应用:有一个庞大的字符串数组，然后给你一个单独的字符
 <h2 id="linux内核Hash-链表"><a href="#linux内核Hash-链表" class="headerlink" title="linux内核Hash 链表"></a>linux内核Hash 链表</h2><p><a href="http://blog.csdn.net/tigerjibo/article/details/8450995" target="_blank" rel="external">Linux内核哈希表分析与应用</a></p>
 <h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><p>应用:<br>有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它<br><a href="http://blog.csdn.net/shanzhizi/article/details/7736526#comments" target="_blank" rel="external">暴雪公司关于字符串匹配的hash算法</a></p>
 <p>典型的应用场景(Hbase，Accumulo，Leveldb)：<br>某些存储系统的设计中，会存在空查询缺陷：当查询一个不存在的key时，需要访问慢设备，导致效率低下。<br>比如一个前端页面的缓存系统，可能这样设计：先查询某个页面在本地是否存在，如果存在就直接返回，如果不存在，就从后端获取。但是当频繁从缓存系统查询一个页面时，缓存系统将会频繁请求后端，把压力导入后端。<br>这是只要增加一个bloom算法的服务，后端插入一个key时，在这个服务中设置一次<br>需要查询后端时，先判断key在后端是否存在，这样就能避免后端的压力。<br><a href="http://www.cnblogs.com/liyulong1982/p/6013002.html" target="_blank" rel="external">布隆过滤器(Bloom Filter)详解</a><br><a href="http://blog.csdn.net/alps1992/article/details/44610587" target="_blank" rel="external">算法学习 - Bloom Filter(布隆过滤器)学习实现(C++实现)</a></p>
+<h2 id="RadixTree（基数树）"><a href="#RadixTree（基数树）" class="headerlink" title="RadixTree（基数树）"></a>RadixTree（基数树）</h2><p>应用：Linux radix树最广泛的用途是用于内存管理，结构address_space通过radix树跟踪绑定到地址映射上的核心页，该radix树允许内存管理代码快速查找标识为dirty或writeback的页。其使用的是数据类型unsigned long的固定长度输入的版本。每级代表了输入空间固定位数。Linux radix树的API函数在lib/radix-tree.c中实现。（把页指针和描述页状态的结构映射起来，使能快速查询一个页的信息。）<br><a href="http://blog.csdn.net/yang_yulei/article/details/46371975" target="_blank" rel="external">RadixTree（基数树）</a></p>
 
         </div>
         
