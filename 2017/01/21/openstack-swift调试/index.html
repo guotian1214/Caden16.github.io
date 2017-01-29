@@ -15,18 +15,18 @@
   
   <meta name="keywords" content="openstack-swift">
   <meta name="description" content="最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。
-启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参">
+启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。禁用多线程：1eventlet.patcher.monkey_patch(all=">
 <meta property="og:type" content="article">
 <meta property="og:title" content="openstack-swift调试">
 <meta property="og:url" content="https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
 <meta property="og:description" content="最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。
-启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参">
-<meta property="og:updated_time" content="2017-01-21T11:58:37.868Z">
+启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。禁用多线程：1eventlet.patcher.monkey_patch(all=">
+<meta property="og:updated_time" content="2017-01-29T14:29:46.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="openstack-swift调试">
 <meta name="twitter:description" content="最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。
-启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参">
+启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。禁用多线程：1eventlet.patcher.monkey_patch(all=">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -66,7 +66,7 @@
             <li class="waves-block waves-effect">
               <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
-                文章
+                归档
               </a>
             </li>
         
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启用调试"><span class="post-toc-number">1.</span> <span class="post-toc-text">启用调试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启用调试"><span class="post-toc-number">1.</span> <span class="post-toc-text">启用调试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用pydevd调试"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">使用pydevd调试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用winpdb调试"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">使用winpdb调试</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">2.</span> <span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -189,9 +189,10 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。</p>
-<h2 id="启用调试"><a href="#启用调试" class="headerlink" title="启用调试"></a>启用调试</h2><p>按照swift all in one的方式搭建，没遇到啥问题。<br>调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。<br> 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参照这两篇文章：<a href="http://yikun.github.io/2016/02/23/%E4%BC%98%E9%9B%85%E5%9C%B0%E8%B0%83%E8%AF%95OpenStack/#4-_启动调试服务器" target="_blank" rel="external">openstack调试</a><br><a href="http://debugopenstack.blogspot.com.tr/" target="_blank" rel="external">远程调试</a><br>其实只要使用NFS把代码挂载到本地，在pycharm中设置远程调试，代码中加入断点即可。加入断点代码</p>
+<h2 id="启用调试"><a href="#启用调试" class="headerlink" title="启用调试"></a>启用调试</h2><p>按照swift all in one的方式搭建，没遇到啥问题。<br>调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。<br>禁用多线程：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eventlet.patcher.monkey_patch(all=<span class="keyword">False</span>, socket=<span class="keyword">True</span>, time=<span class="keyword">True</span>, thread=<span class="keyword">False</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="使用pydevd调试"><a href="#使用pydevd调试" class="headerlink" title="使用pydevd调试"></a>使用pydevd调试</h3><p> 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参照这两篇文章：<a href="http://yikun.github.io/2016/02/23/%E4%BC%98%E9%9B%85%E5%9C%B0%E8%B0%83%E8%AF%95OpenStack/#4-_启动调试服务器" target="_blank" rel="external">openstack调试</a><br><a href="http://debugopenstack.blogspot.com.tr/" target="_blank" rel="external">远程调试</a><br>其实只要使用NFS把代码挂载到本地，在pycharm中设置远程调试，代码中加入断点即可。加入断点代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import pydevd</div><div class="line">pydevd.settrace(&lt;pycharm所在机子IP&gt;, 设置端口, stdoutToServer=True, stderrToServer=True)</div></pre></td></tr></table></figure>
-<p>使用winpdb调试<br>在代码中加入断点</p>
+<h3 id="使用winpdb调试"><a href="#使用winpdb调试" class="headerlink" title="使用winpdb调试"></a>使用winpdb调试</h3><p>在代码中加入断点</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import rpdb2</div><div class="line">rpdb2.start_embedded_debugger(&apos;12345&apos;,fAllowRemote=True)</div></pre></td></tr></table></figure>
 <p>start_embedded_debugger第一个参数为密码，在winpdb中attach时输入，第二个参数启用远程调试，启用远程调试时，在远程调试的机子上启动winpdb，attach时输入密码，并输入swift部署机子IP即可。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我喜欢用方式一，可以把调试的信息直接标注在代码旁。方式二支持分布式调试，但太轻量化，只能看，不能添加，各有优缺点，按需选择。<br>修改代码后需要重启swift才能生效。<br>调试记录信息会放到github上，<a href="https://github.com/MakeItPossible16/openstack-swift" target="_blank" rel="external">github地址</a></p>
@@ -274,18 +275,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2017/01/21/查找-数据结构学习/" id="post-prev" class="post-nav-link">
+      <a href="/2017/01/21/linux文件存储机制/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">查找-数据结构学习</h4>
+        <h4 class="title">linux文件存储机制</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2017/01/21/linux文件存储机制/" id="post-next" class="post-nav-link">
+      <a href="/2017/01/21/查找-数据结构学习/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">linux文件存储机制</h4>
+        <h4 class="title">查找-数据结构学习</h4>
       </a>
     </div>
   

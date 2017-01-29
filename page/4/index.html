@@ -62,7 +62,7 @@
             <li class="waves-block waves-effect">
               <a href="/archives"  >
                 <i class="icon icon-lg icon-archives"></i>
-                文章
+                归档
               </a>
             </li>
         
@@ -361,7 +361,7 @@ go ma...
         </li>
     
         <li class="post-list-item">
-            <article id="post-seaweedfs源码阅读记录"
+            <article id="post-seaweedfs源码阅读记录2"
   class="article-card article-type-post" itemprop="blogPost">
      
     <div class="post-meta">
@@ -381,7 +381,7 @@ go ma...
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/11/22/seaweedfs源码阅读记录/">seaweedfs源码阅读记录1</a>
+      <a class="post-title-link" href="/2016/11/22/seaweedfs源码阅读记录2/">seaweedfs源码阅读记录2</a>
     </h3>
   
 
@@ -391,12 +391,11 @@ go ma...
     <div class="post-content" id="post-content" itemprop="postContent" >
 
     
-        接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
-目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
-学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm ...
+        master启动过程使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,参考文章： weed-fs 源码解读
+12345type Sequencer interface &#123;	NextFileId(count uint64) (uint64...
     
     
-        <a href="/2016/11/22/seaweedfs源码阅读记录/" class="post-more waves-effect waves-button">
+        <a href="/2016/11/22/seaweedfs源码阅读记录2/" class="post-more waves-effect waves-button">
             阅读全文...
         </a>
     </div>
