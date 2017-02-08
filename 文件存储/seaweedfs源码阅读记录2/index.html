@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="google-site-verification" content="true">
+  
+  
+  
+  <title>seaweedfs源码阅读记录2 | MakeItPossible16 | 寻找实习单位,个人简介:https://makeitpossible16.github.io/about/</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="go,seaweedfs">
+  <meta name="description" content="master启动过程使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,参考文章： weed-fs 源码解读
+12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="seaweedfs源码阅读记录2">
+<meta property="og:url" content="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/index.html">
+<meta property="og:site_name" content="MakeItPossible16">
+<meta property="og:description" content="master启动过程使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,参考文章： weed-fs 源码解读
+12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, u">
+<meta property="og:image" content="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg">
+<meta property="og:updated_time" content="2016-11-28T11:57:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="seaweedfs源码阅读记录2">
+<meta name="twitter:description" content="master启动过程使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,参考文章： weed-fs 源码解读
+12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, u">
+<meta name="twitter:image" content="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg">
+  
+    <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.2">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MakeItPossible16</h5>
+          <a href="mailto:cjc1005819688@gmail.com" title="cjc1005819688@gmail.com" class="mail">cjc1005819688@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MakeItPossible16" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                个人简介
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>MakeItPossible16 &copy; 2016 - 2017</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</footer>
+
+    </div>
+  </div>
+</aside>
+
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">seaweedfs源码阅读记录2</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">seaweedfs源码阅读记录2</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-11-22T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2016-11-22
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#master启动过程"><span class="post-toc-number">1.</span> <span class="post-toc-text">master启动过程</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-seaweedfs源码阅读记录2" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">seaweedfs源码阅读记录2</h1>
+        <div class="post-meta">
+            <time datetime="2016-11-22T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-11-22
+</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="master启动过程"><a href="#master启动过程" class="headerlink" title="master启动过程"></a>master启动过程</h2><p>使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.<br>opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,<br>参考文章： <a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+<p><img src="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg" alt="master启动-20161128"><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">	NextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">	SetMax(<span class="keyword">uint64</span>)</div><div class="line">	Peek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>topology中包含Sequencer , sequence 负责FileID的全局有序生成</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Topology <span class="keyword">struct</span> &#123;</div><div class="line">	NodeImpl   <span class="comment">//指向NodeImpl对象，即Topology和node相互指向</span></div><div class="line"></div><div class="line">	collectionMap *util.ConcurrentReadMap</div><div class="line"></div><div class="line">	pulse <span class="keyword">int64</span></div><div class="line"></div><div class="line">	volumeSizeLimit <span class="keyword">uint64</span></div><div class="line"></div><div class="line">	Sequence sequence.Sequencer</div><div class="line"></div><div class="line">	chanDeadDataNodes      <span class="keyword">chan</span> *DataNode</div><div class="line">	chanRecoveredDataNodes <span class="keyword">chan</span> *DataNode</div><div class="line">	chanFullVolumes        <span class="keyword">chan</span> storage.VolumeInfo</div><div class="line"></div><div class="line">	configuration *Configuration</div><div class="line"></div><div class="line">	RaftServer raft.Server</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>NodeImpl结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> NodeImpl <span class="keyword">struct</span> &#123;</div><div class="line">	id                NodeId</div><div class="line">	volumeCount       <span class="keyword">int</span></div><div class="line">	activeVolumeCount <span class="keyword">int</span></div><div class="line">	maxVolumeCount    <span class="keyword">int</span></div><div class="line">	parent            Node</div><div class="line">	sync.RWMutex      <span class="comment">// lock children</span></div><div class="line">	children          <span class="keyword">map</span>[NodeId]Node</div><div class="line">	maxVolumeId       storage.VolumeId</div><div class="line"></div><div class="line">	<span class="comment">//for rack, data center, topology</span></div><div class="line">	nodeType <span class="keyword">string</span></div><div class="line">	value    <span class="keyword">interface</span>&#123;&#125;  <span class="comment">//指向Topology对象，即Topology和node相互指向</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>DataNode数据结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> DataNode <span class="keyword">struct</span> &#123;</div><div class="line">	NodeImpl</div><div class="line">	volumes   <span class="keyword">map</span>[storage.VolumeId]storage.VolumeInfo</div><div class="line">	Ip        <span class="keyword">string</span></div><div class="line">	Port      <span class="keyword">int</span></div><div class="line">	PublicUrl <span class="keyword">string</span></div><div class="line">	LastSeen  <span class="keyword">int64</span> <span class="comment">// unix time in seconds</span></div><div class="line">	Dead      <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> VolumeInfo <span class="keyword">struct</span> &#123;</div><div class="line">	Id               VolumeId</div><div class="line">	Size             <span class="keyword">uint64</span></div><div class="line">	ReplicaPlacement *ReplicaPlacement</div><div class="line">	Ttl              *TTL</div><div class="line">	Collection       <span class="keyword">string</span></div><div class="line">	Version          Version</div><div class="line">	FileCount        <span class="keyword">int</span></div><div class="line">	DeleteCount      <span class="keyword">int</span></div><div class="line">	DeletedByteCount <span class="keyword">uint64</span></div><div class="line">	ReadOnly         <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过RaftServer的raft协议，完成多个weedmaster间投票选leader的事情,<br>当启动多个ServerMaster时，它们之间会进行通信，通过raft协议选举出一个Leader，对所有的master进行管理。<br>weed-fs中，通过使用raftServer完成上述选举过程；而raftServer则是用到了第三方资源，即goRaft（参照<a href="http://ayende.com/blog/165858/reviewing-go-raft-part-i）。" target="_blank" rel="external">http://ayende.com/blog/165858/reviewing-go-raft-part-i）。</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> RaftServer <span class="keyword">struct</span> &#123;</div><div class="line">	peers      []<span class="keyword">string</span> <span class="comment">// initial peers to join with</span></div><div class="line">	raftServer raft.Server  <span class="comment">//使用goraft //type Server interface 包含实现raft的方法</span></div><div class="line">	dataDir    <span class="keyword">string</span></div><div class="line">	httpAddr   <span class="keyword">string</span></div><div class="line">	router     *mux.Router</div><div class="line">	topo       *topology.Topology</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        小白,欢迎指正:cjc1005819688@gmail.com
+    </div>
+    <footer>
+        <a href="https://makeitpossible16.github.io">
+            <img src="/img/logo.jpg" alt="MakeItPossible16">
+            MakeItPossible16
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/&title=《seaweedfs源码阅读记录2》 — MakeItPossible16&pic=/" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/&title=《seaweedfs源码阅读记录2》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录2》 — MakeItPossible16&url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/文件存储/seaweedfs源码阅读记录/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">seaweedfs源码阅读记录1</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/cloudsatck搭建/cloudstack搭建总结/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">cloudstack 搭建总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo" id="comments">
+	<div class="ds-thread" data-thread-key="seaweedfs源码阅读记录2" data-title="seaweedfs源码阅读记录2" data-url="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.2"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'makeitpossible16.duoshuo.com', theme: 'none'}
+</script>
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
+
+
+
+<div class="global-share" id="globalShare">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/&title=《seaweedfs源码阅读记录2》 — MakeItPossible16&pic=/" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/&title=《seaweedfs源码阅读记录2》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录2》 — MakeItPossible16&url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/" alt="微信分享二维码"/>
+</div>
+
+
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.2"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.2"></script>
+
+
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-89971065-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="google-site-verification" content="true">
+  
+  
+  
+  <title>ubuntu16.04搭建openstack-swift单机开发环境 | MakeItPossible16 | 寻找实习单位,个人简介:https://makeitpossible16.github.io/about/</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="openstack-swift">
+  <meta name="description" content="使用虚拟机进行远程调试电脑太卡，用着不爽，所以搭建单机板环境，按照SAIO搭建,在Ubuntu14.04上搭建没有啥问题，但在Ubuntu16.04上会出现问题，记录一下。
+出现问题123456789101112Traceback (most recent call last):  File &quot;/usr/local/bin/swift-object-server&quot;, line 6, in &amp;lt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu16.04搭建openstack-swift单机开发环境">
+<meta property="og:url" content="https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/index.html">
+<meta property="og:site_name" content="MakeItPossible16">
+<meta property="og:description" content="使用虚拟机进行远程调试电脑太卡，用着不爽，所以搭建单机板环境，按照SAIO搭建,在Ubuntu14.04上搭建没有啥问题，但在Ubuntu16.04上会出现问题，记录一下。
+出现问题123456789101112Traceback (most recent call last):  File &quot;/usr/local/bin/swift-object-server&quot;, line 6, in &amp;lt;">
+<meta property="og:updated_time" content="2017-01-30T10:23:11.103Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu16.04搭建openstack-swift单机开发环境">
+<meta name="twitter:description" content="使用虚拟机进行远程调试电脑太卡，用着不爽，所以搭建单机板环境，按照SAIO搭建,在Ubuntu14.04上搭建没有啥问题，但在Ubuntu16.04上会出现问题，记录一下。
+出现问题123456789101112Traceback (most recent call last):  File &quot;/usr/local/bin/swift-object-server&quot;, line 6, in &amp;lt;">
+  
+    <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.2">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MakeItPossible16</h5>
+          <a href="mailto:cjc1005819688@gmail.com" title="cjc1005819688@gmail.com" class="mail">cjc1005819688@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MakeItPossible16" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                个人简介
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>MakeItPossible16 &copy; 2016 - 2017</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</footer>
+
+    </div>
+  </div>
+</aside>
+
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">ubuntu16.04搭建openstack-swift单机开发环境</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">ubuntu16.04搭建openstack-swift单机开发环境</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-30T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-01-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#出现问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">出现问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决方法"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决方法</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-ubuntu16.04搭建openstack-swift单机开发环境" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">ubuntu16.04搭建openstack-swift单机开发环境</h1>
+        <div class="post-meta">
+            <time datetime="2017-01-30T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-01-30
+</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
+
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>使用虚拟机进行远程调试电脑太卡，用着不爽，所以搭建单机板环境，按照<a href="http://docs.openstack.org/developer/swift/development_saio.html" target="_blank" rel="external">SAIO</a>搭建,在Ubuntu14.04上搭建没有啥问题，但在Ubuntu16.04上会出现问题，记录一下。</p>
+<h2 id="出现问题"><a href="#出现问题" class="headerlink" title="出现问题"></a>出现问题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Traceback (most recent call last):</div><div class="line">  File <span class="string">"/usr/local/bin/swift-object-server"</span>, line 6, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    <span class="built_in">exec</span>(compile(open(__file__).read(), __file__, <span class="string">'exec'</span>))</div><div class="line">  File <span class="string">"/home/ubuntu/swift/bin/swift-object-server"</span>, line 19, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from swift.common.wsgi import run_wsgi</div><div class="line">  File <span class="string">"/home/ubuntu/swift/swift/common/wsgi.py"</span>, line 41, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from swift.common.storage_policy import BindPortsCache</div><div class="line">  File <span class="string">"/home/ubuntu/swift/swift/common/storage_policy.py"</span>, line 25, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from pyeclib.ec_iface import ECDriver, ECDriverError, VALID_EC_TYPES</div><div class="line">  File <span class="string">"/usr/local/lib/python2.7/dist-packages/pyeclib/ec_iface.py"</span>, line 29, <span class="keyword">in</span> &lt;module&gt;</div><div class="line">    from pyeclib_c import check_backend_available</div><div class="line">ImportError: /usr/<span class="built_in">local</span>/lib/python2.7/dist-packages/pyeclib_c.so: undefined symbol: liberasurecode_backend_available</div></pre></td></tr></table></figure>
+<p>系统找不到liberasurecode_backend_available。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>参考<a href="https://ask.openstack.org/en/question/93267/unable-to-start-swift-proxy-liberasurecode-missing-libshssso/" target="_blank" rel="external">openstack-swift bug反馈</a>，得到解决方法:<br>根据Alex Usov 的回答：<br>Finally got it working. Had to compile liberasurecode from <a href="https://github.com/openstack/liberasurecode.git" target="_blank" rel="external">https://github.com/openstack/liberasurecode.git</a> (<a href="https://github.com/openstack/liberasu" target="_blank" rel="external">https://github.com/openstack/liberasu</a>…), add line /usr/local/lib to /etc/ld.so.conf, run ldconfig, and restart openstack-swift-proxy.</p>
+<p>具体操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/openstack/liberasurecode.git</div><div class="line">$ <span class="built_in">cd</span> liberasurecode</div><div class="line">$ ./autogen.sh</div><div class="line">$ ./configure</div><div class="line">$ make</div><div class="line">$ make <span class="built_in">test</span></div><div class="line">$ sudo make install</div></pre></td></tr></table></figure></p>
+<p>在 /etc/ld.so.conf中添加一行：/usr/local/lib<br>运行 ldconfig</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        小白,欢迎指正:cjc1005819688@gmail.com
+    </div>
+    <footer>
+        <a href="https://makeitpossible16.github.io">
+            <img src="/img/logo.jpg" alt="MakeItPossible16">
+            MakeItPossible16
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/&title=《ubuntu16.04搭建openstack-swift单机开发环境》 — MakeItPossible16&pic=/" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/&title=《ubuntu16.04搭建openstack-swift单机开发环境》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ubuntu16.04搭建openstack-swift单机开发环境》 — MakeItPossible16&url=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/python语法/python语法记录/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">python语法记录</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/数据结构/查找-数据结构学习/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">查找-数据结构学习</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo" id="comments">
+	<div class="ds-thread" data-thread-key="ubuntu16.04搭建openstack-swift单机开发环境" data-title="ubuntu16.04搭建openstack-swift单机开发环境" data-url="https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.2"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'makeitpossible16.duoshuo.com', theme: 'none'}
+</script>
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
+
+
+
+<div class="global-share" id="globalShare">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/&title=《ubuntu16.04搭建openstack-swift单机开发环境》 — MakeItPossible16&pic=/" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/&title=《ubuntu16.04搭建openstack-swift单机开发环境》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《ubuntu16.04搭建openstack-swift单机开发环境》 — MakeItPossible16&url=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/" alt="微信分享二维码"/>
+</div>
+
+
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.2"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.2"></script>
+
+
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-89971065-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+</body>
+</html>

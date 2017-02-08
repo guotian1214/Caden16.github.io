@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="google-site-verification" content="true">
+  
+  
+  
+  <title>seaweedfs源码阅读记录9-生成fid过程 | MakeItPossible16 | 寻找实习单位,个人简介:https://makeitpossible16.github.io/about/</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="go,seaweedfs">
+  <meta name="description" content="使用命令 : curl -X POST http://localhost:9333/dir/assign
+在topology.go 中12345678func (t *Topology) PickForWrite(count uint64, option *VolumeGrowOption) (string, uint64, *DataNode, error) &amp;#123;	vid, count,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="seaweedfs源码阅读记录9-生成fid过程">
+<meta property="og:url" content="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/index.html">
+<meta property="og:site_name" content="MakeItPossible16">
+<meta property="og:description" content="使用命令 : curl -X POST http://localhost:9333/dir/assign
+在topology.go 中12345678func (t *Topology) PickForWrite(count uint64, option *VolumeGrowOption) (string, uint64, *DataNode, error) &amp;#123;	vid, count,">
+<meta property="og:updated_time" content="2016-12-16T14:27:23.010Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="seaweedfs源码阅读记录9-生成fid过程">
+<meta name="twitter:description" content="使用命令 : curl -X POST http://localhost:9333/dir/assign
+在topology.go 中12345678func (t *Topology) PickForWrite(count uint64, option *VolumeGrowOption) (string, uint64, *DataNode, error) &amp;#123;	vid, count,">
+  
+    <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.2">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MakeItPossible16</h5>
+          <a href="mailto:cjc1005819688@gmail.com" title="cjc1005819688@gmail.com" class="mail">cjc1005819688@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MakeItPossible16" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                个人简介
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>MakeItPossible16 &copy; 2016 - 2017</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</footer>
+
+    </div>
+  </div>
+</aside>
+
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">seaweedfs源码阅读记录9-生成fid过程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">seaweedfs源码阅读记录9-生成fid过程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-12-16T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2016-12-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-seaweedfs源码阅读记录9-生成fid过程" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">seaweedfs源码阅读记录9-生成fid过程</h1>
+        <div class="post-meta">
+            <time datetime="2016-12-16T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-12-16
+</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>使用命令 : curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a></p>
+<p>在topology.go 中<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Topology)</span> <span class="title">PickForWrite</span><span class="params">(count <span class="keyword">uint64</span>, option *VolumeGrowOption)</span> <span class="params">(<span class="keyword">string</span>, <span class="keyword">uint64</span>, *DataNode, error)</span></span> &#123;</div><div class="line">	vid, count, datanodes, err := t.GetVolumeLayout(option.Collection, option.ReplicaPlacement, option.Ttl).PickForWrite(count, option)</div><div class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> || datanodes.Length() == <span class="number">0</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">""</span>, <span class="number">0</span>, <span class="literal">nil</span>, errors.New(<span class="string">"No writable volumes available!"</span>)</div><div class="line">	&#125;</div><div class="line">	fileId, count := t.Sequence.NextFileId(count)   <span class="comment">// fileId = 1050682, count = 1</span></div><div class="line">	<span class="keyword">return</span> storage.NewFileId(*vid, fileId, rand.Uint32()).String(), count, datanodes.Head(), <span class="literal">nil</span>  <span class="comment">//调用file_id.go中的NewFileId函数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在file_id.go 中<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> FileId <span class="keyword">struct</span> &#123;</div><div class="line">	VolumeId VolumeId</div><div class="line">	Key      <span class="keyword">uint64</span> <span class="comment">// fileId = 1050682</span></div><div class="line">	Hashcode <span class="keyword">uint32</span> <span class="comment">// rand.Uint32()</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewFileId</span><span class="params">(VolumeId VolumeId, Key <span class="keyword">uint64</span>, Hashcode <span class="keyword">uint32</span>)</span> *<span class="title">FileId</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> &amp;FileId&#123;VolumeId: VolumeId, Key: Key, Hashcode: Hashcode&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用memory_sequencer.go中的函数<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *MemorySequencer)</span> <span class="title">NextFileId</span><span class="params">(count <span class="keyword">uint64</span>)</span> <span class="params">(<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</span></span> &#123;  <span class="comment">// count = 1</span></div><div class="line">	m.sequenceLock.Lock()</div><div class="line">	<span class="keyword">defer</span> m.sequenceLock.Unlock()</div><div class="line">	ret := m.counter</div><div class="line">	m.counter += <span class="keyword">uint64</span>(count)</div><div class="line">	<span class="keyword">return</span> ret, count</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>调试信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(dlv) p m</div><div class="line">*github.com/chrislusf/seaweedfs/weed/sequence.MemorySequencer &#123;</div><div class="line">	counter: 1050683,</div><div class="line">	sequenceLock: sync.Mutex &#123;state: 1, sema: 0&#125;,&#125;</div></pre></td></tr></table></figure></p>
+<p>在 master_server_handlers.go 中封装信息<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">fid, count, dn, err := ms.Topo.PickForWrite(requestedCount, option)</div><div class="line">	<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</div><div class="line">		writeJsonQuiet(w, r, http.StatusOK, operation.AssignResult&#123;Fid: fid, Url: dn.Url(), PublicUrl: dn.PublicUrl, Count: count&#125;)</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		writeJsonQuiet(w, r, http.StatusNotAcceptable, operation.AssignResult&#123;Error: err.Error()&#125;)</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        小白,欢迎指正:cjc1005819688@gmail.com
+    </div>
+    <footer>
+        <a href="https://makeitpossible16.github.io">
+            <img src="/img/logo.jpg" alt="MakeItPossible16">
+            MakeItPossible16
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/&title=《seaweedfs源码阅读记录9-生成fid过程》 — MakeItPossible16&pic=/" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/&title=《seaweedfs源码阅读记录9-生成fid过程》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录9-生成fid过程》 — MakeItPossible16&url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/文件存储/linux学习-linux文件存储/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">linux学习-linux文件存储</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/文件存储/seaweedfs源码阅读8-GET&HEAD获取文件过程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo" id="comments">
+	<div class="ds-thread" data-thread-key="seaweedfs源码阅读记录9-生成fid过程" data-title="seaweedfs源码阅读记录9-生成fid过程" data-url="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.2"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'makeitpossible16.duoshuo.com', theme: 'none'}
+</script>
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
+
+
+
+<div class="global-share" id="globalShare">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/&title=《seaweedfs源码阅读记录9-生成fid过程》 — MakeItPossible16&pic=/" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/&title=《seaweedfs源码阅读记录9-生成fid过程》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录9-生成fid过程》 — MakeItPossible16&url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/" alt="微信分享二维码"/>
+</div>
+
+
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.2"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.2"></script>
+
+
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-89971065-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+</body>
+</html>

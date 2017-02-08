@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="google-site-verification" content="true">
+  
+  
+  
+  <title>golang学习 | MakeItPossible16 | 寻找实习单位,个人简介:https://makeitpossible16.github.io/about/</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="go">
+  <meta name="description" content="在看seaweedfs过程中遇到的go 语法,不会的记录一下.
+interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, uint64)	SetMax(uint64)	Peek() uint64&amp;#125;
+go map1t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="golang学习">
+<meta property="og:url" content="https://makeitpossible16.github.io/go/golang学习/index.html">
+<meta property="og:site_name" content="MakeItPossible16">
+<meta property="og:description" content="在看seaweedfs过程中遇到的go 语法,不会的记录一下.
+interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, uint64)	SetMax(uint64)	Peek() uint64&amp;#125;
+go map1t">
+<meta property="og:updated_time" content="2016-12-15T03:15:17.470Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="golang学习">
+<meta name="twitter:description" content="在看seaweedfs过程中遇到的go 语法,不会的记录一下.
+interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, uint64)	SetMax(uint64)	Peek() uint64&amp;#125;
+go map1t">
+  
+    <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css?v=1.2">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">MakeItPossible16</h5>
+          <a href="mailto:cjc1005819688@gmail.com" title="cjc1005819688@gmail.com" class="mail">cjc1005819688@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/MakeItPossible16" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                个人简介
+              </a>
+            </li>
+        
+      </ul>
+
+      <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>MakeItPossible16 &copy; 2016 - 2017</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+</footer>
+
+    </div>
+  </div>
+</aside>
+
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">golang学习</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container">
+        <h1 class="title">golang学习</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-11-29T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2016-11-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/go/">go</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>目录</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#interface-是一组method的组合-通过interface来定义对象的一组行为"><span class="post-toc-number">1.</span> <span class="post-toc-text">interface: 是一组method的组合,通过interface来定义对象的一组行为.</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-map"><span class="post-toc-number">2.</span> <span class="post-toc-text">go map</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-sync-RWMutex和sync-Mutex"><span class="post-toc-number">3.</span> <span class="post-toc-text">go sync.RWMutex和sync.Mutex</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-Routine和Channel"><span class="post-toc-number">4.</span> <span class="post-toc-text">go Routine和Channel</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go反引号"><span class="post-toc-number">5.</span> <span class="post-toc-text">go反引号</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#go-get-安装程序错误"><span class="post-toc-number">6.</span> <span class="post-toc-text">go get 安装程序错误</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#strconv-ParseInt-s-string-base-int-bitSize-int-i-int64-err-error-或strconv-ParseUint"><span class="post-toc-number">7.</span> <span class="post-toc-text">strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)  或strconv.ParseUint</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-golang学习" 
+  class="post-article article-type-post" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">golang学习</h1>
+        <div class="post-meta">
+            <time datetime="2016-11-29T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-11-29
+</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/go/">go</a></li></ul>
+
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在看seaweedfs过程中遇到的go 语法,不会的记录一下.</p>
+<h2 id="interface-是一组method的组合-通过interface来定义对象的一组行为"><a href="#interface-是一组method的组合-通过interface来定义对象的一组行为" class="headerlink" title="interface: 是一组method的组合,通过interface来定义对象的一组行为."></a>interface: 是一组method的组合,通过interface来定义对象的一组行为.</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">	NextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">	SetMax(<span class="keyword">uint64</span>)</div><div class="line">	Peek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="go-map"><a href="#go-map" class="headerlink" title="go map"></a>go map</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">t.children = <span class="built_in">make</span>(<span class="keyword">map</span>[NodeId]Node)  <span class="comment">// NodeId --&gt; Node</span></div></pre></td></tr></table></figure>
+<h2 id="go-sync-RWMutex和sync-Mutex"><a href="#go-sync-RWMutex和sync-Mutex" class="headerlink" title="go sync.RWMutex和sync.Mutex"></a>go <a href="http://studygolang.com/articles/3373" target="_blank" rel="external">sync.RWMutex和sync.Mutex</a></h2><p>golang中sync包实现了两种锁Mutex （互斥锁）和RWMutex（读写锁），其中RWMutex是基于Mutex实现的，只读锁的实现使用类似引用计数器的功能．<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Mutex</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="params">(m *Mutex)</span> <span class="title">Lock</span><span class="params">()</span></span></div><div class="line">    <span class="title">func</span> <span class="params">(m *Mutex)</span> <span class="title">Unlock</span><span class="params">()</span></div></pre></td></tr></table></figure></p>
+<p>Mutex为互斥锁，Lock()加锁，Unlock()解锁，使用Lock()加锁后，便不能再次对其进行加锁，直到利用Unlock()解锁对其解锁后，才能再次加锁．适用于读写不确定场景，即读写次数没有明显的区别，并且只允许只有一个读或者写的场景，所以该锁也叫做全局锁．</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> RWMutex</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="params">(rw *RWMutex)</span> <span class="title">Lock</span><span class="params">()</span></span></div><div class="line">    <span class="title">func</span> <span class="params">(rw *RWMutex)</span> <span class="title">RLock</span><span class="params">()</span></div><div class="line">    <span class="title">func</span> <span class="params">(rw *RWMutex)</span> <span class="title">RLocker</span><span class="params">()</span> <span class="title">Locker</span></div><div class="line">    <span class="title">func</span> <span class="params">(rw *RWMutex)</span> <span class="title">RUnlock</span><span class="params">()</span></div><div class="line">    <span class="title">func</span> <span class="params">(rw *RWMutex)</span> <span class="title">Unlock</span><span class="params">()</span></div></pre></td></tr></table></figure>
+<p>func (rw <em>RWMutex) Lock()　　写锁，如果在添加写锁之前已经有其他的读锁和写锁，则lock就会阻塞直到该锁可用，为确保该锁最终可用，已阻塞的 Lock 调用会从获得的锁中排除新的读取器，即写锁权限高于读锁，有写锁时优先进行写锁定<br> func (rw </em>RWMutex) Unlock()　写锁解锁，如果没有进行写锁定，则就会引起一个运行时错误．<br> func (rw *RWMutex) RLock() 读锁，当有写锁时，无法加载读锁，当只有读锁或者没有锁时，可以加载读锁，读锁可以加载多个，所以适用于＂读多写少＂的场景</p>
+<p>func (rw *RWMutex)RUnlock()　读锁解锁，RUnlock 撤销单次 RLock 调用，它对于其它同时存在的读取器则没有效果。若 rw 并没有为读取而锁定，调用 RUnlock 就会引发一个运行时错误(注：这种说法在go1.3版本中是不对的，例如下面这个例子)。</p>
+<h2 id="go-Routine和Channel"><a href="#go-Routine和Channel" class="headerlink" title="go Routine和Channel"></a>go Routine和Channel</h2><p><a href="http://blog.csdn.net/colouful987/article/details/45190319" target="_blank" rel="external">go学习笔记_Routine和Channel上</a></p>
+<p>goroutine 类似开辟进程、线程做法<br>语法：</p>
+<pre><code>1. 定义一个函数functionName，要异步调用时使用语句go functionName即可。
+
+2. 使用匿名函数，用法为go func(参数列表){函数执行体}()，说明最后一个()作用就是让该函数执行。
+</code></pre><p>代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/////////第一种示例代码：///////////</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">sayHello</span><span class="params">(name <span class="keyword">string</span>)</span></span>&#123;</div><div class="line">    fmt.Println(<span class="string">"hello"</span>+name)</div><div class="line">&#125;</div><div class="line"><span class="comment">//主程序入口</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">go</span> sayHello(<span class="string">"PMST"</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">/////////第二种示例代码：//////////</span></div><div class="line"><span class="comment">//主程序入口</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span>&#123;</div><div class="line">        fmt.Println(<span class="string">"hello world"</span>)</div><div class="line">    &#125;()     <span class="comment">//别忘记这里的()</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一旦将go放在函数之前，意味分配一个子routine让这个函数自个玩去(有点自身自灭的感觉),而主routine则继续该干嘛干嘛。</p>
+<p>channel<br>goroutine 之间进行数据通信方式：</p>
+<ol>
+<li>共用内存内存空间。</li>
+<li>Go语言推荐的通信机制channel。</li>
+</ol>
+<p>通过make来创建channel,例如<br>无缓存ci := make(chan int),<br>指定缓存cib := make(chan int,2)。给这个通道分类了2个缓存空间</p>
+<p>通道的接收和发送都是阻塞的，除非与之对应的一端已经准备好<br>阻塞状态：</p>
+<ol>
+<li>数据写入channel（或缓存已满）却没读出</li>
+<li>channel中没有数据，读channel会阻塞。</li>
+</ol>
+<h2 id="go反引号"><a href="#go反引号" class="headerlink" title="go反引号"></a>go反引号</h2><p>参考文章:<a href="http://studygolang.com/articles/2553" target="_blank" rel="external">GoLang获取struct的tag</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> AppendEntriesRequest <span class="keyword">struct</span> &#123;</div><div class="line">	Term             *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,1,req" json:"Term,omitempty"`</span></div><div class="line">	PrevLogIndex     *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,2,req" json:"PrevLogIndex,omitempty"`</span></div><div class="line">	PrevLogTerm      *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,3,req" json:"PrevLogTerm,omitempty"`</span></div><div class="line">	CommitIndex      *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,4,req" json:"CommitIndex,omitempty"`</span></div><div class="line">	LeaderName       *<span class="keyword">string</span>     <span class="string">`protobuf:"bytes,5,req" json:"LeaderName,omitempty"`</span></div><div class="line">	Entries          []*LogEntry <span class="string">`protobuf:"bytes,6,rep" json:"Entries,omitempty"`</span></div><div class="line">	XXX_unrecognized []<span class="keyword">byte</span>      <span class="string">`json:"-"`</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中,反引号表示字符串,struct后面的字符串用于reflect,具体用法<br>s := AppendEntriesRequest{}<br>st := reflect.TypeOf(s)<br>field := st.Field(0)<br>field.Tag.Get(“protobuf”) // varint,1,req<br>field.Tag.Get(“json”) // Term,omitempty</p>
+<h2 id="go-get-安装程序错误"><a href="#go-get-安装程序错误" class="headerlink" title="go get 安装程序错误"></a>go get 安装程序错误</h2><p>错误提示:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">unrecognized import path <span class="string">"code.google.com/p/goprotobuf/proto"</span></div><div class="line"></div><div class="line">parse https://code.google.com/p/goprotobuf?go-get=1: no go-import meta tags</div></pre></td></tr></table></figure></p>
+<p>错误原因:依赖包已从code.google.com移除, 已重定向到github.com/golang/protobuf/proto,修改程序中的代码即可</p>
+<h2 id="strconv-ParseInt-s-string-base-int-bitSize-int-i-int64-err-error-或strconv-ParseUint"><a href="#strconv-ParseInt-s-string-base-int-bitSize-int-i-int64-err-error-或strconv-ParseUint" class="headerlink" title="strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)  或strconv.ParseUint"></a>strconv.ParseInt(s string, base int, bitSize int) (i int64, err error)  或strconv.ParseUint</h2><p>把字符串转换为整数,<br>参数1 数字的字符串形式</p>
+<p>参数2 数字字符串的进制 比如二进制 八进制 十进制 十六进制</p>
+<p>参数3 返回结果的bit大小 也就是int8 int16 int32 int64</p>
+
+        </div>
+        
+        <blockquote class="post-copyright">
+    <div class="content">
+        小白,欢迎指正:cjc1005819688@gmail.com
+    </div>
+    <footer>
+        <a href="https://makeitpossible16.github.io">
+            <img src="/img/logo.jpg" alt="MakeItPossible16">
+            MakeItPossible16
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/go/golang学习/&title=《golang学习》 — MakeItPossible16&pic=/" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/go/golang学习/&title=《golang学习》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/go/golang学习/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《golang学习》 — MakeItPossible16&url=https://makeitpossible16.github.io/go/golang学习/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/go/golang学习/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>   
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/go/golang 反射机制/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">golang 反射机制</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/文件存储/seaweedfs源码阅读记录3-raft协议理解/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">seaweedfs源码阅读记录3-raft协议理解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+    
+<div class="duoshuo" id="comments">
+	<div class="ds-thread" data-thread-key="golang学习" data-title="golang学习" data-url="https://makeitpossible16.github.io/go/golang学习/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.2"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'makeitpossible16.duoshuo.com', theme: 'none'}
+</script>
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+  </main>
+  <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
+
+
+
+<div class="global-share" id="globalShare">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/go/golang学习/&title=《golang学习》 — MakeItPossible16&pic=/" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/go/golang学习/&title=《golang学习》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/go/golang学习/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《golang学习》 — MakeItPossible16&url=https://makeitpossible16.github.io/go/golang学习/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/go/golang学习/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/go/golang学习/" alt="微信分享二维码"/>
+</div>
+
+
+
+
+  <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script src="/js/main.min.js?v=1.2"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.2"></script>
+
+
+
+
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-89971065-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+</body>
+</html>

@@ -17,8 +17,8 @@
   
   <entry>
     <title>数据结构</title>
-    <link href="https://makeitpossible16.github.io/2017/02/07/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://makeitpossible16.github.io/2017/02/07/数据结构/</id>
+    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
     <published>2017-02-07T00:00:00.000Z</published>
     <updated>2017-02-07T13:37:16.495Z</updated>
     
@@ -42,8 +42,8 @@
   
   <entry>
     <title>python语法记录</title>
-    <link href="https://makeitpossible16.github.io/2017/02/07/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/2017/02/07/python语法记录/</id>
+    <link href="https://makeitpossible16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
+    <id>https://makeitpossible16.github.io/python语法/python语法记录/</id>
     <published>2017-02-07T00:00:00.000Z</published>
     <updated>2017-02-07T13:52:07.095Z</updated>
     
@@ -67,8 +67,8 @@
   
   <entry>
     <title>ubuntu16.04搭建openstack-swift单机开发环境</title>
-    <link href="https://makeitpossible16.github.io/2017/01/30/ubuntu16.04%E6%90%AD%E5%BB%BAopenstack-swift%E5%8D%95%E6%9C%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
-    <id>https://makeitpossible16.github.io/2017/01/30/ubuntu16.04搭建openstack-swift单机开发环境/</id>
+    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/ubuntu16.04%E6%90%AD%E5%BB%BAopenstack-swift%E5%8D%95%E6%9C%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <id>https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/</id>
     <published>2017-01-30T00:00:00.000Z</published>
     <updated>2017-01-30T10:23:11.103Z</updated>
     
@@ -95,8 +95,8 @@
   
   <entry>
     <title>查找-数据结构学习</title>
-    <link href="https://makeitpossible16.github.io/2017/01/21/%E6%9F%A5%E6%89%BE-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/2017/01/21/查找-数据结构学习/</id>
+    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%9F%A5%E6%89%BE-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://makeitpossible16.github.io/数据结构/查找-数据结构学习/</id>
     <published>2017-01-21T00:00:00.000Z</published>
     <updated>2017-01-21T13:52:15.975Z</updated>
     
@@ -117,34 +117,9 @@
   </entry>
   
   <entry>
-    <title>linux文件存储机制</title>
-    <link href="https://makeitpossible16.github.io/2017/01/21/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/2017/01/21/linux文件存储机制/</id>
-    <published>2017-01-21T00:00:00.000Z</published>
-    <updated>2017-01-21T14:05:03.896Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>openstack-swift调试</title>
-    <link href="https://makeitpossible16.github.io/2017/01/21/openstack-swift%E8%B0%83%E8%AF%95/"/>
-    <id>https://makeitpossible16.github.io/2017/01/21/openstack-swift调试/</id>
+    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E8%B0%83%E8%AF%95/"/>
+    <id>https://makeitpossible16.github.io/对象存储/openstack-swift调试/</id>
     <published>2017-01-21T00:00:00.000Z</published>
     <updated>2017-01-29T14:29:46.391Z</updated>
     
@@ -173,9 +148,34 @@
   </entry>
   
   <entry>
+    <title>linux文件存储机制</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
+    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
+    <published>2017-01-21T00:00:00.000Z</published>
+    <updated>2017-01-21T14:05:03.896Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+  </entry>
+  
+  <entry>
     <title>kafka学习笔记</title>
-    <link href="https://makeitpossible16.github.io/2017/01/11/kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>https://makeitpossible16.github.io/2017/01/11/kafka学习笔记/</id>
+    <link href="https://makeitpossible16.github.io/kafka/kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://makeitpossible16.github.io/kafka/kafka学习笔记/</id>
     <published>2017-01-11T00:00:00.000Z</published>
     <updated>2017-01-21T11:58:44.205Z</updated>
     
@@ -202,8 +202,8 @@
   
   <entry>
     <title>文件系统(seaweedfs)与关系型数据库优劣势分析</title>
-    <link href="https://makeitpossible16.github.io/2017/01/06/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F(seaweedfs)%E4%B8%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8A%A3%E5%8A%BF%E5%88%86%E6%9E%90/"/>
-    <id>https://makeitpossible16.github.io/2017/01/06/文件系统(seaweedfs)与关系型数据库优劣势分析/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8A%A3%E5%8A%BF%E5%88%86%E6%9E%90/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F(seaweedfs)%E4%B8%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8A%A3%E5%8A%BF%E5%88%86%E6%9E%90/"/>
+    <id>https://makeitpossible16.github.io/文件系统与数据库优劣势分析/文件系统(seaweedfs)与关系型数据库优劣势分析/</id>
     <published>2017-01-06T00:00:00.000Z</published>
     <updated>2017-01-07T08:45:11.290Z</updated>
     
@@ -232,8 +232,8 @@
   
   <entry>
     <title>linux内核学习-数据结构</title>
-    <link href="https://makeitpossible16.github.io/2017/01/04/linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://makeitpossible16.github.io/2017/01/04/linux内核学习-数据结构/</id>
+    <link href="https://makeitpossible16.github.io/linux%E5%86%85%E6%A0%B8/linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://makeitpossible16.github.io/linux内核/linux内核学习-数据结构/</id>
     <published>2017-01-04T00:00:00.000Z</published>
     <updated>2017-01-21T13:35:37.846Z</updated>
     
@@ -263,8 +263,8 @@
   
   <entry>
     <title>linux命令学习</title>
-    <link href="https://makeitpossible16.github.io/2017/01/02/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/2017/01/02/linux命令学习/</id>
+    <link href="https://makeitpossible16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://makeitpossible16.github.io/linux命令/linux命令学习/</id>
     <published>2017-01-02T00:00:00.000Z</published>
     <updated>2017-01-03T12:52:27.902Z</updated>
     
@@ -294,8 +294,8 @@
   
   <entry>
     <title>ELKStack搭建问题总结</title>
-    <link href="https://makeitpossible16.github.io/2017/01/02/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/2017/01/02/ELKStack搭建问题总结/</id>
+    <link href="https://makeitpossible16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://makeitpossible16.github.io/ELKStack/ELKStack搭建问题总结/</id>
     <published>2017-01-02T00:00:00.000Z</published>
     <updated>2017-01-02T15:58:17.559Z</updated>
     
@@ -330,8 +330,8 @@
   
   <entry>
     <title>linux学习-linux文件存储</title>
-    <link href="https://makeitpossible16.github.io/2017/01/01/linux%E5%AD%A6%E4%B9%A0-linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    <id>https://makeitpossible16.github.io/2017/01/01/linux学习-linux文件存储/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E5%AD%A6%E4%B9%A0-linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    <id>https://makeitpossible16.github.io/文件存储/linux学习-linux文件存储/</id>
     <published>2017-01-01T00:00:00.000Z</published>
     <updated>2017-01-01T15:55:22.224Z</updated>
     
@@ -354,8 +354,8 @@
   
   <entry>
     <title>seaweedfs源码阅读记录9-生成fid过程</title>
-    <link href="https://makeitpossible16.github.io/2016/12/16/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%959-%E7%94%9F%E6%88%90fid%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/2016/12/16/seaweedfs源码阅读记录9-生成fid过程/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%959-%E7%94%9F%E6%88%90fid%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/</id>
     <published>2016-12-16T00:00:00.000Z</published>
     <updated>2016-12-16T14:27:23.010Z</updated>
     
@@ -385,8 +385,8 @@
   
   <entry>
     <title>seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</title>
-    <link href="https://makeitpossible16.github.io/2016/12/15/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB8-GET&amp;HEAD%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/2016/12/15/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB8-GET&amp;HEAD%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程/</id>
     <published>2016-12-15T00:00:00.000Z</published>
     <updated>2016-12-15T12:08:29.759Z</updated>
     
@@ -418,8 +418,8 @@
   
   <entry>
     <title>seaweedfs源码阅读7-文件存储过程</title>
-    <link href="https://makeitpossible16.github.io/2016/12/13/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB7-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/2016/12/13/seaweedfs源码阅读7-文件存储过程/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB7-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读7-文件存储过程/</id>
     <published>2016-12-13T00:00:00.000Z</published>
     <updated>2016-12-15T03:13:10.345Z</updated>
     
@@ -443,8 +443,8 @@
   
   <entry>
     <title>seaweedfs源码阅读6-文件存储格式</title>
-    <link href="https://makeitpossible16.github.io/2016/12/12/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB6-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/"/>
-    <id>https://makeitpossible16.github.io/2016/12/12/seaweedfs源码阅读6-文件存储格式/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB6-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/</id>
     <published>2016-12-12T00:00:00.000Z</published>
     <updated>2016-12-13T03:26:44.809Z</updated>
     
@@ -469,8 +469,8 @@
   
   <entry>
     <title>seaweedfs源码阅读4-volume启动过程</title>
-    <link href="https://makeitpossible16.github.io/2016/12/11/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
-    <id>https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读4-volume启动/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读4-volume启动/</id>
     <published>2016-12-11T00:00:00.000Z</published>
     <updated>2016-12-11T04:47:50.162Z</updated>
     
@@ -499,8 +499,8 @@
   
   <entry>
     <title>seaweedfs源码阅读5-文件PUT过程</title>
-    <link href="https://makeitpossible16.github.io/2016/12/11/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/2016/12/11/seaweedfs源码阅读5-文件PUT过程/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读5-文件PUT过程/</id>
     <published>2016-12-11T00:00:00.000Z</published>
     <updated>2016-12-11T13:30:05.384Z</updated>
     
@@ -528,8 +528,8 @@
   
   <entry>
     <title>golang调试技巧</title>
-    <link href="https://makeitpossible16.github.io/2016/12/10/golang%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/"/>
-    <id>https://makeitpossible16.github.io/2016/12/10/golang调试技巧/</id>
+    <link href="https://makeitpossible16.github.io/go/golang%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/"/>
+    <id>https://makeitpossible16.github.io/go/golang调试技巧/</id>
     <published>2016-12-10T00:00:00.000Z</published>
     <updated>2016-12-11T02:52:49.574Z</updated>
     
@@ -565,8 +565,8 @@
   
   <entry>
     <title>golang 反射机制</title>
-    <link href="https://makeitpossible16.github.io/2016/12/02/golang%20%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/2016/12/02/golang 反射机制/</id>
+    <link href="https://makeitpossible16.github.io/go/golang%20%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+    <id>https://makeitpossible16.github.io/go/golang 反射机制/</id>
     <published>2016-12-02T00:00:00.000Z</published>
     <updated>2016-12-04T07:55:20.022Z</updated>
     
@@ -590,8 +590,8 @@
   
   <entry>
     <title>golang学习</title>
-    <link href="https://makeitpossible16.github.io/2016/11/29/golang%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/2016/11/29/golang学习/</id>
+    <link href="https://makeitpossible16.github.io/go/golang%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://makeitpossible16.github.io/go/golang学习/</id>
     <published>2016-11-29T00:00:00.000Z</published>
     <updated>2016-12-15T03:15:17.470Z</updated>
     
@@ -647,8 +647,8 @@
   
   <entry>
     <title>seaweedfs源码阅读记录3-raft协议理解</title>
-    <link href="https://makeitpossible16.github.io/2016/11/28/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%953-raft%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/"/>
-    <id>https://makeitpossible16.github.io/2016/11/28/seaweedfs源码阅读记录3-raft协议理解/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%953-raft%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录3-raft协议理解/</id>
     <published>2016-11-28T00:00:00.000Z</published>
     <updated>2016-12-03T15:29:42.344Z</updated>
     
@@ -677,8 +677,8 @@
   
   <entry>
     <title>seaweedfs源码阅读记录1</title>
-    <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/</id>
     <published>2016-11-22T00:00:00.000Z</published>
     <updated>2016-12-26T14:43:32.666Z</updated>
     
@@ -709,8 +709,8 @@
   
   <entry>
     <title>seaweedfs源码阅读记录2</title>
-    <link href="https://makeitpossible16.github.io/2016/11/22/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
-    <id>https://makeitpossible16.github.io/2016/11/22/seaweedfs源码阅读记录2/</id>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
     <published>2016-11-22T00:00:00.000Z</published>
     <updated>2016-11-28T11:57:03.000Z</updated>
     
@@ -741,8 +741,8 @@
   
   <entry>
     <title>cloudstack 搭建总结</title>
-    <link href="https://makeitpossible16.github.io/2016/11/20/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/2016/11/20/cloudstack搭建总结/</id>
+    <link href="https://makeitpossible16.github.io/cloudsatck%E6%90%AD%E5%BB%BA/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
+    <id>https://makeitpossible16.github.io/cloudsatck搭建/cloudstack搭建总结/</id>
     <published>2016-11-20T00:00:00.000Z</published>
     <updated>2016-11-23T04:37:32.945Z</updated>
     
@@ -774,8 +774,8 @@
   
   <entry>
     <title>nodeJS入门总结</title>
-    <link href="https://makeitpossible16.github.io/2016/11/20/nodeJS%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/2016/11/20/nodeJS入门总结/</id>
+    <link href="https://makeitpossible16.github.io/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/nodeJS%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/"/>
+    <id>https://makeitpossible16.github.io/网站相关/nodeJS入门总结/</id>
     <published>2016-11-20T00:00:00.000Z</published>
     <updated>2016-11-24T14:55:44.836Z</updated>
     
@@ -817,8 +817,8 @@
   
   <entry>
     <title>ubuntu下如何优雅地使用翻译</title>
-    <link href="https://makeitpossible16.github.io/2016/10/26/ubuntu%E4%B8%8B%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8%E7%BF%BB%E8%AF%91/"/>
-    <id>https://makeitpossible16.github.io/2016/10/26/ubuntu下如何优雅地使用翻译/</id>
+    <link href="https://makeitpossible16.github.io/%E6%9C%89%E9%81%93%E5%AD%97%E5%85%B8%E4%BF%AE%E6%94%B9/ubuntu%E4%B8%8B%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8%E7%BF%BB%E8%AF%91/"/>
+    <id>https://makeitpossible16.github.io/有道字典修改/ubuntu下如何优雅地使用翻译/</id>
     <published>2016-10-26T00:00:00.000Z</published>
     <updated>2016-11-26T15:39:42.885Z</updated>
     
