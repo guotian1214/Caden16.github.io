@@ -7,7 +7,7 @@
   
   
   
-  <title>golang学习 | MakeItPossible16 | 寻找实习单位,个人简介:https://makeitpossible16.github.io/about/</title>
+  <title>golang学习 | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
@@ -15,21 +15,18 @@
   
   <meta name="keywords" content="go">
   <meta name="description" content="在看seaweedfs过程中遇到的go 语法,不会的记录一下.
-interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, uint64)	SetMax(uint64)	Peek() uint64&amp;#125;
-go map1t">
+interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;trueNextFileId(count uint64) (uint64, uint64)trueSetMax(uint64)truePeek() uint64&amp;#125;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="golang学习">
 <meta property="og:url" content="https://makeitpossible16.github.io/go/golang学习/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
 <meta property="og:description" content="在看seaweedfs过程中遇到的go 语法,不会的记录一下.
-interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, uint64)	SetMax(uint64)	Peek() uint64&amp;#125;
-go map1t">
+interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;trueNextFileId(count uint64) (uint64, uint64)trueSetMax(uint64)truePeek() uint64&amp;#125;">
 <meta property="og:updated_time" content="2016-12-15T03:15:17.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang学习">
 <meta name="twitter:description" content="在看seaweedfs过程中遇到的go 语法,不会的记录一下.
-interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;	NextFileId(count uint64) (uint64, uint64)	SetMax(uint64)	Peek() uint64&amp;#125;
-go map1t">
+interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &amp;#123;trueNextFileId(count uint64) (uint64, uint64)trueSetMax(uint64)truePeek() uint64&amp;#125;">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -192,7 +189,7 @@ go map1t">
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>在看seaweedfs过程中遇到的go 语法,不会的记录一下.</p>
-<h2 id="interface-是一组method的组合-通过interface来定义对象的一组行为"><a href="#interface-是一组method的组合-通过interface来定义对象的一组行为" class="headerlink" title="interface: 是一组method的组合,通过interface来定义对象的一组行为."></a>interface: 是一组method的组合,通过interface来定义对象的一组行为.</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">	NextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">	SetMax(<span class="keyword">uint64</span>)</div><div class="line">	Peek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="interface-是一组method的组合-通过interface来定义对象的一组行为"><a href="#interface-是一组method的组合-通过interface来定义对象的一组行为" class="headerlink" title="interface: 是一组method的组合,通过interface来定义对象的一组行为."></a>interface: 是一组method的组合,通过interface来定义对象的一组行为.</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">trueNextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">trueSetMax(<span class="keyword">uint64</span>)</div><div class="line">truePeek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="go-map"><a href="#go-map" class="headerlink" title="go map"></a>go map</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">t.children = <span class="built_in">make</span>(<span class="keyword">map</span>[NodeId]Node)  <span class="comment">// NodeId --&gt; Node</span></div></pre></td></tr></table></figure>
 <h2 id="go-sync-RWMutex和sync-Mutex"><a href="#go-sync-RWMutex和sync-Mutex" class="headerlink" title="go sync.RWMutex和sync.Mutex"></a>go <a href="http://studygolang.com/articles/3373" target="_blank" rel="external">sync.RWMutex和sync.Mutex</a></h2><p>golang中sync包实现了两种锁Mutex （互斥锁）和RWMutex（读写锁），其中RWMutex是基于Mutex实现的，只读锁的实现使用类似引用计数器的功能．<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Mutex</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="params">(m *Mutex)</span> <span class="title">Lock</span><span class="params">()</span></span></div><div class="line">    <span class="title">func</span> <span class="params">(m *Mutex)</span> <span class="title">Unlock</span><span class="params">()</span></div></pre></td></tr></table></figure></p>
 <p>Mutex为互斥锁，Lock()加锁，Unlock()解锁，使用Lock()加锁后，便不能再次对其进行加锁，直到利用Unlock()解锁对其解锁后，才能再次加锁．适用于读写不确定场景，即读写次数没有明显的区别，并且只允许只有一个读或者写的场景，所以该锁也叫做全局锁．</p>
@@ -218,7 +215,7 @@ go map1t">
 <li>数据写入channel（或缓存已满）却没读出</li>
 <li>channel中没有数据，读channel会阻塞。</li>
 </ol>
-<h2 id="go反引号"><a href="#go反引号" class="headerlink" title="go反引号"></a>go反引号</h2><p>参考文章:<a href="http://studygolang.com/articles/2553" target="_blank" rel="external">GoLang获取struct的tag</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> AppendEntriesRequest <span class="keyword">struct</span> &#123;</div><div class="line">	Term             *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,1,req" json:"Term,omitempty"`</span></div><div class="line">	PrevLogIndex     *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,2,req" json:"PrevLogIndex,omitempty"`</span></div><div class="line">	PrevLogTerm      *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,3,req" json:"PrevLogTerm,omitempty"`</span></div><div class="line">	CommitIndex      *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,4,req" json:"CommitIndex,omitempty"`</span></div><div class="line">	LeaderName       *<span class="keyword">string</span>     <span class="string">`protobuf:"bytes,5,req" json:"LeaderName,omitempty"`</span></div><div class="line">	Entries          []*LogEntry <span class="string">`protobuf:"bytes,6,rep" json:"Entries,omitempty"`</span></div><div class="line">	XXX_unrecognized []<span class="keyword">byte</span>      <span class="string">`json:"-"`</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="go反引号"><a href="#go反引号" class="headerlink" title="go反引号"></a>go反引号</h2><p>参考文章:<a href="http://studygolang.com/articles/2553" target="_blank" rel="external">GoLang获取struct的tag</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> AppendEntriesRequest <span class="keyword">struct</span> &#123;</div><div class="line">trueTerm             *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,1,req" json:"Term,omitempty"`</span></div><div class="line">truePrevLogIndex     *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,2,req" json:"PrevLogIndex,omitempty"`</span></div><div class="line">truePrevLogTerm      *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,3,req" json:"PrevLogTerm,omitempty"`</span></div><div class="line">trueCommitIndex      *<span class="keyword">uint64</span>     <span class="string">`protobuf:"varint,4,req" json:"CommitIndex,omitempty"`</span></div><div class="line">trueLeaderName       *<span class="keyword">string</span>     <span class="string">`protobuf:"bytes,5,req" json:"LeaderName,omitempty"`</span></div><div class="line">trueEntries          []*LogEntry <span class="string">`protobuf:"bytes,6,rep" json:"Entries,omitempty"`</span></div><div class="line">trueXXX_unrecognized []<span class="keyword">byte</span>      <span class="string">`json:"-"`</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>其中,反引号表示字符串,struct后面的字符串用于reflect,具体用法<br>s := AppendEntriesRequest{}<br>st := reflect.TypeOf(s)<br>field := st.Field(0)<br>field.Tag.Get(“protobuf”) // varint,1,req<br>field.Tag.Get(“json”) // Term,omitempty</p>
 <h2 id="go-get-安装程序错误"><a href="#go-get-安装程序错误" class="headerlink" title="go get 安装程序错误"></a>go get 安装程序错误</h2><p>错误提示:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">unrecognized import path <span class="string">"code.google.com/p/goprotobuf/proto"</span></div><div class="line"></div><div class="line">parse https://code.google.com/p/goprotobuf?go-get=1: no go-import meta tags</div></pre></td></tr></table></figure></p>
 <p>错误原因:依赖包已从code.google.com移除, 已重定向到github.com/golang/protobuf/proto,修改程序中的代码即可</p>

@@ -7,7 +7,7 @@
   
   
   
-  <title>seaweedfs源码阅读4-volume启动过程 | MakeItPossible16 | 寻找实习单位,个人简介:https://makeitpossible16.github.io/about/</title>
+  <title>seaweedfs源码阅读4-volume启动过程 | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="MakeItPossible16">
 <meta property="og:description" content="根据文章使用delve调试Golang程序技巧使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试
 通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关go http ServeMux介绍,12345volumeMux := http.NewServeMux()publicVolumeMux := vo">
-<meta property="og:updated_time" content="2016-12-11T04:47:50.162Z">
+<meta property="og:updated_time" content="2017-02-08T12:23:41.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="seaweedfs源码阅读4-volume启动过程">
 <meta name="twitter:description" content="根据文章使用delve调试Golang程序技巧使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试
@@ -182,11 +182,11 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <p>根据文章<a href="http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">使用delve调试Golang程序技巧</a><br>使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试</p>
-<p>通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/03.4.md" target="_blank" rel="external">go http ServeMux介绍</a>,<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">volumeMux := http.NewServeMux()</div><div class="line">publicVolumeMux := volumeMux</div><div class="line"><span class="keyword">if</span> isSeperatedPublicPort &#123;</div><div class="line">	publicVolumeMux = http.NewServeMux()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关<a href="https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/03.4.md" target="_blank" rel="external">go http ServeMux介绍</a>,<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">volumeMux := http.NewServeMux()</div><div class="line">publicVolumeMux := volumeMux</div><div class="line"><span class="keyword">if</span> isSeperatedPublicPort &#123;</div><div class="line">truepublicVolumeMux = http.NewServeMux()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>根据参数VolumeServerOptions 中的 indexType,选择volume Needle Map 的存储位置,默认使用内存<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">volumeNeedleMapKind := storage.NeedleMapInMemory</div><div class="line"><span class="keyword">switch</span> *v.indexType &#123;</div><div class="line"><span class="keyword">case</span> <span class="string">"leveldb"</span>:</div><div class="line">  volumeNeedleMapKind = storage.NeedleMapLevelDb</div><div class="line"><span class="keyword">case</span> <span class="string">"boltdb"</span>:</div><div class="line">  volumeNeedleMapKind = storage.NeedleMapBoltDb</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>调试信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(dlv) p *v.indexType</div><div class="line"><span class="string">"memory"</span></div></pre></td></tr></table></figure></p>
 <p>根据参数生成volumeServer,使用volume_server.go 中的NewVolumeServer 生成volumeServer<br>在volume_server.go 中,设置masterNode ,store, guard<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vs.SetMasterNode(masterNode)</div><div class="line">vs.store = storage.NewStore(port, ip, publicUrl, folders, maxCounts, vs.needleMapKind)</div><div class="line"></div><div class="line">vs.guard = security.NewGuard(whiteList, <span class="string">""</span>)</div></pre></td></tr></table></figure></p>
-<p>生成store时会加载已有的volume<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// store.go</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewStore</span><span class="params">(port <span class="keyword">int</span>, ip, publicUrl <span class="keyword">string</span>, dirnames []<span class="keyword">string</span>, maxVolumeCounts []<span class="keyword">int</span>, needleMapKind NeedleMapType)</span> <span class="params">(s *Store)</span></span> &#123;</div><div class="line">	s = &amp;Store&#123;Port: port, Ip: ip, PublicUrl: publicUrl&#125;</div><div class="line">	s.Locations = <span class="built_in">make</span>([]*DiskLocation, <span class="number">0</span>)</div><div class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(dirnames); i++ &#123;</div><div class="line">		location := NewDiskLocation(dirnames[i], maxVolumeCounts[i])</div><div class="line">		location.loadExistingVolumes(needleMapKind)</div><div class="line">		s.Locations = <span class="built_in">append</span>(s.Locations, location)</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>生成store时会加载已有的volume<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// store.go</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewStore</span><span class="params">(port <span class="keyword">int</span>, ip, publicUrl <span class="keyword">string</span>, dirnames []<span class="keyword">string</span>, maxVolumeCounts []<span class="keyword">int</span>, needleMapKind NeedleMapType)</span> <span class="params">(s *Store)</span></span> &#123;</div><div class="line">trues = &amp;Store&#123;Port: port, Ip: ip, PublicUrl: publicUrl&#125;</div><div class="line">trues.Locations = <span class="built_in">make</span>([]*DiskLocation, <span class="number">0</span>)</div><div class="line">true<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(dirnames); i++ &#123;</div><div class="line">truetruelocation := NewDiskLocation(dirnames[i], maxVolumeCounts[i])</div><div class="line">truetruelocation.loadExistingVolumes(needleMapKind)</div><div class="line">truetrues.Locations = <span class="built_in">append</span>(s.Locations, location)</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
         </div>
         
@@ -266,18 +266,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/文件存储/seaweedfs源码阅读5-文件PUT过程/" id="post-prev" class="post-nav-link">
+      <a href="/文件存储/seaweedfs源码阅读6-文件存储格式/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">seaweedfs源码阅读5-文件PUT过程</h4>
+        <h4 class="title">seaweedfs源码阅读6-文件存储格式</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/go/golang调试技巧/" id="post-next" class="post-nav-link">
+      <a href="/文件存储/seaweedfs源码阅读5-文件PUT过程/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">golang调试技巧</h4>
+        <h4 class="title">seaweedfs源码阅读5-文件PUT过程</h4>
       </a>
     </div>
   
