@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-02-07T13:37:16.495Z</updated>
+  <updated>2017-02-09T14:57:19.281Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -16,27 +16,29 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>数据结构</title>
-    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
-    <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-02-07T13:37:16.495Z</updated>
+    <title>文件合并存储与单个存储优劣势分析</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F(seaweedfs)%E4%B8%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8A%A3%E5%8A%BF%E5%88%86%E6%9E%90/"/>
+    <id>https://makeitpossible16.github.io/文件系统/文件系统(seaweedfs)与关系型数据库优劣势分析/</id>
+    <published>2017-02-08T00:00:00.000Z</published>
+    <updated>2017-02-09T14:57:19.281Z</updated>
     
-    <content type="html"><![CDATA[<p>数据结构都忘得差不多了,记录一下</p>
-<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
-]]></content>
+    <content type="html"><![CDATA[<h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>经过一段时间的学习，想要把openstack-swift与seaweedfs进行结合，单纯考虑文件存储效率，对比把openstack-swift与seaweedfs进行结合后的存储效率是否会高于openstack-swift.问题最后可以简化为文件合并存储与单个存储优劣势比较.</p>
+<h2 id="具体分析"><a href="#具体分析" class="headerlink" title="具体分析"></a>具体分析</h2><h3 id="文件单个存储"><a href="#文件单个存储" class="headerlink" title="文件单个存储"></a>文件单个存储</h3><p>从Linux内核文件系统出发,以ext3为例,参考<a href="http://www.cnblogs.com/zengyiwen/p/5755186.html" target="_blank" rel="external">深入解析Linux内核I/O剖析（open,write实现）</a>,<a href="http://book.2cto.com/201312/38238.html" target="_blank" rel="external">do_filp_open函数</a>,<a href="http://alanwu.blog.51cto.com/3652632/1106506/" target="_blank" rel="external">Ext3文件系统读写过程分析</a>当用户执行文件读写操作时,首先需要open相应的文件，然后再进行读写操作。在open操作时，首先将用户空间的文件名参数复制到内核空间,Linux kernel会执行do_filp_open函数,在do_filp_open函数中,沿着要打开文件名的整个路径，一层层解析路径，最后得到文件的dentry和vfsmount对象，保存到一个nameidata结构中,根据获得的nameidata结构，初始化一个file对象描述这个文件,File对象和文件的dentry和inode对象建立联系，并且将ext3的文件操作方法、映射处理方法（address space）注册到file对象中。<br>File数据结构是Linux用来描述文件的关键数据结构，该对象在一个文件被进程打开的时候被创建。当一个文件被关闭的时候，file对象也会被立即销毁。<br>执行open的最终结果:将文件描述符fd与文件管理结构file对应起来</p>
+<h4 id="文件合并存储"><a href="#文件合并存储" class="headerlink" title="文件合并存储"></a>文件合并存储</h4><p>文件读写是,若文件没有关闭,只需进行一次open操作,直接以lseek为例,参考<a href="http://linux.chinaunix.net/techdoc/system/2009/04/30/1109611.shtml" target="_blank" rel="external">linux内核文件IO的系统调用实现分析(flseek&amp;close)</a>,</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;数据结构都忘得差不多了,记录一下&lt;/p&gt;
-&lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fans
+      &lt;h2 id=&quot;问题引入&quot;&gt;&lt;a href=&quot;#问题引入&quot; class=&quot;headerlink&quot; title=&quot;问题引入&quot;&gt;&lt;/a&gt;问题引入&lt;/h2&gt;&lt;p&gt;经过一段时间的学习，想要把openstack-swift与seaweedfs进行结合，单纯考虑文件存储效率，对比把opens
     
     </summary>
     
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="文件系统" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+      <category term="文件系统" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
@@ -62,6 +64,31 @@
     
     
       <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构</title>
+    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
+    <published>2017-02-07T00:00:00.000Z</published>
+    <updated>2017-02-07T13:37:16.495Z</updated>
+    
+    <content type="html"><![CDATA[<p>数据结构都忘得差不多了,记录一下</p>
+<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;数据结构都忘得差不多了,记录一下&lt;/p&gt;
+&lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fans
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -197,36 +224,6 @@
     
     
       <category term="kafka" scheme="https://makeitpossible16.github.io/tags/kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>文件系统(seaweedfs)与关系型数据库优劣势分析</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8A%A3%E5%8A%BF%E5%88%86%E6%9E%90/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F(seaweedfs)%E4%B8%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8A%A3%E5%8A%BF%E5%88%86%E6%9E%90/"/>
-    <id>https://makeitpossible16.github.io/文件系统与数据库优劣势分析/文件系统(seaweedfs)与关系型数据库优劣势分析/</id>
-    <published>2017-01-06T00:00:00.000Z</published>
-    <updated>2017-01-07T08:45:11.290Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>在学习ELKStack过程中,想用seaweedfs作为ELKStack的后端存储系统,突然想知道,数据库的搜索与文件系统(主要围绕seaweedfs)的数据搜索,哪个更有优势. 作为数据相对较小,但数量多,并不断持续增长,到底该使用数据库还是使用seaweedfs. 本文以数据搜索为切入点进行展开.</p>
-<h2 id="具体分析"><a href="#具体分析" class="headerlink" title="具体分析"></a>具体分析</h2><h3 id="seaweedfs"><a href="#seaweedfs" class="headerlink" title="seaweedfs"></a>seaweedfs</h3><p>seaweedsfs可用k-v型数据库进行数据检索,比如redis,Leveldb,据我所知,Leveldb采用<a href="http://www.cnblogs.com/aspnethot/articles/3442813.html" target="_blank" rel="external">布隆过滤算法</a>判断key是否存在,若存在,定位到相应的inode及文件偏移量进行读取,读取文件的耗时基本可以忽略,不算入比较范围.所以seaweedfs的搜索关键在于k-v型数据库的搜索速度.当数据量变大时,seaweedfs占用的内存呈现出线性增长的变化过程,具体分析及优化参考文章<a href="https://gold.xitu.io/entry/57d0b42d128fe1005509321b" target="_blank" rel="external">Facebook Haystack: 小文件解决方案</a></p>
-<h4 id="seaweedfs实现内容搜索的构想"><a href="#seaweedfs实现内容搜索的构想" class="headerlink" title="seaweedfs实现内容搜索的构想"></a>seaweedfs实现内容搜索的构想</h4><p>借助elasticsearch,建立索引,或借助Apache Lucene建立全文索引</p>
-<h3 id="关系型数据库-mysql"><a href="#关系型数据库-mysql" class="headerlink" title="关系型数据库(mysql)"></a>关系型数据库(mysql)</h3><p>参考文章<a href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" target="_blank" rel="external">MySQL索引背后的数据结构及算法原理</a><br><a href="http://jm.taobao.org/2013/08/26/2988/" target="_blank" rel="external">从外部查询看数据库的内部实现机制</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;问题引入&quot;&gt;&lt;a href=&quot;#问题引入&quot; class=&quot;headerlink&quot; title=&quot;问题引入&quot;&gt;&lt;/a&gt;问题引入&lt;/h2&gt;&lt;p&gt;在学习ELKStack过程中,想用seaweedfs作为ELKStack的后端存储系统,突然想知道,数据库的搜索与文件系统(
-    
-    </summary>
-    
-      <category term="文件系统与数据库优劣势分析" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8A%A3%E5%8A%BF%E5%88%86%E6%9E%90/"/>
-    
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-      <category term="文件系统" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
-    
-      <category term="数据库" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
@@ -740,39 +737,6 @@
   </entry>
   
   <entry>
-    <title>cloudstack 搭建总结</title>
-    <link href="https://makeitpossible16.github.io/cloudsatck%E6%90%AD%E5%BB%BA/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/cloudsatck搭建/cloudstack搭建总结/</id>
-    <published>2016-11-20T00:00:00.000Z</published>
-    <updated>2016-11-23T04:37:32.945Z</updated>
-    
-    <content type="html"><![CDATA[<p>按照官网的教程搭建<a href="http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html" target="_blank" rel="external">cloudstack</a>,稍不注意,就出现错误.总结一下.</p>
-<h2 id="子节点状态不对"><a href="#子节点状态不对" class="headerlink" title="子节点状态不对"></a>子节点状态不对</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@node3 ~]<span class="comment"># service cloudstack-agent status</span></div><div class="line"></div><div class="line">cloudstack-agent dead but subsys locked</div></pre></td></tr></table></figure>
-<p>解决：管理节点防火墙问题，正常状态下计算节点应通过NFS挂载主存储,管理节点应开放8250端口</p>
-<p>执行完后把cloudstack-agent 重启一下，其状态应为running</p>
-<h2 id="系统VM-状态为Starting"><a href="#系统VM-状态为Starting" class="headerlink" title="系统VM 状态为Starting"></a>系统VM 状态为Starting</h2><p>解决：在数据库中将这个虚拟机的状态由“Starting”更改成“Stopped”，重新启动虚拟机即可。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MySQL -uroot -p -e "<span class="keyword">update</span> cloud.vm_instance <span class="keyword">set</span> state=<span class="string">'Stopped'</span> <span class="keyword">where</span> <span class="keyword">name</span>=VMNAME</div></pre></td></tr></table></figure>
-<h2 id="系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）"><a href="#系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）" class="headerlink" title="系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）"></a>系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）</h2><p>防火墙问题</p>
-<p>管理节点也用作计算节点，防火墙状态应为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [187042:40599771]</div><div class="line">:POSTROUTING ACCEPT [36644:2281945]</div><div class="line">:OUTPUT ACCEPT [36644:2281945]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [13422:54204084]</div><div class="line">:BF-cloud0 - [0:0]</div><div class="line">:BF-cloud0-IN - [0:0]</div><div class="line">:BF-cloud0-OUT - [0:0]</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5902 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 2049 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 32803 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 32769 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 662 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 662 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -o cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -i cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -o cloud0 -j DROP</div><div class="line">-A FORWARD -i cloud0 -j DROP</div><div class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A BF-cloud0 -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-in --physdev-is-bridged -j BF-cloud0-IN</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-out --physdev-is-bridged -j BF-cloud0-OUT</div><div class="line">-A BF-cloud0 -m physdev --physdev-out vnet0 --physdev-is-bridged -j ACCEPT</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div></pre></td></tr></table></figure>
-<p>计算节点防火墙状态</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*mangle</div><div class="line">:PREROUTING ACCEPT [654:130068]</div><div class="line">:INPUT ACCEPT [210:107800]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [143:8276]</div><div class="line">:POSTROUTING ACCEPT [143:8276]</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [0:0]</div><div class="line">:POSTROUTING ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p udp -m state --state NEW -m udp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -i virbr0 -o virbr0 -j ACCEPT</div><div class="line">-A FORWARD -o virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">-A FORWARD -i virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div></pre></td></tr></table></figure>
-<h2 id="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"><a href="#二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件" class="headerlink" title="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"></a>二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件</h2><h2 id="注意看日志文件，里面有详细的输出说明"><a href="#注意看日志文件，里面有详细的输出说明" class="headerlink" title="注意看日志文件，里面有详细的输出说明"></a>注意看日志文件，里面有详细的输出说明</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;按照官网的教程搭建&lt;a href=&quot;http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html&quot; target=&quot;_blank&quot; rel=&quot;ext
-    
-    </summary>
-    
-      <category term="cloudsatck搭建" scheme="https://makeitpossible16.github.io/categories/cloudsatck%E6%90%AD%E5%BB%BA/"/>
-    
-    
-      <category term="cloudsatck" scheme="https://makeitpossible16.github.io/tags/cloudsatck/"/>
-    
-  </entry>
-  
-  <entry>
     <title>nodeJS入门总结</title>
     <link href="https://makeitpossible16.github.io/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/nodeJS%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/"/>
     <id>https://makeitpossible16.github.io/网站相关/nodeJS入门总结/</id>
@@ -812,6 +776,39 @@
       <category term="Express" scheme="https://makeitpossible16.github.io/tags/Express/"/>
     
       <category term="mongoose" scheme="https://makeitpossible16.github.io/tags/mongoose/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>cloudstack 搭建总结</title>
+    <link href="https://makeitpossible16.github.io/cloudsatck%E6%90%AD%E5%BB%BA/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
+    <id>https://makeitpossible16.github.io/cloudsatck搭建/cloudstack搭建总结/</id>
+    <published>2016-11-20T00:00:00.000Z</published>
+    <updated>2016-11-23T04:37:32.945Z</updated>
+    
+    <content type="html"><![CDATA[<p>按照官网的教程搭建<a href="http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html" target="_blank" rel="external">cloudstack</a>,稍不注意,就出现错误.总结一下.</p>
+<h2 id="子节点状态不对"><a href="#子节点状态不对" class="headerlink" title="子节点状态不对"></a>子节点状态不对</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@node3 ~]<span class="comment"># service cloudstack-agent status</span></div><div class="line"></div><div class="line">cloudstack-agent dead but subsys locked</div></pre></td></tr></table></figure>
+<p>解决：管理节点防火墙问题，正常状态下计算节点应通过NFS挂载主存储,管理节点应开放8250端口</p>
+<p>执行完后把cloudstack-agent 重启一下，其状态应为running</p>
+<h2 id="系统VM-状态为Starting"><a href="#系统VM-状态为Starting" class="headerlink" title="系统VM 状态为Starting"></a>系统VM 状态为Starting</h2><p>解决：在数据库中将这个虚拟机的状态由“Starting”更改成“Stopped”，重新启动虚拟机即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MySQL -uroot -p -e "<span class="keyword">update</span> cloud.vm_instance <span class="keyword">set</span> state=<span class="string">'Stopped'</span> <span class="keyword">where</span> <span class="keyword">name</span>=VMNAME</div></pre></td></tr></table></figure>
+<h2 id="系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）"><a href="#系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）" class="headerlink" title="系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）"></a>系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）</h2><p>防火墙问题</p>
+<p>管理节点也用作计算节点，防火墙状态应为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [187042:40599771]</div><div class="line">:POSTROUTING ACCEPT [36644:2281945]</div><div class="line">:OUTPUT ACCEPT [36644:2281945]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [13422:54204084]</div><div class="line">:BF-cloud0 - [0:0]</div><div class="line">:BF-cloud0-IN - [0:0]</div><div class="line">:BF-cloud0-OUT - [0:0]</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5902 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 2049 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 32803 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 32769 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 662 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 662 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -o cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -i cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -o cloud0 -j DROP</div><div class="line">-A FORWARD -i cloud0 -j DROP</div><div class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A BF-cloud0 -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-in --physdev-is-bridged -j BF-cloud0-IN</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-out --physdev-is-bridged -j BF-cloud0-OUT</div><div class="line">-A BF-cloud0 -m physdev --physdev-out vnet0 --physdev-is-bridged -j ACCEPT</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div></pre></td></tr></table></figure>
+<p>计算节点防火墙状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*mangle</div><div class="line">:PREROUTING ACCEPT [654:130068]</div><div class="line">:INPUT ACCEPT [210:107800]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [143:8276]</div><div class="line">:POSTROUTING ACCEPT [143:8276]</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [0:0]</div><div class="line">:POSTROUTING ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p udp -m state --state NEW -m udp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -i virbr0 -o virbr0 -j ACCEPT</div><div class="line">-A FORWARD -o virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">-A FORWARD -i virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div></pre></td></tr></table></figure>
+<h2 id="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"><a href="#二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件" class="headerlink" title="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"></a>二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件</h2><h2 id="注意看日志文件，里面有详细的输出说明"><a href="#注意看日志文件，里面有详细的输出说明" class="headerlink" title="注意看日志文件，里面有详细的输出说明"></a>注意看日志文件，里面有详细的输出说明</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;按照官网的教程搭建&lt;a href=&quot;http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html&quot; target=&quot;_blank&quot; rel=&quot;ext
+    
+    </summary>
+    
+      <category term="cloudsatck搭建" scheme="https://makeitpossible16.github.io/categories/cloudsatck%E6%90%AD%E5%BB%BA/"/>
+    
+    
+      <category term="cloudsatck" scheme="https://makeitpossible16.github.io/tags/cloudsatck/"/>
     
   </entry>
   
