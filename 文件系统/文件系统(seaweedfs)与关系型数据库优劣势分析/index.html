@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="MakeItPossible16">
 <meta property="og:description" content="问题引入经过一段时间的学习，想要把openstack-swift与seaweedfs进行结合，单纯考虑文件存储效率，对比把openstack-swift与seaweedfs进行结合后的存储效率是否会高于openstack-swift.问题最后可以简化为文件合并存储与单个存储优劣势比较.
 具体分析文件单个存储从Linux内核文件系统出发,以ext3为例,参考深入解析Linux内核I/O剖析（open">
-<meta property="og:updated_time" content="2017-02-09T14:59:03.279Z">
+<meta property="og:updated_time" content="2017-02-10T15:24:26.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件合并存储与单个存储优劣势分析">
 <meta name="twitter:description" content="问题引入经过一段时间的学习，想要把openstack-swift与seaweedfs进行结合，单纯考虑文件存储效率，对比把openstack-swift与seaweedfs进行结合后的存储效率是否会高于openstack-swift.问题最后可以简化为文件合并存储与单个存储优劣势比较.
@@ -166,7 +166,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题引入"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题引入</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#具体分析"><span class="post-toc-number">2.</span> <span class="post-toc-text">具体分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件单个存储"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">文件单个存储</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件合并存储"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">文件合并存储</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题引入"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题引入</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#具体分析"><span class="post-toc-number">2.</span> <span class="post-toc-text">具体分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件单个存储"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">文件单个存储</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件合并存储"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">文件合并存储</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结论"><span class="post-toc-number">3.</span> <span class="post-toc-text">结论</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -190,8 +190,30 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>经过一段时间的学习，想要把openstack-swift与seaweedfs进行结合，单纯考虑文件存储效率，对比把openstack-swift与seaweedfs进行结合后的存储效率是否会高于openstack-swift.问题最后可以简化为文件合并存储与单个存储优劣势比较.</p>
 <h2 id="具体分析"><a href="#具体分析" class="headerlink" title="具体分析"></a>具体分析</h2><h3 id="文件单个存储"><a href="#文件单个存储" class="headerlink" title="文件单个存储"></a>文件单个存储</h3><p>从Linux内核文件系统出发,以ext3为例,参考<a href="http://www.cnblogs.com/zengyiwen/p/5755186.html" target="_blank" rel="external">深入解析Linux内核I/O剖析（open,write实现）</a>,<a href="http://book.2cto.com/201312/38238.html" target="_blank" rel="external">do_filp_open函数</a>,<a href="http://alanwu.blog.51cto.com/3652632/1106506/" target="_blank" rel="external">Ext3文件系统读写过程分析</a>当用户执行文件读写操作时,首先需要open相应的文件，然后再进行读写操作。在open操作时，首先将用户空间的文件名参数复制到内核空间,Linux kernel会执行do_filp_open函数,在do_filp_open函数中,沿着要打开文件名的整个路径，一层层解析路径，最后得到文件的dentry和vfsmount对象，保存到一个nameidata结构中,根据获得的nameidata结构，初始化一个file对象描述这个文件,File对象和文件的dentry和inode对象建立联系，并且将ext3的文件操作方法、映射处理方法（address space）注册到file对象中。<br>File数据结构是Linux用来描述文件的关键数据结构，该对象在一个文件被进程打开的时候被创建。当一个文件被关闭的时候，file对象也会被立即销毁。<br>执行open的最终结果:将文件描述符fd与文件管理结构file对应起来</p>
-<h3 id="文件合并存储"><a href="#文件合并存储" class="headerlink" title="文件合并存储"></a>文件合并存储</h3><p>文件读写是,若文件没有关闭,只需进行一次open操作,直接以lseek为例,参考<a href="http://linux.chinaunix.net/techdoc/system/2009/04/30/1109611.shtml" target="_blank" rel="external">linux内核文件IO的系统调用实现分析(flseek&amp;close)</a>,</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2>
+<h3 id="文件合并存储"><a href="#文件合并存储" class="headerlink" title="文件合并存储"></a>文件合并存储</h3><p>文件读写是,若文件没有关闭,只需进行一次open操作,直接以lseek为例,参考<a href="http://linux.chinaunix.net/techdoc/system/2009/04/30/1109611.shtml" target="_blank" rel="external">linux内核文件IO的系统调用实现分析(flseek&amp;close)</a>,使用lseek,设置文件开始读取的位置,当调用read或write时直接从该位置读取数据.</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><table>
+<thead>
+<tr>
+<th style="text-align:left">存储方式</th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">文件单个存储</td>
+<td>存储过程简单,进行读写时直接进行读取,不需要进行lseek</td>
+<td>容易产生页面空洞,导致磁盘扇区利用率降低,大量的文件,会增加文件系统需要维护的inode及dentry,降低文件存储效率.</td>
+</tr>
+<tr>
+<td style="text-align:left">合并存储</td>
+<td>多个文件合并存储,减少文件系统需要维护的inode及dentry,文件连续写入,提高扇区利用率</td>
+<td>文件读写时,需要进行lseek,增加文件偏移量查找操作</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对于大规模存储系统,若能把大文件与小文件进行分开存储,大文件采用单文件存储,小文件使用合并存储,理论上可以提高系统存储效率.可以把openstack-swift与seaweedfs的存储部分进行结合,优化openstack-swift对象存储效率.</p>
+
         </div>
         
         <blockquote class="post-copyright">
@@ -272,9 +294,9 @@
 
   
     <div class="waves-block waves-effect next">
-      <a href="/数据结构/数据结构/" id="post-next" class="post-nav-link">
+      <a href="/python语法/python语法记录/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">数据结构</h4>
+        <h4 class="title">python语法记录</h4>
       </a>
     </div>
   
