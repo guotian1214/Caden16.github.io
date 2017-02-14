@@ -8,7 +8,7 @@ with open("/home/ubuntu/workspace/blog/hexo_blog/blog/source/_posts/README.md",'
                     if(file.split(".")[1] == "md"):
                         if (file.split(".")[0] == "README"):
                             continue
-                        writeStr =writeStr + "## ["+ file.split('.')[0] +"](" + file +")\n\n"
+                        writeStr =writeStr + "### ["+ file.split('.')[0] +"](https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/" + file +")\n"
     print writeStr
     f.write(writeStr)
 f.close()
