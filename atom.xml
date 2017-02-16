@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-02-15T13:59:10.221Z</updated>
+  <updated>2017-02-16T13:48:09.980Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ubuntu使用问题总结</title>
+    <link href="https://makeitpossible16.github.io/ubuntu/ubuntu%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://makeitpossible16.github.io/ubuntu/ubuntu使用问题总结/</id>
+    <published>2017-02-16T00:00:00.000Z</published>
+    <updated>2017-02-16T13:48:09.980Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="lightdm登录界面找不到登录用户名"><a href="#lightdm登录界面找不到登录用户名" class="headerlink" title="lightdm登录界面找不到登录用户名"></a>lightdm登录界面找不到登录用户名</h2><p>问题分析：直接修改/etc/passwd文件中的用户user id，想要用此方法提升普通用户权限为root权限，但把user id在/etc/passwd中重新改成不为原有user id（比如原有user id 为1000，改成0后，又改成1001）时，会导致系统找不到用户，这是再改成1000，系统也会找不到用户，因此在登录界面不显示。<br>解决方法：使用userdel 删除用户，但不删除与用户相关配置文件，然后使用useradd添加同名用户，即可在登录页面显示。</p>
+<h2 id="系统登录不断循环"><a href="#系统登录不断循环" class="headerlink" title="系统登录不断循环"></a>系统登录不断循环</h2><p>问题分析：参考<a href="http://www.tuicool.com/articles/IBreErY" target="_blank" rel="external">Ubuntu 14.04登陆界面无限循环的解决办法</a>,其中提到，home目录空间满了，还有一种可能是：由于添加了同名用户，但用户的user id不一样，系统认为/home目录不属于当前登录用户，导致登录不进去。<br>解决方法：常看当前用户的user id：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id -u &lt;username&gt;</div></pre></td></tr></table></figure></p>
+<p>使用ll命令查看当前用户的/home文件夹所有者的user id是否为当前用户的user id，如果不是，使用命令chown改变home目录的所有者。</p>
+<h2 id="无法执行-bin-bash，没有那个文件或目录"><a href="#无法执行-bin-bash，没有那个文件或目录" class="headerlink" title="无法执行/bin/bash，没有那个文件或目录"></a>无法执行/bin/bash，没有那个文件或目录</h2><p><img src="/uploads/2017-02-16 19-46-51.png" alt=""><br>问题分析：参考<a href="https://my.oschina.net/u/2324376/blog/388412" target="_blank" rel="external">脚本格式之殇——/bin/bash^M: 没有那个文件或目录</a> ，修改过/etc/passwd文件，导致/bin/bash后面多加空格符<br>解决方法：使用cat -A filename查看文件，把不规则的空格去掉</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;lightdm登录界面找不到登录用户名&quot;&gt;&lt;a href=&quot;#lightdm登录界面找不到登录用户名&quot; class=&quot;headerlink&quot; title=&quot;lightdm登录界面找不到登录用户名&quot;&gt;&lt;/a&gt;lightdm登录界面找不到登录用户名&lt;/h2&gt;&lt;p&gt;问题
+    
+    </summary>
+    
+      <category term="ubuntu" scheme="https://makeitpossible16.github.io/categories/ubuntu/"/>
+    
+    
+      <category term="ubuntu" scheme="https://makeitpossible16.github.io/tags/ubuntu/"/>
+    
+  </entry>
   
   <entry>
     <title>openstack-swift源码阅读记录3-文件下载过程</title>
@@ -132,32 +158,6 @@
       <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
     
       <category term="文件系统" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu使用问题总结</title>
-    <link href="https://makeitpossible16.github.io/ubuntu/ubuntu%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/ubuntu/ubuntu使用问题总结/</id>
-    <published>2017-02-08T00:00:00.000Z</published>
-    <updated>2017-02-16T13:45:13.539Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="lightdm登录界面找不到登录用户名"><a href="#lightdm登录界面找不到登录用户名" class="headerlink" title="lightdm登录界面找不到登录用户名"></a>lightdm登录界面找不到登录用户名</h2><p>问题分析：直接修改/etc/passwd文件中的用户user id，想要用此方法提升普通用户权限为root权限，但把user id在/etc/passwd中重新改成不为原有user id（比如原有user id 为1000，改成0后，又改成1001）时，会导致系统找不到用户，这是再改成1000，系统也会找不到用户，因此在登录界面不显示。<br>解决方法：使用userdel 删除用户，但不删除与用户相关配置文件，然后使用useradd添加同名用户，即可在登录页面显示。</p>
-<h2 id="系统登录不断循环"><a href="#系统登录不断循环" class="headerlink" title="系统登录不断循环"></a>系统登录不断循环</h2><p>问题分析：参考<a href="http://www.tuicool.com/articles/IBreErY" target="_blank" rel="external">Ubuntu 14.04登陆界面无限循环的解决办法</a>,其中提到，home目录空间满了，还有一种可能是：由于添加了同名用户，但用户的user id不一样，系统认为/home目录不属于当前登录用户，导致登录不进去。<br>解决方法：常看当前用户的user id：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">id -u &lt;username&gt;</div></pre></td></tr></table></figure></p>
-<p>使用ll命令查看当前用户的/home文件夹所有者的user id是否为当前用户的user id，如果不是，使用命令chown改变home目录的所有者。</p>
-<h2 id="无法执行-bin-bash，没有那个文件或目录"><a href="#无法执行-bin-bash，没有那个文件或目录" class="headerlink" title="无法执行/bin/bash，没有那个文件或目录"></a>无法执行/bin/bash，没有那个文件或目录</h2><p><img src="/uploads/2017-02-16 19-46-51.png" alt=""><br>问题分析：参考<a href="https://my.oschina.net/u/2324376/blog/388412" target="_blank" rel="external">脚本格式之殇——/bin/bash^M: 没有那个文件或目录</a> ，修改过/etc/passwd文件，导致/bin/bash后面多加空格符<br>解决方法：使用cat -A filename查看文件，把不规则的空格去掉</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;lightdm登录界面找不到登录用户名&quot;&gt;&lt;a href=&quot;#lightdm登录界面找不到登录用户名&quot; class=&quot;headerlink&quot; title=&quot;lightdm登录界面找不到登录用户名&quot;&gt;&lt;/a&gt;lightdm登录界面找不到登录用户名&lt;/h2&gt;&lt;p&gt;问题
-    
-    </summary>
-    
-      <category term="ubuntu" scheme="https://makeitpossible16.github.io/categories/ubuntu/"/>
-    
-    
-      <category term="ubuntu" scheme="https://makeitpossible16.github.io/tags/ubuntu/"/>
     
   </entry>
   
