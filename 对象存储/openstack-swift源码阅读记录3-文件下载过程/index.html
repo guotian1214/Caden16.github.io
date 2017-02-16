@@ -7,44 +7,23 @@
   
   
   
-  <title>个人简介 | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
+  <title>openstack-swift源码阅读记录3-文件下载过程 | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="undefined">
-  <meta name="description" content="寻找实习单位,从2017年8月起可入职
-实习方向期待实习方向: 云计算，分布式存储
-个人简介学校: 哈尔滨工业大学(威海)入学时间: 2014-09毕业时间: 2018-07学院: 软件学院专业: 软件工程语言: 英语，粤语
-联系方式:手机号: 15657628864Email:
-
-cjc1005819688@gmail.com
-cjc1005819688@163.com
-1005819688@q">
-<meta property="og:type" content="website">
-<meta property="og:title" content="个人简介">
-<meta property="og:url" content="https://makeitpossible16.github.io/about/index.html">
+  <meta name="keywords" content="openstack-swift">
+  <meta name="description" content="闲着没事写点东西">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openstack-swift源码阅读记录3-文件下载过程">
+<meta property="og:url" content="https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="寻找实习单位,从2017年8月起可入职
-实习方向期待实习方向: 云计算，分布式存储
-个人简介学校: 哈尔滨工业大学(威海)入学时间: 2014-09毕业时间: 2018-07学院: 软件学院专业: 软件工程语言: 英语，粤语
-联系方式:手机号: 15657628864Email:
-
-cjc1005819688@gmail.com
-cjc1005819688@163.com
-1005819688@q">
-<meta property="og:updated_time" content="2017-01-15T13:07:07.573Z">
+<meta property="og:description" content="闲着没事写点东西">
+<meta property="og:updated_time" content="2017-02-15T13:59:10.221Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="个人简介">
-<meta name="twitter:description" content="寻找实习单位,从2017年8月起可入职
-实习方向期待实习方向: 云计算，分布式存储
-个人简介学校: 哈尔滨工业大学(威海)入学时间: 2014-09毕业时间: 2018-07学院: 软件学院专业: 软件工程语言: 英语，粤语
-联系方式:手机号: 15657628864Email:
-
-cjc1005819688@gmail.com
-cjc1005819688@163.com
-1005819688@q">
+<meta name="twitter:title" content="openstack-swift源码阅读记录3-文件下载过程">
+<meta name="twitter:description" content="闲着没事写点东西">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -55,7 +34,7 @@ cjc1005819688@163.com
 <body>
   <div id="loading" class="active"></div>
 
-  <aside id="menu"  >
+  <aside id="menu" class="hide" >
   <div class="inner flex-row-vertical">
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
@@ -109,7 +88,7 @@ cjc1005819688@163.com
               </a>
             </li>
         
-            <li class="waves-block waves-effect active">
+            <li class="waves-block waves-effect">
               <a href="/about"  >
                 <i class="icon icon-lg icon-user"></i>
                 个人简介
@@ -138,7 +117,7 @@ cjc1005819688@163.com
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">个人简介</div>
+        <div class="flex-col header-title ellipsis">openstack-swift源码阅读记录3-文件下载过程</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -160,8 +139,16 @@ cjc1005819688@163.com
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">个人简介</h1>
+        <h1 class="title">openstack-swift源码阅读记录3-文件下载过程</h1>
         <h5 class="subtitle">
+            
+                <time datetime="2017-02-15T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-02-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
+
             
         </h5>
     </div>
@@ -173,51 +160,25 @@ cjc1005819688@163.com
 
 <div class="container body-wrap">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实习方向"><span class="post-toc-number">1.</span> <span class="post-toc-text">实习方向</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#个人简介"><span class="post-toc-number">2.</span> <span class="post-toc-text">个人简介</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#联系方式"><span class="post-toc-number">3.</span> <span class="post-toc-text">联系方式:</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#专业技能"><span class="post-toc-number">4.</span> <span class="post-toc-text">专业技能:</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目经验"><span class="post-toc-number">5.</span> <span class="post-toc-text">项目经验:</span></a></li></ol>
-        </nav>
-    </aside>
-    
 
-<article id="post-undefined" 
+<article id="post-openstack-swift源码阅读记录3-文件下载过程" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">个人简介</h1>
+        <h1 class="post-card-title">openstack-swift源码阅读记录3-文件下载过程</h1>
         <div class="post-meta">
-            <time datetime="2017-02-16T13:15:20.501Z" itemprop="datePublished" class="post-time">
-  2017-02-16
+            <time datetime="2017-02-15T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-02-15
 </time>
 
             
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
+
 
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>寻找实习单位,从2017年8月起可入职</p>
-<h2 id="实习方向"><a href="#实习方向" class="headerlink" title="实习方向"></a>实习方向</h2><p>期待实习方向: 云计算，分布式存储</p>
-<h2 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h2><p>学校: 哈尔滨工业大学(威海)<br>入学时间: 2014-09<br>毕业时间: 2018-07<br>学院: 软件学院<br>专业: 软件工程<br>语言: 英语，粤语</p>
-<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式:"></a>联系方式:</h2><p>手机号: 15657628864<br>Email:</p>
-<ol>
-<li>cjc1005819688@gmail.com</li>
-<li>cjc1005819688@163.com</li>
-<li>1005819688@qq.com</li>
-</ol>
-<h2 id="专业技能"><a href="#专业技能" class="headerlink" title="专业技能:"></a>专业技能:</h2><ol>
-<li>常用操作环境为ubuntu,接近3年linux使用经验;</li>
-<li>了解Linux文件系统；</li>
-<li>专注于分布式存储领域,了解openstack-swift对象存储,了解seaweedfs文件系统,学习了openstack-swift及seaweedfs源码;</li>
-<li>了解云计算IaaS层,有搭建及使用cloudstack经验;</li>
-<li>有Docker使用经验;</li>
-<li>自学python,golang等编程语言,具备完整的软件专业技能.</li>
-</ol>
-<h2 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验:"></a>项目经验:</h2><ol>
-<li>openstack-swift小文件存储优化,职责: 协助研究生学长完成毕业设计;</li>
-<li>有道字典修改,结果：使用Google翻译作为划词翻译结果，添加保存到单词本功能;</li>
-</ol>
-
+            
         </div>
         
         <blockquote class="post-copyright">
@@ -237,6 +198,8 @@ cjc1005819688@163.com
 
         <div class="post-footer">
             
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li></ul>
+
 
             
 <div class="page-share-wrap">
@@ -246,7 +209,7 @@ cjc1005819688@163.com
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/about/&title=《个人简介》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/&title=《openstack-swift源码阅读记录3-文件下载过程》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -256,22 +219,22 @@ cjc1005819688@163.com
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/about/&title=《个人简介》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/&title=《openstack-swift源码阅读记录3-文件下载过程》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/about/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《个人简介》 — MakeItPossible16&url=https://makeitpossible16.github.io/about/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《openstack-swift源码阅读记录3-文件下载过程》 — MakeItPossible16&url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/about/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -291,9 +254,32 @@ cjc1005819688@163.com
     </div>   
 
     
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/对象存储/openstack源码阅读记录2-object metadata/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">openstack源码阅读记录2-object metadata</h4>
+      </a>
+    </div>
+  
+</nav>
+
 
             
     
+<div class="duoshuo" id="comments">
+	<div class="ds-thread" data-thread-key="openstack-swift源码阅读记录3-文件下载过程" data-title="openstack-swift源码阅读记录3-文件下载过程" data-url="https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/"></div>
+</div>
+<script src="/js/embed.min.js?v=1.2"></script>
+<script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
+<script>
+var duoshuoQuery = {short_name:'makeitpossible16', theme: 'none'}
+</script>
+
+
 
 
 
@@ -315,7 +301,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/about/&title=《个人简介》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/&title=《openstack-swift源码阅读记录3-文件下载过程》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -325,22 +311,22 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/about/&title=《个人简介》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/&title=《openstack-swift源码阅读记录3-文件下载过程》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/about/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《个人简介》 — MakeItPossible16&url=https://makeitpossible16.github.io/about/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《openstack-swift源码阅读记录3-文件下载过程》 — MakeItPossible16&url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/about/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -351,7 +337,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/about/" alt="微信分享二维码"/>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-文件下载过程/" alt="微信分享二维码"/>
 </div>
 
 

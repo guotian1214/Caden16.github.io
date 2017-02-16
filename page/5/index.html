@@ -155,6 +155,105 @@
     <ul class="post-list">
     
         <li class="post-list-item">
+            <article id="post-seaweedfs源码阅读5-文件PUT过程"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-12-11T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-12-11
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/文件存储/seaweedfs源码阅读5-文件PUT过程/">seaweedfs源码阅读5-文件PUT过程</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        使用命令1234&gt; curl -X POST http://localhost:9333/dir/assign&#123;"count":1,"fid":"3,01637037d6","url":"127.0.0.1:8080","publicUrl":"localhost:8080"&#125;&gt; curl -X PUT -F file=@/home/chris/myphoto...
+    
+    
+        <a href="/文件存储/seaweedfs源码阅读5-文件PUT过程/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-seaweedfs源码阅读4-volume启动"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2016-12-11T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2016-12-11
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/文件存储/seaweedfs源码阅读4-volume启动/">seaweedfs源码阅读4-volume启动过程</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        根据文章使用delve调试Golang程序技巧使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试
+通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关go http ServeMux介绍,12345volumeMux := http.NewServeMux()publicVolumeMux :=...
+    
+    
+        <a href="/文件存储/seaweedfs源码阅读4-volume启动/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
             <article id="post-golang调试技巧"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -308,113 +407,12 @@ interface: 是一组method的组合,通过interface来定义对象的一组行�
 
         </li>
     
-        <li class="post-list-item">
-            <article id="post-seaweedfs源码阅读记录3-raft协议理解"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-11-28T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-11-28
-</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/文件存储/seaweedfs源码阅读记录3-raft协议理解/">seaweedfs源码阅读记录3-raft协议理解</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理.
-参考文章Raft一致性算法raft动画演示raft介绍go-raft源码解析go-raft文档goraft的简单实现
-阅读记录本文按照参考文章中的go-raft源码解析中的文章阅读,记录阅读过程.12345678910111213141516// ...
-    
-    
-        <a href="/文件存储/seaweedfs源码阅读记录3-raft协议理解/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/raft/">raft</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-seaweedfs源码阅读记录2"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2016-11-22T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-11-22
-</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/文件存储/seaweedfs源码阅读记录2/">seaweedfs源码阅读记录2</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        master启动过程使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,参考文章： weed-fs 源码解读
-12345type Sequencer interface &#123;trueNextFileId(count uint64) (uin...
-    
-    
-        <a href="/文件存储/seaweedfs源码阅读记录2/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
 <nav id="page-nav">
     <div class="inner">
-    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
+    <a class="extend prev" rel="prev" href="/page/4/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">下一页</a>
     </div>
 </nav>
 
