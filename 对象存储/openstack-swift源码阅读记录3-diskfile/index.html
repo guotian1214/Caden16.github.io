@@ -7,29 +7,26 @@
   
   
   
-  <title>seaweedfs源码阅读记录1 | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
+  <title>openstack-swift源码阅读记录3-diskfile | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="go,seaweedfs">
-  <meta name="description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
-目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
-学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需">
+  <meta name="keywords" content="openstack-swift">
+  <meta name="description" content="diskfile模块：diskfile模块为Swift对象服务器的磁盘文件接口
+“DiskFile”，“DiskFileWriter”和“DiskFileReader”类组合定义用于支持对象服务器REST API的磁盘抽象层接口（不包括REPLICATE）。 其他希望提供的实现对象服务器的替代后端必须实现三个类。 mem_server.py和mem_diskfile.py模块为其中的一个实现示例。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="seaweedfs源码阅读记录1">
-<meta property="og:url" content="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/index.html">
+<meta property="og:title" content="openstack-swift源码阅读记录3-diskfile">
+<meta property="og:url" content="https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
-目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
-学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需">
-<meta property="og:updated_time" content="2016-12-26T14:43:32.666Z">
+<meta property="og:description" content="diskfile模块：diskfile模块为Swift对象服务器的磁盘文件接口
+“DiskFile”，“DiskFileWriter”和“DiskFileReader”类组合定义用于支持对象服务器REST API的磁盘抽象层接口（不包括REPLICATE）。 其他希望提供的实现对象服务器的替代后端必须实现三个类。 mem_server.py和mem_diskfile.py模块为其中的一个实现示例。">
+<meta property="og:updated_time" content="2017-02-21T07:19:05.819Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="seaweedfs源码阅读记录1">
-<meta name="twitter:description" content="接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs.
-目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.
-学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需">
+<meta name="twitter:title" content="openstack-swift源码阅读记录3-diskfile">
+<meta name="twitter:description" content="diskfile模块：diskfile模块为Swift对象服务器的磁盘文件接口
+“DiskFile”，“DiskFileWriter”和“DiskFileReader”类组合定义用于支持对象服务器REST API的磁盘抽象层接口（不包括REPLICATE）。 其他希望提供的实现对象服务器的替代后端必须实现三个类。 mem_server.py和mem_diskfile.py模块为其中的一个实现示例。">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -123,7 +120,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">seaweedfs源码阅读记录1</div>
+        <div class="flex-col header-title ellipsis">openstack-swift源码阅读记录3-diskfile</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -145,15 +142,15 @@
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">seaweedfs源码阅读记录1</h1>
+        <h1 class="title">openstack-swift源码阅读记录3-diskfile</h1>
         <h5 class="subtitle">
             
-                <time datetime="2016-11-22T00:00:00.000Z" itemprop="datePublished" class="page-time">
-  2016-11-22
+                <time datetime="2017-02-21T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-02-21
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
 
             
         </h5>
@@ -166,39 +163,28 @@
 
 <div class="container body-wrap">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目标-学习seaweedfs-的文件合并存储"><span class="post-toc-number">1.</span> <span class="post-toc-text">目标:学习seaweedfs 的文件合并存储</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#学习方式-google-调试"><span class="post-toc-number">2.</span> <span class="post-toc-text">学习方式: google + 调试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试用命令"><span class="post-toc-number">3.</span> <span class="post-toc-text">测试用命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文章"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考文章</span></a></li></ol>
-        </nav>
-    </aside>
-    
 
-<article id="post-seaweedfs源码阅读记录" 
+<article id="post-openstack-swift源码阅读记录3-diskfile" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">seaweedfs源码阅读记录1</h1>
+        <h1 class="post-card-title">openstack-swift源码阅读记录3-diskfile</h1>
         <div class="post-meta">
-            <time datetime="2016-11-22T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2016-11-22
+            <time datetime="2017-02-21T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-02-21
 </time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/文件存储/">文件存储</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
 
 
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
-<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
-<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
-<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333”  -port=8080<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
-<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
-<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
-<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+            <p>diskfile模块：<br>diskfile模块为Swift对象服务器的磁盘文件接口</p>
+<p>“DiskFile”，“DiskFileWriter”和“DiskFileReader”类组合定义用于支持对象服务器REST API的磁盘抽象层接口（不包括<code>REPLICATE</code>）。 其他希望提供的实现对象服务器的替代后端必须实现三个类。 <code>mem_server.py</code>和<code>mem_diskfile.py</code>模块为其中的一个实现示例。</p>
+<p><code>DiskFileManager</code>是一个参考实现特定的类，而不是部分后端API。</p>
+<p>此模块中的其余方法被视为具体实现并且也不被视为后端API的一部分。</p>
 
         </div>
         
@@ -219,7 +205,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go/">go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li></ul>
 
 
             
@@ -230,7 +216,7 @@
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/&title=《seaweedfs源码阅读记录1》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/&title=《openstack-swift源码阅读记录3-diskfile》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -240,22 +226,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/&title=《seaweedfs源码阅读记录1》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/&title=《openstack-swift源码阅读记录3-diskfile》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录1》 — MakeItPossible16&url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《openstack-swift源码阅读记录3-diskfile》 — MakeItPossible16&url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -275,21 +261,14 @@
     </div>   
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/文件存储/seaweedfs源码阅读记录2/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">seaweedfs源码阅读记录2</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/网站相关/nodeJS入门总结/" id="post-next" class="post-nav-link">
+      <a href="/ubuntu/ubuntu使用问题总结/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">nodeJS入门总结</h4>
+        <h4 class="title">ubuntu使用问题总结</h4>
       </a>
     </div>
   
@@ -299,7 +278,7 @@
             
     
 <div class="duoshuo" id="comments">
-	<div class="ds-thread" data-thread-key="seaweedfs源码阅读记录" data-title="seaweedfs源码阅读记录1" data-url="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/"></div>
+	<div class="ds-thread" data-thread-key="openstack-swift源码阅读记录3-diskfile" data-title="openstack-swift源码阅读记录3-diskfile" data-url="https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.2"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -329,7 +308,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/&title=《seaweedfs源码阅读记录1》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/&title=《openstack-swift源码阅读记录3-diskfile》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -339,22 +318,22 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/&title=《seaweedfs源码阅读记录1》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/&title=《openstack-swift源码阅读记录3-diskfile》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《seaweedfs源码阅读记录1》 — MakeItPossible16&url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《openstack-swift源码阅读记录3-diskfile》 — MakeItPossible16&url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -365,7 +344,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/" alt="微信分享二维码"/>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/" alt="微信分享二维码"/>
 </div>
 
 
