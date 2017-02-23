@@ -7,29 +7,29 @@
   
   
   
-  <title>python语法记录 | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
+  <title>在Openstack Swift中使用多种后端存储实现 | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="python">
-  <meta name="description" content="记录一下忘记的Python语法
-StringIO负责在内存中读写string,其中在openstack-swift的mem_diskfile.py中提到::param fp: StringIO in-memory representation objectStringIO和BytesIO
-os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat()。Python">
+  <meta name="keywords" content="openstack-swift,seaweedfs">
+  <meta name="description" content="在Intel开发者社区发现这篇文章,给我很大的帮助,尝试着把它翻译成中文. 原文链接Using Multiple Backends in Openstack Swift
+Using Multiple Backends in Openstack SwiftBy Yuan Zhou (Intel), Added February 3, 2015
+OpenStack Swift是一个高度可用的，分布式的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python语法记录">
-<meta property="og:url" content="https://makeitpossible16.github.io/python语法/python语法记录/index.html">
+<meta property="og:title" content="在Openstack Swift中使用多种后端存储实现">
+<meta property="og:url" content="https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="记录一下忘记的Python语法
-StringIO负责在内存中读写string,其中在openstack-swift的mem_diskfile.py中提到::param fp: StringIO in-memory representation objectStringIO和BytesIO
-os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat()。Python">
-<meta property="og:updated_time" content="2017-02-13T08:36:26.483Z">
+<meta property="og:description" content="在Intel开发者社区发现这篇文章,给我很大的帮助,尝试着把它翻译成中文. 原文链接Using Multiple Backends in Openstack Swift
+Using Multiple Backends in Openstack SwiftBy Yuan Zhou (Intel), Added February 3, 2015
+OpenStack Swift是一个高度可用的，分布式的">
+<meta property="og:updated_time" content="2017-02-23T14:16:33.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python语法记录">
-<meta name="twitter:description" content="记录一下忘记的Python语法
-StringIO负责在内存中读写string,其中在openstack-swift的mem_diskfile.py中提到::param fp: StringIO in-memory representation objectStringIO和BytesIO
-os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat()。Python">
+<meta name="twitter:title" content="在Openstack Swift中使用多种后端存储实现">
+<meta name="twitter:description" content="在Intel开发者社区发现这篇文章,给我很大的帮助,尝试着把它翻译成中文. 原文链接Using Multiple Backends in Openstack Swift
+Using Multiple Backends in Openstack SwiftBy Yuan Zhou (Intel), Added February 3, 2015
+OpenStack Swift是一个高度可用的，分布式的">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -123,7 +123,7 @@ os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat(
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">python语法记录</div>
+        <div class="flex-col header-title ellipsis">在Openstack Swift中使用多种后端存储实现</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -145,15 +145,15 @@ os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat(
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">python语法记录</h1>
+        <h1 class="title">在Openstack Swift中使用多种后端存储实现</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-02-07T00:00:00.000Z" itemprop="datePublished" class="page-time">
-  2017-02-07
+                <time datetime="2017-02-23T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-02-23
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python语法/">python语法</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/seaweedfs/">seaweedfs</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/seaweedfs/openstack-swift/">openstack-swift</a></li></ul></li></ul>
 
             
         </h5>
@@ -169,31 +169,31 @@ os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat(
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#StringIO"><span class="post-toc-number">1.</span> <span class="post-toc-text">StringIO</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#os-fstat"><span class="post-toc-number">2.</span> <span class="post-toc-text">os.fstat()</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Using-Multiple-Backends-in-Openstack-Swift"><span class="post-toc-number">1.</span> <span class="post-toc-text">Using Multiple Backends in Openstack Swift</span></a></li></ol>
         </nav>
     </aside>
     
 
-<article id="post-python语法记录" 
+<article id="post-在Openstack Swift中使用多种后端存储实现" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">python语法记录</h1>
+        <h1 class="post-card-title">在Openstack Swift中使用多种后端存储实现</h1>
         <div class="post-meta">
-            <time datetime="2017-02-07T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2017-02-07
+            <time datetime="2017-02-23T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-02-23
 </time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python语法/">python语法</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/seaweedfs/">seaweedfs</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/seaweedfs/openstack-swift/">openstack-swift</a></li></ul></li></ul>
 
 
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>记录一下忘记的Python语法</p>
-<h2 id="StringIO"><a href="#StringIO" class="headerlink" title="StringIO"></a>StringIO</h2><p>负责在内存中读写string,其中在openstack-swift的mem_diskfile.py中提到::param fp: <code>StringIO</code> in-memory representation object<br><a href="StringIO和BytesIO">StringIO和BytesIO</a></p>
-<h2 id="os-fstat"><a href="#os-fstat" class="headerlink" title="os.fstat()"></a>os.fstat()</h2><p>os.fstat() 方法用于返回文件描述符fd的状态，类似 stat()。<br><a href="http://www.runoob.com/python/os-fstat.html" target="_blank" rel="external">Python os.fstat() 方法</a></p>
+            <p>在Intel开发者社区发现这篇文章,给我很大的帮助,尝试着把它翻译成中文. 原文链接<a href="https://software.intel.com/en-us/blogs/2015/02/03/using-multiple-backends-in-openstack-swift" target="_blank" rel="external">Using Multiple Backends in Openstack Swift</a></p>
+<h1 id="Using-Multiple-Backends-in-Openstack-Swift"><a href="#Using-Multiple-Backends-in-Openstack-Swift" class="headerlink" title="Using Multiple Backends in Openstack Swift"></a>Using Multiple Backends in Openstack Swift</h1><p>By <a href="https://software.intel.com/en-us/user/496209" target="_blank" rel="external">Yuan Zhou (Intel)</a>, Added February 3, 2015</p>
+<p>OpenStack Swift是一个高度可用的，分布式的，最终一致的对象存储实现系统. 考虑到经济效益及存储横向扩展能力,对象存储是理想的存储实现模式.它提供了一个完全分布式，API可访问的存储平台，可以直接集成到应用程序中或用于备份，归档和保存数据。有关详细信息，请参阅<a href="http://docs.openstack.org/developer/swift/。" target="_blank" rel="external">http://docs.openstack.org/developer/swift/。</a><br>由于V2.0 Swift支持多个存储策略,这允许通过创建多个object ring来为不同目的进行不同的存储策略,从而实现某种程度的分段集群.对于帐户数据库，容器数据库有一个单独的ring，并且每个存储策略都有一个object ring。通过支持多个对象环，Swift允许应用程序和/或部署程序在单个集群中实现分离对象存储功能。然而Swift拥有另一个相当好的功能:从Juno发行版开始,支持可插拔存储后端. 得益于对象服务器中高度抽象的DiskFile API,存储设备提供商可以轻易地使用不同后端存储实现方案去存储文件对象. 这些项目有几个共同的特征:</p>
 
         </div>
         
@@ -214,7 +214,7 @@ os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat(
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
 
 
             
@@ -225,7 +225,7 @@ os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat(
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/python语法/python语法记录/&title=《python语法记录》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/&title=《在Openstack Swift中使用多种后端存储实现》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -235,22 +235,22 @@ os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat(
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/python语法/python语法记录/&title=《python语法记录》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/&title=《在Openstack Swift中使用多种后端存储实现》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/python语法/python语法记录/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python语法记录》 — MakeItPossible16&url=https://makeitpossible16.github.io/python语法/python语法记录/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Openstack Swift中使用多种后端存储实现》 — MakeItPossible16&url=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/python语法/python语法记录/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -270,21 +270,14 @@ os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat(
     </div>   
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/文件系统/文件系统(seaweedfs)与关系型数据库优劣势分析/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">文件合并存储与单个存储优劣势分析</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/数据结构/数据结构/" id="post-next" class="post-nav-link">
+      <a href="/对象存储/openstack-swift源码阅读记录3-diskfile/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">数据结构</h4>
+        <h4 class="title">openstack-swift源码阅读记录3-diskfile</h4>
       </a>
     </div>
   
@@ -294,7 +287,7 @@ os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat(
             
     
 <div class="duoshuo" id="comments">
-	<div class="ds-thread" data-thread-key="python语法记录" data-title="python语法记录" data-url="https://makeitpossible16.github.io/python语法/python语法记录/"></div>
+	<div class="ds-thread" data-thread-key="在Openstack Swift中使用多种后端存储实现" data-title="在Openstack Swift中使用多种后端存储实现" data-url="https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.2"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -324,7 +317,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/python语法/python语法记录/&title=《python语法记录》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/&title=《在Openstack Swift中使用多种后端存储实现》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -334,22 +327,22 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/python语法/python语法记录/&title=《python语法记录》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/&title=《在Openstack Swift中使用多种后端存储实现》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/python语法/python语法记录/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python语法记录》 — MakeItPossible16&url=https://makeitpossible16.github.io/python语法/python语法记录/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Openstack Swift中使用多种后端存储实现》 — MakeItPossible16&url=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/python语法/python语法记录/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -360,7 +353,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/python语法/python语法记录/" alt="微信分享二维码"/>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/" alt="微信分享二维码"/>
 </div>
 
 
