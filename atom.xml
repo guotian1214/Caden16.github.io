@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-02-24T06:01:50.569Z</updated>
+  <updated>2017-02-24T06:04:21.796Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/%E5%9C%A8Openstack%20Swift%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%A7%8D%E5%90%8E%E7%AB%AF%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
     <id>https://makeitpossible16.github.io/对象存储/在Openstack Swift中使用多种后端存储实现/</id>
     <published>2017-02-23T00:00:00.000Z</published>
-    <updated>2017-02-24T06:01:50.569Z</updated>
+    <updated>2017-02-24T06:04:21.796Z</updated>
     
     <content type="html"><![CDATA[<p>在Intel开发者社区发现这篇文章,给我很大的帮助,尝试着把它翻译成中文. 原文链接<a href="https://software.intel.com/en-us/blogs/2015/02/03/using-multiple-backends-in-openstack-swift" target="_blank" rel="external">Using Multiple Backends in Openstack Swift</a></p>
 <h1 id="Using-Multiple-Backends-in-Openstack-Swift"><a href="#Using-Multiple-Backends-in-Openstack-Swift" class="headerlink" title="Using Multiple Backends in Openstack Swift"></a>Using Multiple Backends in Openstack Swift</h1><p>By <a href="https://software.intel.com/en-us/user/496209" target="_blank" rel="external">Yuan Zhou (Intel)</a>, Added February 3, 2015</p>
@@ -33,7 +33,7 @@
 </ol>
 <p>其他后端解决方案需要使用自己的接口来实现这些接口.</p>
 <h2 id="使用内存后端"><a href="#使用内存后端" class="headerlink" title="使用内存后端"></a>使用内存后端</h2><p>这是在Swift中的样本示例. 在此实现中，用户上传的文件将与其元数据一起存储在内存的散列表(python dict)中. 每个键是accout，container和object_name的组合,相应的值是对象及其元数据的内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">filesystem[name] = &#123;data, metadata&#125;</div></pre></td></tr></table></figure></p>
-<p>在DiskFile的一个PUT请求将是一个简单的python dict更新,这个解决方案目前只是一个原型，不适合在生产环境中使用. 我们可以很轻易地知道,当对象服务器关闭,所有的数据都会丢失.<br><img src="/uploads/wift-multibackend-03.jpg" alt=""><br>要使用此后端，您需要将object-server.conf中的默认WSGI应用程序更改为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[app:object-server]</div><div class="line">use = egg: swift#mem_object</div></pre></td></tr></table></figure></p>
+<p>在DiskFile的一个PUT请求将是一个简单的python dict更新,这个解决方案目前只是一个原型，不适合在生产环境中使用. 我们可以很轻易地知道,当对象服务器关闭,所有的数据都会丢失.<br><img src="/uploads/swift-multibackend-03.jpg" alt=""><br>要使用此后端，您需要将object-server.conf中的默认WSGI应用程序更改为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[app:object-server]</div><div class="line">use = egg: swift#mem_object</div></pre></td></tr></table></figure></p>
 <p>然后重新启动对象服务器.</p>
 <h2 id="Swift-Ceph后端"><a href="#Swift-Ceph后端" class="headerlink" title="Swift-Ceph后端"></a>Swift-Ceph后端</h2><p>目前这是一个由eNovance发起的stackforge项目.这个实现使用Ceph作为Swift的存储设备. Swift对象环被配置为1x副本，而Ceph可以配置为3x副本. 这意味着从Swift的视图，只有1个对象副本存储在集群中。但是在Ceph集群中，将有3个对象的副本，并且Ceph将做一致性/复制工作.一般设计是来自DiskFile的新派生类，它将Swift读/写转换为使用librados读/写rados对象. Swift中的一个对象将被存储为Ceph中的一个文件，其名称为account，container和object name的组合.目前,account/container数据库依然以原始的方式存储在Swift当中.该项目还有一个计划，以便以后将这些SQLite DB存储到Ceph.<br><img src="/uploads/swift-multibackend-04-new.png" alt=""><br>此解决方案实现为WSGI应用程序,要使用此后端，您需要安装swift-ceph-backend项目，并将object-server.conf中的默认WSGI应用程序更改为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[app:object-server]</div><div class="line">use = egg: swift_ceph_backend#rados_object</div></pre></td></tr></table></figure></p>
 <p>然后重新启动对象服务器.</p>
