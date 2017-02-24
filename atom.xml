@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-02-24T05:58:56.398Z</updated>
+  <updated>2017-02-24T06:01:50.569Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>在Openstack Swift中使用多种后端存储实现</title>
-    <link href="https://makeitpossible16.github.io/seaweedfs/openstack-swift/%E5%9C%A8Openstack%20Swift%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%A7%8D%E5%90%8E%E7%AB%AF%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://makeitpossible16.github.io/seaweedfs/openstack-swift/在Openstack Swift中使用多种后端存储实现/</id>
+    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/%E5%9C%A8Openstack%20Swift%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%A7%8D%E5%90%8E%E7%AB%AF%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://makeitpossible16.github.io/对象存储/在Openstack Swift中使用多种后端存储实现/</id>
     <published>2017-02-23T00:00:00.000Z</published>
-    <updated>2017-02-24T05:58:56.398Z</updated>
+    <updated>2017-02-24T06:01:50.569Z</updated>
     
     <content type="html"><![CDATA[<p>在Intel开发者社区发现这篇文章,给我很大的帮助,尝试着把它翻译成中文. 原文链接<a href="https://software.intel.com/en-us/blogs/2015/02/03/using-multiple-backends-in-openstack-swift" target="_blank" rel="external">Using Multiple Backends in Openstack Swift</a></p>
 <h1 id="Using-Multiple-Backends-in-Openstack-Swift"><a href="#Using-Multiple-Backends-in-Openstack-Swift" class="headerlink" title="Using Multiple Backends in Openstack Swift"></a>Using Multiple Backends in Openstack Swift</h1><p>By <a href="https://software.intel.com/en-us/user/496209" target="_blank" rel="external">Yuan Zhou (Intel)</a>, Added February 3, 2015</p>
@@ -49,9 +49,7 @@
     
     </summary>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/categories/seaweedfs/"/>
-    
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/categories/seaweedfs/openstack-swift/"/>
+      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
       <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
