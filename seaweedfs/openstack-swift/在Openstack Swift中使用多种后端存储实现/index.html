@@ -24,12 +24,19 @@ OpenStack Swift是一个高度可用的，分布式的">
 <meta property="og:description" content="在Intel开发者社区发现这篇文章,给我很大的帮助,尝试着把它翻译成中文. 原文链接Using Multiple Backends in Openstack Swift
 Using Multiple Backends in Openstack SwiftBy Yuan Zhou (Intel), Added February 3, 2015
 OpenStack Swift是一个高度可用的，分布式的">
-<meta property="og:updated_time" content="2017-02-23T14:16:33.557Z">
+<meta property="og:image" content="https://makeitpossible16.github.io/uploads/swift-multibackend-01.jpg">
+<meta property="og:image" content="https://makeitpossible16.github.io/uploads/swift-multibackend-02.jpg">
+<meta property="og:image" content="https://makeitpossible16.github.io/uploads/wift-multibackend-03.jpg">
+<meta property="og:image" content="https://makeitpossible16.github.io/uploads/swift-multibackend-04-new.png">
+<meta property="og:image" content="https://makeitpossible16.github.io/uploads/swift-multibackend-05.jpg">
+<meta property="og:image" content="https://makeitpossible16.github.io/uploads/swift-multibackend-06.jpg">
+<meta property="og:updated_time" content="2017-02-24T05:58:56.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Openstack Swift中使用多种后端存储实现">
 <meta name="twitter:description" content="在Intel开发者社区发现这篇文章,给我很大的帮助,尝试着把它翻译成中文. 原文链接Using Multiple Backends in Openstack Swift
 Using Multiple Backends in Openstack SwiftBy Yuan Zhou (Intel), Added February 3, 2015
 OpenStack Swift是一个高度可用的，分布式的">
+<meta name="twitter:image" content="https://makeitpossible16.github.io/uploads/swift-multibackend-01.jpg">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -169,7 +176,7 @@ OpenStack Swift是一个高度可用的，分布式的">
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Using-Multiple-Backends-in-Openstack-Swift"><span class="post-toc-number">1.</span> <span class="post-toc-text">Using Multiple Backends in Openstack Swift</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Using-Multiple-Backends-in-Openstack-Swift"><span class="post-toc-number">1.</span> <span class="post-toc-text">Using Multiple Backends in Openstack Swift</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#本地磁盘后端"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">本地磁盘后端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用内存后端"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">使用内存后端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Swift-Ceph后端"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Swift-Ceph后端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Swift-On-File后端"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Swift-On-File后端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Seagate-kinetics后端"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Seagate kinetics后端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文献："><span class="post-toc-number">1.6.</span> <span class="post-toc-text">参考文献：</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -194,6 +201,22 @@ OpenStack Swift是一个高度可用的，分布式的">
             <p>在Intel开发者社区发现这篇文章,给我很大的帮助,尝试着把它翻译成中文. 原文链接<a href="https://software.intel.com/en-us/blogs/2015/02/03/using-multiple-backends-in-openstack-swift" target="_blank" rel="external">Using Multiple Backends in Openstack Swift</a></p>
 <h1 id="Using-Multiple-Backends-in-Openstack-Swift"><a href="#Using-Multiple-Backends-in-Openstack-Swift" class="headerlink" title="Using Multiple Backends in Openstack Swift"></a>Using Multiple Backends in Openstack Swift</h1><p>By <a href="https://software.intel.com/en-us/user/496209" target="_blank" rel="external">Yuan Zhou (Intel)</a>, Added February 3, 2015</p>
 <p>OpenStack Swift是一个高度可用的，分布式的，最终一致的对象存储实现系统. 考虑到经济效益及存储横向扩展能力,对象存储是理想的存储实现模式.它提供了一个完全分布式，API可访问的存储平台，可以直接集成到应用程序中或用于备份，归档和保存数据。有关详细信息，请参阅<a href="http://docs.openstack.org/developer/swift/。" target="_blank" rel="external">http://docs.openstack.org/developer/swift/。</a><br>由于V2.0 Swift支持多个存储策略,这允许通过创建多个object ring来为不同目的进行不同的存储策略,从而实现某种程度的分段集群.对于帐户数据库，容器数据库有一个单独的ring，并且每个存储策略都有一个object ring。通过支持多个对象环，Swift允许应用程序和/或部署程序在单个集群中实现分离对象存储功能。然而Swift拥有另一个相当好的功能:从Juno发行版开始,支持可插拔存储后端. 得益于对象服务器中高度抽象的DiskFile API,存储设备提供商可以轻易地使用不同后端存储实现方案去存储文件对象. 这些项目有几个共同的特征:</p>
+<ol>
+<li>这些项目被实现为一些新的WSGI对象服务器应用程序。Swift DiskFile抽象是这些多个后端解决方案的引擎.</li>
+<li>这些项目正试图利用Swift / S3 API来加入对象存储市场或OpenStack生态系统.</li>
+<li>目前这些项目大部分都在POC状态，并且不是很活跃。<h2 id="本地磁盘后端"><a href="#本地磁盘后端" class="headerlink" title="本地磁盘后端"></a>本地磁盘后端</h2>默认情况下，Swift将使用本地磁盘作为对象服务器中的存储设备. 在此实现中，用户上传的文件将单独存储在位于磁盘上层的本地文件系统中. 元数据将与文件一起存储为文件的扩展属性. 这需要一个支持文件扩展属性的文件系统，如xfs或ext4.<br><img src="/uploads/swift-multibackend-01.jpg" alt=""><br>对象服务器中的DiskFile API是一组RESTFul接口,如READ，WRITE和DELETE. 在这个本地磁盘后端，这些接口大多数是用POSIX API实现的. 例如，WRITE请求将调用python中的os.write().<br><img src="/uploads/swift-multibackend-02.jpg" alt=""><br>要使用此后端，您只需要复制示例object-server.conf. 注意，默认的WSGI应用程序应该是:<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[app:object-server]</div><div class="line"></div><div class="line">use = egg: swift#object</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其他后端解决方案需要使用自己的接口来实现这些接口.</p>
+<h2 id="使用内存后端"><a href="#使用内存后端" class="headerlink" title="使用内存后端"></a>使用内存后端</h2><p>这是在Swift中的样本示例. 在此实现中，用户上传的文件将与其元数据一起存储在内存的散列表(python dict)中. 每个键是accout，container和object_name的组合,相应的值是对象及其元数据的内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">filesystem[name] = &#123;data, metadata&#125;</div></pre></td></tr></table></figure></p>
+<p>在DiskFile的一个PUT请求将是一个简单的python dict更新,这个解决方案目前只是一个原型，不适合在生产环境中使用. 我们可以很轻易地知道,当对象服务器关闭,所有的数据都会丢失.<br><img src="/uploads/wift-multibackend-03.jpg" alt=""><br>要使用此后端，您需要将object-server.conf中的默认WSGI应用程序更改为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[app:object-server]</div><div class="line">use = egg: swift#mem_object</div></pre></td></tr></table></figure></p>
+<p>然后重新启动对象服务器.</p>
+<h2 id="Swift-Ceph后端"><a href="#Swift-Ceph后端" class="headerlink" title="Swift-Ceph后端"></a>Swift-Ceph后端</h2><p>目前这是一个由eNovance发起的stackforge项目.这个实现使用Ceph作为Swift的存储设备. Swift对象环被配置为1x副本，而Ceph可以配置为3x副本. 这意味着从Swift的视图，只有1个对象副本存储在集群中。但是在Ceph集群中，将有3个对象的副本，并且Ceph将做一致性/复制工作.一般设计是来自DiskFile的新派生类，它将Swift读/写转换为使用librados读/写rados对象. Swift中的一个对象将被存储为Ceph中的一个文件，其名称为account，container和object name的组合.目前,account/container数据库依然以原始的方式存储在Swift当中.该项目还有一个计划，以便以后将这些SQLite DB存储到Ceph.<br><img src="/uploads/swift-multibackend-04-new.png" alt=""><br>此解决方案实现为WSGI应用程序,要使用此后端，您需要安装swift-ceph-backend项目，并将object-server.conf中的默认WSGI应用程序更改为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[app:object-server]</div><div class="line">use = egg: swift_ceph_backend#rados_object</div></pre></td></tr></table></figure></p>
+<p>然后重新启动对象服务器.</p>
+<h2 id="Swift-On-File后端"><a href="#Swift-On-File后端" class="headerlink" title="Swift-On-File后端"></a>Swift-On-File后端</h2><p>Swift-on-File项目也是由Redhat发起的stackforge项目, 目前它是一个Swift对象服务器的实现, 它使用户能够访问相同的数据，既作为对象也可作为文件. 数据可以通过Swift的REST接口存储和检索，也可作为NAS接口的文件，包括本地GlusterFS，NFS和CIFS.<br><img src="/uploads/swift-multibackend-05.jpg" alt=""><br>要使用此后端，您需要安装swiftonfile项目，然后将object-server.conf中的默认WSGI应用程序更改为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[app:object-server]</div><div class="line">use = egg:swiftonfile#object</div></pre></td></tr></table></figure></p>
+<p>您还需要在/mnt/swiftonfile 挂载一个NFS分区,或GlusterFS卷<br>建议将对象环配置为仅1个副本. 所有的一致性/复制工作都在GlusterFS / NFS层中处理</p>
+<h2 id="Seagate-kinetics后端"><a href="#Seagate-kinetics后端" class="headerlink" title="Seagate kinetics后端"></a>Seagate kinetics后端</h2><p>Swift over Seagate 是由SwiftStack和Seagate开始的一个项目. 目前，它仍然在试验beta Kinetic库中. 使用Kinetic驱动器的Swift群集允许访问任何驱动器，从而访问任何对象.对于当前的Kinetic集成,对象服务器命令（对象守护程序）的一小部分被嵌入在作为逻辑构造的代理服务器中,如下所示:<br><img src="/uploads/swift-multibackend-06.jpg" alt=""><br>还有一些通过kinetic部署的设备,由于这个项目仍在开发中,没有准备过多的文档. 您需要检查最新的代码来了解详细信息.</p>
+<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p><a href="http://docs.openstack.org/developer/swift/" target="_blank" rel="external">http://docs.openstack.org/developer/swift/</a><br><a href="https://swiftstack.com/blog/2014/02/04/swift-extensibility/" target="_blank" rel="external">https://swiftstack.com/blog/2014/02/04/swift-extensibility/</a><br><a href="https://github.com/stackforge/swift-ceph-backend" target="_blank" rel="external">https://github.com/stackforge/swift-ceph-backend</a><br><a href="https://github.com/stackforge/swiftonfile" target="_blank" rel="external">https://github.com/stackforge/swiftonfile</a><br><a href="https://github.com/swiftstack/kinetic-swift" target="_blank" rel="external">https://github.com/swiftstack/kinetic-swift</a><br><a href="https://developers.seagate.com/display/KV/OpenStack+Swift" target="_blank" rel="external">https://developers.seagate.com/display/KV/OpenStack+Swift</a></p>
 
         </div>
         
