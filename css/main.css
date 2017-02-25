@@ -1295,8 +1295,8 @@ pre .javascript .function {
 .posts-collapse .post-meta {
   position: absolute;
   font-size: 12px;
-  left: 20px;
-  top: 5px;
+  left: 10px;
+  top: 1px;
 }
 .posts-collapse .post-comments-count {
   display: none;
@@ -1705,7 +1705,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #98341b;
+  background: #eeacb9;
 }
 .links-of-blogroll {
   font-size: 13px;
