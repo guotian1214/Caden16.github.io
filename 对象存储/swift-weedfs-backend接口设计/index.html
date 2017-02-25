@@ -14,19 +14,16 @@
   
   
   <meta name="keywords" content="openstack-swift,seaweedfs">
-  <meta name="description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:
-|接口名称|参数类型:参数名称|返回值|接口说明|get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj_metadata,">
+  <meta name="description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:|接口名称|参数类型:参数名称|返回值|接口说明|—— |—|—|—||get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj">
 <meta property="og:type" content="article">
 <meta property="og:title" content="swift-weedfs-backend接口设计">
 <meta property="og:url" content="https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:
-|接口名称|参数类型:参数名称|返回值|接口说明|get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj_metadata,">
-<meta property="og:updated_time" content="2017-02-25T03:00:02.702Z">
+<meta property="og:description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:|接口名称|参数类型:参数名称|返回值|接口说明|—— |—|—|—||get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj">
+<meta property="og:updated_time" content="2017-02-25T03:02:53.849Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="swift-weedfs-backend接口设计">
-<meta name="twitter:description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:
-|接口名称|参数类型:参数名称|返回值|接口说明|get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj_metadata,">
+<meta name="twitter:description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:|接口名称|参数类型:参数名称|返回值|接口说明|—— |—|—|—||get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -163,13 +160,6 @@
 
 <div class="container body-wrap">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap" id="post-toc">
-            <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接口名称-参数类型-参数名称-返回值-接口说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">|接口名称|参数类型:参数名称|返回值|接口说明</span></a></li></ol>
-        </nav>
-    </aside>
-    
 
 <article id="post-swift-weedfs-backend接口设计" 
   class="post-article article-type-post" itemprop="blogPost">
@@ -188,8 +178,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.<br>设计接口如下:</p>
-<h2 id="接口名称-参数类型-参数名称-返回值-接口说明"><a href="#接口名称-参数类型-参数名称-返回值-接口说明" class="headerlink" title="|接口名称|参数类型:参数名称|返回值|接口说明"></a>|接口名称|参数类型:参数名称|返回值|接口说明</h2><p>|get_object|strng:url|obj_content,obj_metadata|获取对象<br>|put_object|string:url,obj_content,obj_metadata,obj_name|True/False|保存对象<br>|del_object|string:url|True/False|删除对象</p>
+            <p>swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.<br>设计接口如下:<br>|接口名称|参数类型:参数名称|返回值|接口说明<br>|—— |—|—|—|<br>|get_object|strng:url|obj_content,obj_metadata|获取对象<br>|put_object|string:url,obj_content,obj_metadata,obj_name|True/False|保存对象<br>|del_object|string:url|True/False|删除对象</p>
 
         </div>
         
