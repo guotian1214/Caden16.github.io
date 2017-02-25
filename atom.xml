@@ -79,10 +79,12 @@
     <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%954-%E5%90%AF%E7%94%A8mem_diskfile/"/>
     <id>https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录4-启用mem_diskfile/</id>
     <published>2017-02-24T00:00:00.000Z</published>
-    <updated>2017-02-24T12:12:24.211Z</updated>
+    <updated>2017-02-25T11:46:46.271Z</updated>
     
     <content type="html"><![CDATA[<p>修改/etc/swift/object-server/中的文件,改为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[app:object-server]</div><div class="line">use = egg:swift#mem_object</div></pre></td></tr></table></figure></p>
-<p>其中,设置客户端超时时间:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.client_timeout = int(conf.get(&apos;client_timeout&apos;, 60))</div></pre></td></tr></table></figure></p>
+<p>mem_diskfile为mem_server提供内存存储后端实现,而mem_server继承自server.ObjectController,提供请求转发工作,其中,设置客户端超时时间:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.client_timeout = int(conf.get(&apos;client_timeout&apos;, 60))</div></pre></td></tr></table></figure></p>
+<h3 id="用户上传对象过程"><a href="#用户上传对象过程" class="headerlink" title="用户上传对象过程"></a>用户上传对象过程</h3><p>调用mem_diskfile中的put_object方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">def put_object(self, name, fp, metadata):</div></pre></td></tr></table></figure></p>
+<p>参数:<br><img src="/uploads/2017-02-25 19-43-22put_object参数.png" alt="mem_diskfile.put_object参数"><br>可以看到,name为account,container,object的组合</p>
 ]]></content>
     
     <summary type="html">
@@ -972,12 +974,12 @@
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
     <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/</id>
     <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2017-02-23T12:24:28.724Z</updated>
+    <updated>2017-02-25T11:47:17.603Z</updated>
     
     <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
 <h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
 <h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
-<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333”  -port=8080<br>启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter -master=localhost:9333<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid</p>
+<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333”  -port=8080<br>启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter1 -master=localhost:9333<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid</p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
 <p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
 <p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
@@ -1080,7 +1082,7 @@
     <link href="https://makeitpossible16.github.io/%E6%9C%89%E9%81%93%E5%AD%97%E5%85%B8%E4%BF%AE%E6%94%B9/ubuntu%E4%B8%8B%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8%E7%BF%BB%E8%AF%91/"/>
     <id>https://makeitpossible16.github.io/有道字典修改/ubuntu下如何优雅地使用翻译/</id>
     <published>2016-10-26T00:00:00.000Z</published>
-    <updated>2016-11-26T15:39:42.885Z</updated>
+    <updated>2017-02-25T10:48:06.246Z</updated>
     
     <content type="html"><![CDATA[<p>最近看英文文档比较多，但英语水平不咋地，需要借助翻译工具。在ubuntu下，有startdict、goldendict等字典，但字典毕竟是字典，解释太多，用着不太爽。平时喜欢用谷歌翻译，最近谷歌翻译的水平也的确提升了不少，可惜没有客户端，平时看个PDF啥的也用不了，github 上的发现mtranslate模块，把网址改为中国的网址，得到结果还挺快.</p>
 <p>本来想写个接口封装一下，直接用goldendict显示的，无奈网络延迟太大，谷歌翻译都没出结果，字典的弹框就出来了，能找到goldendict的源码，但看到那一坨代码，实在没有修改的欲望。偶然的机会，发现了某道有ubuntu的客户端，解压出来，居然是python的代码，还是python大法好，这样就来优雅地改一下代码吧。<br>最后实现功能：<br>在弹框中显示调用mtranslate模块显示的翻译信息</p>

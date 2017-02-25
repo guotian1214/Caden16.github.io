@@ -12,7 +12,7 @@
     <entry>
       <title><![CDATA[openstack-swift源码阅读记录4-启用mem_diskfile]]></title>
       <url>%2F%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%2Fopenstack-swift%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%954-%E5%90%AF%E7%94%A8mem_diskfile%2F</url>
-      <content type="text"><![CDATA[修改/etc/swift/object-server/中的文件,改为:12[app:object-server]use = egg:swift#mem_object 其中,设置客户端超时时间:1self.client_timeout = int(conf.get(&apos;client_timeout&apos;, 60))]]></content>
+      <content type="text"><![CDATA[修改/etc/swift/object-server/中的文件,改为:12[app:object-server]use = egg:swift#mem_object mem_diskfile为mem_server提供内存存储后端实现,而mem_server继承自server.ObjectController,提供请求转发工作,其中,设置客户端超时时间:1self.client_timeout = int(conf.get(&apos;client_timeout&apos;, 60)) 用户上传对象过程调用mem_diskfile中的put_object方法1def put_object(self, name, fp, metadata): 参数:可以看到,name为account,container,object的组合]]></content>
     </entry>
 
     
@@ -215,7 +215,7 @@
     <entry>
       <title><![CDATA[seaweedfs源码阅读记录1]]></title>
       <url>%2F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%2Fseaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95%2F</url>
-      <content type="text"><![CDATA[接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs. 目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等. 学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用. 测试用命令启动:master : weed master -mdir=/home/ubuntu/weedfsvolume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333” -port=8080启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter -master=localhost:9333使用:curl -X POST http://localhost:9333/dir/assign 获取fid 参考文章分布式存储Seaweedfs源码分析 tonybai的个人blog weed-fs 源码解读—分布式处理过程 weed-fs 源码解读]]></content>
+      <content type="text"><![CDATA[接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:seaweedfs. 目标:学习seaweedfs 的文件合并存储文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等. 学习方式: google + 调试github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用. 测试用命令启动:master : weed master -mdir=/home/ubuntu/weedfsvolume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333” -port=8080启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter1 -master=localhost:9333使用:curl -X POST http://localhost:9333/dir/assign 获取fid 参考文章分布式存储Seaweedfs源码分析 tonybai的个人blog weed-fs 源码解读—分布式处理过程 weed-fs 源码解读]]></content>
     </entry>
 
     
