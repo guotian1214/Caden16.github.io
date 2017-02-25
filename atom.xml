@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-02-25T03:02:53.849Z</updated>
+  <updated>2017-02-25T03:05:44.704Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/"/>
     <id>https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/</id>
     <published>2017-02-25T00:00:00.000Z</published>
-    <updated>2017-02-25T03:02:53.849Z</updated>
+    <updated>2017-02-25T03:05:44.704Z</updated>
     
-    <content type="html"><![CDATA[<p>swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.<br>设计接口如下:<br>|接口名称|参数类型:参数名称|返回值|接口说明<br>|—— |—|—|—|<br>|get_object|strng:url|obj_content,obj_metadata|获取对象<br>|put_object|string:url,obj_content,obj_metadata,obj_name|True/False|保存对象<br>|del_object|string:url|True/False|删除对象</p>
+    <content type="html"><![CDATA[<p>swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.<br>设计接口如下:<br>| 接口名称 |参数类型:参数名称|返回值|接口说明|<br>| —— | —— |——| ——|<br>|get_object|strng:url|obj_content,obj_metadata|获取对象|<br>|put_object|string:url,obj_content,obj_metadata,obj_name|True/False|保存对象|<br>|del_object|string:url|True/False|删除对象|</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.&lt;br&gt;设计接口如下:&lt;br&gt;|接口名称|参数类型:参数名称|返回值|接口说明&lt;br&gt;|—— |—|—|—|&lt;br&gt;|get_objec
+      &lt;p&gt;swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.&lt;br&gt;设计接口如下:&lt;br&gt;| 接口名称 |参数类型:参数名称|返回值|接口说明|&lt;br&gt;| —— | —— |——| ——|&lt;br&gt;
     
     </summary>
     
