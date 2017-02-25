@@ -7,26 +7,26 @@
   
   
   
-  <title>数据结构 | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
+  <title>swift-weedfs-backend接口设计 | MakeItPossible16 | 寻找实习单位,详情请看个人简介</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="theme-color" content="#3F51B5">
   
   
-  <meta name="keywords" content="数据结构">
-  <meta name="description" content="数据结构都忘得差不多了,记录一下
-二叉树遍历数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现前序遍历：根节点-&amp;gt;左子树-&amp;gt;右子树中序遍历：左子树-&amp;gt;根节点-&amp;gt;右子树后序遍历：左子树-&amp;gt;右子树-&amp;gt;根节点">
+  <meta name="keywords" content="openstack-swift,seaweedfs">
+  <meta name="description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:
+|接口名称|参数类型:参数名称|返回值|接口说明|get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj_metadata,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构">
-<meta property="og:url" content="https://makeitpossible16.github.io/数据结构/数据结构/index.html">
+<meta property="og:title" content="swift-weedfs-backend接口设计">
+<meta property="og:url" content="https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="数据结构都忘得差不多了,记录一下
-二叉树遍历数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现前序遍历：根节点-&amp;gt;左子树-&amp;gt;右子树中序遍历：左子树-&amp;gt;根节点-&amp;gt;右子树后序遍历：左子树-&amp;gt;右子树-&amp;gt;根节点">
-<meta property="og:updated_time" content="2017-02-07T13:37:16.495Z">
+<meta property="og:description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:
+|接口名称|参数类型:参数名称|返回值|接口说明|get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj_metadata,">
+<meta property="og:updated_time" content="2017-02-25T03:00:02.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构">
-<meta name="twitter:description" content="数据结构都忘得差不多了,记录一下
-二叉树遍历数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现前序遍历：根节点-&amp;gt;左子树-&amp;gt;右子树中序遍历：左子树-&amp;gt;根节点-&amp;gt;右子树后序遍历：左子树-&amp;gt;右子树-&amp;gt;根节点">
+<meta name="twitter:title" content="swift-weedfs-backend接口设计">
+<meta name="twitter:description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:
+|接口名称|参数类型:参数名称|返回值|接口说明|get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj_metadata,">
   
     <link rel="alternative" href="/atom.xml" title="MakeItPossible16" type="application/atom+xml">
   
@@ -120,7 +120,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">数据结构</div>
+        <div class="flex-col header-title ellipsis">swift-weedfs-backend接口设计</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -142,15 +142,15 @@
 <header class="content-header post-header">
 
     <div class="container">
-        <h1 class="title">数据结构</h1>
+        <h1 class="title">swift-weedfs-backend接口设计</h1>
         <h5 class="subtitle">
             
-                <time datetime="2017-02-07T00:00:00.000Z" itemprop="datePublished" class="page-time">
-  2017-02-07
+                <time datetime="2017-02-25T00:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-02-25
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
 
             
         </h5>
@@ -166,30 +166,30 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>目录</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二叉树遍历"><span class="post-toc-number">1.</span> <span class="post-toc-text">二叉树遍历</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#接口名称-参数类型-参数名称-返回值-接口说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">|接口名称|参数类型:参数名称|返回值|接口说明</span></a></li></ol>
         </nav>
     </aside>
     
 
-<article id="post-数据结构" 
+<article id="post-swift-weedfs-backend接口设计" 
   class="post-article article-type-post" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">数据结构</h1>
+        <h1 class="post-card-title">swift-weedfs-backend接口设计</h1>
         <div class="post-meta">
-            <time datetime="2017-02-07T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2017-02-07
+            <time datetime="2017-02-25T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-02-25
 </time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
 
 
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>数据结构都忘得差不多了,记录一下</p>
-<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
+            <p>swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.<br>设计接口如下:</p>
+<h2 id="接口名称-参数类型-参数名称-返回值-接口说明"><a href="#接口名称-参数类型-参数名称-返回值-接口说明" class="headerlink" title="|接口名称|参数类型:参数名称|返回值|接口说明"></a>|接口名称|参数类型:参数名称|返回值|接口说明</h2><p>|get_object|strng:url|obj_content,obj_metadata|获取对象<br>|put_object|string:url,obj_content,obj_metadata,obj_name|True/False|保存对象<br>|del_object|string:url|True/False|删除对象</p>
 
         </div>
         
@@ -210,7 +210,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
 
 
             
@@ -221,7 +221,7 @@
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/数据结构/数据结构/&title=《数据结构》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/&title=《swift-weedfs-backend接口设计》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -231,22 +231,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/数据结构/数据结构/&title=《数据结构》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/&title=《swift-weedfs-backend接口设计》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/数据结构/数据结构/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据结构》 — MakeItPossible16&url=https://makeitpossible16.github.io/数据结构/数据结构/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《swift-weedfs-backend接口设计》 — MakeItPossible16&url=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/数据结构/数据结构/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -266,21 +266,14 @@
     </div>   
 
     
-<nav class="post-nav flex-row flex-justify-between">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/文件系统/文件系统(seaweedfs)与关系型数据库优劣势分析/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">文件合并存储与单个存储优劣势分析</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/python语法/python语法记录/" id="post-next" class="post-nav-link">
+      <a href="/对象存储/openstack-swift源码阅读记录4-启用mem_diskfile/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">python语法记录</h4>
+        <h4 class="title">openstack-swift源码阅读记录4-启用mem_diskfile</h4>
       </a>
     </div>
   
@@ -290,7 +283,7 @@
             
     
 <div class="duoshuo" id="comments">
-	<div class="ds-thread" data-thread-key="数据结构" data-title="数据结构" data-url="https://makeitpossible16.github.io/数据结构/数据结构/"></div>
+	<div class="ds-thread" data-thread-key="swift-weedfs-backend接口设计" data-title="swift-weedfs-backend接口设计" data-url="https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.2"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -320,7 +313,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
     <div class="tit">分享到：</div>
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/数据结构/数据结构/&title=《数据结构》 — MakeItPossible16&pic=/" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/&title=《swift-weedfs-backend接口设计》 — MakeItPossible16&pic=/" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -330,22 +323,22 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/数据结构/数据结构/&title=《数据结构》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/&title=《swift-weedfs-backend接口设计》 — MakeItPossible16&source=闲着没事写点东西" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/数据结构/数据结构/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《数据结构》 — MakeItPossible16&url=https://makeitpossible16.github.io/数据结构/数据结构/&via=https://makeitpossible16.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《swift-weedfs-backend接口设计》 — MakeItPossible16&url=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/&via=https://makeitpossible16.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/数据结构/数据结构/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -356,7 +349,7 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: false }</script>
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/数据结构/数据结构/" alt="微信分享二维码"/>
+    <img src="http://s.jiathis.com/qrcode.php?url=https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/" alt="微信分享二维码"/>
 </div>
 
 

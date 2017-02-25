@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-02-24T06:04:21.796Z</updated>
+  <updated>2017-02-25T03:00:02.702Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -14,6 +14,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>swift-weedfs-backend接口设计</title>
+    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/"/>
+    <id>https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/</id>
+    <published>2017-02-25T00:00:00.000Z</published>
+    <updated>2017-02-25T03:00:02.702Z</updated>
+    
+    <content type="html"><![CDATA[<p>swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.<br>设计接口如下:</p>
+<h2 id="接口名称-参数类型-参数名称-返回值-接口说明"><a href="#接口名称-参数类型-参数名称-返回值-接口说明" class="headerlink" title="|接口名称|参数类型:参数名称|返回值|接口说明"></a>|接口名称|参数类型:参数名称|返回值|接口说明</h2><p>|get_object|strng:url|obj_content,obj_metadata|获取对象<br>|put_object|string:url,obj_content,obj_metadata,obj_name|True/False|保存对象<br>|del_object|string:url|True/False|删除对象</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.&lt;br&gt;设计接口如下:&lt;/p&gt;
+&lt;h2 id=&quot;接口名称-参数类型-参数名称-返回值-接口说明&quot;&gt;&lt;a href=&quot;#接口名称-参数类型
+    
+    </summary>
+    
+      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openstack-swift源码阅读记录4-启用mem_diskfile</title>
+    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%954-%E5%90%AF%E7%94%A8mem_diskfile/"/>
+    <id>https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录4-启用mem_diskfile/</id>
+    <published>2017-02-24T00:00:00.000Z</published>
+    <updated>2017-02-24T12:12:24.211Z</updated>
+    
+    <content type="html"><![CDATA[<p>修改/etc/swift/object-server/中的文件,改为:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[app:object-server]</div><div class="line">use = egg:swift#mem_object</div></pre></td></tr></table></figure></p>
+<p>其中,设置客户端超时时间:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.client_timeout = int(conf.get(&apos;client_timeout&apos;, 60))</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;修改/etc/swift/object-server/中的文件,改为:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div c
+    
+    </summary>
+    
+      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+    
+  </entry>
   
   <entry>
     <title>在Openstack Swift中使用多种后端存储实现</title>
@@ -214,6 +265,31 @@
   </entry>
   
   <entry>
+    <title>数据结构</title>
+    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
+    <published>2017-02-07T00:00:00.000Z</published>
+    <updated>2017-02-07T13:37:16.495Z</updated>
+    
+    <content type="html"><![CDATA[<p>数据结构都忘得差不多了,记录一下</p>
+<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;数据结构都忘得差不多了,记录一下&lt;/p&gt;
+&lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fans
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>python语法记录</title>
     <link href="https://makeitpossible16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://makeitpossible16.github.io/python语法/python语法记录/</id>
@@ -236,31 +312,6 @@
     
     
       <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构</title>
-    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
-    <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-02-07T13:37:16.495Z</updated>
-    
-    <content type="html"><![CDATA[<p>数据结构都忘得差不多了,记录一下</p>
-<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;数据结构都忘得差不多了,记录一下&lt;/p&gt;
-&lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fans
-    
-    </summary>
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   

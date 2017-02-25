@@ -155,6 +155,107 @@
     <ul class="post-list">
     
         <li class="post-list-item">
+            <article id="post-swift-weedfs-backend接口设计"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2017-02-25T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-02-25
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/对象存储/swift-weedfs-backend接口设计/">swift-weedfs-backend接口设计</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:
+|接口名称|参数类型:参数名称|返回值|接口说明|get_object|strng:url|obj_content,obj_metadata|获取对象|put_object|string:url,obj_content,obj_metada...
+    
+    
+        <a href="/对象存储/swift-weedfs-backend接口设计/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seaweedfs/">seaweedfs</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
+            <article id="post-openstack-swift源码阅读记录4-启用mem_diskfile"
+  class="article-card article-type-post" itemprop="blogPost">
+     
+    <div class="post-meta">
+        <time datetime="2017-02-24T00:00:00.000Z" itemprop="datePublished" class="post-time">
+  2017-02-24
+</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/对象存储/openstack-swift源码阅读记录4-启用mem_diskfile/">openstack-swift源码阅读记录4-启用mem_diskfile</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+        修改/etc/swift/object-server/中的文件,改为:12[app:object-server]use = egg:swift#mem_object
+其中,设置客户端超时时间:1self.client_timeout = int(conf.get(&apos;client_timeout&apos;, 60))
+
+    
+    
+        <a href="/对象存储/openstack-swift源码阅读记录4-启用mem_diskfile/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item">
             <article id="post-在Openstack Swift中使用多种后端存储实现"
   class="article-card article-type-post" itemprop="blogPost">
      
@@ -297,107 +398,6 @@ OpenStack Swift是一个高度可用的，分...
     <div class="post-footer">
         
 	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-openstack源码阅读记录2-object metadata"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2017-02-13T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2017-02-13
-</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/对象存储/openstack源码阅读记录2-object metadata/">openstack源码阅读记录2-object metadata</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        通过调试,得到object metadata的格式:
-
-    
-    
-        <a href="/对象存储/openstack源码阅读记录2-object metadata/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item">
-            <article id="post-openstack-swift源码阅读记录1-文件上传过程"
-  class="article-card article-type-post" itemprop="blogPost">
-     
-    <div class="post-meta">
-        <time datetime="2017-02-12T00:00:00.000Z" itemprop="datePublished" class="post-time">
-  2017-02-12
-</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/对象存储/">对象存储</a></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/对象存储/openstack-swift源码阅读记录1-文件上传过程/">openstack-swift源码阅读记录1-文件上传过程</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent" >
-
-    
-        使用命令:1swift upload
-上传文件,openstack-swift调用过程
-入口函数
-    
-    
-        <a href="/对象存储/openstack-swift源码阅读记录1-文件上传过程/" class="post-more waves-effect waves-button">
-            阅读全文...
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/openstack-swift/">openstack-swift</a></li></ul>
 
     </div>
     
