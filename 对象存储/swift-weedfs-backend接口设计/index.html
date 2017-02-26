@@ -101,14 +101,19 @@
 
 
 
-get_object
+GET
 strng:url
-obj_content,obj_metadata
-获取对象
+file_content
+获取seaweedfs文件
 
 
-put_object
-string:url,obj_content,obj_m">
+PUT
+string:url,obj_content
+True/False
+保存对象
+
+
+DELE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="swift-weedfs-backend接口设计">
 <meta property="og:url" content="https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/index.html">
@@ -125,15 +130,20 @@ string:url,obj_content,obj_m">
 
 
 
-get_object
+GET
 strng:url
-obj_content,obj_metadata
-获取对象
+file_content
+获取seaweedfs文件
 
 
-put_object
-string:url,obj_content,obj_m">
-<meta property="og:updated_time" content="2017-02-25T03:34:02.735Z">
+PUT
+string:url,obj_content
+True/False
+保存对象
+
+
+DELE">
+<meta property="og:updated_time" content="2017-02-26T13:41:57.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="swift-weedfs-backend接口设计">
 <meta name="twitter:description" content="swift-weedfs-backend基于mem_diskfile,使用seaweedfs对mem_diskfile中的数据进行持久化.设计接口如下:
@@ -148,14 +158,19 @@ string:url,obj_content,obj_m">
 
 
 
-get_object
+GET
 strng:url
-obj_content,obj_metadata
-获取对象
+file_content
+获取seaweedfs文件
 
 
-put_object
-string:url,obj_content,obj_m">
+PUT
+string:url,obj_content
+True/False
+保存对象
+
+
+DELE">
 
 
 
@@ -413,8 +428,8 @@ string:url,obj_content,obj_m">
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-25T11:34:02+08:00">
-                2017-02-25
+              <time title="更新于" itemprop="dateModified" datetime="2017-02-26T21:41:57+08:00">
+                2017-02-26
               </time>
             
           </span>
@@ -489,25 +504,32 @@ string:url,obj_content,obj_m">
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">get_object</td>
+<td style="text-align:left">GET</td>
 <td>strng:url</td>
-<td>obj_content,obj_metadata</td>
-<td>获取对象</td>
+<td>file_content</td>
+<td>获取seaweedfs文件</td>
 </tr>
 <tr>
-<td style="text-align:left">put_object</td>
-<td>string:url,obj_content,obj_metadata,obj_name</td>
+<td style="text-align:left">PUT</td>
+<td>string:url,obj_content</td>
 <td>True/False</td>
 <td>保存对象</td>
 </tr>
 <tr>
-<td style="text-align:left">del_object</td>
+<td style="text-align:left">DELETE</td>
 <td>string:url</td>
 <td>True/False</td>
 <td>删除对象</td>
 </tr>
+<tr>
+<td style="text-align:left">parseURL</td>
+<td>string:url</td>
+<td>account,container,obj_name</td>
+<td>从URL中解析得到account,container,obj_name</td>
+</tr>
 </tbody>
 </table>
+<p>代码实现:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Seaweedfs_operation</span><span class="params">()</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.seaweedfs = WeedFS();</div><div class="line">        self.filter_ip = <span class="string">"127.0.0.1"</span></div><div class="line">        self.filter_port = <span class="string">"8888"</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">PUT</span><span class="params">(self,url, obj_content)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        upload file to seaweedfs</div><div class="line">        :param url:</div><div class="line">        :param obj_content:</div><div class="line">        :return: obj size</div><div class="line">        """</div><div class="line">        account,container,obj_name = self.parseURL(url)</div><div class="line">        url_complete = <span class="string">u"http://&#123;filter_ip&#125;:&#123;filter_port&#125;/&#123;account&#125;/&#123;container&#125;/"</span>.format(filter_ip=self.filter_ip,</div><div class="line">                                                                                         filter_port=self.filter_port,</div><div class="line">                                                                                         account=account,container=container)</div><div class="line">        <span class="keyword">return</span> self.seaweedfs.upload_file(url_complete,obj_name,obj_content)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">DELETE</span><span class="params">(self,url)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        delete a file from seaweedfs</div><div class="line">        :param url:</div><div class="line">        :return: Boolean: True:delete success</div><div class="line">        """</div><div class="line">        url_complete = <span class="string">u"http://&#123;filter_ip&#125;:&#123;filter_port&#125;&#123;url&#125;"</span>.format(filter_ip=self.filter_ip,</div><div class="line">                                                                       filter_port=self.filter_port,url=url)</div><div class="line">        <span class="keyword">return</span> self.seaweedfs.delete_file(url_complete)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self,url)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        download a file from seaweedfs</div><div class="line">        :param url:</div><div class="line">        :return:</div><div class="line">            Content of the file with provided url or None if file doesn't</div><div class="line">                exist on the server</div><div class="line">        """</div><div class="line">        url_complete = <span class="string">"http://&#123;filter_ip&#125;:&#123;filter_port&#125;&#123;url&#125;"</span>.format(filter_ip=self.filter_ip,</div><div class="line">                                                                      filter_port=self.filter_port,url=url)</div><div class="line">        <span class="keyword">return</span> self.seaweedfs.get_file(url_complete)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parseURL</span><span class="params">(self,url)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        parse url to account, container, obj_name</div><div class="line">        :param url:</div><div class="line">        :return: account, container, obj_name</div><div class="line">        """</div><div class="line">        url_split = url.split(<span class="string">'/'</span>)</div><div class="line">        <span class="keyword">return</span> url_split[<span class="number">1</span>],url_split[<span class="number">2</span>],url_split[<span class="number">3</span>]</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -555,6 +577,10 @@ string:url,obj_content,obj_m">
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/对象存储/swift-weedfs-backend diskfile代码实现/" rel="prev" title="swift-weedfs-backend diskfile代码实现">
+                swift-weedfs-backend diskfile代码实现 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -638,7 +664,7 @@ string:url,obj_content,obj_m">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -656,7 +682,7 @@ string:url,obj_content,obj_m">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
