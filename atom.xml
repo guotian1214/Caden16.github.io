@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-02-27T07:32:25.589Z</updated>
+  <updated>2017-02-27T07:37:20.507Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Next%20Permutation(%E5%85%A8%E6%8E%92%E5%88%97%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95)/"/>
     <id>https://makeitpossible16.github.io/算法/LeetCode解题-Next Permutation(全排列生成算法)/</id>
     <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-02-27T07:32:25.589Z</updated>
+    <updated>2017-02-27T07:37:20.507Z</updated>
     
     <content type="html"><![CDATA[<p>LeetCode题目-Next Permutation<br>看半天连题目都看不懂,参考<a href="http://blog.csdn.net/nomasp/article/details/49913627" target="_blank" rel="external">LeetCode 31 Next Permutation（下一个排列）</a>,基本理解题意:<br>数学中的排列组合，比如“1，2，3”的全排列，依次是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1 2 3</div><div class="line">1 3 2</div><div class="line">2 1 3</div><div class="line">2 3 1</div><div class="line">3 1 2</div><div class="line">3 2 1</div></pre></td></tr></table></figure></p>
 <p>从上面的某一行重排到期下一行，如果已经是最后一行了，则重排成第一行。</p>
-<p>实现思路:<br>从后往前遍历,找到最长递增序列,结束位置为index,然后找到最长递增序列中比index-1的数大的最小的数.<br>图片来源:<a href="http://fisherlei.blogspot.co.id/2012/12/leetcode-next-permutation.html" target="_blank" rel="external"></a><br><img src="/uploads/next permutation.png" alt=""></p>
+<p>实现思路:<br>从后往前遍历,找到最长递增序列,结束位置为index,然后找到最长递增序列中比index-1的数大的最小的数.<br>图片来源:<a href="http://fisherlei.blogspot.co.id/2012/12/leetcode-next-permutation.html" target="_blank" rel="external">http://fisherlei.blogspot.co.id/2012/12/leetcode-next-permutation.html</a><br><img src="/uploads/next permutation.png" alt=""></p>
 ]]></content>
     
     <summary type="html">
