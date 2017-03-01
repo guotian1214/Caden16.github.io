@@ -66,33 +66,6 @@
   </entry>
   
   <entry>
-    <title>swift-weedfs-backend diskfile代码实现</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://makeitpossible16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
-    <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-02-26T13:56:46.998Z</updated>
-    
-    <content type="html"><![CDATA[<p>主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现<a href="https://github.com/MakeItPossible16/swift-weedfs-backend" target="_blank" rel="external">swift-weedfs-backend</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryFileSystem</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    A very simplistic in-memory file system scheme.</div><div class="line"></div><div class="line">    There is one dictionary mapping a given object name to a tuple. The first</div><div class="line">    entry in the tuple is the cStringIO buffer representing the file contents,</div><div class="line">    the second entry is the metadata dictionary.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._filesystem = &#123;&#125;</div><div class="line">        self.seaweedfs = Seaweedfs_operation()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return back an file-like object and its metadata</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :return (fp, metadata): fp is `StringIO` in-memory representation</div><div class="line">                                object (or None). metadata is a dictionary</div><div class="line">                                of metadata (or None)</div><div class="line">        """</div><div class="line">        <span class="comment"># val = self._filesystem.get(name)</span></div><div class="line">        val = self.seaweedfs.GET(name)</div><div class="line">        <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            fp, metadata = <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            fp, metadata = self.parse_seaweedfs_file(val)</div><div class="line">        <span class="comment"># else:</span></div><div class="line">        <span class="comment">#     fp, metadata = val</span></div><div class="line">        <span class="keyword">return</span> fp, metadata</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_seaweedfs_file</span><span class="params">(self,val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        parse file download from seaweedfs</div><div class="line">        :param val: seaweedfs file,fomat: str(metadata) + '\n' + obj_content</div><div class="line">        :return: StringIO obj_content, python dict metadata</div><div class="line">        """</div><div class="line">        metadata_index = val.find(<span class="string">'\n'</span>)</div><div class="line">        val = val.split(<span class="string">'\n'</span>,<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span>  StringIO.StringIO(val[<span class="number">1</span>]),eval(val[<span class="number">0</span>])</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put_object</span><span class="params">(self, name, fp, metadata)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Store object into seaweedfs</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :param fp: `StringIO` in-memory representation object</div><div class="line">        :param metadata: dictionary of metadata to be written</div><div class="line">        """</div><div class="line">        <span class="comment"># self._filesystem[name] = (fp, metadata)</span></div><div class="line">        fp.seek(<span class="number">0</span>)</div><div class="line">        self.seaweedfs.PUT(name,str(metadata) + <span class="string">'\n'</span> + fp.read())</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Delete object from memory</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        """</div><div class="line">        <span class="comment"># import pydevd</span></div><div class="line">        <span class="comment"># pydevd.settrace('127.0.0.1', port=54321, stdoutToServer=True, stderrToServer=True)</span></div><div class="line">        self.seaweedfs.DELETE(name)</div><div class="line">        <span class="comment"># del self._filesystem[name]</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_diskfile</span><span class="params">(self, account, container, obj, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">return</span> DiskFile(self, account, container, obj)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pickle_async_update</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        For now don't handle async updates.</div><div class="line">        """</div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现&lt;a href=&quot;https://github.com/MakeItPossible16/swift-weedfs-backend&quot; target=&quot;_blank&quot; re
-    
-    </summary>
-    
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-      <category term="swift-weedfs-backend" scheme="https://makeitpossible16.github.io/tags/swift-weedfs-backend/"/>
-    
-  </entry>
-  
-  <entry>
     <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
     <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
     <id>https://makeitpossible16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
@@ -116,6 +89,33 @@
     
     
       <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>swift-weedfs-backend diskfile代码实现</title>
+    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://makeitpossible16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
+    <published>2017-02-26T00:00:00.000Z</published>
+    <updated>2017-02-26T13:56:46.998Z</updated>
+    
+    <content type="html"><![CDATA[<p>主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现<a href="https://github.com/MakeItPossible16/swift-weedfs-backend" target="_blank" rel="external">swift-weedfs-backend</a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryFileSystem</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    A very simplistic in-memory file system scheme.</div><div class="line"></div><div class="line">    There is one dictionary mapping a given object name to a tuple. The first</div><div class="line">    entry in the tuple is the cStringIO buffer representing the file contents,</div><div class="line">    the second entry is the metadata dictionary.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._filesystem = &#123;&#125;</div><div class="line">        self.seaweedfs = Seaweedfs_operation()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return back an file-like object and its metadata</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :return (fp, metadata): fp is `StringIO` in-memory representation</div><div class="line">                                object (or None). metadata is a dictionary</div><div class="line">                                of metadata (or None)</div><div class="line">        """</div><div class="line">        <span class="comment"># val = self._filesystem.get(name)</span></div><div class="line">        val = self.seaweedfs.GET(name)</div><div class="line">        <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            fp, metadata = <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            fp, metadata = self.parse_seaweedfs_file(val)</div><div class="line">        <span class="comment"># else:</span></div><div class="line">        <span class="comment">#     fp, metadata = val</span></div><div class="line">        <span class="keyword">return</span> fp, metadata</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_seaweedfs_file</span><span class="params">(self,val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        parse file download from seaweedfs</div><div class="line">        :param val: seaweedfs file,fomat: str(metadata) + '\n' + obj_content</div><div class="line">        :return: StringIO obj_content, python dict metadata</div><div class="line">        """</div><div class="line">        metadata_index = val.find(<span class="string">'\n'</span>)</div><div class="line">        val = val.split(<span class="string">'\n'</span>,<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span>  StringIO.StringIO(val[<span class="number">1</span>]),eval(val[<span class="number">0</span>])</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put_object</span><span class="params">(self, name, fp, metadata)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Store object into seaweedfs</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :param fp: `StringIO` in-memory representation object</div><div class="line">        :param metadata: dictionary of metadata to be written</div><div class="line">        """</div><div class="line">        <span class="comment"># self._filesystem[name] = (fp, metadata)</span></div><div class="line">        fp.seek(<span class="number">0</span>)</div><div class="line">        self.seaweedfs.PUT(name,str(metadata) + <span class="string">'\n'</span> + fp.read())</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Delete object from memory</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        """</div><div class="line">        <span class="comment"># import pydevd</span></div><div class="line">        <span class="comment"># pydevd.settrace('127.0.0.1', port=54321, stdoutToServer=True, stderrToServer=True)</span></div><div class="line">        self.seaweedfs.DELETE(name)</div><div class="line">        <span class="comment"># del self._filesystem[name]</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_diskfile</span><span class="params">(self, account, container, obj, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">return</span> DiskFile(self, account, container, obj)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pickle_async_update</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        For now don't handle async updates.</div><div class="line">        """</div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现&lt;a href=&quot;https://github.com/MakeItPossible16/swift-weedfs-backend&quot; target=&quot;_blank&quot; re
+    
+    </summary>
+    
+      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+      <category term="swift-weedfs-backend" scheme="https://makeitpossible16.github.io/tags/swift-weedfs-backend/"/>
     
   </entry>
   
@@ -493,6 +493,29 @@
   </entry>
   
   <entry>
+    <title>查找-数据结构学习</title>
+    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%9F%A5%E6%89%BE-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://makeitpossible16.github.io/数据结构/查找-数据结构学习/</id>
+    <published>2017-01-21T00:00:00.000Z</published>
+    <updated>2017-02-14T04:08:27.481Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简单清晰的B树、Trie树详解&quot;&gt;&lt;a href=&quot;#简单清晰的B树、Trie树详解&quot; class=&quot;headerlink&quot; title=&quot;简单清晰的B树、Trie树详解&quot;&gt;&lt;/a&gt;简单清晰的B树、Trie树详解&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://bl
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>linux文件存储机制</title>
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
     <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
@@ -545,29 +568,6 @@
     
     
       <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>查找-数据结构学习</title>
-    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%9F%A5%E6%89%BE-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/数据结构/查找-数据结构学习/</id>
-    <published>2017-01-21T00:00:00.000Z</published>
-    <updated>2017-02-14T04:08:27.481Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;简单清晰的B树、Trie树详解&quot;&gt;&lt;a href=&quot;#简单清晰的B树、Trie树详解&quot; class=&quot;headerlink&quot; title=&quot;简单清晰的B树、Trie树详解&quot;&gt;&lt;/a&gt;简单清晰的B树、Trie树详解&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://bl
-    
-    </summary>
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -841,35 +841,6 @@
   </entry>
   
   <entry>
-    <title>seaweedfs源码阅读5-文件PUT过程</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读5-文件PUT过程/</id>
-    <published>2016-12-11T00:00:00.000Z</published>
-    <updated>2016-12-11T13:30:05.384Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; curl -X POST http://localhost:9333/dir/assign</div><div class="line">&#123;<span class="string">"count"</span>:1,<span class="string">"fid"</span>:<span class="string">"3,01637037d6"</span>,<span class="string">"url"</span>:<span class="string">"127.0.0.1:8080"</span>,<span class="string">"publicUrl"</span>:<span class="string">"localhost:8080"</span>&#125;</div><div class="line">&gt; curl -X PUT -F file=@/home/chris/myphoto.jpg http://127.0.0.1:8080/3,01637037d6</div><div class="line">&#123;<span class="string">"size"</span>: 43234&#125;</div></pre></td></tr></table></figure></p>
-<p>上传文件,程序调用volume_server_handlers_write.go 中的PostHandler进行处理,根据URL,提取vid,生成新的volumeId<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vid, _, _, _, _ := parseURLPath(r.URL.Path) <span class="comment">//vid 为3</span></div><div class="line">volumeId, ve := storage.NewVolumeId(vid) <span class="comment">// volumeId : 7</span></div></pre></td></tr></table></figure></p>
-<p>根据请求参数,生成needle<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">needle, ne := storage.NewNeedle(r, vs.FixJpgOrientation)</div></pre></td></tr></table></figure></p>
-<p>使用multipartReader读取请求中的数据,有关multipart的介绍: <a href="http://wanlitian.github.io/2014/11/16/multipart_with_golang/" target="_blank" rel="external">golang的multipart包</a><br>使用needle.go 中的ParseUpload方法解析请求,得到上传的文件名和数据;<br>如果上传的数据类型是JPG或jpeg,调用 images.FixJpgOrientation(n.Data)对数据进行处理<br>生成needle过程<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewNeedle</span><span class="params">(r *http.Request, fixJpgOrientation <span class="keyword">bool</span>)</span> <span class="params">(n *Needle, e error)</span></span> &#123;</div><div class="line">truefname, mimeType, isGzipped, isChunkedFile := <span class="string">""</span>, <span class="string">""</span>, <span class="literal">false</span>, <span class="literal">false</span></div><div class="line">truen = <span class="built_in">new</span>(Needle)</div><div class="line">truefname, n.Data, mimeType, isGzipped, n.LastModified, n.Ttl, isChunkedFile, e = ParseUpload(r)</div><div class="line">true<span class="keyword">if</span> e != <span class="literal">nil</span> &#123;</div><div class="line">truetrue<span class="keyword">return</span></div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(fname) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Name = []<span class="keyword">byte</span>(fname)</div><div class="line">truetruen.SetHasName()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(mimeType) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Mime = []<span class="keyword">byte</span>(mimeType)</div><div class="line">truetruen.SetHasMime()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> isGzipped &#123;</div><div class="line">truetruen.SetGzipped()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> n.LastModified == <span class="number">0</span> &#123;</div><div class="line">truetruen.LastModified = <span class="keyword">uint64</span>(time.Now().Unix())</div><div class="line">true&#125;</div><div class="line">truen.SetHasLastModifiedDate()</div><div class="line">true<span class="keyword">if</span> n.Ttl != EMPTY_TTL &#123;</div><div class="line">truetruen.SetHasTtl()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> isChunkedFile &#123;</div><div class="line">truetruen.SetIsChunkManifest()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> fixJpgOrientation &#123;</div><div class="line">truetrueloweredName := strings.ToLower(fname)</div><div class="line">truetrue<span class="keyword">if</span> mimeType == <span class="string">"image/jpeg"</span> || strings.HasSuffix(loweredName, <span class="string">".jpg"</span>) || strings.HasSuffix(loweredName, <span class="string">".jpeg"</span>) &#123;</div><div class="line">truetruetruen.Data = images.FixJpgOrientation(n.Data)</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truen.Checksum = NewCRC(n.Data)</div><div class="line"></div><div class="line">truecommaSep := strings.LastIndex(r.URL.Path, <span class="string">","</span>)</div><div class="line">truedotSep := strings.LastIndex(r.URL.Path, <span class="string">"."</span>)</div><div class="line">truefid := r.URL.Path[commaSep+<span class="number">1</span>:]</div><div class="line">true<span class="keyword">if</span> dotSep &gt; <span class="number">0</span> &#123;</div><div class="line">truetruefid = r.URL.Path[commaSep+<span class="number">1</span> : dotSep]</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truee = n.ParsePath(fid)</div><div class="line"></div><div class="line">true<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>把数据及needle相关属性填充完成后,同步到其他volumeServer中,已needle作为传输载体<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size, errorStatus := topology.ReplicatedWrite(vs.GetMasterNode(),vs.store, volumeId, needle, r)</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用命令&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;l
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>seaweedfs源码阅读4-volume启动过程</title>
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
     <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读4-volume启动/</id>
@@ -887,6 +858,35 @@
     <summary type="html">
     
       &lt;p&gt;根据文章&lt;a href=&quot;http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;amp;utm_medium=referral&quot; target=&quot;_blank&quot; 
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读5-文件PUT过程</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读5-文件PUT过程/</id>
+    <published>2016-12-11T00:00:00.000Z</published>
+    <updated>2016-12-11T13:30:05.384Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; curl -X POST http://localhost:9333/dir/assign</div><div class="line">&#123;<span class="string">"count"</span>:1,<span class="string">"fid"</span>:<span class="string">"3,01637037d6"</span>,<span class="string">"url"</span>:<span class="string">"127.0.0.1:8080"</span>,<span class="string">"publicUrl"</span>:<span class="string">"localhost:8080"</span>&#125;</div><div class="line">&gt; curl -X PUT -F file=@/home/chris/myphoto.jpg http://127.0.0.1:8080/3,01637037d6</div><div class="line">&#123;<span class="string">"size"</span>: 43234&#125;</div></pre></td></tr></table></figure></p>
+<p>上传文件,程序调用volume_server_handlers_write.go 中的PostHandler进行处理,根据URL,提取vid,生成新的volumeId<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vid, _, _, _, _ := parseURLPath(r.URL.Path) <span class="comment">//vid 为3</span></div><div class="line">volumeId, ve := storage.NewVolumeId(vid) <span class="comment">// volumeId : 7</span></div></pre></td></tr></table></figure></p>
+<p>根据请求参数,生成needle<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">needle, ne := storage.NewNeedle(r, vs.FixJpgOrientation)</div></pre></td></tr></table></figure></p>
+<p>使用multipartReader读取请求中的数据,有关multipart的介绍: <a href="http://wanlitian.github.io/2014/11/16/multipart_with_golang/" target="_blank" rel="external">golang的multipart包</a><br>使用needle.go 中的ParseUpload方法解析请求,得到上传的文件名和数据;<br>如果上传的数据类型是JPG或jpeg,调用 images.FixJpgOrientation(n.Data)对数据进行处理<br>生成needle过程<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewNeedle</span><span class="params">(r *http.Request, fixJpgOrientation <span class="keyword">bool</span>)</span> <span class="params">(n *Needle, e error)</span></span> &#123;</div><div class="line">truefname, mimeType, isGzipped, isChunkedFile := <span class="string">""</span>, <span class="string">""</span>, <span class="literal">false</span>, <span class="literal">false</span></div><div class="line">truen = <span class="built_in">new</span>(Needle)</div><div class="line">truefname, n.Data, mimeType, isGzipped, n.LastModified, n.Ttl, isChunkedFile, e = ParseUpload(r)</div><div class="line">true<span class="keyword">if</span> e != <span class="literal">nil</span> &#123;</div><div class="line">truetrue<span class="keyword">return</span></div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(fname) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Name = []<span class="keyword">byte</span>(fname)</div><div class="line">truetruen.SetHasName()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(mimeType) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Mime = []<span class="keyword">byte</span>(mimeType)</div><div class="line">truetruen.SetHasMime()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> isGzipped &#123;</div><div class="line">truetruen.SetGzipped()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> n.LastModified == <span class="number">0</span> &#123;</div><div class="line">truetruen.LastModified = <span class="keyword">uint64</span>(time.Now().Unix())</div><div class="line">true&#125;</div><div class="line">truen.SetHasLastModifiedDate()</div><div class="line">true<span class="keyword">if</span> n.Ttl != EMPTY_TTL &#123;</div><div class="line">truetruen.SetHasTtl()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> isChunkedFile &#123;</div><div class="line">truetruen.SetIsChunkManifest()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> fixJpgOrientation &#123;</div><div class="line">truetrueloweredName := strings.ToLower(fname)</div><div class="line">truetrue<span class="keyword">if</span> mimeType == <span class="string">"image/jpeg"</span> || strings.HasSuffix(loweredName, <span class="string">".jpg"</span>) || strings.HasSuffix(loweredName, <span class="string">".jpeg"</span>) &#123;</div><div class="line">truetruetruen.Data = images.FixJpgOrientation(n.Data)</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truen.Checksum = NewCRC(n.Data)</div><div class="line"></div><div class="line">truecommaSep := strings.LastIndex(r.URL.Path, <span class="string">","</span>)</div><div class="line">truedotSep := strings.LastIndex(r.URL.Path, <span class="string">"."</span>)</div><div class="line">truefid := r.URL.Path[commaSep+<span class="number">1</span>:]</div><div class="line">true<span class="keyword">if</span> dotSep &gt; <span class="number">0</span> &#123;</div><div class="line">truetruefid = r.URL.Path[commaSep+<span class="number">1</span> : dotSep]</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truee = n.ParsePath(fid)</div><div class="line"></div><div class="line">true<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>把数据及needle相关属性填充完成后,同步到其他volumeServer中,已needle作为传输载体<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size, errorStatus := topology.ReplicatedWrite(vs.GetMasterNode(),vs.store, volumeId, needle, r)</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用命令&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;l
     
     </summary>
     
@@ -1049,38 +1049,6 @@
   </entry>
   
   <entry>
-    <title>seaweedfs源码阅读记录1</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/</id>
-    <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2017-02-25T11:47:17.603Z</updated>
-    
-    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
-<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
-<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
-<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333”  -port=8080<br>启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter1 -master=localhost:9333<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
-<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
-<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
-<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>seaweedfs源码阅读记录2</title>
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
     <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
@@ -1100,6 +1068,38 @@
     <summary type="html">
     
       &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读记录1</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/</id>
+    <published>2016-11-22T00:00:00.000Z</published>
+    <updated>2017-02-25T11:47:17.603Z</updated>
+    
+    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
+<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
+<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
+<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333”  -port=8080<br>启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter1 -master=localhost:9333<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
+<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
+<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
+<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
     
     </summary>
     
@@ -1235,7 +1235,7 @@
     <link href="https://makeitpossible16.github.io/uncategorized/README/"/>
     <id>https://makeitpossible16.github.io/uncategorized/README/</id>
     <published>2016-01-01T00:00:00.000Z</published>
-    <updated>2017-03-01T08:56:08.886Z</updated>
+    <updated>2017-03-01T09:33:32.818Z</updated>
     
     <content type="html"><![CDATA[<h2 id="blogMarkdownFile"><a href="#blogMarkdownFile" class="headerlink" title="blogMarkdownFile"></a>blogMarkdownFile</h2><h2 id="寻找实习单位-个人简介"><a href="#寻找实习单位-个人简介" class="headerlink" title="寻找实习单位,个人简介"></a>寻找实习单位,<a href="https://makeitpossible16.github.io/about/">个人简介</a></h2><h2 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a><a href="https://www.makeitpossible16.github.io" target="_blank" rel="external">myblog</a></h2><h3 id="ELKStack搭建问题总结"><a href="#ELKStack搭建问题总结" class="headerlink" title="ELKStack搭建问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ELKStack搭建问题总结.md" target="_blank" rel="external">ELKStack搭建问题总结</a></h3><h3 id="LeetCode解题-Next-Permutation-全排列生成算法-md"><a href="#LeetCode解题-Next-Permutation-全排列生成算法-md" class="headerlink" title="LeetCode解题-Next Permutation(全排列生成算法).md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Next Permutation(全排列生成算法" target="_blank" rel="external">LeetCode解题-Next Permutation(全排列生成算法)</a>.md)</h3><h3 id="LeetCode解题-Permutation-Sequence"><a href="#LeetCode解题-Permutation-Sequence" class="headerlink" title="LeetCode解题-Permutation Sequence"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Permutation Sequence.md" target="_blank" rel="external">LeetCode解题-Permutation Sequence</a></h3><h3 id="cloudstack搭建总结"><a href="#cloudstack搭建总结" class="headerlink" title="cloudstack搭建总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/cloudstack搭建总结.md" target="_blank" rel="external">cloudstack搭建总结</a></h3><h3 id="gdb调试错误-找不到文件"><a href="#gdb调试错误-找不到文件" class="headerlink" title="gdb调试错误-找不到文件"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/gdb调试错误-找不到文件.md" target="_blank" rel="external">gdb调试错误-找不到文件</a></h3><h3 id="golang-反射机制"><a href="#golang-反射机制" class="headerlink" title="golang 反射机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang 反射机制.md" target="_blank" rel="external">golang 反射机制</a></h3><h3 id="golang学习"><a href="#golang学习" class="headerlink" title="golang学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang学习.md" target="_blank" rel="external">golang学习</a></h3><h3 id="golang调试技巧"><a href="#golang调试技巧" class="headerlink" title="golang调试技巧"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang调试技巧.md" target="_blank" rel="external">golang调试技巧</a></h3><h3 id="kafka学习笔记"><a href="#kafka学习笔记" class="headerlink" title="kafka学习笔记"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka学习笔记.md" target="_blank" rel="external">kafka学习笔记</a></h3><h3 id="linux内核学习-数据结构"><a href="#linux内核学习-数据结构" class="headerlink" title="linux内核学习-数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux内核学习-数据结构.md" target="_blank" rel="external">linux内核学习-数据结构</a></h3><h3 id="linux命令学习"><a href="#linux命令学习" class="headerlink" title="linux命令学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux命令学习.md" target="_blank" rel="external">linux命令学习</a></h3><h3 id="linux学习-linux文件存储"><a href="#linux学习-linux文件存储" class="headerlink" title="linux学习-linux文件存储"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux学习-linux文件存储.md" target="_blank" rel="external">linux学习-linux文件存储</a></h3><h3 id="linux文件存储机制"><a href="#linux文件存储机制" class="headerlink" title="linux文件存储机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux文件存储机制.md" target="_blank" rel="external">linux文件存储机制</a></h3><h3 id="nodeJS入门总结"><a href="#nodeJS入门总结" class="headerlink" title="nodeJS入门总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/nodeJS入门总结.md" target="_blank" rel="external">nodeJS入门总结</a></h3><h3 id="openstack-swift源码阅读记录1-文件上传过程"><a href="#openstack-swift源码阅读记录1-文件上传过程" class="headerlink" title="openstack-swift源码阅读记录1-文件上传过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录1-文件上传过程.md" target="_blank" rel="external">openstack-swift源码阅读记录1-文件上传过程</a></h3><h3 id="openstack-swift源码阅读记录3-diskfile"><a href="#openstack-swift源码阅读记录3-diskfile" class="headerlink" title="openstack-swift源码阅读记录3-diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录3-diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录3-diskfile</a></h3><h3 id="openstack-swift源码阅读记录4-启用mem-diskfile"><a href="#openstack-swift源码阅读记录4-启用mem-diskfile" class="headerlink" title="openstack-swift源码阅读记录4-启用mem_diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录4-启用mem_diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录4-启用mem_diskfile</a></h3><h3 id="openstack-swift调试"><a href="#openstack-swift调试" class="headerlink" title="openstack-swift调试"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift调试.md" target="_blank" rel="external">openstack-swift调试</a></h3><h3 id="openstack源码阅读记录2-object-metadata"><a href="#openstack源码阅读记录2-object-metadata" class="headerlink" title="openstack源码阅读记录2-object metadata"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack源码阅读记录2-object metadata.md" target="_blank" rel="external">openstack源码阅读记录2-object metadata</a></h3><h3 id="python语法记录"><a href="#python语法记录" class="headerlink" title="python语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python语法记录.md" target="_blank" rel="external">python语法记录</a></h3><h3 id="seaweedfs源码阅读4-volume启动"><a href="#seaweedfs源码阅读4-volume启动" class="headerlink" title="seaweedfs源码阅读4-volume启动"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读4-volume启动.md" target="_blank" rel="external">seaweedfs源码阅读4-volume启动</a></h3><h3 id="seaweedfs源码阅读5-文件PUT过程"><a href="#seaweedfs源码阅读5-文件PUT过程" class="headerlink" title="seaweedfs源码阅读5-文件PUT过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读5-文件PUT过程.md" target="_blank" rel="external">seaweedfs源码阅读5-文件PUT过程</a></h3><h3 id="seaweedfs源码阅读6-文件存储格式"><a href="#seaweedfs源码阅读6-文件存储格式" class="headerlink" title="seaweedfs源码阅读6-文件存储格式"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读6-文件存储格式.md" target="_blank" rel="external">seaweedfs源码阅读6-文件存储格式</a></h3><h3 id="seaweedfs源码阅读7-文件存储过程"><a href="#seaweedfs源码阅读7-文件存储过程" class="headerlink" title="seaweedfs源码阅读7-文件存储过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读7-文件存储过程.md" target="_blank" rel="external">seaweedfs源码阅读7-文件存储过程</a></h3><h3 id="seaweedfs源码阅读8-GET-amp-HEAD获取文件过程"><a href="#seaweedfs源码阅读8-GET-amp-HEAD获取文件过程" class="headerlink" title="seaweedfs源码阅读8-GET&amp;HEAD获取文件过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程.md" target="_blank" rel="external">seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</a></h3><h3 id="seaweedfs源码阅读记录"><a href="#seaweedfs源码阅读记录" class="headerlink" title="seaweedfs源码阅读记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录.md" target="_blank" rel="external">seaweedfs源码阅读记录</a></h3><h3 id="seaweedfs源码阅读记录2"><a href="#seaweedfs源码阅读记录2" class="headerlink" title="seaweedfs源码阅读记录2"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录2.md" target="_blank" rel="external">seaweedfs源码阅读记录2</a></h3><h3 id="seaweedfs源码阅读记录3-raft协议理解"><a href="#seaweedfs源码阅读记录3-raft协议理解" class="headerlink" title="seaweedfs源码阅读记录3-raft协议理解"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录3-raft协议理解.md" target="_blank" rel="external">seaweedfs源码阅读记录3-raft协议理解</a></h3><h3 id="seaweedfs源码阅读记录9-生成fid过程"><a href="#seaweedfs源码阅读记录9-生成fid过程" class="headerlink" title="seaweedfs源码阅读记录9-生成fid过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录9-生成fid过程.md" target="_blank" rel="external">seaweedfs源码阅读记录9-生成fid过程</a></h3><h3 id="swift-weedfs-backend-diskfile代码实现"><a href="#swift-weedfs-backend-diskfile代码实现" class="headerlink" title="swift-weedfs-backend diskfile代码实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend diskfile代码实现.md" target="_blank" rel="external">swift-weedfs-backend diskfile代码实现</a></h3><h3 id="swift-weedfs-backend接口设计"><a href="#swift-weedfs-backend接口设计" class="headerlink" title="swift-weedfs-backend接口设计"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend接口设计.md" target="_blank" rel="external">swift-weedfs-backend接口设计</a></h3><h3 id="ubuntu下如何优雅地使用翻译"><a href="#ubuntu下如何优雅地使用翻译" class="headerlink" title="ubuntu下如何优雅地使用翻译"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu下如何优雅地使用翻译.md" target="_blank" rel="external">ubuntu下如何优雅地使用翻译</a></h3><h3 id="ubuntu使用问题总结"><a href="#ubuntu使用问题总结" class="headerlink" title="ubuntu使用问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu使用问题总结.md" target="_blank" rel="external">ubuntu使用问题总结</a></h3><h3 id="在Openstack-Swift中使用多种后端存储实现"><a href="#在Openstack-Swift中使用多种后端存储实现" class="headerlink" title="在Openstack Swift中使用多种后端存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/在Openstack Swift中使用多种后端存储实现.md" target="_blank" rel="external">在Openstack Swift中使用多种后端存储实现</a></h3><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/数据结构.md" target="_blank" rel="external">数据结构</a></h3><h3 id="文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md"><a href="#文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md" class="headerlink" title="文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/文件系统(seaweedfs" target="_blank" rel="external">文件系统(seaweedfs)与关系型数据库优劣势分析</a>与关系型数据库优劣势分析.md)</h3><h3 id="查找-数据结构学习"><a href="#查找-数据结构学习" class="headerlink" title="查找-数据结构学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/查找-数据结构学习.md" target="_blank" rel="external">查找-数据结构学习</a></h3>]]></content>
     

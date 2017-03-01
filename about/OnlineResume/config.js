@@ -1,1 +1,0 @@
-IDRViewer.config = {"pagecount":1,"title":"","author":"CJC","fileName":"_________.pdf","bounds":[[908,1286]],"bookmarks":[],"thumbnailType":"jpg","pageType":"svg","pageLabels":[]};
