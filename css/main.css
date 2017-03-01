@@ -390,6 +390,9 @@ dd {
 .use-motion .motion-element {
   opacity: 0;
 }
+.tag-year {
+  opacity: 1;
+}
 #local-search-input {
   padding: 3px;
   border: none;
@@ -1295,8 +1298,8 @@ pre .javascript .function {
 .posts-collapse .post-meta {
   position: absolute;
   font-size: 12px;
-  left: 10px;
-  top: 1px;
+  left: 20px;
+  top: 5px;
 }
 .posts-collapse .post-comments-count {
   display: none;
@@ -1705,7 +1708,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b5c124;
+  background: #99ffb9;
 }
 .links-of-blogroll {
   font-size: 13px;
