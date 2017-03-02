@@ -3,15 +3,8 @@
   
     
     <entry>
-      <title></title>
-      <url>%2Funcategorized%2FC%2B%2B%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95%2F</url>
-      <content type="text"></content>
-    </entry>
-
-    
-    <entry>
       <title><![CDATA[C++语法记录]]></title>
-      <url>%2FC-11%2FC%2B%2B11%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95%2F</url>
+      <url>%2FC-11%2FC%2B%2B%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95%2F</url>
       <content type="text"><![CDATA[最近遇到一些C++的代码,其中会包含一些C++11的代码,对C++11的特性不太了解,记录一下. nextnext用于操作迭代器,函数解释std::nextParameters it - an iterator n - number of elements to advance使用示例:12345678910111213141516#include &lt;iostream&gt;#include &lt;iterator&gt;#include &lt;vector&gt;int main()&#123; std::vector&lt;int&gt; v&#123; 3, 1, 4,6,7 &#125;; auto it = v.begin(); auto nx = std::next(it, 3); std::cout &lt;&lt; *it &lt;&lt; &apos; &apos; &lt;&lt; *nx &lt;&lt; &apos;\n&apos;;&#125;output:3 6 push_back函数将一个新的元素加到vector的最后面，位置为当前最后一个元素的下一个元素. 参考C++ vector::push_back 用法剖析]]></content>
     </entry>
 
@@ -20,6 +13,13 @@
       <title><![CDATA[gdb调试错误-找不到文件]]></title>
       <url>%2Flinux%E5%91%BD%E4%BB%A4%2Fgdb%E8%B0%83%E8%AF%95%E9%94%99%E8%AF%AF-%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6%2F</url>
       <content type="text"><![CDATA[使用gdb进行调试时出现错误,错误重现:(gdb) qsh-4.3$ gdb -q aaaReading symbols from aaa…done.(gdb) l28 int base = factorial(n - 1);29 –k;30 for (int i = n -1; i &gt; 0; k %= base, base /= i, –i) {31 auto a = next(S.begin(), k / base);32 result.push_back(*a);33 S.erase(a);34 }35 cout &lt;&lt; S[0];36 auto a = S[0];37 // result.push_pack(a);(gdb) b 37Breakpoint 1 at 0x4012a2: file /home/ubuntu/workspace/leetcode/permutation_sequence.cpp, line 37.(gdb) rStarting program: /home/ubuntu/workspace/leetcode/aaaCannot exec -c exec /home/ubuntu/workspace/leetcode/aaa .Error: 没有那个文件或目录During startup program exited with code 127. 在vscode中,错误提示为:1Unable to start debugging. Unexpected GDB output from command &quot;-exec-run&quot;. During startup program exited with code 127. 解决方法:参考http://unix.stackexchange.com/questions/167918/gdb-cannot-exec-my-test-program,由于SHELL变量不存在,导致gdb抛出异常,解决方法:在/etc//etc/environment中设置全局变量123export SHELL=/bin/sh或export SHELL=/bin/bash]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[LeetCode解题-Next Permutation(全排列生成算法)]]></title>
+      <url>%2F%E7%AE%97%E6%B3%95%2FLeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence%2F</url>
+      <content type="text"><![CDATA[题目:给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=31234567全排列:123132213231312321 结果为:213 解题使用逆康托编码展开,参考全排列的编码与解码——康托展开 康托编码:{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有22！=4种。小于2的数只有一个1，所以有11！=1种情况，最后一位是1，没有比一小的数，所以是00！=0综上：小于321的数有4+1=5个，所以321是第六小的数。例如:排列3 5 7 4 1 2 9 6 8展开为98884X=28!+37!+46!+25!+04!+03!+22!+01!+00!=98884. 逆康托展开:1234567891011121314151617181920212223如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？1. 首先用16-1得到152. 用15去除4! 得到0余153. 用15去除3! 得到2余34. 用3去除2! 得到1余15. 用1去除1! 得到1余0有0个数比它小的数是1，所以第一位是1有2个数比它小的数是3，但1已经在之前出现过了所以是4有1个数比它小的数是2，但1已经在之前出现过了所以是3有1个数比它小的数是2，但1,3,4都出现过了所以是5最后一个数只能是2所以排列为1 4 3 5 2]]></content>
     </entry>
 
     
@@ -34,13 +34,6 @@
       <title><![CDATA[swift-weedfs-backend diskfile代码实现]]></title>
       <url>%2F%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%2Fswift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%2F</url>
       <content type="text"><![CDATA[主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现swift-weedfs-backend1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374class InMemoryFileSystem(object): """ A very simplistic in-memory file system scheme. There is one dictionary mapping a given object name to a tuple. The first entry in the tuple is the cStringIO buffer representing the file contents, the second entry is the metadata dictionary. """ def __init__(self): self._filesystem = &#123;&#125; self.seaweedfs = Seaweedfs_operation() def get_object(self, name): """ Return back an file-like object and its metadata :param name: standard object name :return (fp, metadata): fp is `StringIO` in-memory representation object (or None). metadata is a dictionary of metadata (or None) """ # val = self._filesystem.get(name) val = self.seaweedfs.GET(name) if val is None: fp, metadata = None, None else: fp, metadata = self.parse_seaweedfs_file(val) # else: # fp, metadata = val return fp, metadata def parse_seaweedfs_file(self,val): """ parse file download from seaweedfs :param val: seaweedfs file,fomat: str(metadata) + '\n' + obj_content :return: StringIO obj_content, python dict metadata """ metadata_index = val.find('\n') val = val.split('\n',1) return StringIO.StringIO(val[1]),eval(val[0]) def put_object(self, name, fp, metadata): """ Store object into seaweedfs :param name: standard object name :param fp: `StringIO` in-memory representation object :param metadata: dictionary of metadata to be written """ # self._filesystem[name] = (fp, metadata) fp.seek(0) self.seaweedfs.PUT(name,str(metadata) + '\n' + fp.read()) def del_object(self, name): """ Delete object from memory :param name: standard object name """ # import pydevd # pydevd.settrace('127.0.0.1', port=54321, stdoutToServer=True, stderrToServer=True) self.seaweedfs.DELETE(name) # del self._filesystem[name] def get_diskfile(self, account, container, obj, **kwargs): return DiskFile(self, account, container, obj) def pickle_async_update(self, *args, **kwargs): """ For now don't handle async updates. """ pass]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[LeetCode解题-Next Permutation(全排列生成算法)]]></title>
-      <url>%2F%E7%AE%97%E6%B3%95%2FLeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence%2F</url>
-      <content type="text"><![CDATA[题目:给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=31234567全排列:123132213231312321 结果为:213 解题使用逆康托编码展开,参考全排列的编码与解码——康托展开 康托编码:{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有22！=4种。小于2的数只有一个1，所以有11！=1种情况，最后一位是1，没有比一小的数，所以是00！=0综上：小于321的数有4+1=5个，所以321是第六小的数。例如:排列3 5 7 4 1 2 9 6 8展开为98884X=28!+37!+46!+25!+04!+03!+22!+01!+00!=98884. 逆康托展开:1234567891011121314151617181920212223如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？1. 首先用16-1得到152. 用15去除4! 得到0余153. 用15去除3! 得到2余34. 用3去除2! 得到1余15. 用1去除1! 得到1余0有0个数比它小的数是1，所以第一位是1有2个数比它小的数是3，但1已经在之前出现过了所以是4有1个数比它小的数是2，但1已经在之前出现过了所以是3有1个数比它小的数是2，但1,3,4都出现过了所以是5最后一个数只能是2所以排列为1 4 3 5 2]]></content>
     </entry>
 
     
@@ -129,16 +122,16 @@
 
     
     <entry>
-      <title><![CDATA[linux文件存储机制]]></title>
-      <url>%2F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%2Flinux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6%2F</url>
-      <content type="text"><![CDATA[Linux 内核的文件 Cache 管理机制介绍从内核文件系统看文件读写过程]]></content>
+      <title><![CDATA[openstack-swift调试]]></title>
+      <url>%2F%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%2Fopenstack-swift%E8%B0%83%E8%AF%95%2F</url>
+      <content type="text"><![CDATA[最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。 启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。禁用多线程：1eventlet.patcher.monkey_patch(all=False, socket=True, time=True, thread=False) 使用pydevd调试 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参照这两篇文章：openstack调试远程调试其实只要使用NFS把代码挂载到本地，在pycharm中设置远程调试，代码中加入断点即可。加入断点代码 12import pydevdpydevd.settrace(&lt;pycharm所在机子IP&gt;, 设置端口, stdoutToServer=True, stderrToServer=True) 使用winpdb调试在代码中加入断点 12import rpdb2rpdb2.start_embedded_debugger(&apos;12345&apos;,fAllowRemote=True) start_embedded_debugger第一个参数为密码，在winpdb中attach时输入，第二个参数启用远程调试，启用远程调试时，在远程调试的机子上启动winpdb，attach时输入密码，并输入swift部署机子IP即可。 总结我喜欢用方式一，可以把调试的信息直接标注在代码旁。方式二支持分布式调试，但太轻量化，只能看，不能添加，各有优缺点，按需选择。修改代码后需要重启swift才能生效。调试记录信息会放到github上，github地址]]></content>
     </entry>
 
     
     <entry>
-      <title><![CDATA[openstack-swift调试]]></title>
-      <url>%2F%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%2Fopenstack-swift%E8%B0%83%E8%AF%95%2F</url>
-      <content type="text"><![CDATA[最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。 启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。禁用多线程：1eventlet.patcher.monkey_patch(all=False, socket=True, time=True, thread=False) 使用pydevd调试 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参照这两篇文章：openstack调试远程调试其实只要使用NFS把代码挂载到本地，在pycharm中设置远程调试，代码中加入断点即可。加入断点代码 12import pydevdpydevd.settrace(&lt;pycharm所在机子IP&gt;, 设置端口, stdoutToServer=True, stderrToServer=True) 使用winpdb调试在代码中加入断点 12import rpdb2rpdb2.start_embedded_debugger(&apos;12345&apos;,fAllowRemote=True) start_embedded_debugger第一个参数为密码，在winpdb中attach时输入，第二个参数启用远程调试，启用远程调试时，在远程调试的机子上启动winpdb，attach时输入密码，并输入swift部署机子IP即可。 总结我喜欢用方式一，可以把调试的信息直接标注在代码旁。方式二支持分布式调试，但太轻量化，只能看，不能添加，各有优缺点，按需选择。修改代码后需要重启swift才能生效。调试记录信息会放到github上，github地址]]></content>
+      <title><![CDATA[linux文件存储机制]]></title>
+      <url>%2F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%2Flinux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6%2F</url>
+      <content type="text"><![CDATA[Linux 内核的文件 Cache 管理机制介绍从内核文件系统看文件读写过程]]></content>
     </entry>
 
     
@@ -285,7 +278,7 @@
     <entry>
       <title><![CDATA[github目录]]></title>
       <url>%2Funcategorized%2FREADME%2F</url>
-      <content type="text"><![CDATA[blogMarkdownFile寻找实习单位,个人简介myblogC++11语法记录C++语法记录ELKStack搭建问题总结LeetCode解题-Next Permutation(全排列生成算法).md)LeetCode解题-Permutation Sequencecloudstack搭建总结gdb调试错误-找不到文件golang 反射机制golang学习golang调试技巧kafka学习笔记linux内核学习-数据结构linux命令学习linux学习-linux文件存储linux文件存储机制nodeJS入门总结openstack-swift源码阅读记录1-文件上传过程openstack-swift源码阅读记录3-diskfileopenstack-swift源码阅读记录4-启用mem_diskfileopenstack-swift调试openstack源码阅读记录2-object metadatapython语法记录seaweedfs源码阅读4-volume启动seaweedfs源码阅读5-文件PUT过程seaweedfs源码阅读6-文件存储格式seaweedfs源码阅读7-文件存储过程seaweedfs源码阅读8-GET&amp;HEAD获取文件过程seaweedfs源码阅读记录seaweedfs源码阅读记录2seaweedfs源码阅读记录3-raft协议理解seaweedfs源码阅读记录9-生成fid过程swift-weedfs-backend diskfile代码实现swift-weedfs-backend接口设计ubuntu下如何优雅地使用翻译ubuntu使用问题总结在Openstack Swift中使用多种后端存储实现数据结构文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)查找-数据结构学习]]></content>
+      <content type="text"><![CDATA[blogMarkdownFile寻找实习单位,个人简介myblogC++语法记录ELKStack搭建问题总结LeetCode解题-Next Permutation(全排列生成算法).md)LeetCode解题-Permutation Sequencecloudstack搭建总结gdb调试错误-找不到文件golang 反射机制golang学习golang调试技巧kafka学习笔记linux内核学习-数据结构linux命令学习linux学习-linux文件存储linux文件存储机制nodeJS入门总结openstack-swift源码阅读记录1-文件上传过程openstack-swift源码阅读记录3-diskfileopenstack-swift源码阅读记录4-启用mem_diskfileopenstack-swift调试openstack源码阅读记录2-object metadatapython语法记录seaweedfs源码阅读4-volume启动seaweedfs源码阅读5-文件PUT过程seaweedfs源码阅读6-文件存储格式seaweedfs源码阅读7-文件存储过程seaweedfs源码阅读8-GET&amp;HEAD获取文件过程seaweedfs源码阅读记录seaweedfs源码阅读记录2seaweedfs源码阅读记录3-raft协议理解seaweedfs源码阅读记录9-生成fid过程swift-weedfs-backend diskfile代码实现swift-weedfs-backend接口设计ubuntu下如何优雅地使用翻译ubuntu使用问题总结在Openstack Swift中使用多种后端存储实现数据结构文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)查找-数据结构学习]]></content>
     </entry>
 
     

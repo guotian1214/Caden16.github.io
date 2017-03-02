@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-03-01T13:54:55.388Z</updated>
+  <updated>2017-03-02T02:40:28.921Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -16,25 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://makeitpossible16.github.io/uncategorized/C++%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/uncategorized/C++语法记录/</id>
-    <published>2017-03-01T13:59:04.915Z</published>
-    <updated>2017-03-01T13:54:55.388Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>C++语法记录</title>
-    <link href="https://makeitpossible16.github.io/C-11/C++11%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/C-11/C++11语法记录/</id>
+    <link href="https://makeitpossible16.github.io/C-11/C++%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
+    <id>https://makeitpossible16.github.io/C-11/C++语法记录/</id>
     <published>2017-03-01T00:00:00.000Z</published>
-    <updated>2017-03-01T14:18:58.033Z</updated>
+    <updated>2017-03-02T02:40:28.921Z</updated>
     
     <content type="html"><![CDATA[<p>最近遇到一些C++的代码,其中会包含一些C++11的代码,对C++11的特性不太了解,记录一下.</p>
 <h2 id="next"><a href="#next" class="headerlink" title="next"></a>next</h2><p>next用于操作迭代器,函数解释<a href="http://en.cppreference.com/w/cpp/iterator/next" target="_blank" rel="external">std::next</a><br>Parameters<br>  it    -    an iterator<br>  n    -    number of elements to advance<br>使用示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;iterator&gt;</div><div class="line">#include &lt;vector&gt;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    std::vector&lt;int&gt; v&#123; 3, 1, 4,6,7 &#125;;</div><div class="line"></div><div class="line">    auto it = v.begin();</div><div class="line"></div><div class="line">    auto nx = std::next(it, 3);</div><div class="line"></div><div class="line">    std::cout &lt;&lt; *it &lt;&lt; &apos; &apos; &lt;&lt; *nx &lt;&lt; &apos;\n&apos;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">output:</div><div class="line">3 6</div></pre></td></tr></table></figure></p>
@@ -52,6 +38,8 @@
     
     
       <category term="C++11" scheme="https://makeitpossible16.github.io/tags/C-11/"/>
+    
+      <category term="C++" scheme="https://makeitpossible16.github.io/tags/C/"/>
     
   </entry>
   
@@ -77,6 +65,33 @@
     
     
       <category term="gdb" scheme="https://makeitpossible16.github.io/tags/gdb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
+    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
+    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
+    <published>2017-02-26T00:00:00.000Z</published>
+    <updated>2017-02-27T12:41:08.472Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h2><p>给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">全排列:</div><div class="line">123</div><div class="line">132</div><div class="line">213</div><div class="line">231</div><div class="line">312</div><div class="line">321</div></pre></td></tr></table></figure></p>
+<p>结果为:213</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>使用逆康托编码展开,参考<a href="http://www.cnblogs.com/zhanjxcom/p/5596208.html" target="_blank" rel="external">全排列的编码与解码——康托展开</a></p>
+<h3 id="康托编码"><a href="#康托编码" class="headerlink" title="康托编码:"></a>康托编码:</h3><p>{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？<br>如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。<br>小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有2<em>2！=4种。<br>小于2的数只有一个1，所以有1</em>1！=1种情况，最后一位是1，没有比一小的数，所以是0<em>0！=0<br>综上：小于321的数有4+1=5个，所以321是第六小的数。<br>例如:排列3 5 7 4 1 2 9 6 8展开为98884<br>X=2</em>8!+3<em>7!+4</em>6!+2<em>5!+0</em>4!+0<em>3!+2</em>2!+0<em>1!+0</em>0!=98884.</p>
+<h3 id="逆康托展开"><a href="#逆康托展开" class="headerlink" title="逆康托展开:"></a>逆康托展开:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？</div><div class="line"></div><div class="line">1. 首先用16-1得到15</div><div class="line"></div><div class="line">2. 用15去除4! 得到0余15</div><div class="line"></div><div class="line">3. 用15去除3! 得到2余3</div><div class="line"></div><div class="line">4. 用3去除2! 得到1余1</div><div class="line"></div><div class="line">5. 用1去除1! 得到1余0</div><div class="line"></div><div class="line">有0个数比它小的数是1，所以第一位是1</div><div class="line"></div><div class="line">有2个数比它小的数是3，但1已经在之前出现过了所以是4</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1已经在之前出现过了所以是3</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1,3,4都出现过了所以是5</div><div class="line"></div><div class="line">最后一个数只能是2</div><div class="line"></div><div class="line">所以排列为1 4 3 5 2</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目:&quot;&gt;&lt;/a&gt;题目:&lt;/h2&gt;&lt;p&gt;给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3&lt;br&gt;&lt;figure class=&quot;highlight pla
+    
+    </summary>
+    
+      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
     
   </entry>
   
@@ -129,33 +144,6 @@
       <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
     
       <category term="swift-weedfs-backend" scheme="https://makeitpossible16.github.io/tags/swift-weedfs-backend/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
-    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
-    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
-    <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-02-27T12:41:08.472Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h2><p>给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">全排列:</div><div class="line">123</div><div class="line">132</div><div class="line">213</div><div class="line">231</div><div class="line">312</div><div class="line">321</div></pre></td></tr></table></figure></p>
-<p>结果为:213</p>
-<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>使用逆康托编码展开,参考<a href="http://www.cnblogs.com/zhanjxcom/p/5596208.html" target="_blank" rel="external">全排列的编码与解码——康托展开</a></p>
-<h3 id="康托编码"><a href="#康托编码" class="headerlink" title="康托编码:"></a>康托编码:</h3><p>{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？<br>如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。<br>小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有2<em>2！=4种。<br>小于2的数只有一个1，所以有1</em>1！=1种情况，最后一位是1，没有比一小的数，所以是0<em>0！=0<br>综上：小于321的数有4+1=5个，所以321是第六小的数。<br>例如:排列3 5 7 4 1 2 9 6 8展开为98884<br>X=2</em>8!+3<em>7!+4</em>6!+2<em>5!+0</em>4!+0<em>3!+2</em>2!+0<em>1!+0</em>0!=98884.</p>
-<h3 id="逆康托展开"><a href="#逆康托展开" class="headerlink" title="逆康托展开:"></a>逆康托展开:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？</div><div class="line"></div><div class="line">1. 首先用16-1得到15</div><div class="line"></div><div class="line">2. 用15去除4! 得到0余15</div><div class="line"></div><div class="line">3. 用15去除3! 得到2余3</div><div class="line"></div><div class="line">4. 用3去除2! 得到1余1</div><div class="line"></div><div class="line">5. 用1去除1! 得到1余0</div><div class="line"></div><div class="line">有0个数比它小的数是1，所以第一位是1</div><div class="line"></div><div class="line">有2个数比它小的数是3，但1已经在之前出现过了所以是4</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1已经在之前出现过了所以是3</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1,3,4都出现过了所以是5</div><div class="line"></div><div class="line">最后一个数只能是2</div><div class="line"></div><div class="line">所以排列为1 4 3 5 2</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目:&quot;&gt;&lt;/a&gt;题目:&lt;/h2&gt;&lt;p&gt;给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3&lt;br&gt;&lt;figure class=&quot;highlight pla
-    
-    </summary>
-    
-      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
     
   </entry>
   
@@ -556,31 +544,6 @@
   </entry>
   
   <entry>
-    <title>linux文件存储机制</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
-    <published>2017-01-21T00:00:00.000Z</published>
-    <updated>2017-01-21T14:05:03.896Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>openstack-swift调试</title>
     <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E8%B0%83%E8%AF%95/"/>
     <id>https://makeitpossible16.github.io/对象存储/openstack-swift调试/</id>
@@ -608,6 +571,31 @@
     
     
       <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux文件存储机制</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
+    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
+    <published>2017-01-21T00:00:00.000Z</published>
+    <updated>2017-01-21T14:05:03.896Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
@@ -1275,9 +1263,9 @@
     <link href="https://makeitpossible16.github.io/uncategorized/README/"/>
     <id>https://makeitpossible16.github.io/uncategorized/README/</id>
     <published>2016-01-01T00:00:00.000Z</published>
-    <updated>2017-03-01T14:19:17.410Z</updated>
+    <updated>2017-03-02T02:40:34.369Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="blogMarkdownFile"><a href="#blogMarkdownFile" class="headerlink" title="blogMarkdownFile"></a>blogMarkdownFile</h2><h2 id="寻找实习单位-个人简介"><a href="#寻找实习单位-个人简介" class="headerlink" title="寻找实习单位,个人简介"></a>寻找实习单位,<a href="https://makeitpossible16.github.io/about/">个人简介</a></h2><h2 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a><a href="https://www.makeitpossible16.github.io" target="_blank" rel="external">myblog</a></h2><h3 id="C-11语法记录"><a href="#C-11语法记录" class="headerlink" title="C++11语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/C++11语法记录.md" target="_blank" rel="external">C++11语法记录</a></h3><h3 id="C-语法记录"><a href="#C-语法记录" class="headerlink" title="C++语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/C++语法记录.md" target="_blank" rel="external">C++语法记录</a></h3><h3 id="ELKStack搭建问题总结"><a href="#ELKStack搭建问题总结" class="headerlink" title="ELKStack搭建问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ELKStack搭建问题总结.md" target="_blank" rel="external">ELKStack搭建问题总结</a></h3><h3 id="LeetCode解题-Next-Permutation-全排列生成算法-md"><a href="#LeetCode解题-Next-Permutation-全排列生成算法-md" class="headerlink" title="LeetCode解题-Next Permutation(全排列生成算法).md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Next Permutation(全排列生成算法" target="_blank" rel="external">LeetCode解题-Next Permutation(全排列生成算法)</a>.md)</h3><h3 id="LeetCode解题-Permutation-Sequence"><a href="#LeetCode解题-Permutation-Sequence" class="headerlink" title="LeetCode解题-Permutation Sequence"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Permutation Sequence.md" target="_blank" rel="external">LeetCode解题-Permutation Sequence</a></h3><h3 id="cloudstack搭建总结"><a href="#cloudstack搭建总结" class="headerlink" title="cloudstack搭建总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/cloudstack搭建总结.md" target="_blank" rel="external">cloudstack搭建总结</a></h3><h3 id="gdb调试错误-找不到文件"><a href="#gdb调试错误-找不到文件" class="headerlink" title="gdb调试错误-找不到文件"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/gdb调试错误-找不到文件.md" target="_blank" rel="external">gdb调试错误-找不到文件</a></h3><h3 id="golang-反射机制"><a href="#golang-反射机制" class="headerlink" title="golang 反射机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang 反射机制.md" target="_blank" rel="external">golang 反射机制</a></h3><h3 id="golang学习"><a href="#golang学习" class="headerlink" title="golang学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang学习.md" target="_blank" rel="external">golang学习</a></h3><h3 id="golang调试技巧"><a href="#golang调试技巧" class="headerlink" title="golang调试技巧"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang调试技巧.md" target="_blank" rel="external">golang调试技巧</a></h3><h3 id="kafka学习笔记"><a href="#kafka学习笔记" class="headerlink" title="kafka学习笔记"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka学习笔记.md" target="_blank" rel="external">kafka学习笔记</a></h3><h3 id="linux内核学习-数据结构"><a href="#linux内核学习-数据结构" class="headerlink" title="linux内核学习-数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux内核学习-数据结构.md" target="_blank" rel="external">linux内核学习-数据结构</a></h3><h3 id="linux命令学习"><a href="#linux命令学习" class="headerlink" title="linux命令学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux命令学习.md" target="_blank" rel="external">linux命令学习</a></h3><h3 id="linux学习-linux文件存储"><a href="#linux学习-linux文件存储" class="headerlink" title="linux学习-linux文件存储"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux学习-linux文件存储.md" target="_blank" rel="external">linux学习-linux文件存储</a></h3><h3 id="linux文件存储机制"><a href="#linux文件存储机制" class="headerlink" title="linux文件存储机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux文件存储机制.md" target="_blank" rel="external">linux文件存储机制</a></h3><h3 id="nodeJS入门总结"><a href="#nodeJS入门总结" class="headerlink" title="nodeJS入门总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/nodeJS入门总结.md" target="_blank" rel="external">nodeJS入门总结</a></h3><h3 id="openstack-swift源码阅读记录1-文件上传过程"><a href="#openstack-swift源码阅读记录1-文件上传过程" class="headerlink" title="openstack-swift源码阅读记录1-文件上传过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录1-文件上传过程.md" target="_blank" rel="external">openstack-swift源码阅读记录1-文件上传过程</a></h3><h3 id="openstack-swift源码阅读记录3-diskfile"><a href="#openstack-swift源码阅读记录3-diskfile" class="headerlink" title="openstack-swift源码阅读记录3-diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录3-diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录3-diskfile</a></h3><h3 id="openstack-swift源码阅读记录4-启用mem-diskfile"><a href="#openstack-swift源码阅读记录4-启用mem-diskfile" class="headerlink" title="openstack-swift源码阅读记录4-启用mem_diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录4-启用mem_diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录4-启用mem_diskfile</a></h3><h3 id="openstack-swift调试"><a href="#openstack-swift调试" class="headerlink" title="openstack-swift调试"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift调试.md" target="_blank" rel="external">openstack-swift调试</a></h3><h3 id="openstack源码阅读记录2-object-metadata"><a href="#openstack源码阅读记录2-object-metadata" class="headerlink" title="openstack源码阅读记录2-object metadata"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack源码阅读记录2-object metadata.md" target="_blank" rel="external">openstack源码阅读记录2-object metadata</a></h3><h3 id="python语法记录"><a href="#python语法记录" class="headerlink" title="python语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python语法记录.md" target="_blank" rel="external">python语法记录</a></h3><h3 id="seaweedfs源码阅读4-volume启动"><a href="#seaweedfs源码阅读4-volume启动" class="headerlink" title="seaweedfs源码阅读4-volume启动"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读4-volume启动.md" target="_blank" rel="external">seaweedfs源码阅读4-volume启动</a></h3><h3 id="seaweedfs源码阅读5-文件PUT过程"><a href="#seaweedfs源码阅读5-文件PUT过程" class="headerlink" title="seaweedfs源码阅读5-文件PUT过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读5-文件PUT过程.md" target="_blank" rel="external">seaweedfs源码阅读5-文件PUT过程</a></h3><h3 id="seaweedfs源码阅读6-文件存储格式"><a href="#seaweedfs源码阅读6-文件存储格式" class="headerlink" title="seaweedfs源码阅读6-文件存储格式"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读6-文件存储格式.md" target="_blank" rel="external">seaweedfs源码阅读6-文件存储格式</a></h3><h3 id="seaweedfs源码阅读7-文件存储过程"><a href="#seaweedfs源码阅读7-文件存储过程" class="headerlink" title="seaweedfs源码阅读7-文件存储过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读7-文件存储过程.md" target="_blank" rel="external">seaweedfs源码阅读7-文件存储过程</a></h3><h3 id="seaweedfs源码阅读8-GET-amp-HEAD获取文件过程"><a href="#seaweedfs源码阅读8-GET-amp-HEAD获取文件过程" class="headerlink" title="seaweedfs源码阅读8-GET&amp;HEAD获取文件过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程.md" target="_blank" rel="external">seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</a></h3><h3 id="seaweedfs源码阅读记录"><a href="#seaweedfs源码阅读记录" class="headerlink" title="seaweedfs源码阅读记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录.md" target="_blank" rel="external">seaweedfs源码阅读记录</a></h3><h3 id="seaweedfs源码阅读记录2"><a href="#seaweedfs源码阅读记录2" class="headerlink" title="seaweedfs源码阅读记录2"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录2.md" target="_blank" rel="external">seaweedfs源码阅读记录2</a></h3><h3 id="seaweedfs源码阅读记录3-raft协议理解"><a href="#seaweedfs源码阅读记录3-raft协议理解" class="headerlink" title="seaweedfs源码阅读记录3-raft协议理解"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录3-raft协议理解.md" target="_blank" rel="external">seaweedfs源码阅读记录3-raft协议理解</a></h3><h3 id="seaweedfs源码阅读记录9-生成fid过程"><a href="#seaweedfs源码阅读记录9-生成fid过程" class="headerlink" title="seaweedfs源码阅读记录9-生成fid过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录9-生成fid过程.md" target="_blank" rel="external">seaweedfs源码阅读记录9-生成fid过程</a></h3><h3 id="swift-weedfs-backend-diskfile代码实现"><a href="#swift-weedfs-backend-diskfile代码实现" class="headerlink" title="swift-weedfs-backend diskfile代码实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend diskfile代码实现.md" target="_blank" rel="external">swift-weedfs-backend diskfile代码实现</a></h3><h3 id="swift-weedfs-backend接口设计"><a href="#swift-weedfs-backend接口设计" class="headerlink" title="swift-weedfs-backend接口设计"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend接口设计.md" target="_blank" rel="external">swift-weedfs-backend接口设计</a></h3><h3 id="ubuntu下如何优雅地使用翻译"><a href="#ubuntu下如何优雅地使用翻译" class="headerlink" title="ubuntu下如何优雅地使用翻译"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu下如何优雅地使用翻译.md" target="_blank" rel="external">ubuntu下如何优雅地使用翻译</a></h3><h3 id="ubuntu使用问题总结"><a href="#ubuntu使用问题总结" class="headerlink" title="ubuntu使用问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu使用问题总结.md" target="_blank" rel="external">ubuntu使用问题总结</a></h3><h3 id="在Openstack-Swift中使用多种后端存储实现"><a href="#在Openstack-Swift中使用多种后端存储实现" class="headerlink" title="在Openstack Swift中使用多种后端存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/在Openstack Swift中使用多种后端存储实现.md" target="_blank" rel="external">在Openstack Swift中使用多种后端存储实现</a></h3><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/数据结构.md" target="_blank" rel="external">数据结构</a></h3><h3 id="文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md"><a href="#文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md" class="headerlink" title="文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/文件系统(seaweedfs" target="_blank" rel="external">文件系统(seaweedfs)与关系型数据库优劣势分析</a>与关系型数据库优劣势分析.md)</h3><h3 id="查找-数据结构学习"><a href="#查找-数据结构学习" class="headerlink" title="查找-数据结构学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/查找-数据结构学习.md" target="_blank" rel="external">查找-数据结构学习</a></h3>]]></content>
+    <content type="html"><![CDATA[<h2 id="blogMarkdownFile"><a href="#blogMarkdownFile" class="headerlink" title="blogMarkdownFile"></a>blogMarkdownFile</h2><h2 id="寻找实习单位-个人简介"><a href="#寻找实习单位-个人简介" class="headerlink" title="寻找实习单位,个人简介"></a>寻找实习单位,<a href="https://makeitpossible16.github.io/about/">个人简介</a></h2><h2 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a><a href="https://www.makeitpossible16.github.io" target="_blank" rel="external">myblog</a></h2><h3 id="C-语法记录"><a href="#C-语法记录" class="headerlink" title="C++语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/C++语法记录.md" target="_blank" rel="external">C++语法记录</a></h3><h3 id="ELKStack搭建问题总结"><a href="#ELKStack搭建问题总结" class="headerlink" title="ELKStack搭建问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ELKStack搭建问题总结.md" target="_blank" rel="external">ELKStack搭建问题总结</a></h3><h3 id="LeetCode解题-Next-Permutation-全排列生成算法-md"><a href="#LeetCode解题-Next-Permutation-全排列生成算法-md" class="headerlink" title="LeetCode解题-Next Permutation(全排列生成算法).md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Next Permutation(全排列生成算法" target="_blank" rel="external">LeetCode解题-Next Permutation(全排列生成算法)</a>.md)</h3><h3 id="LeetCode解题-Permutation-Sequence"><a href="#LeetCode解题-Permutation-Sequence" class="headerlink" title="LeetCode解题-Permutation Sequence"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Permutation Sequence.md" target="_blank" rel="external">LeetCode解题-Permutation Sequence</a></h3><h3 id="cloudstack搭建总结"><a href="#cloudstack搭建总结" class="headerlink" title="cloudstack搭建总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/cloudstack搭建总结.md" target="_blank" rel="external">cloudstack搭建总结</a></h3><h3 id="gdb调试错误-找不到文件"><a href="#gdb调试错误-找不到文件" class="headerlink" title="gdb调试错误-找不到文件"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/gdb调试错误-找不到文件.md" target="_blank" rel="external">gdb调试错误-找不到文件</a></h3><h3 id="golang-反射机制"><a href="#golang-反射机制" class="headerlink" title="golang 反射机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang 反射机制.md" target="_blank" rel="external">golang 反射机制</a></h3><h3 id="golang学习"><a href="#golang学习" class="headerlink" title="golang学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang学习.md" target="_blank" rel="external">golang学习</a></h3><h3 id="golang调试技巧"><a href="#golang调试技巧" class="headerlink" title="golang调试技巧"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang调试技巧.md" target="_blank" rel="external">golang调试技巧</a></h3><h3 id="kafka学习笔记"><a href="#kafka学习笔记" class="headerlink" title="kafka学习笔记"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka学习笔记.md" target="_blank" rel="external">kafka学习笔记</a></h3><h3 id="linux内核学习-数据结构"><a href="#linux内核学习-数据结构" class="headerlink" title="linux内核学习-数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux内核学习-数据结构.md" target="_blank" rel="external">linux内核学习-数据结构</a></h3><h3 id="linux命令学习"><a href="#linux命令学习" class="headerlink" title="linux命令学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux命令学习.md" target="_blank" rel="external">linux命令学习</a></h3><h3 id="linux学习-linux文件存储"><a href="#linux学习-linux文件存储" class="headerlink" title="linux学习-linux文件存储"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux学习-linux文件存储.md" target="_blank" rel="external">linux学习-linux文件存储</a></h3><h3 id="linux文件存储机制"><a href="#linux文件存储机制" class="headerlink" title="linux文件存储机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux文件存储机制.md" target="_blank" rel="external">linux文件存储机制</a></h3><h3 id="nodeJS入门总结"><a href="#nodeJS入门总结" class="headerlink" title="nodeJS入门总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/nodeJS入门总结.md" target="_blank" rel="external">nodeJS入门总结</a></h3><h3 id="openstack-swift源码阅读记录1-文件上传过程"><a href="#openstack-swift源码阅读记录1-文件上传过程" class="headerlink" title="openstack-swift源码阅读记录1-文件上传过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录1-文件上传过程.md" target="_blank" rel="external">openstack-swift源码阅读记录1-文件上传过程</a></h3><h3 id="openstack-swift源码阅读记录3-diskfile"><a href="#openstack-swift源码阅读记录3-diskfile" class="headerlink" title="openstack-swift源码阅读记录3-diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录3-diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录3-diskfile</a></h3><h3 id="openstack-swift源码阅读记录4-启用mem-diskfile"><a href="#openstack-swift源码阅读记录4-启用mem-diskfile" class="headerlink" title="openstack-swift源码阅读记录4-启用mem_diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录4-启用mem_diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录4-启用mem_diskfile</a></h3><h3 id="openstack-swift调试"><a href="#openstack-swift调试" class="headerlink" title="openstack-swift调试"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift调试.md" target="_blank" rel="external">openstack-swift调试</a></h3><h3 id="openstack源码阅读记录2-object-metadata"><a href="#openstack源码阅读记录2-object-metadata" class="headerlink" title="openstack源码阅读记录2-object metadata"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack源码阅读记录2-object metadata.md" target="_blank" rel="external">openstack源码阅读记录2-object metadata</a></h3><h3 id="python语法记录"><a href="#python语法记录" class="headerlink" title="python语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python语法记录.md" target="_blank" rel="external">python语法记录</a></h3><h3 id="seaweedfs源码阅读4-volume启动"><a href="#seaweedfs源码阅读4-volume启动" class="headerlink" title="seaweedfs源码阅读4-volume启动"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读4-volume启动.md" target="_blank" rel="external">seaweedfs源码阅读4-volume启动</a></h3><h3 id="seaweedfs源码阅读5-文件PUT过程"><a href="#seaweedfs源码阅读5-文件PUT过程" class="headerlink" title="seaweedfs源码阅读5-文件PUT过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读5-文件PUT过程.md" target="_blank" rel="external">seaweedfs源码阅读5-文件PUT过程</a></h3><h3 id="seaweedfs源码阅读6-文件存储格式"><a href="#seaweedfs源码阅读6-文件存储格式" class="headerlink" title="seaweedfs源码阅读6-文件存储格式"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读6-文件存储格式.md" target="_blank" rel="external">seaweedfs源码阅读6-文件存储格式</a></h3><h3 id="seaweedfs源码阅读7-文件存储过程"><a href="#seaweedfs源码阅读7-文件存储过程" class="headerlink" title="seaweedfs源码阅读7-文件存储过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读7-文件存储过程.md" target="_blank" rel="external">seaweedfs源码阅读7-文件存储过程</a></h3><h3 id="seaweedfs源码阅读8-GET-amp-HEAD获取文件过程"><a href="#seaweedfs源码阅读8-GET-amp-HEAD获取文件过程" class="headerlink" title="seaweedfs源码阅读8-GET&amp;HEAD获取文件过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程.md" target="_blank" rel="external">seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</a></h3><h3 id="seaweedfs源码阅读记录"><a href="#seaweedfs源码阅读记录" class="headerlink" title="seaweedfs源码阅读记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录.md" target="_blank" rel="external">seaweedfs源码阅读记录</a></h3><h3 id="seaweedfs源码阅读记录2"><a href="#seaweedfs源码阅读记录2" class="headerlink" title="seaweedfs源码阅读记录2"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录2.md" target="_blank" rel="external">seaweedfs源码阅读记录2</a></h3><h3 id="seaweedfs源码阅读记录3-raft协议理解"><a href="#seaweedfs源码阅读记录3-raft协议理解" class="headerlink" title="seaweedfs源码阅读记录3-raft协议理解"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录3-raft协议理解.md" target="_blank" rel="external">seaweedfs源码阅读记录3-raft协议理解</a></h3><h3 id="seaweedfs源码阅读记录9-生成fid过程"><a href="#seaweedfs源码阅读记录9-生成fid过程" class="headerlink" title="seaweedfs源码阅读记录9-生成fid过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录9-生成fid过程.md" target="_blank" rel="external">seaweedfs源码阅读记录9-生成fid过程</a></h3><h3 id="swift-weedfs-backend-diskfile代码实现"><a href="#swift-weedfs-backend-diskfile代码实现" class="headerlink" title="swift-weedfs-backend diskfile代码实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend diskfile代码实现.md" target="_blank" rel="external">swift-weedfs-backend diskfile代码实现</a></h3><h3 id="swift-weedfs-backend接口设计"><a href="#swift-weedfs-backend接口设计" class="headerlink" title="swift-weedfs-backend接口设计"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend接口设计.md" target="_blank" rel="external">swift-weedfs-backend接口设计</a></h3><h3 id="ubuntu下如何优雅地使用翻译"><a href="#ubuntu下如何优雅地使用翻译" class="headerlink" title="ubuntu下如何优雅地使用翻译"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu下如何优雅地使用翻译.md" target="_blank" rel="external">ubuntu下如何优雅地使用翻译</a></h3><h3 id="ubuntu使用问题总结"><a href="#ubuntu使用问题总结" class="headerlink" title="ubuntu使用问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu使用问题总结.md" target="_blank" rel="external">ubuntu使用问题总结</a></h3><h3 id="在Openstack-Swift中使用多种后端存储实现"><a href="#在Openstack-Swift中使用多种后端存储实现" class="headerlink" title="在Openstack Swift中使用多种后端存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/在Openstack Swift中使用多种后端存储实现.md" target="_blank" rel="external">在Openstack Swift中使用多种后端存储实现</a></h3><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/数据结构.md" target="_blank" rel="external">数据结构</a></h3><h3 id="文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md"><a href="#文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md" class="headerlink" title="文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/文件系统(seaweedfs" target="_blank" rel="external">文件系统(seaweedfs)与关系型数据库优劣势分析</a>与关系型数据库优劣势分析.md)</h3><h3 id="查找-数据结构学习"><a href="#查找-数据结构学习" class="headerlink" title="查找-数据结构学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/查找-数据结构学习.md" target="_blank" rel="external">查找-数据结构学习</a></h3>]]></content>
     
     <summary type="html">
     
