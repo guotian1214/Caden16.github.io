@@ -360,7 +360,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-03-02T10:40:28+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-02T02:40:28Z">
                 2017-03-02
               </time>
             
@@ -427,7 +427,7 @@
         
           
           最近遇到一些C++的代码,其中会包含一些C++11的代码,对C++11的特性不太了解,记录一下.
-nextnext用于操作迭代器,函数解释std::nextParameters  it    -    an iterator  n    -    number of elements to adva
+nextnext用于操作迭代器,函数解释std::nextParameters  it    -    an iterator  n    -    number of elements to advance使用示例:12345678910111213141516#include &lt;iostre
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -598,7 +598,7 @@ nextnext用于操作迭代器,函数解释std::nextParameters  it    -    an ite
       
         
           
-          使用gdb进行调试时出现错误,错误重现:(gdb) qsh-4.3$ gdb -q aaaReading symbols from aaa…done.(gdb) l28              int base = factorial(n - 1);29              –k;30   
+          使用gdb进行调试时出现错误,错误重现:(gdb) qsh-4.3$ gdb -q aaaReading symbols from aaa…done.(gdb) l28              int base = factorial(n - 1);29              –k;30              for (int i = n -1; i &gt; 0; k %= base,
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -772,7 +772,7 @@ nextnext用于操作迭代器,函数解释std::nextParameters  it    -    an ite
           题目:给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=31234567全排列:123132213231312321
 结果为:213
 解题使用逆康托编码展开,参考全排列的编码与解码——康托展开
-康托编码:{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其
+康托编码:{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？如 {1,2,3} 按从小到大排列一共6个：123 132 213 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -944,7 +944,8 @@ nextnext用于操作迭代器,函数解释std::nextParameters  it    -    an ite
         
           
           LeetCode题目-Next Permutation看半天连题目都看不懂,参考LeetCode 31 Next Permutation（下一个排列）,基本理解题意:数学中的排列组合，比如“1，2，3”的全排列，依次是：1234561 2 31 3 22 1 32 3 13 1 23 2 1
-从上面
+从上面的某一行重排到期下一行，如果已经是最后一行了，则重排成第一行。
+实现思路:从后往前遍历,找到最长递增
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1049,8 +1050,8 @@ nextnext用于操作迭代器,函数解释std::nextParameters  it    -    an ite
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-02-26T13:56:46Z">
-                2017-02-26
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-02T02:46:55Z">
+                2017-03-02
               </time>
             
           </span>
@@ -1114,9 +1115,7 @@ nextnext用于操作迭代器,函数解释std::nextParameters  it    -    an ite
 
       
         
-          
-          主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现swift-weedfs-backend123456789101112131415161718192021222324252627282930313233343536373839404142434
-          ...
+          <p>主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现<a href="https://github.com/MakeItPossible16/swift-weedfs-backend">swift-weedfs-backend</a><br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/对象存储/swift-weedfs-backend diskfile代码实现/#more" rel="contents">

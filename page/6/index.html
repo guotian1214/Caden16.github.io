@@ -427,7 +427,8 @@
         
           
           GET 文件请求1http://127.0.0.1:8080/27542,10088ee11dccb9
-先生成一个新的needle,然后根据fid:10088ee11dccb9 , 其中,前8位使用16进制转换为uint64 ==&gt; key, 后6位使用16进制转换为uint32 ==&gt;
+先生成一个新的needle,然后根据fid:10088ee11dccb9 , 其中,前8位使用16进制转换为uint64 ==&gt; key, 后6位使用16进制转换为uint32 ==&gt; hash,解析结果给新生成的needle赋值,n.Id=key, n.Cookie=hash
+如果
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -598,7 +599,7 @@
       
         
           
-          文件在volume_server_handlers_write.go 中的topology.ReplicatedWrite中以needle的形式存储,在store.go 的Write方法中调用writeNeedle写入文件.写入时使用append的方法,在文件中追加12345678910111213
+          文件在volume_server_handlers_write.go 中的topology.ReplicatedWrite中以needle的形式存储,在store.go 的Write方法中调用writeNeedle写入文件.写入时使用append的方法,在文件中追加1234567891011121314151617181920212223242526272829303132333435363738
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -942,7 +943,7 @@
       
         
           
-          使用命令1234&gt; curl -X POST http://localhost:9333/dir/assign&#123;"count":1,"fid":"3,01637037d6","url":"127.0.0.1:8080","publicUrl":"localhost:8080"&#12
+          使用命令1234&gt; curl -X POST http://localhost:9333/dir/assign&#123;"count":1,"fid":"3,01637037d6","url":"127.0.0.1:8080","publicUrl":"localhost:8080"&#125;&gt; curl -X PUT -F file=@/home/chris/myphoto.jp
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1114,7 +1115,7 @@
         
           
           根据文章使用delve调试Golang程序技巧使用go install -gcflags “-N -l” weed.go 对程序进行重新编译,方便调试
-通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关go http ServeMux介绍,12345vo
+通过weed.go 调用volume.go ,参数处理完成后,生成一个ServeMux实例,有关go http ServeMux介绍,12345volumeMux := http.NewServeMux()publicVolumeMux := vo
           ...
           <!--noindex-->
           <div class="post-button text-center">

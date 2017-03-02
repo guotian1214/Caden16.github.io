@@ -770,7 +770,7 @@
         
           
           问题引入经过一段时间的学习，想要把openstack-swift与seaweedfs进行结合，单纯考虑文件存储效率，对比把openstack-swift与seaweedfs进行结合后的存储效率是否会高于openstack-swift.问题最后可以简化为文件合并存储与单个存储优劣势比较.
-具体分析文件
+具体分析文件单个存储从Linux内核文件系统出发,以ext3为例,参考深入解析Linux内核I/O剖析（open
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1116,7 +1116,7 @@
           
           记录一下忘记的Python语法
 StringIO负责在内存中读写string,其中在openstack-swift的mem_diskfile.py中提到::param fp: StringIO in-memory representation objectStringIO和BytesIO
-os.fs
+os.fstat()os.fstat() 方法用于返回文件描述符fd的状态，类似 stat()。Python 
           ...
           <!--noindex-->
           <div class="post-button text-center">

@@ -428,6 +428,10 @@
           
           在阅读seaweedfs过程中,发现对于复杂程序,跟踪调试相当困难,不过,在看了使用delve调试Golang程序技巧这篇文章后,调试问题得到很好的改善.
 首先,liteIDE简直让人眼前一亮,使用它并结合delve实现图形化界面调试,使用命令行多少有点不太方便,特别是当你想在源码中加入注释的时候.
+具体实现
+安装delve,liteIDE
+
+加入参数关闭编译器优化,如 go install -g
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -598,7 +602,9 @@
       
         
           
-          在阅读seaweedfs过程中,当程序在运行过程中,想要进行跟踪调试不好实现,目前也没找到很好的解决方案,只能跟踪程序的启动过程.不过回归最原始的方法,使用printf倒是可以查看变量的值,因此打算编写程序,把struct中的变量转化为json,发送给搭建的服务器,实现查看struct变量的方法.其
+          在阅读seaweedfs过程中,当程序在运行过程中,想要进行跟踪调试不好实现,目前也没找到很好的解决方案,只能跟踪程序的启动过程.不过回归最原始的方法,使用printf倒是可以查看变量的值,因此打算编写程序,把struct中的变量转化为json,发送给搭建的服务器,实现查看struct变量的方法.其中就了解到go的反射机制.
+laws-of-reflectionGolang之反射reflect包
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -770,7 +776,7 @@
         
           
           在看seaweedfs过程中遇到的go 语法,不会的记录一下.
-interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &#123;trueNextFileId(count uint64) (uint64
+interface: 是一组method的组合,通过interface来定义对象的一组行为.12345type Sequencer interface &#123;trueNextFileId(count uint64) (uint64, uint64)trueSetMax(uint64)truePeek() uint64&#125;
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -943,7 +949,7 @@ interface: 是一组method的组合,通过interface来定义对象的一组行�
           
           raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理.
 参考文章Raft一致性算法raft动画演示raft介绍go-raft源码解析go-raft文档goraft的简单实现
-阅读记录本文按照参考文章中的go-r
+阅读记录本文按照参考文章中的go-raft源码解析中的文章阅读,记录阅读过程.12345678910111213141516// The
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1115,7 +1121,7 @@ interface: 是一组method的组合,通过interface来定义对象的一组行�
         
           
           master启动过程使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,参考文章： weed-fs 源码解读
-12345type Sequencer in
+12345type Sequencer interface &#123;trueNextFileId(count uint64) (uint64
           ...
           <!--noindex-->
           <div class="post-button text-center">

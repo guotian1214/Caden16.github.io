@@ -428,7 +428,7 @@
           
           container_of用于从包含在某个结构中的指针获得结构本身的指针，通俗地讲就是通过结构体变量中某个成员的首地址进而获得整个结构体变量的首地址。Linux内核中的常用宏container_of其实很简单
 linux内核Hash 链表Linux内核哈希表分析与应用
-Hash应用:有一个庞大的字符串
+Hash应用:有一个庞大的字符串数组，然后给你一个单独的字符串，让你从这个数组中查找是否有这个字符串并找到它暴雪公司关于字符串匹配的
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -600,7 +600,7 @@ Hash应用:有一个庞大的字符串
         
           
           使用Docker搭建ELKStack时,elasticsearch自动退出,使用1docker logs [dockerName]
-问题查看日志, 日志输出为12ERROR: bootstrap checks failedmax virtual memory areas vm.max_map_cou
+问题查看日志, 日志输出为12ERROR: bootstrap checks failedmax virtual memory areas vm.max_map_count [65530] is too low, increase to at least [26214
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -775,7 +775,8 @@ Hash应用:有一个庞大的字符串
 awkAWK是一种处理文本文件的语言，是一个强大的文本分析工具。awk使用介绍awk print 学习
 sort用于排序linux之sort用法
 uniq报告或删除文件中重复的行。linux uniq 命令详解
-t
+tee读取标准输入的数据，并将其内容输出成文件linux tee 命令详解
+/dev/null可以把/
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -947,8 +948,9 @@ t
         
           
           linux文件存储一直对文件存储过程不太理解,估计是操作系统没学好,今天看了这篇文章Linux文件存储结构，包括目录项、inode、数据块,感觉思路一下子清晰了. 根据linux一切皆文件的思想,目录项也作为一个文件存储,存储的内容为inode和文件名.
-linux文件查找文件系统中的目录查找Lin
-          ...
+linux文件查找文件系统中的目录查找Linux中文件名解析处理源码分析
+
+          
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/文件存储/linux学习-linux文件存储/#more" rel="contents">
@@ -1119,7 +1121,7 @@ linux文件查找文件系统中的目录查找Lin
         
           
           使用命令 : curl -X POST http://localhost:9333/dir/assign
-在topology.go 中12345678func (t *Topology) PickForWrite(count uint64, option *VolumeGrowOption) (st
+在topology.go 中12345678func (t *Topology) PickForWrite(count uint64, option *VolumeGrowOption) (string, uint64, *DataNode, error) &#123;truevid, cou
           ...
           <!--noindex-->
           <div class="post-button text-center">

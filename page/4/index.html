@@ -427,7 +427,7 @@
         
           
           使用虚拟机进行远程调试电脑太卡，用着不爽，所以搭建单机板环境，按照SAIO搭建,在Ubuntu14.04上搭建没有啥问题，但在Ubuntu16.04上会出现问题，记录一下。
-出现问题1123456789101112Traceback (most recent call last):  File "/
+出现问题1123456789101112Traceback (most recent call last):  File "/usr/local/bin/swift-object-server", line 6, in &lt
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -771,7 +771,7 @@
         
           
           最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。
-启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这
+启用调试按照swift all in one的方式搭建，没遇到啥问题。调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。禁用多线程：1eventlet.patcher.monkey_patch(all=
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1116,7 +1116,7 @@
           
           学习资源kafka入门介绍
 学习目的构建日志流处理系统，初步实现使用logstash进行日志采集，kafka作为缓存队列，flink进行实时数据分析处理，seaweedfs作为后端存储。
-笔记核心API类型应用程序使用 Producer API 发布消息到1个或多个topic（主题）。应用程序使用 
+笔记核心API类型应用程序使用 Producer API 发布消息到1个或多个topic（主题）。应用程序使用 Consumer API 来订阅一个或多个topic，并处理产生的消息。应用程序使用 Streams
           ...
           <!--noindex-->
           <div class="post-button text-center">
