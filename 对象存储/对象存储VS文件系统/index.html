@@ -90,20 +90,21 @@
 
 
 <meta name="description" content="之前对于对象存储的定义还是比较模糊，看完文件系统vs对象存储——选型和趋势这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。
-对象存储初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。！后期：指的是以AWS的S3为代表的，通过HTT">
+对象存储初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。后期：指的是以AWS的S3为代表的，通过HTTP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="(转)文件系统vs对象存储——选型和趋势">
 <meta property="og:url" content="https://makeitpossible16.github.io/对象存储/对象存储VS文件系统/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
 <meta property="og:description" content="之前对于对象存储的定义还是比较模糊，看完文件系统vs对象存储——选型和趋势这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。
-对象存储初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。！后期：指的是以AWS的S3为代表的，通过HTT">
+对象存储初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。后期：指的是以AWS的S3为代表的，通过HTTP">
+<meta property="og:image" content="https://makeitpossible16.github.io/uploads/对象存储1.png">
 <meta property="og:image" content="https://makeitpossible16.github.io/uploads/对象存储2.png">
-<meta property="og:updated_time" content="2017-03-03T09:28:15.851Z">
+<meta property="og:updated_time" content="2017-03-03T09:30:14.817Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="(转)文件系统vs对象存储——选型和趋势">
 <meta name="twitter:description" content="之前对于对象存储的定义还是比较模糊，看完文件系统vs对象存储——选型和趋势这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。
-对象存储初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。！后期：指的是以AWS的S3为代表的，通过HTT">
-<meta name="twitter:image" content="https://makeitpossible16.github.io/uploads/对象存储2.png">
+对象存储初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。后期：指的是以AWS的S3为代表的，通过HTTP">
+<meta name="twitter:image" content="https://makeitpossible16.github.io/uploads/对象存储1.png">
 
 
 
@@ -361,7 +362,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-03-03T09:28:15Z">
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-03T17:30:14+08:00">
                 2017-03-03
               </time>
             
@@ -426,7 +427,7 @@
 
       
         <p>之前对于对象存储的定义还是比较模糊，看完<a href="http://www.testlab.com.cn/Index/article/id/1082.html" target="_blank" rel="external">文件系统vs对象存储——选型和趋势</a>这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。</p>
-<h2 id="对象存储"><a href="#对象存储" class="headerlink" title="对象存储"></a>对象存储</h2><p>初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。<br>！<a href="/uploads/对象存储1.png"></a><br>后期：指的是以AWS的S3为代表的，通过HTTP接口提供访问的存储服务或者存储系统,如果我们把一个文件传到对象存储系统里面存起来，就叫做一个对象。<br><img src="/uploads/对象存储2.png" alt=""></p>
+<h2 id="对象存储"><a href="#对象存储" class="headerlink" title="对象存储"></a>对象存储</h2><p>初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。<br><img src="/uploads/对象存储1.png" alt=""><br>后期：指的是以AWS的S3为代表的，通过HTTP接口提供访问的存储服务或者存储系统,如果我们把一个文件传到对象存储系统里面存起来，就叫做一个对象。<br><img src="/uploads/对象存储2.png" alt=""></p>
 <h2 id="对象存储与文件系统的比较"><a href="#对象存储与文件系统的比较" class="headerlink" title="对象存储与文件系统的比较"></a>对象存储与文件系统的比较</h2><p>对于大多数文件系统来说，尤其是POSIX(表示可移植操作系统接口（Portable Operating System Interface ，缩写为 POSIX ）,POSIX标准定义了操作系统应该为应用程序提供的接口标准)兼容的文件系统，提供open、close、read、write和lseek等接口。<br>而对象存储的接口是REST风格的，通常是基于HTTP协议的RESTful Web API，通过HTTP请求中的PUT和GET等操作进行文件的上传即写入和下载即读取，通过DELETE操作删除文件。<br>对象存储和文件系统在接口上的本质区别是对象存储不支持和fread和fwrite类似的随机位置读写操作，即一个文件PUT到对象存储里以后，如果要读取，只能GET整个文件，如果要修改一个对象，只能重新PUT一个新的到对象存储里，覆盖之前的对象或者形成一个新的版本。</p>
 
       
