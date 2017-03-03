@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-03-03T07:15:07.058Z</updated>
+  <updated>2017-03-03T09:28:15.851Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>(转)文件系统vs对象存储——选型和趋势</title>
+    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8VS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://makeitpossible16.github.io/对象存储/对象存储VS文件系统/</id>
+    <published>2017-03-03T00:00:00.000Z</published>
+    <updated>2017-03-03T09:28:15.851Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前对于对象存储的定义还是比较模糊，看完<a href="http://www.testlab.com.cn/Index/article/id/1082.html" target="_blank" rel="external">文件系统vs对象存储——选型和趋势</a>这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。</p>
+<h2 id="对象存储"><a href="#对象存储" class="headerlink" title="对象存储"></a>对象存储</h2><p>初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。<br>！<a href="/uploads/对象存储1.png"></a><br>后期：指的是以AWS的S3为代表的，通过HTTP接口提供访问的存储服务或者存储系统,如果我们把一个文件传到对象存储系统里面存起来，就叫做一个对象。<br><img src="/uploads/对象存储2.png" alt=""></p>
+<h2 id="对象存储与文件系统的比较"><a href="#对象存储与文件系统的比较" class="headerlink" title="对象存储与文件系统的比较"></a>对象存储与文件系统的比较</h2><p>对于大多数文件系统来说，尤其是POSIX(表示可移植操作系统接口（Portable Operating System Interface ，缩写为 POSIX ）,POSIX标准定义了操作系统应该为应用程序提供的接口标准)兼容的文件系统，提供open、close、read、write和lseek等接口。<br>而对象存储的接口是REST风格的，通常是基于HTTP协议的RESTful Web API，通过HTTP请求中的PUT和GET等操作进行文件的上传即写入和下载即读取，通过DELETE操作删除文件。<br>对象存储和文件系统在接口上的本质区别是对象存储不支持和fread和fwrite类似的随机位置读写操作，即一个文件PUT到对象存储里以后，如果要读取，只能GET整个文件，如果要修改一个对象，只能重新PUT一个新的到对象存储里，覆盖之前的对象或者形成一个新的版本。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前对于对象存储的定义还是比较模糊，看完&lt;a href=&quot;http://www.testlab.com.cn/Index/article/id/1082.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;文件系统vs对象存储——选型和趋势&lt;/a&gt;这篇
+    
+    </summary>
+    
+      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="文件系统，对象存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%8C%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>C++语法记录</title>
@@ -70,29 +95,29 @@
   </entry>
   
   <entry>
-    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
-    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
-    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
+    <title>swift-weedfs-backend diskfile代码实现</title>
+    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://makeitpossible16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
     <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-02-27T12:41:08.472Z</updated>
+    <updated>2017-03-02T02:46:55.297Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h2><p>给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">全排列:</div><div class="line">123</div><div class="line">132</div><div class="line">213</div><div class="line">231</div><div class="line">312</div><div class="line">321</div></pre></td></tr></table></figure></p>
-<p>结果为:213</p>
-<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>使用逆康托编码展开,参考<a href="http://www.cnblogs.com/zhanjxcom/p/5596208.html" target="_blank" rel="external">全排列的编码与解码——康托展开</a></p>
-<h3 id="康托编码"><a href="#康托编码" class="headerlink" title="康托编码:"></a>康托编码:</h3><p>{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？<br>如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。<br>小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有2<em>2！=4种。<br>小于2的数只有一个1，所以有1</em>1！=1种情况，最后一位是1，没有比一小的数，所以是0<em>0！=0<br>综上：小于321的数有4+1=5个，所以321是第六小的数。<br>例如:排列3 5 7 4 1 2 9 6 8展开为98884<br>X=2</em>8!+3<em>7!+4</em>6!+2<em>5!+0</em>4!+0<em>3!+2</em>2!+0<em>1!+0</em>0!=98884.</p>
-<h3 id="逆康托展开"><a href="#逆康托展开" class="headerlink" title="逆康托展开:"></a>逆康托展开:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？</div><div class="line"></div><div class="line">1. 首先用16-1得到15</div><div class="line"></div><div class="line">2. 用15去除4! 得到0余15</div><div class="line"></div><div class="line">3. 用15去除3! 得到2余3</div><div class="line"></div><div class="line">4. 用3去除2! 得到1余1</div><div class="line"></div><div class="line">5. 用1去除1! 得到1余0</div><div class="line"></div><div class="line">有0个数比它小的数是1，所以第一位是1</div><div class="line"></div><div class="line">有2个数比它小的数是3，但1已经在之前出现过了所以是4</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1已经在之前出现过了所以是3</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1,3,4都出现过了所以是5</div><div class="line"></div><div class="line">最后一个数只能是2</div><div class="line"></div><div class="line">所以排列为1 4 3 5 2</div></pre></td></tr></table></figure>
+    <content type="html"><![CDATA[<p>主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现<a href="https://github.com/MakeItPossible16/swift-weedfs-backend" target="_blank" rel="external">swift-weedfs-backend</a><br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryFileSystem</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    A very simplistic in-memory file system scheme.</div><div class="line"></div><div class="line">    There is one dictionary mapping a given object name to a tuple. The first</div><div class="line">    entry in the tuple is the cStringIO buffer representing the file contents,</div><div class="line">    the second entry is the metadata dictionary.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._filesystem = &#123;&#125;</div><div class="line">        self.seaweedfs = Seaweedfs_operation()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return back an file-like object and its metadata</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :return (fp, metadata): fp is `StringIO` in-memory representation</div><div class="line">                                object (or None). metadata is a dictionary</div><div class="line">                                of metadata (or None)</div><div class="line">        """</div><div class="line">        <span class="comment"># val = self._filesystem.get(name)</span></div><div class="line">        val = self.seaweedfs.GET(name)</div><div class="line">        <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            fp, metadata = <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            fp, metadata = self.parse_seaweedfs_file(val)</div><div class="line">        <span class="comment"># else:</span></div><div class="line">        <span class="comment">#     fp, metadata = val</span></div><div class="line">        <span class="keyword">return</span> fp, metadata</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_seaweedfs_file</span><span class="params">(self,val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        parse file download from seaweedfs</div><div class="line">        :param val: seaweedfs file,fomat: str(metadata) + '\n' + obj_content</div><div class="line">        :return: StringIO obj_content, python dict metadata</div><div class="line">        """</div><div class="line">        metadata_index = val.find(<span class="string">'\n'</span>)</div><div class="line">        val = val.split(<span class="string">'\n'</span>,<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span>  StringIO.StringIO(val[<span class="number">1</span>]),eval(val[<span class="number">0</span>])</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put_object</span><span class="params">(self, name, fp, metadata)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Store object into seaweedfs</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :param fp: `StringIO` in-memory representation object</div><div class="line">        :param metadata: dictionary of metadata to be written</div><div class="line">        """</div><div class="line">        <span class="comment"># self._filesystem[name] = (fp, metadata)</span></div><div class="line">        fp.seek(<span class="number">0</span>)</div><div class="line">        self.seaweedfs.PUT(name,str(metadata) + <span class="string">'\n'</span> + fp.read())</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Delete object from memory</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        """</div><div class="line">        <span class="comment"># import pydevd</span></div><div class="line">        <span class="comment"># pydevd.settrace('127.0.0.1', port=54321, stdoutToServer=True, stderrToServer=True)</span></div><div class="line">        self.seaweedfs.DELETE(name)</div><div class="line">        <span class="comment"># del self._filesystem[name]</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_diskfile</span><span class="params">(self, account, container, obj, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">return</span> DiskFile(self, account, container, obj)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pickle_async_update</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        For now don't handle async updates.</div><div class="line">        """</div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目:&quot;&gt;&lt;/a&gt;题目:&lt;/h2&gt;&lt;p&gt;给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3&lt;br&gt;&lt;figure class=&quot;highlight pla
+      &lt;p&gt;主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现&lt;a href=&quot;https://github.com/MakeItPossible16/swift-weedfs-backend&quot;&gt;swift-weedfs-backend&lt;/a&gt;&lt;br&gt;
     
     </summary>
     
-      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
+      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+      <category term="swift-weedfs-backend" scheme="https://makeitpossible16.github.io/tags/swift-weedfs-backend/"/>
     
   </entry>
   
@@ -122,29 +147,29 @@
   </entry>
   
   <entry>
-    <title>swift-weedfs-backend diskfile代码实现</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://makeitpossible16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
+    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
+    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
+    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
     <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-03-02T02:46:55.297Z</updated>
+    <updated>2017-02-27T12:41:08.472Z</updated>
     
-    <content type="html"><![CDATA[<p>主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现<a href="https://github.com/MakeItPossible16/swift-weedfs-backend" target="_blank" rel="external">swift-weedfs-backend</a><br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryFileSystem</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    A very simplistic in-memory file system scheme.</div><div class="line"></div><div class="line">    There is one dictionary mapping a given object name to a tuple. The first</div><div class="line">    entry in the tuple is the cStringIO buffer representing the file contents,</div><div class="line">    the second entry is the metadata dictionary.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._filesystem = &#123;&#125;</div><div class="line">        self.seaweedfs = Seaweedfs_operation()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return back an file-like object and its metadata</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :return (fp, metadata): fp is `StringIO` in-memory representation</div><div class="line">                                object (or None). metadata is a dictionary</div><div class="line">                                of metadata (or None)</div><div class="line">        """</div><div class="line">        <span class="comment"># val = self._filesystem.get(name)</span></div><div class="line">        val = self.seaweedfs.GET(name)</div><div class="line">        <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            fp, metadata = <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            fp, metadata = self.parse_seaweedfs_file(val)</div><div class="line">        <span class="comment"># else:</span></div><div class="line">        <span class="comment">#     fp, metadata = val</span></div><div class="line">        <span class="keyword">return</span> fp, metadata</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_seaweedfs_file</span><span class="params">(self,val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        parse file download from seaweedfs</div><div class="line">        :param val: seaweedfs file,fomat: str(metadata) + '\n' + obj_content</div><div class="line">        :return: StringIO obj_content, python dict metadata</div><div class="line">        """</div><div class="line">        metadata_index = val.find(<span class="string">'\n'</span>)</div><div class="line">        val = val.split(<span class="string">'\n'</span>,<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span>  StringIO.StringIO(val[<span class="number">1</span>]),eval(val[<span class="number">0</span>])</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put_object</span><span class="params">(self, name, fp, metadata)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Store object into seaweedfs</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :param fp: `StringIO` in-memory representation object</div><div class="line">        :param metadata: dictionary of metadata to be written</div><div class="line">        """</div><div class="line">        <span class="comment"># self._filesystem[name] = (fp, metadata)</span></div><div class="line">        fp.seek(<span class="number">0</span>)</div><div class="line">        self.seaweedfs.PUT(name,str(metadata) + <span class="string">'\n'</span> + fp.read())</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Delete object from memory</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        """</div><div class="line">        <span class="comment"># import pydevd</span></div><div class="line">        <span class="comment"># pydevd.settrace('127.0.0.1', port=54321, stdoutToServer=True, stderrToServer=True)</span></div><div class="line">        self.seaweedfs.DELETE(name)</div><div class="line">        <span class="comment"># del self._filesystem[name]</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_diskfile</span><span class="params">(self, account, container, obj, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">return</span> DiskFile(self, account, container, obj)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pickle_async_update</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        For now don't handle async updates.</div><div class="line">        """</div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h2><p>给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">全排列:</div><div class="line">123</div><div class="line">132</div><div class="line">213</div><div class="line">231</div><div class="line">312</div><div class="line">321</div></pre></td></tr></table></figure></p>
+<p>结果为:213</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>使用逆康托编码展开,参考<a href="http://www.cnblogs.com/zhanjxcom/p/5596208.html" target="_blank" rel="external">全排列的编码与解码——康托展开</a></p>
+<h3 id="康托编码"><a href="#康托编码" class="headerlink" title="康托编码:"></a>康托编码:</h3><p>{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？<br>如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。<br>小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有2<em>2！=4种。<br>小于2的数只有一个1，所以有1</em>1！=1种情况，最后一位是1，没有比一小的数，所以是0<em>0！=0<br>综上：小于321的数有4+1=5个，所以321是第六小的数。<br>例如:排列3 5 7 4 1 2 9 6 8展开为98884<br>X=2</em>8!+3<em>7!+4</em>6!+2<em>5!+0</em>4!+0<em>3!+2</em>2!+0<em>1!+0</em>0!=98884.</p>
+<h3 id="逆康托展开"><a href="#逆康托展开" class="headerlink" title="逆康托展开:"></a>逆康托展开:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？</div><div class="line"></div><div class="line">1. 首先用16-1得到15</div><div class="line"></div><div class="line">2. 用15去除4! 得到0余15</div><div class="line"></div><div class="line">3. 用15去除3! 得到2余3</div><div class="line"></div><div class="line">4. 用3去除2! 得到1余1</div><div class="line"></div><div class="line">5. 用1去除1! 得到1余0</div><div class="line"></div><div class="line">有0个数比它小的数是1，所以第一位是1</div><div class="line"></div><div class="line">有2个数比它小的数是3，但1已经在之前出现过了所以是4</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1已经在之前出现过了所以是3</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1,3,4都出现过了所以是5</div><div class="line"></div><div class="line">最后一个数只能是2</div><div class="line"></div><div class="line">所以排列为1 4 3 5 2</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现&lt;a href=&quot;https://github.com/MakeItPossible16/swift-weedfs-backend&quot;&gt;swift-weedfs-backend&lt;/a&gt;&lt;br&gt;
+      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目:&quot;&gt;&lt;/a&gt;题目:&lt;/h2&gt;&lt;p&gt;给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3&lt;br&gt;&lt;figure class=&quot;highlight pla
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-      <category term="swift-weedfs-backend" scheme="https://makeitpossible16.github.io/tags/swift-weedfs-backend/"/>
+      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
     
   </entry>
   
@@ -439,31 +464,6 @@
   </entry>
   
   <entry>
-    <title>数据结构</title>
-    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
-    <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-02-07T13:37:16.495Z</updated>
-    
-    <content type="html"><![CDATA[<p>数据结构都忘得差不多了,记录一下</p>
-<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;数据结构都忘得差不多了,记录一下&lt;/p&gt;
-&lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fans
-    
-    </summary>
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>python语法记录</title>
     <link href="https://makeitpossible16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://makeitpossible16.github.io/python语法/python语法记录/</id>
@@ -486,6 +486,31 @@
     
     
       <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构</title>
+    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
+    <published>2017-02-07T00:00:00.000Z</published>
+    <updated>2017-02-07T13:37:16.495Z</updated>
+    
+    <content type="html"><![CDATA[<p>数据结构都忘得差不多了,记录一下</p>
+<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;数据结构都忘得差不多了,记录一下&lt;/p&gt;
+&lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fans
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -518,29 +543,6 @@
     
     
       <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>查找-数据结构学习</title>
-    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%9F%A5%E6%89%BE-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/数据结构/查找-数据结构学习/</id>
-    <published>2017-01-21T00:00:00.000Z</published>
-    <updated>2017-02-14T04:08:27.481Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;简单清晰的B树、Trie树详解&quot;&gt;&lt;a href=&quot;#简单清晰的B树、Trie树详解&quot; class=&quot;headerlink&quot; title=&quot;简单清晰的B树、Trie树详解&quot;&gt;&lt;/a&gt;简单清晰的B树、Trie树详解&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://bl
-    
-    </summary>
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -597,6 +599,29 @@
       <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
     
       <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>查找-数据结构学习</title>
+    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%9F%A5%E6%89%BE-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://makeitpossible16.github.io/数据结构/查找-数据结构学习/</id>
+    <published>2017-01-21T00:00:00.000Z</published>
+    <updated>2017-02-14T04:08:27.481Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;简单清晰的B树、Trie树详解&quot;&gt;&lt;a href=&quot;#简单清晰的B树、Trie树详解&quot; class=&quot;headerlink&quot; title=&quot;简单清晰的B树、Trie树详解&quot;&gt;&lt;/a&gt;简单清晰的B树、Trie树详解&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://bl
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -660,6 +685,41 @@
   </entry>
   
   <entry>
+    <title>linux命令学习</title>
+    <link href="https://makeitpossible16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://makeitpossible16.github.io/linux命令/linux命令学习/</id>
+    <published>2017-01-02T00:00:00.000Z</published>
+    <updated>2017-02-25T04:00:15.707Z</updated>
+    
+    <content type="html"><![CDATA[<p>虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。<br><a href="http://www.runoob.com/linux/linux-comm-awk.html" target="_blank" rel="external">awk使用介绍</a><br><a href="http://blog.csdn.net/andyxm/article/details/5964071" target="_blank" rel="external">awk print 学习</a></p>
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><p>用于排序<br><a href="http://www.cnblogs.com/dong008259/archive/2011/12/08/2281214.html" target="_blank" rel="external">linux之sort用法</a></p>
+<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><p>报告或删除文件中重复的行。<br><a href="http://blog.csdn.net/jesseen/article/details/8005056" target="_blank" rel="external">linux uniq 命令详解</a></p>
+<h2 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h2><p>读取标准输入的数据，并将其内容输出成文件<br><a href="http://liubin.blog.51cto.com/282313/131298" target="_blank" rel="external">linux tee 命令详解</a></p>
+<h2 id="dev-null"><a href="#dev-null" class="headerlink" title="/dev/null"></a>/dev/null</h2><p>可以把/dev/null看作一个”黑洞”，它非常等价于一个只写文件，所有写入它的内容都会永远丢失。<br><a href="http://www.2cto.com/os/201412/361275.html" target="_blank" rel="external">linux下/dev/null的用途</a><br><a href="http://blog.csdn.net/sunrier/article/details/7695839/" target="_blank" rel="external">Linux下” &gt;/dev/null 2&gt;&amp;1 “相关知识说明</a></p>
+<h2 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h2><p>程序后台运行,如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令.<br>命令格式 : nohup command &amp;<br><a href="http://www.2cto.com/os/201301/185701.html" target="_blank" rel="external">linux nohup命令详解</a></p>
+<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><p>screen 算是 linux 运维一个中高级技巧。通过 screen 命令创建的环境下运行的终端命令，其父进程不是 sshd 登录会话，而是 screen 。这样就可以即避免用户退出进程消失的问题，又随时能重新接管回终端继续操作。<br>创建独立的 screen 命令如下：<br>screen -dmS elkscreen_1<br>接管连入创建的 elkscreen_1 命令如下：<br>screen -r elkscreen_1<br>然后你可以看到一个一模一样的终端，运行 logstash 之后，不要按 Ctrl+C，而是按 Ctrl+A+D 键，断开环境。想重新接管，依然 screen -r elkscreen_1 即可。<br>如果创建了多个 screen，查看列表命令如下：<br>screen -list<br><a href="http://kibana.logstash.es/content/logstash/get-start/daemon.html" target="_blank" rel="external">需要长期后台运行的大量程序</a>,使用daemontools</p>
+<h2 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2><p>参考<a href="http://blog.csdn.net/yongan1006/article/details/8134581" target="_blank" rel="external">管道命令和xargs的区别(经典解释)</a><br>管道是实现“将前面的标准输出作为后面的标准输入”<br>xargs是实现“将标准输入作为命令的参数”<br>运行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo &quot;--help&quot;|cat</div><div class="line">echo &quot;--help&quot;|xargs cat</div></pre></td></tr></table></figure></p>
+<p>得到结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$ echo &quot;--help&quot;|cat</div><div class="line">--help</div><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$ echo &quot;--help&quot;|xargs cat</div><div class="line">用法：cat [选项]... [文件]...</div><div class="line">Concatenate FILE(s) to standard output.</div><div class="line"></div><div class="line">如果没有指定文件，或者文件为&quot;-&quot;，则从标准输入读取。</div><div class="line"></div><div class="line">  -A, --show-all           equivalent to -vET</div><div class="line">  -b, --number-nonblank    number nonempty output lines, overrides -n</div><div class="line">  -e                       equivalent to -vE</div><div class="line">  -E, --show-ends          display $ at end of each line</div><div class="line">  -n, --number             number all output lines</div><div class="line">  -s, --squeeze-blank      suppress repeated empty output lines</div><div class="line">  -t                       与-vT 等价</div><div class="line">  -T, --show-tabs          将跳格字符显示为^I</div><div class="line">  -u                       (被忽略)</div><div class="line">  -v, --show-nonprinting   使用^ 和M- 引用，除了LFD和 TAB 之外</div><div class="line">      --help		显示此帮助信息并退出</div><div class="line">      --version		显示版本信息并退出</div><div class="line"></div><div class="line">示例：</div><div class="line">  cat f - g  先输出f 的内容，然后输出标准输入的内容，最后输出g 的内容。</div><div class="line">  cat        将标准输入的内容复制到标准输出。</div><div class="line"></div><div class="line">GNU coreutils online help: &lt;http://www.gnu.org/software/coreutils/&gt;</div><div class="line">请向&lt;http://translationproject.org/team/zh_CN.html&gt; 报告cat 的翻译错误</div><div class="line">Full documentation at: &lt;http://www.gnu.org/software/coreutils/cat&gt;</div><div class="line">or available locally via: info &apos;(coreutils) cat invocation&apos;</div><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$</div></pre></td></tr></table></figure></p>
+<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>批量替换字符串,如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find /etc/swift/ -name \*.conf | xargs sudo sed -i &quot;s/&lt;your-user-name&gt;/$&#123;USER&#125;/&quot;</div></pre></td></tr></table></figure></p>
+<p>把/etc/swift/文件夹下 *.conf 文件中的<your-user-name>批量替换为计算机用户名<br>参考<a href="http://www.frostsky.com/2014/01/linux-sed-command/" target="_blank" rel="external">linux sed 批量替换字符串</a></your-user-name></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下&lt;/p&gt;
+&lt;h2 id=&quot;awk&quot;&gt;&lt;a href=&quot;#awk&quot; class=&quot;headerlink&quot; title=&quot;awk&quot;&gt;&lt;/a&gt;awk&lt;/h2&gt;&lt;p&gt;AWK是一种处理文本文件的语言，
+    
+    </summary>
+    
+      <category term="linux命令" scheme="https://makeitpossible16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ELKStack搭建问题总结</title>
     <link href="https://makeitpossible16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     <id>https://makeitpossible16.github.io/ELKStack/ELKStack搭建问题总结/</id>
@@ -692,41 +752,6 @@
       <category term="日志分析" scheme="https://makeitpossible16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
     
       <category term="流处理" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux命令学习</title>
-    <link href="https://makeitpossible16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/linux命令/linux命令学习/</id>
-    <published>2017-01-02T00:00:00.000Z</published>
-    <updated>2017-02-25T04:00:15.707Z</updated>
-    
-    <content type="html"><![CDATA[<p>虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下</p>
-<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。<br><a href="http://www.runoob.com/linux/linux-comm-awk.html" target="_blank" rel="external">awk使用介绍</a><br><a href="http://blog.csdn.net/andyxm/article/details/5964071" target="_blank" rel="external">awk print 学习</a></p>
-<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><p>用于排序<br><a href="http://www.cnblogs.com/dong008259/archive/2011/12/08/2281214.html" target="_blank" rel="external">linux之sort用法</a></p>
-<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><p>报告或删除文件中重复的行。<br><a href="http://blog.csdn.net/jesseen/article/details/8005056" target="_blank" rel="external">linux uniq 命令详解</a></p>
-<h2 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h2><p>读取标准输入的数据，并将其内容输出成文件<br><a href="http://liubin.blog.51cto.com/282313/131298" target="_blank" rel="external">linux tee 命令详解</a></p>
-<h2 id="dev-null"><a href="#dev-null" class="headerlink" title="/dev/null"></a>/dev/null</h2><p>可以把/dev/null看作一个”黑洞”，它非常等价于一个只写文件，所有写入它的内容都会永远丢失。<br><a href="http://www.2cto.com/os/201412/361275.html" target="_blank" rel="external">linux下/dev/null的用途</a><br><a href="http://blog.csdn.net/sunrier/article/details/7695839/" target="_blank" rel="external">Linux下” &gt;/dev/null 2&gt;&amp;1 “相关知识说明</a></p>
-<h2 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h2><p>程序后台运行,如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令.<br>命令格式 : nohup command &amp;<br><a href="http://www.2cto.com/os/201301/185701.html" target="_blank" rel="external">linux nohup命令详解</a></p>
-<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><p>screen 算是 linux 运维一个中高级技巧。通过 screen 命令创建的环境下运行的终端命令，其父进程不是 sshd 登录会话，而是 screen 。这样就可以即避免用户退出进程消失的问题，又随时能重新接管回终端继续操作。<br>创建独立的 screen 命令如下：<br>screen -dmS elkscreen_1<br>接管连入创建的 elkscreen_1 命令如下：<br>screen -r elkscreen_1<br>然后你可以看到一个一模一样的终端，运行 logstash 之后，不要按 Ctrl+C，而是按 Ctrl+A+D 键，断开环境。想重新接管，依然 screen -r elkscreen_1 即可。<br>如果创建了多个 screen，查看列表命令如下：<br>screen -list<br><a href="http://kibana.logstash.es/content/logstash/get-start/daemon.html" target="_blank" rel="external">需要长期后台运行的大量程序</a>,使用daemontools</p>
-<h2 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2><p>参考<a href="http://blog.csdn.net/yongan1006/article/details/8134581" target="_blank" rel="external">管道命令和xargs的区别(经典解释)</a><br>管道是实现“将前面的标准输出作为后面的标准输入”<br>xargs是实现“将标准输入作为命令的参数”<br>运行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo &quot;--help&quot;|cat</div><div class="line">echo &quot;--help&quot;|xargs cat</div></pre></td></tr></table></figure></p>
-<p>得到结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$ echo &quot;--help&quot;|cat</div><div class="line">--help</div><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$ echo &quot;--help&quot;|xargs cat</div><div class="line">用法：cat [选项]... [文件]...</div><div class="line">Concatenate FILE(s) to standard output.</div><div class="line"></div><div class="line">如果没有指定文件，或者文件为&quot;-&quot;，则从标准输入读取。</div><div class="line"></div><div class="line">  -A, --show-all           equivalent to -vET</div><div class="line">  -b, --number-nonblank    number nonempty output lines, overrides -n</div><div class="line">  -e                       equivalent to -vE</div><div class="line">  -E, --show-ends          display $ at end of each line</div><div class="line">  -n, --number             number all output lines</div><div class="line">  -s, --squeeze-blank      suppress repeated empty output lines</div><div class="line">  -t                       与-vT 等价</div><div class="line">  -T, --show-tabs          将跳格字符显示为^I</div><div class="line">  -u                       (被忽略)</div><div class="line">  -v, --show-nonprinting   使用^ 和M- 引用，除了LFD和 TAB 之外</div><div class="line">      --help		显示此帮助信息并退出</div><div class="line">      --version		显示版本信息并退出</div><div class="line"></div><div class="line">示例：</div><div class="line">  cat f - g  先输出f 的内容，然后输出标准输入的内容，最后输出g 的内容。</div><div class="line">  cat        将标准输入的内容复制到标准输出。</div><div class="line"></div><div class="line">GNU coreutils online help: &lt;http://www.gnu.org/software/coreutils/&gt;</div><div class="line">请向&lt;http://translationproject.org/team/zh_CN.html&gt; 报告cat 的翻译错误</div><div class="line">Full documentation at: &lt;http://www.gnu.org/software/coreutils/cat&gt;</div><div class="line">or available locally via: info &apos;(coreutils) cat invocation&apos;</div><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$</div></pre></td></tr></table></figure></p>
-<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>批量替换字符串,如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find /etc/swift/ -name \*.conf | xargs sudo sed -i &quot;s/&lt;your-user-name&gt;/$&#123;USER&#125;/&quot;</div></pre></td></tr></table></figure></p>
-<p>把/etc/swift/文件夹下 *.conf 文件中的<your-user-name>批量替换为计算机用户名<br>参考<a href="http://www.frostsky.com/2014/01/linux-sed-command/" target="_blank" rel="external">linux sed 批量替换字符串</a></your-user-name></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下&lt;/p&gt;
-&lt;h2 id=&quot;awk&quot;&gt;&lt;a href=&quot;#awk&quot; class=&quot;headerlink&quot; title=&quot;awk&quot;&gt;&lt;/a&gt;awk&lt;/h2&gt;&lt;p&gt;AWK是一种处理文本文件的语言，
-    
-    </summary>
-    
-      <category term="linux命令" scheme="https://makeitpossible16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
-    
-    
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
     
   </entry>
   
@@ -1078,38 +1103,6 @@
   </entry>
   
   <entry>
-    <title>seaweedfs源码阅读记录2</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
-    <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2016-11-28T11:57:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="master启动过程"><a href="#master启动过程" class="headerlink" title="master启动过程"></a>master启动过程</h2><p>使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.<br>opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,<br>参考文章： <a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-<p><img src="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg" alt="master启动-20161128"><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">trueNextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">trueSetMax(<span class="keyword">uint64</span>)</div><div class="line">truePeek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>topology中包含Sequencer , sequence 负责FileID的全局有序生成</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Topology <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl   <span class="comment">//指向NodeImpl对象，即Topology和node相互指向</span></div><div class="line"></div><div class="line">truecollectionMap *util.ConcurrentReadMap</div><div class="line"></div><div class="line">truepulse <span class="keyword">int64</span></div><div class="line"></div><div class="line">truevolumeSizeLimit <span class="keyword">uint64</span></div><div class="line"></div><div class="line">trueSequence sequence.Sequencer</div><div class="line"></div><div class="line">truechanDeadDataNodes      <span class="keyword">chan</span> *DataNode</div><div class="line">truechanRecoveredDataNodes <span class="keyword">chan</span> *DataNode</div><div class="line">truechanFullVolumes        <span class="keyword">chan</span> storage.VolumeInfo</div><div class="line"></div><div class="line">trueconfiguration *Configuration</div><div class="line"></div><div class="line">trueRaftServer raft.Server</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>NodeImpl结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> NodeImpl <span class="keyword">struct</span> &#123;</div><div class="line">trueid                NodeId</div><div class="line">truevolumeCount       <span class="keyword">int</span></div><div class="line">trueactiveVolumeCount <span class="keyword">int</span></div><div class="line">truemaxVolumeCount    <span class="keyword">int</span></div><div class="line">trueparent            Node</div><div class="line">truesync.RWMutex      <span class="comment">// lock children</span></div><div class="line">truechildren          <span class="keyword">map</span>[NodeId]Node</div><div class="line">truemaxVolumeId       storage.VolumeId</div><div class="line"></div><div class="line">true<span class="comment">//for rack, data center, topology</span></div><div class="line">truenodeType <span class="keyword">string</span></div><div class="line">truevalue    <span class="keyword">interface</span>&#123;&#125;  <span class="comment">//指向Topology对象，即Topology和node相互指向</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>DataNode数据结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> DataNode <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl</div><div class="line">truevolumes   <span class="keyword">map</span>[storage.VolumeId]storage.VolumeInfo</div><div class="line">trueIp        <span class="keyword">string</span></div><div class="line">truePort      <span class="keyword">int</span></div><div class="line">truePublicUrl <span class="keyword">string</span></div><div class="line">trueLastSeen  <span class="keyword">int64</span> <span class="comment">// unix time in seconds</span></div><div class="line">trueDead      <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> VolumeInfo <span class="keyword">struct</span> &#123;</div><div class="line">trueId               VolumeId</div><div class="line">trueSize             <span class="keyword">uint64</span></div><div class="line">trueReplicaPlacement *ReplicaPlacement</div><div class="line">trueTtl              *TTL</div><div class="line">trueCollection       <span class="keyword">string</span></div><div class="line">trueVersion          Version</div><div class="line">trueFileCount        <span class="keyword">int</span></div><div class="line">trueDeleteCount      <span class="keyword">int</span></div><div class="line">trueDeletedByteCount <span class="keyword">uint64</span></div><div class="line">trueReadOnly         <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过RaftServer的raft协议，完成多个weedmaster间投票选leader的事情,<br>当启动多个ServerMaster时，它们之间会进行通信，通过raft协议选举出一个Leader，对所有的master进行管理。<br>weed-fs中，通过使用raftServer完成上述选举过程；而raftServer则是用到了第三方资源，即goRaft（参照<a href="http://ayende.com/blog/165858/reviewing-go-raft-part-i）。" target="_blank" rel="external">http://ayende.com/blog/165858/reviewing-go-raft-part-i）。</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> RaftServer <span class="keyword">struct</span> &#123;</div><div class="line">truepeers      []<span class="keyword">string</span> <span class="comment">// initial peers to join with</span></div><div class="line">trueraftServer raft.Server  <span class="comment">//使用goraft //type Server interface 包含实现raft的方法</span></div><div class="line">truedataDir    <span class="keyword">string</span></div><div class="line">truehttpAddr   <span class="keyword">string</span></div><div class="line">truerouter     *mux.Router</div><div class="line">truetopo       *topology.Topology</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>seaweedfs源码阅读记录1</title>
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
     <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/</id>
@@ -1129,6 +1122,38 @@
     <summary type="html">
     
       &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读记录2</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
+    <published>2016-11-22T00:00:00.000Z</published>
+    <updated>2016-11-28T11:57:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="master启动过程"><a href="#master启动过程" class="headerlink" title="master启动过程"></a>master启动过程</h2><p>使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.<br>opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,<br>参考文章： <a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+<p><img src="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg" alt="master启动-20161128"><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">trueNextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">trueSetMax(<span class="keyword">uint64</span>)</div><div class="line">truePeek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>topology中包含Sequencer , sequence 负责FileID的全局有序生成</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Topology <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl   <span class="comment">//指向NodeImpl对象，即Topology和node相互指向</span></div><div class="line"></div><div class="line">truecollectionMap *util.ConcurrentReadMap</div><div class="line"></div><div class="line">truepulse <span class="keyword">int64</span></div><div class="line"></div><div class="line">truevolumeSizeLimit <span class="keyword">uint64</span></div><div class="line"></div><div class="line">trueSequence sequence.Sequencer</div><div class="line"></div><div class="line">truechanDeadDataNodes      <span class="keyword">chan</span> *DataNode</div><div class="line">truechanRecoveredDataNodes <span class="keyword">chan</span> *DataNode</div><div class="line">truechanFullVolumes        <span class="keyword">chan</span> storage.VolumeInfo</div><div class="line"></div><div class="line">trueconfiguration *Configuration</div><div class="line"></div><div class="line">trueRaftServer raft.Server</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>NodeImpl结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> NodeImpl <span class="keyword">struct</span> &#123;</div><div class="line">trueid                NodeId</div><div class="line">truevolumeCount       <span class="keyword">int</span></div><div class="line">trueactiveVolumeCount <span class="keyword">int</span></div><div class="line">truemaxVolumeCount    <span class="keyword">int</span></div><div class="line">trueparent            Node</div><div class="line">truesync.RWMutex      <span class="comment">// lock children</span></div><div class="line">truechildren          <span class="keyword">map</span>[NodeId]Node</div><div class="line">truemaxVolumeId       storage.VolumeId</div><div class="line"></div><div class="line">true<span class="comment">//for rack, data center, topology</span></div><div class="line">truenodeType <span class="keyword">string</span></div><div class="line">truevalue    <span class="keyword">interface</span>&#123;&#125;  <span class="comment">//指向Topology对象，即Topology和node相互指向</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>DataNode数据结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> DataNode <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl</div><div class="line">truevolumes   <span class="keyword">map</span>[storage.VolumeId]storage.VolumeInfo</div><div class="line">trueIp        <span class="keyword">string</span></div><div class="line">truePort      <span class="keyword">int</span></div><div class="line">truePublicUrl <span class="keyword">string</span></div><div class="line">trueLastSeen  <span class="keyword">int64</span> <span class="comment">// unix time in seconds</span></div><div class="line">trueDead      <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> VolumeInfo <span class="keyword">struct</span> &#123;</div><div class="line">trueId               VolumeId</div><div class="line">trueSize             <span class="keyword">uint64</span></div><div class="line">trueReplicaPlacement *ReplicaPlacement</div><div class="line">trueTtl              *TTL</div><div class="line">trueCollection       <span class="keyword">string</span></div><div class="line">trueVersion          Version</div><div class="line">trueFileCount        <span class="keyword">int</span></div><div class="line">trueDeleteCount      <span class="keyword">int</span></div><div class="line">trueDeletedByteCount <span class="keyword">uint64</span></div><div class="line">trueReadOnly         <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过RaftServer的raft协议，完成多个weedmaster间投票选leader的事情,<br>当启动多个ServerMaster时，它们之间会进行通信，通过raft协议选举出一个Leader，对所有的master进行管理。<br>weed-fs中，通过使用raftServer完成上述选举过程；而raftServer则是用到了第三方资源，即goRaft（参照<a href="http://ayende.com/blog/165858/reviewing-go-raft-part-i）。" target="_blank" rel="external">http://ayende.com/blog/165858/reviewing-go-raft-part-i）。</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> RaftServer <span class="keyword">struct</span> &#123;</div><div class="line">truepeers      []<span class="keyword">string</span> <span class="comment">// initial peers to join with</span></div><div class="line">trueraftServer raft.Server  <span class="comment">//使用goraft //type Server interface 包含实现raft的方法</span></div><div class="line">truedataDir    <span class="keyword">string</span></div><div class="line">truehttpAddr   <span class="keyword">string</span></div><div class="line">truerouter     *mux.Router</div><div class="line">truetopo       *topology.Topology</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
     
     </summary>
     

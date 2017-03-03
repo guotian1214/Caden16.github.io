@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="go,seaweedfs," />
+  <meta name="keywords" content="文件系统，对象存储," />
 
 
 
@@ -89,22 +89,21 @@
 
 
 
-<meta name="description" content="使用put 上传文件到seaweedfs , 具体显示结果
-上传的所有文件都以单个文件进行存储,后缀为 .dat 和 .idx">
+<meta name="description" content="之前对于对象存储的定义还是比较模糊，看完文件系统vs对象存储——选型和趋势这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。
+对象存储初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。！后期：指的是以AWS的S3为代表的，通过HTT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="seaweedfs源码阅读6-文件存储格式">
-<meta property="og:url" content="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/index.html">
+<meta property="og:title" content="(转)文件系统vs对象存储——选型和趋势">
+<meta property="og:url" content="https://makeitpossible16.github.io/对象存储/对象存储VS文件系统/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="使用put 上传文件到seaweedfs , 具体显示结果
-上传的所有文件都以单个文件进行存储,后缀为 .dat 和 .idx">
-<meta property="og:image" content="http://oh56h8a9l.bkt.clouddn.com/seaweedfs源码阅读6-20161212.png">
-<meta property="og:image" content="http://oh56h8a9l.bkt.clouddn.com/seaweefs源码阅读6-2-20161212.png">
-<meta property="og:updated_time" content="2016-12-13T03:26:44.809Z">
+<meta property="og:description" content="之前对于对象存储的定义还是比较模糊，看完文件系统vs对象存储——选型和趋势这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。
+对象存储初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。！后期：指的是以AWS的S3为代表的，通过HTT">
+<meta property="og:image" content="https://makeitpossible16.github.io/uploads/对象存储2.png">
+<meta property="og:updated_time" content="2017-03-03T09:28:15.851Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="seaweedfs源码阅读6-文件存储格式">
-<meta name="twitter:description" content="使用put 上传文件到seaweedfs , 具体显示结果
-上传的所有文件都以单个文件进行存储,后缀为 .dat 和 .idx">
-<meta name="twitter:image" content="http://oh56h8a9l.bkt.clouddn.com/seaweedfs源码阅读6-20161212.png">
+<meta name="twitter:title" content="(转)文件系统vs对象存储——选型和趋势">
+<meta name="twitter:description" content="之前对于对象存储的定义还是比较模糊，看完文件系统vs对象存储——选型和趋势这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。
+对象存储初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。！后期：指的是以AWS的S3为代表的，通过HTT">
+<meta name="twitter:image" content="https://makeitpossible16.github.io/uploads/对象存储2.png">
 
 
 
@@ -132,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/"/>
+  <link rel="canonical" href="https://makeitpossible16.github.io/对象存储/对象存储VS文件系统/"/>
 
 
 
 
 
-  <title> seaweedfs源码阅读6-文件存储格式 | MakeItPossible16 </title>
+  <title> (转)文件系统vs对象存储——选型和趋势 | MakeItPossible16 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -307,7 +306,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/">
+  <link itemprop="mainEntityOfPage" href="https://makeitpossible16.github.io/对象存储/对象存储VS文件系统/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="MakeItPossible16">
@@ -331,7 +330,7 @@
             
             
               
-                seaweedfs源码阅读6-文件存储格式
+                (转)文件系统vs对象存储——选型和趋势
               
             
           </h1>
@@ -346,8 +345,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-12T00:00:00Z">
-                2016-12-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-03T00:00:00Z">
+                2017-03-03
               &nbsp;&nbsp;</time>&nbsp;
             
 
@@ -362,8 +361,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-13T11:26:44+08:00">
-                2016-12-13
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-03T09:28:15Z">
+                2017-03-03
               </time>
             
           </span>
@@ -381,8 +380,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/文件存储/" itemprop="url" rel="index">
-                    <span itemprop="name">文件存储</span>
+                  <a href="/categories/对象存储/" itemprop="url" rel="index">
+                    <span itemprop="name">对象存储</span>
                   </a>
                 </span>
 
@@ -399,8 +398,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/文件存储/seaweedfs源码阅读6-文件存储格式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="文件存储/seaweedfs源码阅读6-文件存储格式/" itemprop="commentCount"></span>
+                <a href="/对象存储/对象存储VS文件系统/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="对象存储/对象存储VS文件系统/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,8 +425,9 @@
       
 
       
-        <p>使用put 上传文件到seaweedfs , 具体显示结果<br><img src="http://oh56h8a9l.bkt.clouddn.com/seaweedfs源码阅读6-20161212.png" alt="seaweedfs源码阅读6-20161212"></p>
-<p>上传的所有文件都以单个文件进行存储,后缀为 .dat 和 .idx<br><img src="http://oh56h8a9l.bkt.clouddn.com/seaweefs源码阅读6-2-20161212.png" alt="seaweefs源码阅读6-2-20161212"></p>
+        <p>之前对于对象存储的定义还是比较模糊，看完<a href="http://www.testlab.com.cn/Index/article/id/1082.html" target="_blank" rel="external">文件系统vs对象存储——选型和趋势</a>这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。</p>
+<h2 id="对象存储"><a href="#对象存储" class="headerlink" title="对象存储"></a>对象存储</h2><p>初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。<br>！<a href="/uploads/对象存储1.png"></a><br>后期：指的是以AWS的S3为代表的，通过HTTP接口提供访问的存储服务或者存储系统,如果我们把一个文件传到对象存储系统里面存起来，就叫做一个对象。<br><img src="/uploads/对象存储2.png" alt=""></p>
+<h2 id="对象存储与文件系统的比较"><a href="#对象存储与文件系统的比较" class="headerlink" title="对象存储与文件系统的比较"></a>对象存储与文件系统的比较</h2><p>对于大多数文件系统来说，尤其是POSIX(表示可移植操作系统接口（Portable Operating System Interface ，缩写为 POSIX ）,POSIX标准定义了操作系统应该为应用程序提供的接口标准)兼容的文件系统，提供open、close、read、write和lseek等接口。<br>而对象存储的接口是REST风格的，通常是基于HTTP协议的RESTful Web API，通过HTTP请求中的PUT和GET等操作进行文件的上传即写入和下载即读取，通过DELETE操作删除文件。<br>对象存储和文件系统在接口上的本质区别是对象存储不支持和fread和fwrite类似的随机位置读写操作，即一个文件PUT到对象存储里以后，如果要读取，只能GET整个文件，如果要修改一个对象，只能重新PUT一个新的到对象存储里，覆盖之前的对象或者形成一个新的版本。</p>
 
       
     </div>
@@ -451,9 +451,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/go/" rel="tag"># go</a>
-          
-            <a href="/tags/seaweedfs/" rel="tag"># seaweedfs</a>
+            <a href="/tags/文件系统，对象存储/" rel="tag"># 文件系统，对象存储</a>
           
         </div>
       
@@ -466,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/文件存储/seaweedfs源码阅读5-文件PUT过程/" rel="next" title="seaweedfs源码阅读5-文件PUT过程">
-                <i class="fa fa-chevron-left"></i> seaweedfs源码阅读5-文件PUT过程
+              <a href="/C/C++语法记录/" rel="next" title="C++语法记录">
+                <i class="fa fa-chevron-left"></i> C++语法记录
               </a>
             
           </div>
@@ -475,10 +473,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/文件存储/seaweedfs源码阅读7-文件存储过程/" rel="prev" title="seaweedfs源码阅读7-文件存储过程">
-                seaweedfs源码阅读7-文件存储过程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -493,10 +487,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="文件存储/seaweedfs源码阅读6-文件存储格式/"
-     data-title="seaweedfs源码阅读6-文件存储格式"
+        <div class="ds-share flat" data-thread-key="对象存储/对象存储VS文件系统/"
+     data-title="(转)文件系统vs对象存储——选型和趋势"
      data-content=""
-     data-url="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/">
+     data-url="https://makeitpossible16.github.io/对象存储/对象存储VS文件系统/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -523,8 +517,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="文件存储/seaweedfs源码阅读6-文件存储格式/"
-           data-title="seaweedfs源码阅读6-文件存储格式" data-url="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/">
+      <div class="ds-thread" data-thread-key="对象存储/对象存储VS文件系统/"
+           data-title="(转)文件系统vs对象存储——选型和趋势" data-url="https://makeitpossible16.github.io/对象存储/对象存储VS文件系统/">
       </div>
     
   </div>
@@ -548,8 +542,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -632,6 +635,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象存储"><span class="nav-number">1.</span> <span class="nav-text">对象存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象存储与文件系统的比较"><span class="nav-number">2.</span> <span class="nav-text">对象存储与文件系统的比较</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
