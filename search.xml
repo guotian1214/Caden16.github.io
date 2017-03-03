@@ -4,7 +4,7 @@
     
     <entry>
       <title><![CDATA[C++语法记录]]></title>
-      <url>%2FC-11%2FC%2B%2B%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95%2F</url>
+      <url>%2FC%2FC%2B%2B%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95%2F</url>
       <content type="text"><![CDATA[最近遇到一些C++的代码,其中会包含一些C++11及STL的代码,对C++11的特性不太了解,记录一下. nextnext用于操作迭代器,函数解释std::nextParameters it - an iterator n - number of elements to advance使用示例:12345678910111213141516#include &lt;iostream&gt;#include &lt;iterator&gt;#include &lt;vector&gt;int main()&#123; std::vector&lt;int&gt; v&#123; 3, 1, 4,6,7 &#125;; auto it = v.begin(); auto nx = std::next(it, 3); std::cout &lt;&lt; *it &lt;&lt; &apos; &apos; &lt;&lt; *nx &lt;&lt; &apos;\n&apos;;&#125;output:3 6 push_back函数将一个新的元素加到vector的最后面，位置为当前最后一个元素的下一个元素. 参考C++ vector::push_back 用法剖析 for_eachfor_each用于逐个遍历容器元素，它对迭代器区间[first，last)所指的每一个元素，执行由单参数函数对象f所定义的操作。参考简单的程序诠释C++ STL算法系列之一：for_each]]></content>
     </entry>
 
