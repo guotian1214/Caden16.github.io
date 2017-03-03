@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-03-02T02:40:28.921Z</updated>
+  <updated>2017-03-02T02:58:28.038Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -20,17 +20,18 @@
     <link href="https://makeitpossible16.github.io/C-11/C++%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://makeitpossible16.github.io/C-11/C++语法记录/</id>
     <published>2017-03-01T00:00:00.000Z</published>
-    <updated>2017-03-02T02:40:28.921Z</updated>
+    <updated>2017-03-02T02:58:28.038Z</updated>
     
-    <content type="html"><![CDATA[<p>最近遇到一些C++的代码,其中会包含一些C++11的代码,对C++11的特性不太了解,记录一下.</p>
+    <content type="html"><![CDATA[<p>最近遇到一些C++的代码,其中会包含一些C++11及STL的代码,对C++11的特性不太了解,记录一下.</p>
 <h2 id="next"><a href="#next" class="headerlink" title="next"></a>next</h2><p>next用于操作迭代器,函数解释<a href="http://en.cppreference.com/w/cpp/iterator/next" target="_blank" rel="external">std::next</a><br>Parameters<br>  it    -    an iterator<br>  n    -    number of elements to advance<br>使用示例:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;iterator&gt;</div><div class="line">#include &lt;vector&gt;</div><div class="line">int main()</div><div class="line">&#123;</div><div class="line">    std::vector&lt;int&gt; v&#123; 3, 1, 4,6,7 &#125;;</div><div class="line"></div><div class="line">    auto it = v.begin();</div><div class="line"></div><div class="line">    auto nx = std::next(it, 3);</div><div class="line"></div><div class="line">    std::cout &lt;&lt; *it &lt;&lt; &apos; &apos; &lt;&lt; *nx &lt;&lt; &apos;\n&apos;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">output:</div><div class="line">3 6</div></pre></td></tr></table></figure></p>
 <h2 id="push-back"><a href="#push-back" class="headerlink" title="push_back"></a>push_back</h2><p>函数将一个新的元素加到vector的最后面，位置为当前最后一个元素的下一个元素. 参考<a href="http://blog.csdn.net/u010545732/article/details/24385701" target="_blank" rel="external">C++ vector::push_back 用法剖析</a></p>
+<h2 id="for-each"><a href="#for-each" class="headerlink" title="for_each"></a>for_each</h2><p>for_each用于逐个遍历容器元素，它对迭代器区间[first，last)所指的每一个元素，执行由单参数函数对象f所定义的操作。<br>参考<a href="http://blog.csdn.net/jerryjbiao/article/details/6827508" target="_blank" rel="external">简单的程序诠释C++ STL算法系列之一：for_each</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;最近遇到一些C++的代码,其中会包含一些C++11的代码,对C++11的特性不太了解,记录一下.&lt;/p&gt;
-&lt;h2 id=&quot;next&quot;&gt;&lt;a href=&quot;#next&quot; class=&quot;headerlink&quot; title=&quot;next&quot;&gt;&lt;/a&gt;next&lt;/h2&gt;&lt;p&gt;next用于
+      &lt;p&gt;最近遇到一些C++的代码,其中会包含一些C++11及STL的代码,对C++11的特性不太了解,记录一下.&lt;/p&gt;
+&lt;h2 id=&quot;next&quot;&gt;&lt;a href=&quot;#next&quot; class=&quot;headerlink&quot; title=&quot;next&quot;&gt;&lt;/a&gt;next&lt;/h2&gt;&lt;p&gt;ne
     
     </summary>
     
