@@ -250,7 +250,7 @@
     <entry>
       <title><![CDATA[seaweedfs源码阅读记录3-raft协议理解]]></title>
       <url>%2F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%2Fseaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%953-raft%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3%2F</url>
-      <content type="text"><![CDATA[raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理. 参考文章Raft一致性算法raft动画演示raft介绍go-raft源码解析go-raft文档goraft的简单实现 阅读记录本文按照参考文章中的go-raft源码解析中的文章阅读,记录阅读过程.12345678910111213141516// The request sent to a server to append entries to the log.type AppendEntriesRequest struct &#123;trueTerm uint64truePrevLogIndex uint64truePrevLogTerm uint64trueCommitIndex uint64trueLeaderName stringtrueEntries []*protobuf.LogEntry // 定义在protobuf中的LogEntry&#125;// The response returned from a server appending entries to the log.type AppendEntriesResponse struct &#123;truepb *protobuf.AppendEntriesResponsetruepeer stringtrueappend bool&#125;]]></content>
+      <content type="text"><![CDATA[raft用于seaweedfs的多个master server间进行leader选举,选出leader对其他master server进行管理. 参考文章Raft一致性算法raft动画演示raft介绍go-raft源码解析go-raft文档goraft的简单实现分布式一致性，Raft以及其它 阅读记录本文按照参考文章中的go-raft源码解析中的文章阅读,记录阅读过程.12345678910111213141516// The request sent to a server to append entries to the log.type AppendEntriesRequest struct &#123;trueTerm uint64truePrevLogIndex uint64truePrevLogTerm uint64trueCommitIndex uint64trueLeaderName stringtrueEntries []*protobuf.LogEntry // 定义在protobuf中的LogEntry&#125;// The response returned from a server appending entries to the log.type AppendEntriesResponse struct &#123;truepb *protobuf.AppendEntriesResponsetruepeer stringtrueappend bool&#125;]]></content>
     </entry>
 
     
