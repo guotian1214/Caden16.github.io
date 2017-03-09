@@ -523,7 +523,7 @@
     <link href="https://makeitpossible16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://makeitpossible16.github.io/python语法/python语法记录/</id>
     <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-03-09T03:10:23.572Z</updated>
+    <updated>2017-03-09T08:05:14.135Z</updated>
     
     <content type="html"><![CDATA[<p>记录一下忘记的Python语法</p>
 <h2 id="StringIO"><a href="#StringIO" class="headerlink" title="StringIO"></a>StringIO</h2><p>负责在内存中读写string,其中在openstack-swift的mem_diskfile.py中提到::param fp: <code>StringIO</code> in-memory representation object<br><a href="StringIO和BytesIO">StringIO和BytesIO</a></p>
@@ -532,6 +532,8 @@
 <p>转换后的str虽然是字符串类型，但相当于其他语言中的字节流（字节数组），可以在网络上传输.<br>格式符”i”表示转换为int，’ii’表示有两个int变量。进行转换后的结果长度为8个字节（int类型占用4个字节，两个int为8个字 节），可以看到输出的结果是乱码，因为结果是二进制数据，所以显示为乱码。可以使用python的内置函数repr来获取可识别的字符串，其中十六进制的 0x00000014, 0x00001009分别表示20和400。</p>
 <h2 id="struct-unpack"><a href="#struct-unpack" class="headerlink" title="struct.unpack"></a>struct.unpack</h2><p>struct.unpack做的工作刚好与struct.pack相反，用于将字节流转换成python数 据类型。它的函数原型为：struct.unpack(fmt, string)，该函数返回一个元组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">struct.pack(&quot;ii&quot;, 20, 400)  </div><div class="line">a1, a2 = struct.unpack(&quot;ii&quot;, str)  </div><div class="line">print &apos;a1:&apos;, a1  </div><div class="line">print &apos;a2:&apos;, a2  </div><div class="line"></div><div class="line">#---- result:  </div><div class="line">#a1: 20  </div><div class="line">#a2: 400</div></pre></td></tr></table></figure></p>
 <h2 id="repr"><a href="#repr" class="headerlink" title="repr()"></a>repr()</h2><p>参考<a href="http://www.cnblogs.com/itdyb/p/5046415.html" target="_blank" rel="external">Python中的repr()函数</a><br>Python 有办法将任意值转为字符串：将它传入repr() 或str() 函数。<br>函数str() 用于将值转化为适于人阅读的形式，而repr() 转化为供解释器读取的形式。<br>repr（）函数得到的字符串通常可以用来重新获得该对象，repr（）的输入对python比较友好。通常情况下obj==eval(repr(obj))这个等式是成立的。</p>
+<h2 id="enumerate"><a href="#enumerate" class="headerlink" title="enumerate"></a>enumerate</h2><p>参考<a href="http://blog.csdn.net/churximi/article/details/51648388" target="_blank" rel="external">python enumerate用法总结</a><br>如果对一个列表，既要遍历索引又要遍历元素时,可利用enumerate.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">"这"</span>, <span class="string">"是"</span>, <span class="string">"一个"</span>, <span class="string">"测试"</span>]</div><div class="line"><span class="keyword">for</span> index, item <span class="keyword">in</span> enumerate(list1):</div><div class="line">    <span class="keyword">print</span> index, item</div></pre></td></tr></table></figure></p>
+<p>还可以接收第二个参数，用于指定索引起始值.<br>要统计文件的行数，可以这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">count = -1</div><div class="line">for index, line in enumerate(open(filepath,&apos;r&apos;))：</div><div class="line">    count += 1</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
