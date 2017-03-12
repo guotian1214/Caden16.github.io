@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-03-08T11:39:59.802Z</updated>
+  <updated>2017-03-12T14:16:40.177Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -14,6 +14,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>(转)自旋锁spinlock剖析与改进</title>
+    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81spinlock%E5%89%96%E6%9E%90%E4%B8%8E%E6%94%B9%E8%BF%9B/"/>
+    <id>https://makeitpossible16.github.io/操作系统/自旋锁spinlock剖析与改进/</id>
+    <published>2017-03-12T14:16:40.177Z</published>
+    <updated>2017-03-12T14:16:40.177Z</updated>
+    
+    <content type="html"><![CDATA[<p>遇到题目：<br>运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock<br>SpinLock<br>Mutex<br>Semaphore<br>Condition variable<br>对SpinLock 以及Mutex不太了解，参考<a href="http://kb.cnblogs.com/page/105657/" target="_blank" rel="external">自旋锁spinlock剖析与改进</a>,得到比较全面的认识。<br>spinlock又称自旋锁，线程通过busy-wait-loop的方式来获取锁，任时刻只有一个线程能够获得锁，其他线程忙等待直到获得锁。spinlock在多处理器多线程环境的场景中有很广泛的使用，一般要求使用spinlock的临界区尽量简短，这样获取的锁可以尽快释放，以满足其他忙等的线程。Spinlock和mutex不同，spinlock不会导致线程的状态切换(用户态-&gt;内核态)，但是spinlock使用不当(如临界区执行时间过长)会导致cpu busy飙高。<br>spinlock不会使线程状态发生切换，mutex在获取不到锁的时候会选择sleep。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;遇到题目：&lt;br&gt;运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock&lt;br&gt;SpinLock&lt;br&gt;Mutex&lt;br&gt;Semaphore&lt;br&gt;Condition variabl
+    
+    </summary>
+    
+      <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
   
   <entry>
     <title>LRU缓存淘汰算法</title>
@@ -75,7 +98,7 @@
     <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8VS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
     <id>https://makeitpossible16.github.io/对象存储/对象存储VS文件系统/</id>
     <published>2017-03-03T00:00:00.000Z</published>
-    <updated>2017-03-03T09:30:14.817Z</updated>
+    <updated>2017-03-03T11:25:09.854Z</updated>
     
     <content type="html"><![CDATA[<p>之前对于对象存储的定义还是比较模糊，看完<a href="http://www.testlab.com.cn/Index/article/id/1082.html" target="_blank" rel="external">文件系统vs对象存储——选型和趋势</a>这篇文章后对文件系统和对象存储有一个比较清晰的了解，做一下简单的概括。</p>
 <h2 id="对象存储"><a href="#对象存储" class="headerlink" title="对象存储"></a>对象存储</h2><p>初期：对象存储往往指的是以类似标准化组织SNIA定义的OSD（object storage device）和MDS（Metadata Server）为基本组成部分的分布式存储，通常是分布式文件系统。<br><img src="/uploads/对象存储1.png" alt=""><br>后期：指的是以AWS的S3为代表的，通过HTTP接口提供访问的存储服务或者存储系统,如果我们把一个文件传到对象存储系统里面存起来，就叫做一个对象。<br><img src="/uploads/对象存储2.png" alt=""></p>
@@ -118,9 +141,9 @@
       <category term="C++" scheme="https://makeitpossible16.github.io/categories/C/"/>
     
     
-      <category term="C++11" scheme="https://makeitpossible16.github.io/tags/C-11/"/>
-    
       <category term="C++" scheme="https://makeitpossible16.github.io/tags/C/"/>
+    
+      <category term="C++11" scheme="https://makeitpossible16.github.io/tags/C-11/"/>
     
   </entry>
   
@@ -151,31 +174,6 @@
   
   <entry>
     <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
-    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Next%20Permutation(%E5%85%A8%E6%8E%92%E5%88%97%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95)/"/>
-    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Next Permutation(全排列生成算法)/</id>
-    <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-02-27T07:37:20.507Z</updated>
-    
-    <content type="html"><![CDATA[<p>LeetCode题目-Next Permutation<br>看半天连题目都看不懂,参考<a href="http://blog.csdn.net/nomasp/article/details/49913627" target="_blank" rel="external">LeetCode 31 Next Permutation（下一个排列）</a>,基本理解题意:<br>数学中的排列组合，比如“1，2，3”的全排列，依次是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1 2 3</div><div class="line">1 3 2</div><div class="line">2 1 3</div><div class="line">2 3 1</div><div class="line">3 1 2</div><div class="line">3 2 1</div></pre></td></tr></table></figure></p>
-<p>从上面的某一行重排到期下一行，如果已经是最后一行了，则重排成第一行。</p>
-<p>实现思路:<br>从后往前遍历,找到最长递增序列,结束位置为index,然后找到最长递增序列中比index-1的数大的最小的数.<br>图片来源:<a href="http://fisherlei.blogspot.co.id/2012/12/leetcode-next-permutation.html" target="_blank" rel="external">http://fisherlei.blogspot.co.id/2012/12/leetcode-next-permutation.html</a><br><img src="/uploads/next permutation.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;LeetCode题目-Next Permutation&lt;br&gt;看半天连题目都看不懂,参考&lt;a href=&quot;http://blog.csdn.net/nomasp/article/details/49913627&quot; target=&quot;_blank&quot; rel=&quot;external&quot;
-    
-    </summary>
-    
-      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
     <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
     <id>https://makeitpossible16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
     <published>2017-02-26T00:00:00.000Z</published>
@@ -191,6 +189,31 @@
     <summary type="html">
     
       &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目:&quot;&gt;&lt;/a&gt;题目:&lt;/h2&gt;&lt;p&gt;给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3&lt;br&gt;&lt;figure class=&quot;highlight pla
+    
+    </summary>
+    
+      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
+    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Next%20Permutation(%E5%85%A8%E6%8E%92%E5%88%97%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95)/"/>
+    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Next Permutation(全排列生成算法)/</id>
+    <published>2017-02-26T00:00:00.000Z</published>
+    <updated>2017-02-27T07:37:20.507Z</updated>
+    
+    <content type="html"><![CDATA[<p>LeetCode题目-Next Permutation<br>看半天连题目都看不懂,参考<a href="http://blog.csdn.net/nomasp/article/details/49913627" target="_blank" rel="external">LeetCode 31 Next Permutation（下一个排列）</a>,基本理解题意:<br>数学中的排列组合，比如“1，2，3”的全排列，依次是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">1 2 3</div><div class="line">1 3 2</div><div class="line">2 1 3</div><div class="line">2 3 1</div><div class="line">3 1 2</div><div class="line">3 2 1</div></pre></td></tr></table></figure></p>
+<p>从上面的某一行重排到期下一行，如果已经是最后一行了，则重排成第一行。</p>
+<p>实现思路:<br>从后往前遍历,找到最长递增序列,结束位置为index,然后找到最长递增序列中比index-1的数大的最小的数.<br>图片来源:<a href="http://fisherlei.blogspot.co.id/2012/12/leetcode-next-permutation.html" target="_blank" rel="external">http://fisherlei.blogspot.co.id/2012/12/leetcode-next-permutation.html</a><br><img src="/uploads/next permutation.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;LeetCode题目-Next Permutation&lt;br&gt;看半天连题目都看不懂,参考&lt;a href=&quot;http://blog.csdn.net/nomasp/article/details/49913627&quot; target=&quot;_blank&quot; rel=&quot;external&quot;
     
     </summary>
     
@@ -519,6 +542,31 @@
   </entry>
   
   <entry>
+    <title>数据结构</title>
+    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
+    <published>2017-02-07T00:00:00.000Z</published>
+    <updated>2017-02-07T13:37:16.495Z</updated>
+    
+    <content type="html"><![CDATA[<p>数据结构都忘得差不多了,记录一下</p>
+<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;数据结构都忘得差不多了,记录一下&lt;/p&gt;
+&lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fans
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>python语法记录</title>
     <link href="https://makeitpossible16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://makeitpossible16.github.io/python语法/python语法记录/</id>
@@ -547,31 +595,6 @@
     
     
       <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构</title>
-    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
-    <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-02-07T13:37:16.495Z</updated>
-    
-    <content type="html"><![CDATA[<p>数据结构都忘得差不多了,记录一下</p>
-<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;数据结构都忘得差不多了,记录一下&lt;/p&gt;
-&lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fans
-    
-    </summary>
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -631,31 +654,6 @@
   </entry>
   
   <entry>
-    <title>linux文件存储机制</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
-    <published>2017-01-21T00:00:00.000Z</published>
-    <updated>2017-01-21T14:05:03.896Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-  </entry>
-  
-  <entry>
     <title>openstack-swift调试</title>
     <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E8%B0%83%E8%AF%95/"/>
     <id>https://makeitpossible16.github.io/对象存储/openstack-swift调试/</id>
@@ -683,6 +681,31 @@
     
     
       <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux文件存储机制</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
+    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
+    <published>2017-01-21T00:00:00.000Z</published>
+    <updated>2017-01-21T14:05:03.896Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
@@ -746,41 +769,6 @@
   </entry>
   
   <entry>
-    <title>linux命令学习</title>
-    <link href="https://makeitpossible16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/linux命令/linux命令学习/</id>
-    <published>2017-01-02T00:00:00.000Z</published>
-    <updated>2017-02-25T04:00:15.707Z</updated>
-    
-    <content type="html"><![CDATA[<p>虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下</p>
-<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。<br><a href="http://www.runoob.com/linux/linux-comm-awk.html" target="_blank" rel="external">awk使用介绍</a><br><a href="http://blog.csdn.net/andyxm/article/details/5964071" target="_blank" rel="external">awk print 学习</a></p>
-<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><p>用于排序<br><a href="http://www.cnblogs.com/dong008259/archive/2011/12/08/2281214.html" target="_blank" rel="external">linux之sort用法</a></p>
-<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><p>报告或删除文件中重复的行。<br><a href="http://blog.csdn.net/jesseen/article/details/8005056" target="_blank" rel="external">linux uniq 命令详解</a></p>
-<h2 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h2><p>读取标准输入的数据，并将其内容输出成文件<br><a href="http://liubin.blog.51cto.com/282313/131298" target="_blank" rel="external">linux tee 命令详解</a></p>
-<h2 id="dev-null"><a href="#dev-null" class="headerlink" title="/dev/null"></a>/dev/null</h2><p>可以把/dev/null看作一个”黑洞”，它非常等价于一个只写文件，所有写入它的内容都会永远丢失。<br><a href="http://www.2cto.com/os/201412/361275.html" target="_blank" rel="external">linux下/dev/null的用途</a><br><a href="http://blog.csdn.net/sunrier/article/details/7695839/" target="_blank" rel="external">Linux下” &gt;/dev/null 2&gt;&amp;1 “相关知识说明</a></p>
-<h2 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h2><p>程序后台运行,如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令.<br>命令格式 : nohup command &amp;<br><a href="http://www.2cto.com/os/201301/185701.html" target="_blank" rel="external">linux nohup命令详解</a></p>
-<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><p>screen 算是 linux 运维一个中高级技巧。通过 screen 命令创建的环境下运行的终端命令，其父进程不是 sshd 登录会话，而是 screen 。这样就可以即避免用户退出进程消失的问题，又随时能重新接管回终端继续操作。<br>创建独立的 screen 命令如下：<br>screen -dmS elkscreen_1<br>接管连入创建的 elkscreen_1 命令如下：<br>screen -r elkscreen_1<br>然后你可以看到一个一模一样的终端，运行 logstash 之后，不要按 Ctrl+C，而是按 Ctrl+A+D 键，断开环境。想重新接管，依然 screen -r elkscreen_1 即可。<br>如果创建了多个 screen，查看列表命令如下：<br>screen -list<br><a href="http://kibana.logstash.es/content/logstash/get-start/daemon.html" target="_blank" rel="external">需要长期后台运行的大量程序</a>,使用daemontools</p>
-<h2 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2><p>参考<a href="http://blog.csdn.net/yongan1006/article/details/8134581" target="_blank" rel="external">管道命令和xargs的区别(经典解释)</a><br>管道是实现“将前面的标准输出作为后面的标准输入”<br>xargs是实现“将标准输入作为命令的参数”<br>运行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo &quot;--help&quot;|cat</div><div class="line">echo &quot;--help&quot;|xargs cat</div></pre></td></tr></table></figure></p>
-<p>得到结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$ echo &quot;--help&quot;|cat</div><div class="line">--help</div><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$ echo &quot;--help&quot;|xargs cat</div><div class="line">用法：cat [选项]... [文件]...</div><div class="line">Concatenate FILE(s) to standard output.</div><div class="line"></div><div class="line">如果没有指定文件，或者文件为&quot;-&quot;，则从标准输入读取。</div><div class="line"></div><div class="line">  -A, --show-all           equivalent to -vET</div><div class="line">  -b, --number-nonblank    number nonempty output lines, overrides -n</div><div class="line">  -e                       equivalent to -vE</div><div class="line">  -E, --show-ends          display $ at end of each line</div><div class="line">  -n, --number             number all output lines</div><div class="line">  -s, --squeeze-blank      suppress repeated empty output lines</div><div class="line">  -t                       与-vT 等价</div><div class="line">  -T, --show-tabs          将跳格字符显示为^I</div><div class="line">  -u                       (被忽略)</div><div class="line">  -v, --show-nonprinting   使用^ 和M- 引用，除了LFD和 TAB 之外</div><div class="line">      --help		显示此帮助信息并退出</div><div class="line">      --version		显示版本信息并退出</div><div class="line"></div><div class="line">示例：</div><div class="line">  cat f - g  先输出f 的内容，然后输出标准输入的内容，最后输出g 的内容。</div><div class="line">  cat        将标准输入的内容复制到标准输出。</div><div class="line"></div><div class="line">GNU coreutils online help: &lt;http://www.gnu.org/software/coreutils/&gt;</div><div class="line">请向&lt;http://translationproject.org/team/zh_CN.html&gt; 报告cat 的翻译错误</div><div class="line">Full documentation at: &lt;http://www.gnu.org/software/coreutils/cat&gt;</div><div class="line">or available locally via: info &apos;(coreutils) cat invocation&apos;</div><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$</div></pre></td></tr></table></figure></p>
-<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>批量替换字符串,如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find /etc/swift/ -name \*.conf | xargs sudo sed -i &quot;s/&lt;your-user-name&gt;/$&#123;USER&#125;/&quot;</div></pre></td></tr></table></figure></p>
-<p>把/etc/swift/文件夹下 *.conf 文件中的<your-user-name>批量替换为计算机用户名<br>参考<a href="http://www.frostsky.com/2014/01/linux-sed-command/" target="_blank" rel="external">linux sed 批量替换字符串</a></your-user-name></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下&lt;/p&gt;
-&lt;h2 id=&quot;awk&quot;&gt;&lt;a href=&quot;#awk&quot; class=&quot;headerlink&quot; title=&quot;awk&quot;&gt;&lt;/a&gt;awk&lt;/h2&gt;&lt;p&gt;AWK是一种处理文本文件的语言，
-    
-    </summary>
-    
-      <category term="linux命令" scheme="https://makeitpossible16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
-    
-    
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ELKStack搭建问题总结</title>
     <link href="https://makeitpossible16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
     <id>https://makeitpossible16.github.io/ELKStack/ELKStack搭建问题总结/</id>
@@ -813,6 +801,41 @@
       <category term="日志分析" scheme="https://makeitpossible16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
     
       <category term="流处理" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令学习</title>
+    <link href="https://makeitpossible16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://makeitpossible16.github.io/linux命令/linux命令学习/</id>
+    <published>2017-01-02T00:00:00.000Z</published>
+    <updated>2017-02-25T04:00:15.707Z</updated>
+    
+    <content type="html"><![CDATA[<p>虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下</p>
+<h2 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h2><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。<br><a href="http://www.runoob.com/linux/linux-comm-awk.html" target="_blank" rel="external">awk使用介绍</a><br><a href="http://blog.csdn.net/andyxm/article/details/5964071" target="_blank" rel="external">awk print 学习</a></p>
+<h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><p>用于排序<br><a href="http://www.cnblogs.com/dong008259/archive/2011/12/08/2281214.html" target="_blank" rel="external">linux之sort用法</a></p>
+<h2 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h2><p>报告或删除文件中重复的行。<br><a href="http://blog.csdn.net/jesseen/article/details/8005056" target="_blank" rel="external">linux uniq 命令详解</a></p>
+<h2 id="tee"><a href="#tee" class="headerlink" title="tee"></a>tee</h2><p>读取标准输入的数据，并将其内容输出成文件<br><a href="http://liubin.blog.51cto.com/282313/131298" target="_blank" rel="external">linux tee 命令详解</a></p>
+<h2 id="dev-null"><a href="#dev-null" class="headerlink" title="/dev/null"></a>/dev/null</h2><p>可以把/dev/null看作一个”黑洞”，它非常等价于一个只写文件，所有写入它的内容都会永远丢失。<br><a href="http://www.2cto.com/os/201412/361275.html" target="_blank" rel="external">linux下/dev/null的用途</a><br><a href="http://blog.csdn.net/sunrier/article/details/7695839/" target="_blank" rel="external">Linux下” &gt;/dev/null 2&gt;&amp;1 “相关知识说明</a></p>
+<h2 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h2><p>程序后台运行,如果你正在运行一个进程，而且你觉得在退出帐户时该进程还不会结束，那么可以使用nohup命令.<br>命令格式 : nohup command &amp;<br><a href="http://www.2cto.com/os/201301/185701.html" target="_blank" rel="external">linux nohup命令详解</a></p>
+<h2 id="screen"><a href="#screen" class="headerlink" title="screen"></a>screen</h2><p>screen 算是 linux 运维一个中高级技巧。通过 screen 命令创建的环境下运行的终端命令，其父进程不是 sshd 登录会话，而是 screen 。这样就可以即避免用户退出进程消失的问题，又随时能重新接管回终端继续操作。<br>创建独立的 screen 命令如下：<br>screen -dmS elkscreen_1<br>接管连入创建的 elkscreen_1 命令如下：<br>screen -r elkscreen_1<br>然后你可以看到一个一模一样的终端，运行 logstash 之后，不要按 Ctrl+C，而是按 Ctrl+A+D 键，断开环境。想重新接管，依然 screen -r elkscreen_1 即可。<br>如果创建了多个 screen，查看列表命令如下：<br>screen -list<br><a href="http://kibana.logstash.es/content/logstash/get-start/daemon.html" target="_blank" rel="external">需要长期后台运行的大量程序</a>,使用daemontools</p>
+<h2 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2><p>参考<a href="http://blog.csdn.net/yongan1006/article/details/8134581" target="_blank" rel="external">管道命令和xargs的区别(经典解释)</a><br>管道是实现“将前面的标准输出作为后面的标准输入”<br>xargs是实现“将标准输入作为命令的参数”<br>运行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">echo &quot;--help&quot;|cat</div><div class="line">echo &quot;--help&quot;|xargs cat</div></pre></td></tr></table></figure></p>
+<p>得到结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$ echo &quot;--help&quot;|cat</div><div class="line">--help</div><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$ echo &quot;--help&quot;|xargs cat</div><div class="line">用法：cat [选项]... [文件]...</div><div class="line">Concatenate FILE(s) to standard output.</div><div class="line"></div><div class="line">如果没有指定文件，或者文件为&quot;-&quot;，则从标准输入读取。</div><div class="line"></div><div class="line">  -A, --show-all           equivalent to -vET</div><div class="line">  -b, --number-nonblank    number nonempty output lines, overrides -n</div><div class="line">  -e                       equivalent to -vE</div><div class="line">  -E, --show-ends          display $ at end of each line</div><div class="line">  -n, --number             number all output lines</div><div class="line">  -s, --squeeze-blank      suppress repeated empty output lines</div><div class="line">  -t                       与-vT 等价</div><div class="line">  -T, --show-tabs          将跳格字符显示为^I</div><div class="line">  -u                       (被忽略)</div><div class="line">  -v, --show-nonprinting   使用^ 和M- 引用，除了LFD和 TAB 之外</div><div class="line">      --help		显示此帮助信息并退出</div><div class="line">      --version		显示版本信息并退出</div><div class="line"></div><div class="line">示例：</div><div class="line">  cat f - g  先输出f 的内容，然后输出标准输入的内容，最后输出g 的内容。</div><div class="line">  cat        将标准输入的内容复制到标准输出。</div><div class="line"></div><div class="line">GNU coreutils online help: &lt;http://www.gnu.org/software/coreutils/&gt;</div><div class="line">请向&lt;http://translationproject.org/team/zh_CN.html&gt; 报告cat 的翻译错误</div><div class="line">Full documentation at: &lt;http://www.gnu.org/software/coreutils/cat&gt;</div><div class="line">or available locally via: info &apos;(coreutils) cat invocation&apos;</div><div class="line">ubuntu@ubuntu-Aspire-V3-571G:~$</div></pre></td></tr></table></figure></p>
+<h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>批量替换字符串,如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">find /etc/swift/ -name \*.conf | xargs sudo sed -i &quot;s/&lt;your-user-name&gt;/$&#123;USER&#125;/&quot;</div></pre></td></tr></table></figure></p>
+<p>把/etc/swift/文件夹下 *.conf 文件中的<your-user-name>批量替换为计算机用户名<br>参考<a href="http://www.frostsky.com/2014/01/linux-sed-command/" target="_blank" rel="external">linux sed 批量替换字符串</a></your-user-name></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;虽然使用linux有很长一段时间,但对于一些平时用不到的命令,还是比较生疏,记录一下&lt;/p&gt;
+&lt;h2 id=&quot;awk&quot;&gt;&lt;a href=&quot;#awk&quot; class=&quot;headerlink&quot; title=&quot;awk&quot;&gt;&lt;/a&gt;awk&lt;/h2&gt;&lt;p&gt;AWK是一种处理文本文件的语言，
+    
+    </summary>
+    
+      <category term="linux命令" scheme="https://makeitpossible16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+    
+    
+      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
     
   </entry>
   
@@ -1164,38 +1187,6 @@
   </entry>
   
   <entry>
-    <title>seaweedfs源码阅读记录1</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/</id>
-    <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2017-02-25T11:47:17.603Z</updated>
-    
-    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
-<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
-<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
-<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333”  -port=8080<br>启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter1 -master=localhost:9333<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
-<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
-<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
-<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>seaweedfs源码阅读记录2</title>
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
     <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
@@ -1215,6 +1206,38 @@
     <summary type="html">
     
       &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读记录1</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/</id>
+    <published>2016-11-22T00:00:00.000Z</published>
+    <updated>2017-02-25T11:47:17.603Z</updated>
+    
+    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
+<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
+<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
+<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333”  -port=8080<br>启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter1 -master=localhost:9333<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
+<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
+<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
+<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
     
     </summary>
     
@@ -1350,9 +1373,9 @@
     <link href="https://makeitpossible16.github.io/uncategorized/README/"/>
     <id>https://makeitpossible16.github.io/uncategorized/README/</id>
     <published>2016-01-01T00:00:00.000Z</published>
-    <updated>2017-03-08T11:40:10.079Z</updated>
+    <updated>2017-03-12T14:16:52.109Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="blogMarkdownFile"><a href="#blogMarkdownFile" class="headerlink" title="blogMarkdownFile"></a>blogMarkdownFile</h2><h2 id="寻找实习单位-个人简介"><a href="#寻找实习单位-个人简介" class="headerlink" title="寻找实习单位,个人简介"></a>寻找实习单位,<a href="https://makeitpossible16.github.io/about/">个人简介</a></h2><h2 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a><a href="https://www.makeitpossible16.github.io" target="_blank" rel="external">myblog</a></h2><h3 id="C-语法记录"><a href="#C-语法记录" class="headerlink" title="C++语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/C++语法记录.md" target="_blank" rel="external">C++语法记录</a></h3><h3 id="ELKStack搭建问题总结"><a href="#ELKStack搭建问题总结" class="headerlink" title="ELKStack搭建问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ELKStack搭建问题总结.md" target="_blank" rel="external">ELKStack搭建问题总结</a></h3><h3 id="LRU缓存淘汰算法"><a href="#LRU缓存淘汰算法" class="headerlink" title="LRU缓存淘汰算法"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LRU缓存淘汰算法.md" target="_blank" rel="external">LRU缓存淘汰算法</a></h3><h3 id="LeetCode解题-Next-Permutation-全排列生成算法-md"><a href="#LeetCode解题-Next-Permutation-全排列生成算法-md" class="headerlink" title="LeetCode解题-Next Permutation(全排列生成算法).md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Next Permutation(全排列生成算法" target="_blank" rel="external">LeetCode解题-Next Permutation(全排列生成算法)</a>.md)</h3><h3 id="LeetCode解题-Permutation-Sequence"><a href="#LeetCode解题-Permutation-Sequence" class="headerlink" title="LeetCode解题-Permutation Sequence"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Permutation Sequence.md" target="_blank" rel="external">LeetCode解题-Permutation Sequence</a></h3><h3 id="cloudstack搭建总结"><a href="#cloudstack搭建总结" class="headerlink" title="cloudstack搭建总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/cloudstack搭建总结.md" target="_blank" rel="external">cloudstack搭建总结</a></h3><h3 id="gdb调试错误-找不到文件"><a href="#gdb调试错误-找不到文件" class="headerlink" title="gdb调试错误-找不到文件"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/gdb调试错误-找不到文件.md" target="_blank" rel="external">gdb调试错误-找不到文件</a></h3><h3 id="golang-反射机制"><a href="#golang-反射机制" class="headerlink" title="golang 反射机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang 反射机制.md" target="_blank" rel="external">golang 反射机制</a></h3><h3 id="golang学习"><a href="#golang学习" class="headerlink" title="golang学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang学习.md" target="_blank" rel="external">golang学习</a></h3><h3 id="golang调试技巧"><a href="#golang调试技巧" class="headerlink" title="golang调试技巧"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang调试技巧.md" target="_blank" rel="external">golang调试技巧</a></h3><h3 id="kafka学习笔记"><a href="#kafka学习笔记" class="headerlink" title="kafka学习笔记"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka学习笔记.md" target="_blank" rel="external">kafka学习笔记</a></h3><h3 id="linux内核学习-数据结构"><a href="#linux内核学习-数据结构" class="headerlink" title="linux内核学习-数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux内核学习-数据结构.md" target="_blank" rel="external">linux内核学习-数据结构</a></h3><h3 id="linux命令学习"><a href="#linux命令学习" class="headerlink" title="linux命令学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux命令学习.md" target="_blank" rel="external">linux命令学习</a></h3><h3 id="linux学习-linux文件存储"><a href="#linux学习-linux文件存储" class="headerlink" title="linux学习-linux文件存储"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux学习-linux文件存储.md" target="_blank" rel="external">linux学习-linux文件存储</a></h3><h3 id="linux文件存储机制"><a href="#linux文件存储机制" class="headerlink" title="linux文件存储机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux文件存储机制.md" target="_blank" rel="external">linux文件存储机制</a></h3><h3 id="nodeJS入门总结"><a href="#nodeJS入门总结" class="headerlink" title="nodeJS入门总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/nodeJS入门总结.md" target="_blank" rel="external">nodeJS入门总结</a></h3><h3 id="openstack-swift源码阅读记录1-文件上传过程"><a href="#openstack-swift源码阅读记录1-文件上传过程" class="headerlink" title="openstack-swift源码阅读记录1-文件上传过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录1-文件上传过程.md" target="_blank" rel="external">openstack-swift源码阅读记录1-文件上传过程</a></h3><h3 id="openstack-swift源码阅读记录3-diskfile"><a href="#openstack-swift源码阅读记录3-diskfile" class="headerlink" title="openstack-swift源码阅读记录3-diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录3-diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录3-diskfile</a></h3><h3 id="openstack-swift源码阅读记录4-启用mem-diskfile"><a href="#openstack-swift源码阅读记录4-启用mem-diskfile" class="headerlink" title="openstack-swift源码阅读记录4-启用mem_diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录4-启用mem_diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录4-启用mem_diskfile</a></h3><h3 id="openstack-swift调试"><a href="#openstack-swift调试" class="headerlink" title="openstack-swift调试"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift调试.md" target="_blank" rel="external">openstack-swift调试</a></h3><h3 id="openstack源码阅读记录2-object-metadata"><a href="#openstack源码阅读记录2-object-metadata" class="headerlink" title="openstack源码阅读记录2-object metadata"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack源码阅读记录2-object metadata.md" target="_blank" rel="external">openstack源码阅读记录2-object metadata</a></h3><h3 id="python语法记录"><a href="#python语法记录" class="headerlink" title="python语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python语法记录.md" target="_blank" rel="external">python语法记录</a></h3><h3 id="seaweedfs源码阅读4-volume启动"><a href="#seaweedfs源码阅读4-volume启动" class="headerlink" title="seaweedfs源码阅读4-volume启动"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读4-volume启动.md" target="_blank" rel="external">seaweedfs源码阅读4-volume启动</a></h3><h3 id="seaweedfs源码阅读5-文件PUT过程"><a href="#seaweedfs源码阅读5-文件PUT过程" class="headerlink" title="seaweedfs源码阅读5-文件PUT过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读5-文件PUT过程.md" target="_blank" rel="external">seaweedfs源码阅读5-文件PUT过程</a></h3><h3 id="seaweedfs源码阅读6-文件存储格式"><a href="#seaweedfs源码阅读6-文件存储格式" class="headerlink" title="seaweedfs源码阅读6-文件存储格式"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读6-文件存储格式.md" target="_blank" rel="external">seaweedfs源码阅读6-文件存储格式</a></h3><h3 id="seaweedfs源码阅读7-文件存储过程"><a href="#seaweedfs源码阅读7-文件存储过程" class="headerlink" title="seaweedfs源码阅读7-文件存储过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读7-文件存储过程.md" target="_blank" rel="external">seaweedfs源码阅读7-文件存储过程</a></h3><h3 id="seaweedfs源码阅读8-GET-amp-HEAD获取文件过程"><a href="#seaweedfs源码阅读8-GET-amp-HEAD获取文件过程" class="headerlink" title="seaweedfs源码阅读8-GET&amp;HEAD获取文件过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程.md" target="_blank" rel="external">seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</a></h3><h3 id="seaweedfs源码阅读记录"><a href="#seaweedfs源码阅读记录" class="headerlink" title="seaweedfs源码阅读记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录.md" target="_blank" rel="external">seaweedfs源码阅读记录</a></h3><h3 id="seaweedfs源码阅读记录2"><a href="#seaweedfs源码阅读记录2" class="headerlink" title="seaweedfs源码阅读记录2"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录2.md" target="_blank" rel="external">seaweedfs源码阅读记录2</a></h3><h3 id="seaweedfs源码阅读记录3-raft协议理解"><a href="#seaweedfs源码阅读记录3-raft协议理解" class="headerlink" title="seaweedfs源码阅读记录3-raft协议理解"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录3-raft协议理解.md" target="_blank" rel="external">seaweedfs源码阅读记录3-raft协议理解</a></h3><h3 id="seaweedfs源码阅读记录9-生成fid过程"><a href="#seaweedfs源码阅读记录9-生成fid过程" class="headerlink" title="seaweedfs源码阅读记录9-生成fid过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录9-生成fid过程.md" target="_blank" rel="external">seaweedfs源码阅读记录9-生成fid过程</a></h3><h3 id="swift-weedfs-backend-diskfile代码实现"><a href="#swift-weedfs-backend-diskfile代码实现" class="headerlink" title="swift-weedfs-backend diskfile代码实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend diskfile代码实现.md" target="_blank" rel="external">swift-weedfs-backend diskfile代码实现</a></h3><h3 id="swift-weedfs-backend接口设计"><a href="#swift-weedfs-backend接口设计" class="headerlink" title="swift-weedfs-backend接口设计"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend接口设计.md" target="_blank" rel="external">swift-weedfs-backend接口设计</a></h3><h3 id="ubuntu下如何优雅地使用翻译"><a href="#ubuntu下如何优雅地使用翻译" class="headerlink" title="ubuntu下如何优雅地使用翻译"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu下如何优雅地使用翻译.md" target="_blank" rel="external">ubuntu下如何优雅地使用翻译</a></h3><h3 id="ubuntu使用问题总结"><a href="#ubuntu使用问题总结" class="headerlink" title="ubuntu使用问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu使用问题总结.md" target="_blank" rel="external">ubuntu使用问题总结</a></h3><h3 id="伪随机数"><a href="#伪随机数" class="headerlink" title="伪随机数"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/伪随机数.md" target="_blank" rel="external">伪随机数</a></h3><h3 id="在Openstack-Swift中使用多种后端存储实现"><a href="#在Openstack-Swift中使用多种后端存储实现" class="headerlink" title="在Openstack Swift中使用多种后端存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/在Openstack Swift中使用多种后端存储实现.md" target="_blank" rel="external">在Openstack Swift中使用多种后端存储实现</a></h3><h3 id="对象存储VS文件系统"><a href="#对象存储VS文件系统" class="headerlink" title="对象存储VS文件系统"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/对象存储VS文件系统.md" target="_blank" rel="external">对象存储VS文件系统</a></h3><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/数据结构.md" target="_blank" rel="external">数据结构</a></h3><h3 id="文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md"><a href="#文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md" class="headerlink" title="文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/文件系统(seaweedfs" target="_blank" rel="external">文件系统(seaweedfs)与关系型数据库优劣势分析</a>与关系型数据库优劣势分析.md)</h3><h3 id="查找-数据结构学习"><a href="#查找-数据结构学习" class="headerlink" title="查找-数据结构学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/查找-数据结构学习.md" target="_blank" rel="external">查找-数据结构学习</a></h3>]]></content>
+    <content type="html"><![CDATA[<h2 id="blogMarkdownFile"><a href="#blogMarkdownFile" class="headerlink" title="blogMarkdownFile"></a>blogMarkdownFile</h2><h2 id="寻找实习单位-个人简介"><a href="#寻找实习单位-个人简介" class="headerlink" title="寻找实习单位,个人简介"></a>寻找实习单位,<a href="https://makeitpossible16.github.io/about/">个人简介</a></h2><h2 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a><a href="https://www.makeitpossible16.github.io" target="_blank" rel="external">myblog</a></h2><h3 id="C-语法记录"><a href="#C-语法记录" class="headerlink" title="C++语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/C++语法记录.md" target="_blank" rel="external">C++语法记录</a></h3><h3 id="ELKStack搭建问题总结"><a href="#ELKStack搭建问题总结" class="headerlink" title="ELKStack搭建问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ELKStack搭建问题总结.md" target="_blank" rel="external">ELKStack搭建问题总结</a></h3><h3 id="LRU缓存淘汰算法"><a href="#LRU缓存淘汰算法" class="headerlink" title="LRU缓存淘汰算法"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LRU缓存淘汰算法.md" target="_blank" rel="external">LRU缓存淘汰算法</a></h3><h3 id="LeetCode解题-Next-Permutation-全排列生成算法-md"><a href="#LeetCode解题-Next-Permutation-全排列生成算法-md" class="headerlink" title="LeetCode解题-Next Permutation(全排列生成算法).md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Next Permutation(全排列生成算法" target="_blank" rel="external">LeetCode解题-Next Permutation(全排列生成算法)</a>.md)</h3><h3 id="LeetCode解题-Permutation-Sequence"><a href="#LeetCode解题-Permutation-Sequence" class="headerlink" title="LeetCode解题-Permutation Sequence"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Permutation Sequence.md" target="_blank" rel="external">LeetCode解题-Permutation Sequence</a></h3><h3 id="cloudstack搭建总结"><a href="#cloudstack搭建总结" class="headerlink" title="cloudstack搭建总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/cloudstack搭建总结.md" target="_blank" rel="external">cloudstack搭建总结</a></h3><h3 id="gdb调试错误-找不到文件"><a href="#gdb调试错误-找不到文件" class="headerlink" title="gdb调试错误-找不到文件"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/gdb调试错误-找不到文件.md" target="_blank" rel="external">gdb调试错误-找不到文件</a></h3><h3 id="golang-反射机制"><a href="#golang-反射机制" class="headerlink" title="golang 反射机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang 反射机制.md" target="_blank" rel="external">golang 反射机制</a></h3><h3 id="golang学习"><a href="#golang学习" class="headerlink" title="golang学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang学习.md" target="_blank" rel="external">golang学习</a></h3><h3 id="golang调试技巧"><a href="#golang调试技巧" class="headerlink" title="golang调试技巧"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang调试技巧.md" target="_blank" rel="external">golang调试技巧</a></h3><h3 id="kafka学习笔记"><a href="#kafka学习笔记" class="headerlink" title="kafka学习笔记"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka学习笔记.md" target="_blank" rel="external">kafka学习笔记</a></h3><h3 id="linux内核学习-数据结构"><a href="#linux内核学习-数据结构" class="headerlink" title="linux内核学习-数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux内核学习-数据结构.md" target="_blank" rel="external">linux内核学习-数据结构</a></h3><h3 id="linux命令学习"><a href="#linux命令学习" class="headerlink" title="linux命令学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux命令学习.md" target="_blank" rel="external">linux命令学习</a></h3><h3 id="linux学习-linux文件存储"><a href="#linux学习-linux文件存储" class="headerlink" title="linux学习-linux文件存储"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux学习-linux文件存储.md" target="_blank" rel="external">linux学习-linux文件存储</a></h3><h3 id="linux文件存储机制"><a href="#linux文件存储机制" class="headerlink" title="linux文件存储机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux文件存储机制.md" target="_blank" rel="external">linux文件存储机制</a></h3><h3 id="nodeJS入门总结"><a href="#nodeJS入门总结" class="headerlink" title="nodeJS入门总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/nodeJS入门总结.md" target="_blank" rel="external">nodeJS入门总结</a></h3><h3 id="openstack-swift源码阅读记录1-文件上传过程"><a href="#openstack-swift源码阅读记录1-文件上传过程" class="headerlink" title="openstack-swift源码阅读记录1-文件上传过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录1-文件上传过程.md" target="_blank" rel="external">openstack-swift源码阅读记录1-文件上传过程</a></h3><h3 id="openstack-swift源码阅读记录3-diskfile"><a href="#openstack-swift源码阅读记录3-diskfile" class="headerlink" title="openstack-swift源码阅读记录3-diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录3-diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录3-diskfile</a></h3><h3 id="openstack-swift源码阅读记录4-启用mem-diskfile"><a href="#openstack-swift源码阅读记录4-启用mem-diskfile" class="headerlink" title="openstack-swift源码阅读记录4-启用mem_diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录4-启用mem_diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录4-启用mem_diskfile</a></h3><h3 id="openstack-swift调试"><a href="#openstack-swift调试" class="headerlink" title="openstack-swift调试"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift调试.md" target="_blank" rel="external">openstack-swift调试</a></h3><h3 id="openstack源码阅读记录2-object-metadata"><a href="#openstack源码阅读记录2-object-metadata" class="headerlink" title="openstack源码阅读记录2-object metadata"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack源码阅读记录2-object metadata.md" target="_blank" rel="external">openstack源码阅读记录2-object metadata</a></h3><h3 id="python语法记录"><a href="#python语法记录" class="headerlink" title="python语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python语法记录.md" target="_blank" rel="external">python语法记录</a></h3><h3 id="seaweedfs源码阅读4-volume启动"><a href="#seaweedfs源码阅读4-volume启动" class="headerlink" title="seaweedfs源码阅读4-volume启动"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读4-volume启动.md" target="_blank" rel="external">seaweedfs源码阅读4-volume启动</a></h3><h3 id="seaweedfs源码阅读5-文件PUT过程"><a href="#seaweedfs源码阅读5-文件PUT过程" class="headerlink" title="seaweedfs源码阅读5-文件PUT过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读5-文件PUT过程.md" target="_blank" rel="external">seaweedfs源码阅读5-文件PUT过程</a></h3><h3 id="seaweedfs源码阅读6-文件存储格式"><a href="#seaweedfs源码阅读6-文件存储格式" class="headerlink" title="seaweedfs源码阅读6-文件存储格式"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读6-文件存储格式.md" target="_blank" rel="external">seaweedfs源码阅读6-文件存储格式</a></h3><h3 id="seaweedfs源码阅读7-文件存储过程"><a href="#seaweedfs源码阅读7-文件存储过程" class="headerlink" title="seaweedfs源码阅读7-文件存储过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读7-文件存储过程.md" target="_blank" rel="external">seaweedfs源码阅读7-文件存储过程</a></h3><h3 id="seaweedfs源码阅读8-GET-amp-HEAD获取文件过程"><a href="#seaweedfs源码阅读8-GET-amp-HEAD获取文件过程" class="headerlink" title="seaweedfs源码阅读8-GET&amp;HEAD获取文件过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程.md" target="_blank" rel="external">seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</a></h3><h3 id="seaweedfs源码阅读记录"><a href="#seaweedfs源码阅读记录" class="headerlink" title="seaweedfs源码阅读记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录.md" target="_blank" rel="external">seaweedfs源码阅读记录</a></h3><h3 id="seaweedfs源码阅读记录2"><a href="#seaweedfs源码阅读记录2" class="headerlink" title="seaweedfs源码阅读记录2"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录2.md" target="_blank" rel="external">seaweedfs源码阅读记录2</a></h3><h3 id="seaweedfs源码阅读记录3-raft协议理解"><a href="#seaweedfs源码阅读记录3-raft协议理解" class="headerlink" title="seaweedfs源码阅读记录3-raft协议理解"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录3-raft协议理解.md" target="_blank" rel="external">seaweedfs源码阅读记录3-raft协议理解</a></h3><h3 id="seaweedfs源码阅读记录9-生成fid过程"><a href="#seaweedfs源码阅读记录9-生成fid过程" class="headerlink" title="seaweedfs源码阅读记录9-生成fid过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录9-生成fid过程.md" target="_blank" rel="external">seaweedfs源码阅读记录9-生成fid过程</a></h3><h3 id="swift-weedfs-backend-diskfile代码实现"><a href="#swift-weedfs-backend-diskfile代码实现" class="headerlink" title="swift-weedfs-backend diskfile代码实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend diskfile代码实现.md" target="_blank" rel="external">swift-weedfs-backend diskfile代码实现</a></h3><h3 id="swift-weedfs-backend接口设计"><a href="#swift-weedfs-backend接口设计" class="headerlink" title="swift-weedfs-backend接口设计"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend接口设计.md" target="_blank" rel="external">swift-weedfs-backend接口设计</a></h3><h3 id="ubuntu下如何优雅地使用翻译"><a href="#ubuntu下如何优雅地使用翻译" class="headerlink" title="ubuntu下如何优雅地使用翻译"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu下如何优雅地使用翻译.md" target="_blank" rel="external">ubuntu下如何优雅地使用翻译</a></h3><h3 id="ubuntu使用问题总结"><a href="#ubuntu使用问题总结" class="headerlink" title="ubuntu使用问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu使用问题总结.md" target="_blank" rel="external">ubuntu使用问题总结</a></h3><h3 id="伪随机数"><a href="#伪随机数" class="headerlink" title="伪随机数"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/伪随机数.md" target="_blank" rel="external">伪随机数</a></h3><h3 id="在Openstack-Swift中使用多种后端存储实现"><a href="#在Openstack-Swift中使用多种后端存储实现" class="headerlink" title="在Openstack Swift中使用多种后端存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/在Openstack Swift中使用多种后端存储实现.md" target="_blank" rel="external">在Openstack Swift中使用多种后端存储实现</a></h3><h3 id="对象存储VS文件系统"><a href="#对象存储VS文件系统" class="headerlink" title="对象存储VS文件系统"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/对象存储VS文件系统.md" target="_blank" rel="external">对象存储VS文件系统</a></h3><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/数据结构.md" target="_blank" rel="external">数据结构</a></h3><h3 id="文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md"><a href="#文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md" class="headerlink" title="文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/文件系统(seaweedfs" target="_blank" rel="external">文件系统(seaweedfs)与关系型数据库优劣势分析</a>与关系型数据库优劣势分析.md)</h3><h3 id="查找-数据结构学习"><a href="#查找-数据结构学习" class="headerlink" title="查找-数据结构学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/查找-数据结构学习.md" target="_blank" rel="external">查找-数据结构学习</a></h3><h3 id="自旋锁spinlock剖析与改进"><a href="#自旋锁spinlock剖析与改进" class="headerlink" title="自旋锁spinlock剖析与改进"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/自旋锁spinlock剖析与改进.md" target="_blank" rel="external">自旋锁spinlock剖析与改进</a></h3>]]></content>
     
     <summary type="html">
     

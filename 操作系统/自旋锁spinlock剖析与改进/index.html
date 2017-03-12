@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="go,seaweedfs," />
+  <meta name="keywords" content="操作系统," />
 
 
 
@@ -89,22 +89,16 @@
 
 
 
-<meta name="description" content="使用put 上传文件到seaweedfs , 具体显示结果
-上传的所有文件都以单个文件进行存储,后缀为 .dat 和 .idx">
+<meta name="description" content="遇到题目：运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLockSpinLockMutexSemaphoreCondition variable对SpinLock 以及Mutex不太了解，参考自旋锁spinlock剖析与改进,得到比较全面的认识。spinlock又称自旋锁，线程通过busy-wait-loo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="seaweedfs源码阅读6-文件存储格式">
-<meta property="og:url" content="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/index.html">
+<meta property="og:title" content="(转)自旋锁spinlock剖析与改进">
+<meta property="og:url" content="https://makeitpossible16.github.io/操作系统/自旋锁spinlock剖析与改进/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="使用put 上传文件到seaweedfs , 具体显示结果
-上传的所有文件都以单个文件进行存储,后缀为 .dat 和 .idx">
-<meta property="og:image" content="http://oh56h8a9l.bkt.clouddn.com/seaweedfs源码阅读6-20161212.png">
-<meta property="og:image" content="http://oh56h8a9l.bkt.clouddn.com/seaweefs源码阅读6-2-20161212.png">
-<meta property="og:updated_time" content="2016-12-13T03:26:44.809Z">
+<meta property="og:description" content="遇到题目：运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLockSpinLockMutexSemaphoreCondition variable对SpinLock 以及Mutex不太了解，参考自旋锁spinlock剖析与改进,得到比较全面的认识。spinlock又称自旋锁，线程通过busy-wait-loo">
+<meta property="og:updated_time" content="2017-03-12T14:16:40.177Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="seaweedfs源码阅读6-文件存储格式">
-<meta name="twitter:description" content="使用put 上传文件到seaweedfs , 具体显示结果
-上传的所有文件都以单个文件进行存储,后缀为 .dat 和 .idx">
-<meta name="twitter:image" content="http://oh56h8a9l.bkt.clouddn.com/seaweedfs源码阅读6-20161212.png">
+<meta name="twitter:title" content="(转)自旋锁spinlock剖析与改进">
+<meta name="twitter:description" content="遇到题目：运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLockSpinLockMutexSemaphoreCondition variable对SpinLock 以及Mutex不太了解，参考自旋锁spinlock剖析与改进,得到比较全面的认识。spinlock又称自旋锁，线程通过busy-wait-loo">
 
 
 
@@ -132,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/"/>
+  <link rel="canonical" href="https://makeitpossible16.github.io/操作系统/自旋锁spinlock剖析与改进/"/>
 
 
 
 
 
-  <title> seaweedfs源码阅读6-文件存储格式 | MakeItPossible16 </title>
+  <title> (转)自旋锁spinlock剖析与改进 | MakeItPossible16 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -307,7 +301,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/">
+  <link itemprop="mainEntityOfPage" href="https://makeitpossible16.github.io/操作系统/自旋锁spinlock剖析与改进/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="MakeItPossible16">
@@ -331,7 +325,7 @@
             
             
               
-                seaweedfs源码阅读6-文件存储格式
+                (转)自旋锁spinlock剖析与改进
               
             
           </h1>
@@ -346,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-12T00:00:00Z">
-                2016-12-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-12T14:16:40Z">
+                2017-03-12
               &nbsp;&nbsp;</time>&nbsp;
             
 
@@ -362,8 +356,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-13T11:26:44+08:00">
-                2016-12-13
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-12T14:16:40Z">
+                2017-03-12
               </time>
             
           </span>
@@ -381,8 +375,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/文件存储/" itemprop="url" rel="index">
-                    <span itemprop="name">文件存储</span>
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
                   </a>
                 </span>
 
@@ -399,8 +393,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/文件存储/seaweedfs源码阅读6-文件存储格式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="文件存储/seaweedfs源码阅读6-文件存储格式/" itemprop="commentCount"></span>
+                <a href="/操作系统/自旋锁spinlock剖析与改进/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="操作系统/自旋锁spinlock剖析与改进/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -426,8 +420,7 @@
       
 
       
-        <p>使用put 上传文件到seaweedfs , 具体显示结果<br><img src="http://oh56h8a9l.bkt.clouddn.com/seaweedfs源码阅读6-20161212.png" alt="seaweedfs源码阅读6-20161212"></p>
-<p>上传的所有文件都以单个文件进行存储,后缀为 .dat 和 .idx<br><img src="http://oh56h8a9l.bkt.clouddn.com/seaweefs源码阅读6-2-20161212.png" alt="seaweefs源码阅读6-2-20161212"></p>
+        <p>遇到题目：<br>运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock<br>SpinLock<br>Mutex<br>Semaphore<br>Condition variable<br>对SpinLock 以及Mutex不太了解，参考<a href="http://kb.cnblogs.com/page/105657/" target="_blank" rel="external">自旋锁spinlock剖析与改进</a>,得到比较全面的认识。<br>spinlock又称自旋锁，线程通过busy-wait-loop的方式来获取锁，任时刻只有一个线程能够获得锁，其他线程忙等待直到获得锁。spinlock在多处理器多线程环境的场景中有很广泛的使用，一般要求使用spinlock的临界区尽量简短，这样获取的锁可以尽快释放，以满足其他忙等的线程。Spinlock和mutex不同，spinlock不会导致线程的状态切换(用户态-&gt;内核态)，但是spinlock使用不当(如临界区执行时间过长)会导致cpu busy飙高。<br>spinlock不会使线程状态发生切换，mutex在获取不到锁的时候会选择sleep。</p>
 
       
     </div>
@@ -451,9 +444,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/go/" rel="tag"># go</a>
-          
-            <a href="/tags/seaweedfs/" rel="tag"># seaweedfs</a>
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
           
         </div>
       
@@ -466,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/文件存储/seaweedfs源码阅读5-文件PUT过程/" rel="next" title="seaweedfs源码阅读5-文件PUT过程">
-                <i class="fa fa-chevron-left"></i> seaweedfs源码阅读5-文件PUT过程
+              <a href="/算法/LRU缓存淘汰算法/" rel="next" title="LRU缓存淘汰算法">
+                <i class="fa fa-chevron-left"></i> LRU缓存淘汰算法
               </a>
             
           </div>
@@ -475,10 +466,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/文件存储/seaweedfs源码阅读7-文件存储过程/" rel="prev" title="seaweedfs源码阅读7-文件存储过程">
-                seaweedfs源码阅读7-文件存储过程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -493,10 +480,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="文件存储/seaweedfs源码阅读6-文件存储格式/"
-     data-title="seaweedfs源码阅读6-文件存储格式"
+        <div class="ds-share flat" data-thread-key="操作系统/自旋锁spinlock剖析与改进/"
+     data-title="(转)自旋锁spinlock剖析与改进"
      data-content=""
-     data-url="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/">
+     data-url="https://makeitpossible16.github.io/操作系统/自旋锁spinlock剖析与改进/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -523,8 +510,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="文件存储/seaweedfs源码阅读6-文件存储格式/"
-           data-title="seaweedfs源码阅读6-文件存储格式" data-url="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/">
+      <div class="ds-thread" data-thread-key="操作系统/自旋锁spinlock剖析与改进/"
+           data-title="(转)自旋锁spinlock剖析与改进" data-url="https://makeitpossible16.github.io/操作系统/自旋锁spinlock剖析与改进/">
       </div>
     
   </div>
