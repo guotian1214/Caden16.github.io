@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-03-19T11:45:05.691Z</updated>
+  <updated>2017-03-19T11:47:17.060Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="https://makeitpossible16.github.io/Leveldb/(%E8%BD%AC)Leveldb%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
     <id>https://makeitpossible16.github.io/Leveldb/(转)Leveldb实现原理/</id>
     <published>2017-03-19T00:00:00.000Z</published>
-    <updated>2017-03-19T11:45:05.691Z</updated>
+    <updated>2017-03-19T11:47:17.060Z</updated>
     
     <content type="html"><![CDATA[<p>本文转自<a href="http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html" target="_blank" rel="external">数据分析与处理之二（Leveldb 实现原理）</a><br>郑重声明：本篇博客是自己学习 Leveldb 实现原理时参考了郎格科技系列博客整理的，原文地址：<a href="http://www.samecity.com/blog/Index.asp?SortID=12" target="_blank" rel="external">http://www.samecity.com/blog/Index.asp?SortID=12</a>, 只是为了加深印象，本文的配图是自己重新绘制的，大部分内容与原文相似，大家可以浏览原始页面 :-)，感兴趣的话可以一起讨论 Leveldb 的实现原理！</p>
 <h2 id="LevelDb日知录之一：LevelDb-101"><a href="#LevelDb日知录之一：LevelDb-101" class="headerlink" title="LevelDb日知录之一：LevelDb 101"></a>LevelDb日知录之一：LevelDb 101</h2><p>　　说起LevelDb也许您不清楚，但是如果作为IT工程师，不知道下面两位大神级别的工程师，那您的领导估计会Hold不住了：Jeff Dean和Sanjay Ghemawat。这两位是Google公司重量级的工程师，为数甚少的Google Fellow之二。</p>
-<p>　　Jeff Dean其人：<a href="http://research.google.com/people/jeff/index.html，Google大规模分布式平台Bigtable和MapReduce主要设计和实现者。" target="_blank" rel="external">http://research.google.com/people/jeff/index.html，Google大规模分布式平台Bigtable和MapReduce主要设计和实现者。</a></p>
-<p>　　Sanjay Ghemawat其人：<a href="http://research.google.com/people/sanjay/index.html，Google大规模分布式平台GFS，Bigtable和MapReduce主要设计和实现工程师。" target="_blank" rel="external">http://research.google.com/people/sanjay/index.html，Google大规模分布式平台GFS，Bigtable和MapReduce主要设计和实现工程师。</a></p>
+<p>　　Jeff Dean其人：<a href="http://research.google.com/people/jeff/index.html" target="_blank" rel="external">http://research.google.com/people/jeff/index.html</a>, Google大规模分布式平台Bigtable和MapReduce主要设计和实现者。</p>
+<p>　　Sanjay Ghemawat其人：<a href="http://research.google.com/people/sanjay/index.html" target="_blank" rel="external">http://research.google.com/people/sanjay/index.html</a>, Google大规模分布式平台GFS，Bigtable和MapReduce主要设计和实现工程师。</p>
 <p>　　LevelDb就是这两位大神级别的工程师发起的开源项目，简而言之，LevelDb是能够处理十亿级别规模Key-Value型数据持久性存储的C++ 程序库。正像上面介绍的，这二位是Bigtable的设计和实现者，如果了解Bigtable的话，应该知道在这个影响深远的分布式存储系统中有两个核心的部分：Master Server和Tablet Server。其中Master Server做一些管理数据的存储以及分布式调度工作，实际的分布式数据存储以及读写操作是由Tablet Server完成的，而LevelDb则可以理解为一个简化版的Tablet Server。</p>
 <p>　　LevelDb有如下一些特点：</p>
 <p>　　　　首先，LevelDb是一个持久化存储的KV系统，和Redis这种内存型的KV系统不同，LevelDb不会像Redis一样狂吃内存，而是将大部分数据存储到磁盘上。</p>
@@ -70,7 +70,7 @@
 <p>　　需要注意的是，LevelDb的Memtable中KV对是根据Key大小有序存储的，在系统插入新的KV时，LevelDb要把这个KV插到合适的位置上以保持这种Key有序性。其实，LevelDb的Memtable类只是一个接口类，真正的操作是通过背后的SkipList来做的，包括插入操作和读取操作等，所以Memtable的核心数据结构是一个SkipList。</p>
 <p>　　SkipList是由William Pugh发明。他在Communications of the ACM June 1990, 33(6) 668-676 发表了Skip lists: a probabilistic alternative to balanced trees，在该论文中详细解释了SkipList的数据结构和插入删除操作。</p>
 <p>SkipList是平衡树的一种替代数据结构，但是和红黑树不相同的是，SkipList对于树的平衡的实现是基于一种随机化的算法的，这样也就是说SkipList的插入和删除的工作是比较简单的。</p>
-<p>关于SkipList的详细介绍可以参考这篇文章：<a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html，讲述的很清楚，LevelDb的SkipList基本上是一个具体实现，并无特殊之处。" target="_blank" rel="external">http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html，讲述的很清楚，LevelDb的SkipList基本上是一个具体实现，并无特殊之处。</a></p>
+<p>关于SkipList的详细介绍可以参考这篇文章：<a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html" target="_blank" rel="external">http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html</a>, 讲述的很清楚，LevelDb的SkipList基本上是一个具体实现，并无特殊之处。</p>
 <p>　　SkipList不仅是维护有序数据的一个简单实现，而且相比较平衡树来说，在插入数据的时候可以避免频繁的树节点调整操作，所以写入效率是很高的，LevelDb整体而言是个高写入系统，SkipList在其中应该也起到了很重要的作用。Redis为了加快插入操作，也使用了SkipList来作为内部实现数据结构。</p>
 <h2 id="LevelDb日知录之六-写入与删除记录"><a href="#LevelDb日知录之六-写入与删除记录" class="headerlink" title="LevelDb日知录之六 写入与删除记录"></a>LevelDb日知录之六 写入与删除记录</h2><p>在之前的五节LevelDb日知录中，我们介绍了LevelDb的一些静态文件及其详细布局，从本节开始，我们看看LevelDb的一些动态操作，比如读写记录，Compaction，错误恢复等操作。</p>
 <p> 本节介绍levelDb的记录更新操作，即插入一条KV记录或者删除一条KV记录。levelDb的更新操作速度是非常快的，源于其内部机制决定了这种更新操作的简单性。<br> <img src="/uploads/leveldb-11.png" alt=""><br> <center>图6.1 LevelDb写入记录</center><br> 图6.1是levelDb如何更新KV数据的示意图，从图中可以看出，对于一个插入操作Put(Key,Value)来说，完成插入操作包含两个具体步骤：首先是将这条KV记录以顺序写的方式追加到之前介绍过的log文件末尾，因为尽管这是一个磁盘读写操作，但是文件的顺序追加写入效率是很高的，所以并不会导致写入速度的降低；第二个步骤是:如果写入log文件成功，那么将这条KV记录插入内存中的Memtable中，前面介绍过，Memtable只是一层封装，其内部其实是一个Key有序的SkipList列表，插入一条新记录的过程也很简单，即先查找合适的插入位置，然后修改相应的链接指针将新记录插入即可。完成这一步，写入记录就算完成了，所以一个插入记录操作涉及一次磁盘文件追加写和内存SkipList插入操作，这是为何levelDb写入速度如此高效的根本原因。</p>
