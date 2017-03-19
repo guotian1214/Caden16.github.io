@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-03-19T11:27:44.474Z</updated>
+  <updated>2017-03-19T11:45:05.691Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="https://makeitpossible16.github.io/Leveldb/(%E8%BD%AC)Leveldb%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
     <id>https://makeitpossible16.github.io/Leveldb/(转)Leveldb实现原理/</id>
     <published>2017-03-19T00:00:00.000Z</published>
-    <updated>2017-03-19T11:27:44.474Z</updated>
+    <updated>2017-03-19T11:45:05.691Z</updated>
     
-    <content type="html"><![CDATA[<p>本文转自<a href="http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html" target="_blank" rel="external">数据分析与处理之二（Leveldb 实现原理）</a><br>郑重声明：本篇博客是自己学习 Leveldb 实现原理时参考了郎格科技系列博客整理的，原文地址：<a href="http://www.samecity.com/blog/Index.asp?SortID=12，只是为了加深印象，本文的配图是自己重新绘制的，大部分内容与原文相似，大家可以浏览原始页面" target="_blank" rel="external">http://www.samecity.com/blog/Index.asp?SortID=12，只是为了加深印象，本文的配图是自己重新绘制的，大部分内容与原文相似，大家可以浏览原始页面</a> :-)，感兴趣的话可以一起讨论 Leveldb 的实现原理！</p>
+    <content type="html"><![CDATA[<p>本文转自<a href="http://www.cnblogs.com/haippy/archive/2011/12/04/2276064.html" target="_blank" rel="external">数据分析与处理之二（Leveldb 实现原理）</a><br>郑重声明：本篇博客是自己学习 Leveldb 实现原理时参考了郎格科技系列博客整理的，原文地址：<a href="http://www.samecity.com/blog/Index.asp?SortID=12" target="_blank" rel="external">http://www.samecity.com/blog/Index.asp?SortID=12</a>, 只是为了加深印象，本文的配图是自己重新绘制的，大部分内容与原文相似，大家可以浏览原始页面 :-)，感兴趣的话可以一起讨论 Leveldb 的实现原理！</p>
 <h2 id="LevelDb日知录之一：LevelDb-101"><a href="#LevelDb日知录之一：LevelDb-101" class="headerlink" title="LevelDb日知录之一：LevelDb 101"></a>LevelDb日知录之一：LevelDb 101</h2><p>　　说起LevelDb也许您不清楚，但是如果作为IT工程师，不知道下面两位大神级别的工程师，那您的领导估计会Hold不住了：Jeff Dean和Sanjay Ghemawat。这两位是Google公司重量级的工程师，为数甚少的Google Fellow之二。</p>
 <p>　　Jeff Dean其人：<a href="http://research.google.com/people/jeff/index.html，Google大规模分布式平台Bigtable和MapReduce主要设计和实现者。" target="_blank" rel="external">http://research.google.com/people/jeff/index.html，Google大规模分布式平台Bigtable和MapReduce主要设计和实现者。</a></p>
 <p>　　Sanjay Ghemawat其人：<a href="http://research.google.com/people/sanjay/index.html，Google大规模分布式平台GFS，Bigtable和MapReduce主要设计和实现工程师。" target="_blank" rel="external">http://research.google.com/people/sanjay/index.html，Google大规模分布式平台GFS，Bigtable和MapReduce主要设计和实现工程师。</a></p>
