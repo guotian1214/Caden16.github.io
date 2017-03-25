@@ -533,7 +533,7 @@ In CPython, the global interpreter lock, or GIL, is a mutex that prevents multip
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-03-25T12:06:22Z">
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-25T13:09:02Z">
                 2017-03-25
               </time>
             
@@ -598,10 +598,7 @@ In CPython, the global interpreter lock, or GIL, is a mutex that prevents multip
 
       
         
-          
-          参考Linux Page Cache机制
-
-          
+          <p>参考<a href="https://www.ibm.com/developerworks/cn/linux/l-cache/">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://blog.csdn.net/xf_xjtu/article/details/46382119">Linux Page Cache机制</a><br>在 Linux 中，具体文件系统，如 ext2/ext3、jfs、ntfs 等，负责在文件 Cache和存储设备之间交换 数据，位于具体文件系统之上的虚拟文件系统VFS负责在应用程序和文件 Cache 之间通过 read/write 等接口交换 数 据，而内存管理系统负责文件 Cache 的分配和回收，同时虚拟内存管理系统(VMM)则允许应用程序和文件 Cache 之间通过 memory map的方式交换数据。可见，在 Linux 系统中，文件 Cache 是内存管理系统、文件系统以及应用程序之间的一个联系枢纽。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/操作系统/linux页缓存机制 Page Cache/#more" rel="contents">
