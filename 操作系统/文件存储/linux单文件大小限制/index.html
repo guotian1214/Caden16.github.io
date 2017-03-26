@@ -89,16 +89,18 @@
 
 
 
-<meta name="description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则">
+<meta name="description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux单文件大小限制">
 <meta property="og:url" content="https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则">
-<meta property="og:updated_time" content="2017-03-25T16:25:07.595Z">
+<meta property="og:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有">
+<meta property="og:image" content="https://makeitpossible16.github.io/uploads/inode-struct.jpg">
+<meta property="og:updated_time" content="2017-03-26T04:08:21.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux单文件大小限制">
-<meta name="twitter:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则">
+<meta name="twitter:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有">
+<meta name="twitter:image" content="https://makeitpossible16.github.io/uploads/inode-struct.jpg">
 
 
 
@@ -356,8 +358,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-03-26T00:25:07+08:00">
-                2017-03-25
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-26T12:08:21+08:00">
+                2017-03-26
               </time>
             
           </span>
@@ -431,7 +433,10 @@
       
 
       
-        <p>参考<a href="http://mingyang.blog.51cto.com/2807508/1580314" target="_blank" rel="external">刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则</a></p>
+        <p>参考<a href="http://mingyang.blog.51cto.com/2807508/1580314" target="_blank" rel="external">刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则</a><br>对于ext3:<br>1)ext3文件系统采用32bit的块地址索引空间；<br>2)在inode条目中，引用一个块空间符号需要4byte的大小；<br>3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引<br>注：<br>a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有为什么，只有是什么；对于其它文件系统也是一样；<br>b.所谓双间接指针索引和三间接指针索引指的是两级结构和三级结构，相当于linux中的根文件系统目录树一样；<br>ext3文件系统中inode内部结构图：<br><img src="/uploads/inode-struct.jpg" alt=""><br>ext4:<br>1).ext4文件系统采用48bit的块地址索引空间；<br>2).在inode条目中，不在是使用指针索引的方式来进行与block的映射，而是采用extent来替代指针；此前在ext3中的15个<br>指针被替换成5个extent，一个extent占用3byte空间；一个extent描述了一组连续的block，当不够用时extent依旧可以采<br>用间接指针的索引，但没有个数限制。</p>
+<p>ext3:<br>1).最大支持的文件大小<br>    首先要知道，在linux文件系统，一个block的大小可以为1k,2k,4k，当block的大小为4k时为最大。在linux系统中，每一个文件都要使用一个inode号，因此要想计算出单个文件所支持的最大空间，只要知道inode中能够引用多少个block，而block取最大值4k的时候计算出来的值就是所能支持的单个文件的最大空间。<br>    从上面的硬性规定中可以看出：<br>a.一个inode支持12个直接指针，因此就表示了12个block<br>b.一个inode支持一个间接指针，也就是一个指针指向了一个block块，将该block块作为指向最终block的直接指针，这里是一个block为4K，指向一个block要占用4byte的空间，因此一个block的间接指针可以指向4K/4byte的block,即2^10<br>c.双间接指针最终则指向：2^10<em>2^10=2^20 个block<br>d.三间接指针最终执行：2^10</em>2^10*2^10=2^30 个block</p>
+<p>因此最终的block的个数为：12+2^10+2^20+2^30<br>则最终的大小为：(12+2^10+2^20+2^30)x4KByte<br>则换算成TB的大小为：(12+2^10+2^20+2^30)x4KByte/1024/1024/1024=4TB</p>
+<p>到此，可知ext3文件系统，在block为4K的时候，其支持的单个文件大小为最大，最大为4TB。</p>
 
       
     </div>
