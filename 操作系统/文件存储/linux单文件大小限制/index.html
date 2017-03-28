@@ -89,17 +89,17 @@
 
 
 
-<meta name="description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有">
+<meta name="description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则剖析 ext4ext4 维基百科对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux单文件大小限制">
 <meta property="og:url" content="https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有">
+<meta property="og:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则剖析 ext4ext4 维基百科对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也">
 <meta property="og:image" content="https://makeitpossible16.github.io/uploads/inode-struct.jpg">
-<meta property="og:updated_time" content="2017-03-26T04:08:21.201Z">
+<meta property="og:updated_time" content="2017-03-26T08:22:21.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux单文件大小限制">
-<meta name="twitter:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有">
+<meta name="twitter:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则剖析 ext4ext4 维基百科对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也">
 <meta name="twitter:image" content="https://makeitpossible16.github.io/uploads/inode-struct.jpg">
 
 
@@ -358,7 +358,7 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-03-26T12:08:21+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-26T16:22:21+08:00">
                 2017-03-26
               </time>
             
@@ -433,10 +433,15 @@
       
 
       
-        <p>参考<a href="http://mingyang.blog.51cto.com/2807508/1580314" target="_blank" rel="external">刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则</a><br>对于ext3:<br>1)ext3文件系统采用32bit的块地址索引空间；<br>2)在inode条目中，引用一个块空间符号需要4byte的大小；<br>3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引<br>注：<br>a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有为什么，只有是什么；对于其它文件系统也是一样；<br>b.所谓双间接指针索引和三间接指针索引指的是两级结构和三级结构，相当于linux中的根文件系统目录树一样；<br>ext3文件系统中inode内部结构图：<br><img src="/uploads/inode-struct.jpg" alt=""><br>ext4:<br>1).ext4文件系统采用48bit的块地址索引空间；<br>2).在inode条目中，不在是使用指针索引的方式来进行与block的映射，而是采用extent来替代指针；此前在ext3中的15个<br>指针被替换成5个extent，一个extent占用3byte空间；一个extent描述了一组连续的block，当不够用时extent依旧可以采<br>用间接指针的索引，但没有个数限制。</p>
+        <p>参考<a href="http://mingyang.blog.51cto.com/2807508/1580314" target="_blank" rel="external">刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则</a><br><a href="https://www.ibm.com/developerworks/cn/linux/l-anatomy-ext4/" target="_blank" rel="external">剖析 ext4</a><br><a href="https://zh.wikipedia.org/wiki/Ext4#cite_note-6" target="_blank" rel="external">ext4 维基百科</a><br>对于ext3:<br>1)ext3文件系统采用32bit的块地址索引空间；<br>2)在inode条目中，引用一个块空间符号需要4byte的大小；<br>3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引<br>注：<br>a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有为什么，只有是什么；对于其它文件系统也是一样；<br>b.所谓双间接指针索引和三间接指针索引指的是两级结构和三级结构，相当于linux中的根文件系统目录树一样；<br>ext3文件系统中inode内部结构图：<br><img src="/uploads/inode-struct.jpg" alt=""><br>ext4:<br>1).ext4文件系统采用48bit的块地址索引空间；<br>2).在inode条目中，不在是使用指针索引的方式来进行与block的映射，而是采用extent来替代指针；此前在ext3中的15个<br>指针被替换成5个extent，一个extent占用3byte空间；一个extent描述了一组连续的block，当不够用时extent依旧可以采<br>用间接指针的索引，但没有个数限制。</p>
 <p>ext3:<br>1).最大支持的文件大小<br>    首先要知道，在linux文件系统，一个block的大小可以为1k,2k,4k，当block的大小为4k时为最大。在linux系统中，每一个文件都要使用一个inode号，因此要想计算出单个文件所支持的最大空间，只要知道inode中能够引用多少个block，而block取最大值4k的时候计算出来的值就是所能支持的单个文件的最大空间。<br>    从上面的硬性规定中可以看出：<br>a.一个inode支持12个直接指针，因此就表示了12个block<br>b.一个inode支持一个间接指针，也就是一个指针指向了一个block块，将该block块作为指向最终block的直接指针，这里是一个block为4K，指向一个block要占用4byte的空间，因此一个block的间接指针可以指向4K/4byte的block,即2^10<br>c.双间接指针最终则指向：2^10<em>2^10=2^20 个block<br>d.三间接指针最终执行：2^10</em>2^10*2^10=2^30 个block</p>
-<p>因此最终的block的个数为：12+2^10+2^20+2^30<br>则最终的大小为：(12+2^10+2^20+2^30)x4KByte<br>则换算成TB的大小为：(12+2^10+2^20+2^30)x4KByte/1024/1024/1024=4TB</p>
-<p>到此，可知ext3文件系统，在block为4K的时候，其支持的单个文件大小为最大，最大为4TB。</p>
+<p>因此最终的block的个数为：12+2^10+2^20+2^30<br>则最终的大小为：(12+2^10+2^20+2^30)x4KByte<br>则换算成TB的大小为：(12+2^10+2^20+2^30)x4KByte/1024/1024/1024=2TB</p>
+<p>到此，可知ext3文件系统，在block为4K的时候，其支持的单个文件大小为最大，最大为2TB。</p>
+<p>ext4 的一个明显差别就是它支持更大的文件系统、文件和子目录。ext4 支持的最大文件系统为 1 EB（1000 PB）。虽然根据今天的标准这个文件系统已经非常巨大，但存储空间的消费会不断增长，因此 ext4 必须考虑到未来的发展。ext4 支持最大 16 TB 的文件（假设由 4KB 的块组成），这个容量是 ext3 的 8 倍。</p>
+<p>ext3的一个目录下最多只能有32000个子目录。ext4的子目录最高可达64000，且使用“dir_nlink”功能后可以达到更高（虽然父目录的link count会停止增加）。为了避免性能受到大量目录的影响，ext4默认打开Htree（一种特殊的B树）索引功能。该功能已经实现于Linux核心2.6.23版。</p>
+<p>ext4 的区段采用分层的方法高效地表示小文件，并且使用区段树高效地表示大文件。例如，单个 ext4 inode 有足够的空间来引用 4 个区段（每个区段表示一组相邻的块）。对于大文件（包括片段文件），一个 inode 能够引用一个索引节点，而每个索引节点能够引用一个叶节点（引用多个区段）。这种持续的区段树为大文件（尤其是分散的文件）提供丰富的表示方式。这些节点还包含自主检查机制，以阻止文件系统损坏带来威胁。</p>
+<p>ext4性能<br>衡量一个新文件系统的最重要指标就是它的根本性能。这常常是最难实现的指标，因为当文件系统变得庞大并且要求实现高可靠性时，将会以损害性能为代价。但是，ext4 不仅解决了伸缩性和可靠性，它还提供各种改善性能的方法。<br>文件级预分配<br>某些应用程序，比如数据库或内容流，要求将文件存储在相邻的块上（利用相邻块的读优化和最大化读的命令-块比率）。尽管区段能够将相邻块划分为片段，但另一种更强大的方法是按照所需的大小预分配比较大的相邻块（XFS 以前就是采用这种方法）。ext4 通过一个新的系统调用来实现这个目的，这个调用将按照特定的大小预分配并初始化文件。然后，您就可以写入必要的数据，并为数据提供不错的读性能。<br>延迟块分配<br>另一个基于文件大小的优化是延迟分配。这种性能优化延迟磁盘上的物理块的分配，直到块被刷入到磁盘时才进行分配。这种优化的关键是延迟物理块的分配，直到需要在磁盘上写这些物理块时才对其进行分配并写到相邻的块。这类似于持久化预分配，惟一的区别是文件系统会自动执行这项任务。不过如果预先知道文件的大小时，持久化预分配是更好的选择。<br>多个块分配<br>这是最后一个与相邻块相关的优化，即针对 ext4 的块分配器。在 ext3 中，块分配器的工作方式是每次分配一个块。当需要分配多个块时，非相邻块中可能存在相邻的数据。ext4 使用块分配器修复了这个问题，它能够在磁盘上一次分配多个块。与前面其他优化一样，这个优化在磁盘上收集相关的数据，以实现相邻读优化。<br>多个块分配的另一个方面是分配块时需要的处理量。记住，ext3 一次只分配一个块。在最简单的情况下，每个块的分配都要有一个调用。如果一次分配多个块，对块分配器的调用就会大大减少，从而加快分配并减少处理量。</p>
+<p>ext4可靠性<br>ext4 文件系统可能会扩展得比较大，这将导致可靠性问题。但 ext4 通过许多自主保护和自主修复机制来解决这个问题。<br>执行文件系统日志校验和<br>和 ext3 一样，ext4 也是一个日志文件系统。日志记录 就是通过日记（磁盘上相邻区域的专门循环记录）记录文件系统的变更的过程。因此，根据日志对物理存储执行实际变更更加可靠，并且能够确保一致性，即使在操作期间出现系统崩溃或电源中断。这样做可以减少文件系统损坏的几率。<br>但是即使进行日志记录，如果日志出现错误仍然会导致文件系统损坏。为了解决这个问题，ext4 对日志执行校验和，确保有效变更能够在底层文件系统上正确完成。<br>ext4 支持根据用户需求采用多种模式的日志记录。例如，ext4 支持 Writeback 模式，它仅记录元数据；或 Ordered 模式，它记录元数据，但写为元数据的数据是从日志中写入的；或 Journal 模式（最可靠的模式），它同时记录元数据和数据。注意，虽然 Journal 模式是确保文件系统一致的最佳选择，但它也是最慢的，因为所有数据都要经过日志。</p>
 
       
     </div>
@@ -484,6 +489,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/python/python string intern/" rel="prev" title="python string intern">
+                python string intern <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -567,7 +576,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -576,7 +585,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

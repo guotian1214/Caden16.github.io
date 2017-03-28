@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-03-26T04:08:21.201Z</updated>
+  <updated>2017-03-28T08:30:34.606Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -16,21 +16,61 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>linux单文件大小限制</title>
-    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E5%8D%95%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/</id>
-    <published>2017-03-26T00:00:00.000Z</published>
-    <updated>2017-03-26T04:08:21.201Z</updated>
+    <title>python string intern</title>
+    <link href="https://makeitpossible16.github.io/python/python%20string%20intern/"/>
+    <id>https://makeitpossible16.github.io/python/python string intern/</id>
+    <published>2017-03-28T00:00:00.000Z</published>
+    <updated>2017-03-28T08:30:34.606Z</updated>
     
-    <content type="html"><![CDATA[<p>参考<a href="http://mingyang.blog.51cto.com/2807508/1580314" target="_blank" rel="external">刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则</a><br>对于ext3:<br>1)ext3文件系统采用32bit的块地址索引空间；<br>2)在inode条目中，引用一个块空间符号需要4byte的大小；<br>3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引<br>注：<br>a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有为什么，只有是什么；对于其它文件系统也是一样；<br>b.所谓双间接指针索引和三间接指针索引指的是两级结构和三级结构，相当于linux中的根文件系统目录树一样；<br>ext3文件系统中inode内部结构图：<br><img src="/uploads/inode-struct.jpg" alt=""><br>ext4:<br>1).ext4文件系统采用48bit的块地址索引空间；<br>2).在inode条目中，不在是使用指针索引的方式来进行与block的映射，而是采用extent来替代指针；此前在ext3中的15个<br>指针被替换成5个extent，一个extent占用3byte空间；一个extent描述了一组连续的block，当不够用时extent依旧可以采<br>用间接指针的索引，但没有个数限制。</p>
-<p>ext3:<br>1).最大支持的文件大小<br>    首先要知道，在linux文件系统，一个block的大小可以为1k,2k,4k，当block的大小为4k时为最大。在linux系统中，每一个文件都要使用一个inode号，因此要想计算出单个文件所支持的最大空间，只要知道inode中能够引用多少个block，而block取最大值4k的时候计算出来的值就是所能支持的单个文件的最大空间。<br>    从上面的硬性规定中可以看出：<br>a.一个inode支持12个直接指针，因此就表示了12个block<br>b.一个inode支持一个间接指针，也就是一个指针指向了一个block块，将该block块作为指向最终block的直接指针，这里是一个block为4K，指向一个block要占用4byte的空间，因此一个block的间接指针可以指向4K/4byte的block,即2^10<br>c.双间接指针最终则指向：2^10<em>2^10=2^20 个block<br>d.三间接指针最终执行：2^10</em>2^10*2^10=2^30 个block</p>
-<p>因此最终的block的个数为：12+2^10+2^20+2^30<br>则最终的大小为：(12+2^10+2^20+2^30)x4KByte<br>则换算成TB的大小为：(12+2^10+2^20+2^30)x4KByte/1024/1024/1024=4TB</p>
-<p>到此，可知ext3文件系统，在block为4K的时候，其支持的单个文件大小为最大，最大为4TB。</p>
+    <content type="html"><![CDATA[<p>参考<a href="http://blog.csdn.net/handsomekang/article/details/41170685" target="_blank" rel="external">什么是string interning(字符串驻留)以及python中字符串的intern机制</a><br>Python中的字符串采用了intern机制，会自动intern.<br>Incomputer science, string interning is a method of storing only onecopy of each distinct string value, which must be immutable. Interning strings makes some stringprocessing tasks more time- or space-efficient at the cost of requiring moretime when the string is created or interned. The distinct values are stored ina string intern pool. –引自维基百科<br>也就是说，值相同的字符串对象只会保存一份，是共用的，这也决定了字符串必须是不可变对象。<br>Python中的字符串采用了intern机制，会自动intern<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;a = &apos;kzc&apos;</div><div class="line">&gt;&gt;b = &apos;k&apos;+&apos;zc&apos;</div><div class="line">&gt;&gt;id(a)</div><div class="line">55704656</div><div class="line">&gt;&gt;id(b)</div><div class="line">55704656</div></pre></td></tr></table></figure></p>
+<p>可以看到，它们是同一个对象。（Java 中直接赋值的字符串也可用 == 来判断，但是使用 new 实例化的对象则需要使用equals(String s) 来判断)<br>intern机制的好处是，需要值相同的字符串的时候（比如标识符），直接从池里拿来用，避免频繁的创建和销毁，提升效率，节约内存。缺点是，拼接字符串、对字符串修改之类的影响性能。因为是不可变的，所以对字符串修改不是inplace操作，要新建对象。这也是为什么拼接多字符串的时候不建议用+而用join()。join()是先计算出所有字符串的长度，然后一一拷贝，只new一次对象。<br>需要小心的坑，并不是所有的字符串都会采用intern机制。只包含下划线、数字、字母的字符串才会被intern。<br>既然python内置函数intern()能显式对任意字符串进行intern。说明不是实现难度的问题。<br>答案在源码stringobject.h中的注释可以找到，<br>/<em> … … This is generally restricted tostrings that “looklike” Python identifiers, although the intern() builtincan be used to force interning of any string … … \</em>/<br>也就是说，只对那些看起来像是python标识符的进行intern。</p>
+<p>下面看另外一个坑，<br>例1.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&apos;kz&apos;+&apos;c&apos; is &apos;kzc&apos;</div><div class="line">True</div></pre></td></tr></table></figure></p>
+<p>例2.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;s1 = &apos;kz&apos;</div><div class="line">&gt;&gt;s2 = &apos;kzc&apos;</div><div class="line">&gt;&gt;s1+&apos;c&apos; is &apos;kzc&apos;</div><div class="line">False</div></pre></td></tr></table></figure></p>
+<p>为什么第二个栗子是False,只包含字母啊，不是应该被自动intern的么？<br>这是因为第一个栗子中，’kz’+’c’是在compile time求值的，被替换成了’kzc’.<br>而第二个栗子，s1+’c’是在run-time拼接的，导致没有被自动intern.</p>
+<p>参考<a href="http://onlypython.group.iteye.com/group/wiki/852-%E6%93%8D%E4%BD%9C%E7%AC%A6is%E7%9A%841%E4%B8%AA%E8%AF%A1%E5%BC%82%E9%97%AE%E9%A2%98" target="_blank" rel="external">操作符is的1个诡异问题</a><br>参考<a href="https://www.liurongxing.com/python-is-cmp-compare-operator.html" target="_blank" rel="external">python中的is、==和cmp()比较字符串</a><br><a href="http://stackoverflow.com/questions/306313/is-operator-behaves-unexpectedly-with-integers" target="_blank" rel="external">“is” operator behaves unexpectedly with integers</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; a = 256</div><div class="line">&gt;&gt;&gt; b = 256</div><div class="line">&gt;&gt;&gt; id(a)</div><div class="line">9987148</div><div class="line">&gt;&gt;&gt; id(b)</div><div class="line">9987148</div><div class="line">&gt;&gt;&gt; a = 257</div><div class="line">&gt;&gt;&gt; b = 257</div><div class="line">&gt;&gt;&gt; id(a)</div><div class="line">11662816</div><div class="line">&gt;&gt;&gt; id(b)</div><div class="line">11662828</div></pre></td></tr></table></figure></p>
+<p>原因:</p>
+<blockquote>
+<blockquote>
+<p>This is really hardcoded limit in the current CPython implementation<br>The interpreter preallocates numbers from 0 to 256.</p>
+</blockquote>
+</blockquote>
+<p>intobject.c的有关这部分的源码：<br>#ifndef NSMALLPOSINTS<br>#define NSMALLPOSINTS       257<br>#endif<br>#ifndef NSMALLNEGINTS<br>#define NSMALLNEGINTS       5<br>#endif<br>#if NSMALLNEGINTS + NSMALLPOSINTS &gt; 0<br>/<em> References to small integers are saved in this array so that they<br>   can be shared.<br>   The integers that are saved are those in the range<br>   -NSMALLNEGINTS (inclusive) to NSMALLPOSINTS (not inclusive).<br>\</em>/<br>static PyIntObject *small_ints[NSMALLNEGINTS + NSMALLPOSINTS];<br>#endif<br>#ifdef COUNT_ALLOCS<br>int quick_int_allocs, quick_neg_int_allocs;<br>#endif  </p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;参考&lt;a href=&quot;http://mingyang.blog.51cto.com/2807508/1580314&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则&lt;/a&gt;&lt;br&gt;对于ext3
+      &lt;p&gt;参考&lt;a href=&quot;http://blog.csdn.net/handsomekang/article/details/41170685&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;什么是string interning(字符串驻留)以及python中
+    
+    </summary>
+    
+      <category term="python" scheme="https://makeitpossible16.github.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux单文件大小限制</title>
+    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E5%8D%95%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6/"/>
+    <id>https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/</id>
+    <published>2017-03-26T00:00:00.000Z</published>
+    <updated>2017-03-26T08:22:21.189Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考<a href="http://mingyang.blog.51cto.com/2807508/1580314" target="_blank" rel="external">刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则</a><br><a href="https://www.ibm.com/developerworks/cn/linux/l-anatomy-ext4/" target="_blank" rel="external">剖析 ext4</a><br><a href="https://zh.wikipedia.org/wiki/Ext4#cite_note-6" target="_blank" rel="external">ext4 维基百科</a><br>对于ext3:<br>1)ext3文件系统采用32bit的块地址索引空间；<br>2)在inode条目中，引用一个块空间符号需要4byte的大小；<br>3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引<br>注：<br>a.这些规定都是文件系统自身的程序代码所决定的，也就是说这是开发时就设计好的，没有为什么，只有是什么；对于其它文件系统也是一样；<br>b.所谓双间接指针索引和三间接指针索引指的是两级结构和三级结构，相当于linux中的根文件系统目录树一样；<br>ext3文件系统中inode内部结构图：<br><img src="/uploads/inode-struct.jpg" alt=""><br>ext4:<br>1).ext4文件系统采用48bit的块地址索引空间；<br>2).在inode条目中，不在是使用指针索引的方式来进行与block的映射，而是采用extent来替代指针；此前在ext3中的15个<br>指针被替换成5个extent，一个extent占用3byte空间；一个extent描述了一组连续的block，当不够用时extent依旧可以采<br>用间接指针的索引，但没有个数限制。</p>
+<p>ext3:<br>1).最大支持的文件大小<br>    首先要知道，在linux文件系统，一个block的大小可以为1k,2k,4k，当block的大小为4k时为最大。在linux系统中，每一个文件都要使用一个inode号，因此要想计算出单个文件所支持的最大空间，只要知道inode中能够引用多少个block，而block取最大值4k的时候计算出来的值就是所能支持的单个文件的最大空间。<br>    从上面的硬性规定中可以看出：<br>a.一个inode支持12个直接指针，因此就表示了12个block<br>b.一个inode支持一个间接指针，也就是一个指针指向了一个block块，将该block块作为指向最终block的直接指针，这里是一个block为4K，指向一个block要占用4byte的空间，因此一个block的间接指针可以指向4K/4byte的block,即2^10<br>c.双间接指针最终则指向：2^10<em>2^10=2^20 个block<br>d.三间接指针最终执行：2^10</em>2^10*2^10=2^30 个block</p>
+<p>因此最终的block的个数为：12+2^10+2^20+2^30<br>则最终的大小为：(12+2^10+2^20+2^30)x4KByte<br>则换算成TB的大小为：(12+2^10+2^20+2^30)x4KByte/1024/1024/1024=2TB</p>
+<p>到此，可知ext3文件系统，在block为4K的时候，其支持的单个文件大小为最大，最大为2TB。</p>
+<p>ext4 的一个明显差别就是它支持更大的文件系统、文件和子目录。ext4 支持的最大文件系统为 1 EB（1000 PB）。虽然根据今天的标准这个文件系统已经非常巨大，但存储空间的消费会不断增长，因此 ext4 必须考虑到未来的发展。ext4 支持最大 16 TB 的文件（假设由 4KB 的块组成），这个容量是 ext3 的 8 倍。</p>
+<p>ext3的一个目录下最多只能有32000个子目录。ext4的子目录最高可达64000，且使用“dir_nlink”功能后可以达到更高（虽然父目录的link count会停止增加）。为了避免性能受到大量目录的影响，ext4默认打开Htree（一种特殊的B树）索引功能。该功能已经实现于Linux核心2.6.23版。</p>
+<p>ext4 的区段采用分层的方法高效地表示小文件，并且使用区段树高效地表示大文件。例如，单个 ext4 inode 有足够的空间来引用 4 个区段（每个区段表示一组相邻的块）。对于大文件（包括片段文件），一个 inode 能够引用一个索引节点，而每个索引节点能够引用一个叶节点（引用多个区段）。这种持续的区段树为大文件（尤其是分散的文件）提供丰富的表示方式。这些节点还包含自主检查机制，以阻止文件系统损坏带来威胁。</p>
+<p>ext4性能<br>衡量一个新文件系统的最重要指标就是它的根本性能。这常常是最难实现的指标，因为当文件系统变得庞大并且要求实现高可靠性时，将会以损害性能为代价。但是，ext4 不仅解决了伸缩性和可靠性，它还提供各种改善性能的方法。<br>文件级预分配<br>某些应用程序，比如数据库或内容流，要求将文件存储在相邻的块上（利用相邻块的读优化和最大化读的命令-块比率）。尽管区段能够将相邻块划分为片段，但另一种更强大的方法是按照所需的大小预分配比较大的相邻块（XFS 以前就是采用这种方法）。ext4 通过一个新的系统调用来实现这个目的，这个调用将按照特定的大小预分配并初始化文件。然后，您就可以写入必要的数据，并为数据提供不错的读性能。<br>延迟块分配<br>另一个基于文件大小的优化是延迟分配。这种性能优化延迟磁盘上的物理块的分配，直到块被刷入到磁盘时才进行分配。这种优化的关键是延迟物理块的分配，直到需要在磁盘上写这些物理块时才对其进行分配并写到相邻的块。这类似于持久化预分配，惟一的区别是文件系统会自动执行这项任务。不过如果预先知道文件的大小时，持久化预分配是更好的选择。<br>多个块分配<br>这是最后一个与相邻块相关的优化，即针对 ext4 的块分配器。在 ext3 中，块分配器的工作方式是每次分配一个块。当需要分配多个块时，非相邻块中可能存在相邻的数据。ext4 使用块分配器修复了这个问题，它能够在磁盘上一次分配多个块。与前面其他优化一样，这个优化在磁盘上收集相关的数据，以实现相邻读优化。<br>多个块分配的另一个方面是分配块时需要的处理量。记住，ext3 一次只分配一个块。在最简单的情况下，每个块的分配都要有一个调用。如果一次分配多个块，对块分配器的调用就会大大减少，从而加快分配并减少处理量。</p>
+<p>ext4可靠性<br>ext4 文件系统可能会扩展得比较大，这将导致可靠性问题。但 ext4 通过许多自主保护和自主修复机制来解决这个问题。<br>执行文件系统日志校验和<br>和 ext3 一样，ext4 也是一个日志文件系统。日志记录 就是通过日记（磁盘上相邻区域的专门循环记录）记录文件系统的变更的过程。因此，根据日志对物理存储执行实际变更更加可靠，并且能够确保一致性，即使在操作期间出现系统崩溃或电源中断。这样做可以减少文件系统损坏的几率。<br>但是即使进行日志记录，如果日志出现错误仍然会导致文件系统损坏。为了解决这个问题，ext4 对日志执行校验和，确保有效变更能够在底层文件系统上正确完成。<br>ext4 支持根据用户需求采用多种模式的日志记录。例如，ext4 支持 Writeback 模式，它仅记录元数据；或 Ordered 模式，它记录元数据，但写为元数据的数据是从日志中写入的；或 Journal 模式（最可靠的模式），它同时记录元数据和数据。注意，虽然 Journal 模式是确保文件系统一致的最佳选择，但它也是最慢的，因为所有数据都要经过日志。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考&lt;a href=&quot;http://mingyang.blog.51cto.com/2807508/1580314&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则&lt;/a&gt;&lt;br&gt;&lt;a hre
     
     </summary>
     
@@ -50,9 +90,35 @@
     <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/%E7%BD%91%E7%BB%9C/linux%20IO%E5%AD%A6%E4%B9%A0/"/>
     <id>https://makeitpossible16.github.io/操作系统/文件存储/网络/linux IO学习/</id>
     <published>2017-03-26T00:00:00.000Z</published>
-    <updated>2017-03-25T16:19:04.431Z</updated>
+    <updated>2017-03-28T02:59:19.184Z</updated>
     
     <content type="html"><![CDATA[<p>参考<a href="https://segmentfault.com/a/1190000003063859" target="_blank" rel="external">Linux IO模式及 select、poll、epoll详解</a><br><a href="http://www.jianshu.com/p/dfd940e7fca2" target="_blank" rel="external">聊聊IO多路复用之select、poll、epoll详解</a><br><a href="http://www.cnblogs.com/Anker/p/3265058.html" target="_blank" rel="external">select、poll、epoll之间的区别总结[整理]</a></p>
+<h2 id="用户空间与内核空间"><a href="#用户空间与内核空间" class="headerlink" title="用户空间与内核空间"></a>用户空间与内核空间</h2><p>现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。</p>
+<h2 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h2><p>参考<a href="http://guojing.me/linux-kernel-architecture/posts/process-switch/" target="_blank" rel="external">进程切换</a><br>从一个进程的运行转到另一个进程上运行，这个过程中经过下面这些变化：</p>
+<ol>
+<li>保存处理机上下文，包括程序计数器和其他寄存器。</li>
+<li>更新PCB信息。</li>
+<li>把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列。</li>
+<li>选择另一个进程执行，并更新其PCB。</li>
+<li>更新内存管理的数据结构。</li>
+<li>恢复处理机上下文。<h2 id="缓存-I-O"><a href="#缓存-I-O" class="headerlink" title="缓存 I/O"></a>缓存 I/O</h2>缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。</li>
+</ol>
+<p>缓存 I/O 的缺点：<br>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<h2 id="IO模式"><a href="#IO模式" class="headerlink" title="IO模式"></a>IO模式</h2><p>对于一次IO访问（以read举例），数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。所以说，当一个read操作发生时，它会经历两个阶段：</p>
+<ol>
+<li>等待数据准备 (Waiting for the data to be ready)</li>
+<li>将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
+</ol>
+<p>正式因为这两个阶段，linux系统产生了下面五种网络模式的方案。</p>
+<ul>
+<li>阻塞 I/O（blocking IO）</li>
+<li>非阻塞 I/O（nonblocking IO）</li>
+<li>I/O 多路复用（ IO multiplexing）</li>
+<li>信号驱动 I/O（ signal driven IO）</li>
+<li>异步 I/O（asynchronous IO）</li>
+</ul>
+<p>注：由于signal driven IO在实际中并不常用，所以只提及剩下的四种IO Model。</p>
+<h3 id="阻塞-I-O（blocking-IO）"><a href="#阻塞-I-O（blocking-IO）" class="headerlink" title="阻塞 I/O（blocking IO）"></a>阻塞 I/O（blocking IO）</h3><p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样：</p>
 ]]></content>
     
     <summary type="html">
@@ -144,9 +210,9 @@
       <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
       <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
     
   </entry>
   
@@ -947,6 +1013,31 @@
   </entry>
   
   <entry>
+    <title>linux文件存储机制</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
+    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
+    <published>2017-01-21T00:00:00.000Z</published>
+    <updated>2017-01-21T14:05:03.896Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>openstack-swift调试</title>
     <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E8%B0%83%E8%AF%95/"/>
     <id>https://makeitpossible16.github.io/对象存储/openstack-swift调试/</id>
@@ -974,31 +1065,6 @@
     
     
       <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux文件存储机制</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
-    <published>2017-01-21T00:00:00.000Z</published>
-    <updated>2017-01-21T14:05:03.896Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
     
   </entry>
   
@@ -1062,42 +1128,6 @@
   </entry>
   
   <entry>
-    <title>ELKStack搭建问题总结</title>
-    <link href="https://makeitpossible16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/ELKStack/ELKStack搭建问题总结/</id>
-    <published>2017-01-02T00:00:00.000Z</published>
-    <updated>2017-01-02T15:58:17.559Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用Docker搭建ELKStack时,elasticsearch自动退出,使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs [dockerName]</div></pre></td></tr></table></figure></p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>查看日志, 日志输出为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR: bootstrap checks failed</div><div class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</div></pre></td></tr></table></figure></p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a href="max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]">Elasticsearch5.0 安装问题集锦</a></p>
-<p>切换到root用户修改配置sysctl.conf</p>
-<p>vi /etc/sysctl.conf</p>
-<p>添加下面配置：</p>
-<p>vm.max_map_count=655360</p>
-<p>并执行命令：</p>
-<p>sysctl -p</p>
-<p>然后，重新启动elasticsearch，即可启动成功。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用Docker搭建ELKStack时,elasticsearch自动退出,使用&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/
-    
-    </summary>
-    
-      <category term="ELKStack" scheme="https://makeitpossible16.github.io/categories/ELKStack/"/>
-    
-    
-      <category term="ELKStack" scheme="https://makeitpossible16.github.io/tags/ELKStack/"/>
-    
-      <category term="日志分析" scheme="https://makeitpossible16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
-    
-      <category term="流处理" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
     <title>linux命令学习</title>
     <link href="https://makeitpossible16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
     <id>https://makeitpossible16.github.io/linux命令/linux命令学习/</id>
@@ -1130,6 +1160,42 @@
     
     
       <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ELKStack搭建问题总结</title>
+    <link href="https://makeitpossible16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://makeitpossible16.github.io/ELKStack/ELKStack搭建问题总结/</id>
+    <published>2017-01-02T00:00:00.000Z</published>
+    <updated>2017-01-02T15:58:17.559Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用Docker搭建ELKStack时,elasticsearch自动退出,使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs [dockerName]</div></pre></td></tr></table></figure></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>查看日志, 日志输出为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR: bootstrap checks failed</div><div class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</div></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a href="max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]">Elasticsearch5.0 安装问题集锦</a></p>
+<p>切换到root用户修改配置sysctl.conf</p>
+<p>vi /etc/sysctl.conf</p>
+<p>添加下面配置：</p>
+<p>vm.max_map_count=655360</p>
+<p>并执行命令：</p>
+<p>sysctl -p</p>
+<p>然后，重新启动elasticsearch，即可启动成功。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用Docker搭建ELKStack时,elasticsearch自动退出,使用&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/
+    
+    </summary>
+    
+      <category term="ELKStack" scheme="https://makeitpossible16.github.io/categories/ELKStack/"/>
+    
+    
+      <category term="ELKStack" scheme="https://makeitpossible16.github.io/tags/ELKStack/"/>
+    
+      <category term="日志分析" scheme="https://makeitpossible16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+      <category term="流处理" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
@@ -1481,38 +1547,6 @@
   </entry>
   
   <entry>
-    <title>seaweedfs源码阅读记录2</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
-    <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2016-11-28T11:57:03.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="master启动过程"><a href="#master启动过程" class="headerlink" title="master启动过程"></a>master启动过程</h2><p>使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.<br>opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,<br>参考文章： <a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-<p><img src="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg" alt="master启动-20161128"><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">trueNextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">trueSetMax(<span class="keyword">uint64</span>)</div><div class="line">truePeek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>topology中包含Sequencer , sequence 负责FileID的全局有序生成</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Topology <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl   <span class="comment">//指向NodeImpl对象，即Topology和node相互指向</span></div><div class="line"></div><div class="line">truecollectionMap *util.ConcurrentReadMap</div><div class="line"></div><div class="line">truepulse <span class="keyword">int64</span></div><div class="line"></div><div class="line">truevolumeSizeLimit <span class="keyword">uint64</span></div><div class="line"></div><div class="line">trueSequence sequence.Sequencer</div><div class="line"></div><div class="line">truechanDeadDataNodes      <span class="keyword">chan</span> *DataNode</div><div class="line">truechanRecoveredDataNodes <span class="keyword">chan</span> *DataNode</div><div class="line">truechanFullVolumes        <span class="keyword">chan</span> storage.VolumeInfo</div><div class="line"></div><div class="line">trueconfiguration *Configuration</div><div class="line"></div><div class="line">trueRaftServer raft.Server</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>NodeImpl结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> NodeImpl <span class="keyword">struct</span> &#123;</div><div class="line">trueid                NodeId</div><div class="line">truevolumeCount       <span class="keyword">int</span></div><div class="line">trueactiveVolumeCount <span class="keyword">int</span></div><div class="line">truemaxVolumeCount    <span class="keyword">int</span></div><div class="line">trueparent            Node</div><div class="line">truesync.RWMutex      <span class="comment">// lock children</span></div><div class="line">truechildren          <span class="keyword">map</span>[NodeId]Node</div><div class="line">truemaxVolumeId       storage.VolumeId</div><div class="line"></div><div class="line">true<span class="comment">//for rack, data center, topology</span></div><div class="line">truenodeType <span class="keyword">string</span></div><div class="line">truevalue    <span class="keyword">interface</span>&#123;&#125;  <span class="comment">//指向Topology对象，即Topology和node相互指向</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>DataNode数据结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> DataNode <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl</div><div class="line">truevolumes   <span class="keyword">map</span>[storage.VolumeId]storage.VolumeInfo</div><div class="line">trueIp        <span class="keyword">string</span></div><div class="line">truePort      <span class="keyword">int</span></div><div class="line">truePublicUrl <span class="keyword">string</span></div><div class="line">trueLastSeen  <span class="keyword">int64</span> <span class="comment">// unix time in seconds</span></div><div class="line">trueDead      <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> VolumeInfo <span class="keyword">struct</span> &#123;</div><div class="line">trueId               VolumeId</div><div class="line">trueSize             <span class="keyword">uint64</span></div><div class="line">trueReplicaPlacement *ReplicaPlacement</div><div class="line">trueTtl              *TTL</div><div class="line">trueCollection       <span class="keyword">string</span></div><div class="line">trueVersion          Version</div><div class="line">trueFileCount        <span class="keyword">int</span></div><div class="line">trueDeleteCount      <span class="keyword">int</span></div><div class="line">trueDeletedByteCount <span class="keyword">uint64</span></div><div class="line">trueReadOnly         <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过RaftServer的raft协议，完成多个weedmaster间投票选leader的事情,<br>当启动多个ServerMaster时，它们之间会进行通信，通过raft协议选举出一个Leader，对所有的master进行管理。<br>weed-fs中，通过使用raftServer完成上述选举过程；而raftServer则是用到了第三方资源，即goRaft（参照<a href="http://ayende.com/blog/165858/reviewing-go-raft-part-i）。" target="_blank" rel="external">http://ayende.com/blog/165858/reviewing-go-raft-part-i）。</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> RaftServer <span class="keyword">struct</span> &#123;</div><div class="line">truepeers      []<span class="keyword">string</span> <span class="comment">// initial peers to join with</span></div><div class="line">trueraftServer raft.Server  <span class="comment">//使用goraft //type Server interface 包含实现raft的方法</span></div><div class="line">truedataDir    <span class="keyword">string</span></div><div class="line">truehttpAddr   <span class="keyword">string</span></div><div class="line">truerouter     *mux.Router</div><div class="line">truetopo       *topology.Topology</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>seaweedfs源码阅读记录1</title>
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
     <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/</id>
@@ -1532,6 +1566,38 @@
     <summary type="html">
     
       &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读记录2</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
+    <published>2016-11-22T00:00:00.000Z</published>
+    <updated>2016-11-28T11:57:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="master启动过程"><a href="#master启动过程" class="headerlink" title="master启动过程"></a>master启动过程</h2><p>使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.<br>opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,<br>参考文章： <a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+<p><img src="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg" alt="master启动-20161128"><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">trueNextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">trueSetMax(<span class="keyword">uint64</span>)</div><div class="line">truePeek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>topology中包含Sequencer , sequence 负责FileID的全局有序生成</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Topology <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl   <span class="comment">//指向NodeImpl对象，即Topology和node相互指向</span></div><div class="line"></div><div class="line">truecollectionMap *util.ConcurrentReadMap</div><div class="line"></div><div class="line">truepulse <span class="keyword">int64</span></div><div class="line"></div><div class="line">truevolumeSizeLimit <span class="keyword">uint64</span></div><div class="line"></div><div class="line">trueSequence sequence.Sequencer</div><div class="line"></div><div class="line">truechanDeadDataNodes      <span class="keyword">chan</span> *DataNode</div><div class="line">truechanRecoveredDataNodes <span class="keyword">chan</span> *DataNode</div><div class="line">truechanFullVolumes        <span class="keyword">chan</span> storage.VolumeInfo</div><div class="line"></div><div class="line">trueconfiguration *Configuration</div><div class="line"></div><div class="line">trueRaftServer raft.Server</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>NodeImpl结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> NodeImpl <span class="keyword">struct</span> &#123;</div><div class="line">trueid                NodeId</div><div class="line">truevolumeCount       <span class="keyword">int</span></div><div class="line">trueactiveVolumeCount <span class="keyword">int</span></div><div class="line">truemaxVolumeCount    <span class="keyword">int</span></div><div class="line">trueparent            Node</div><div class="line">truesync.RWMutex      <span class="comment">// lock children</span></div><div class="line">truechildren          <span class="keyword">map</span>[NodeId]Node</div><div class="line">truemaxVolumeId       storage.VolumeId</div><div class="line"></div><div class="line">true<span class="comment">//for rack, data center, topology</span></div><div class="line">truenodeType <span class="keyword">string</span></div><div class="line">truevalue    <span class="keyword">interface</span>&#123;&#125;  <span class="comment">//指向Topology对象，即Topology和node相互指向</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>DataNode数据结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> DataNode <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl</div><div class="line">truevolumes   <span class="keyword">map</span>[storage.VolumeId]storage.VolumeInfo</div><div class="line">trueIp        <span class="keyword">string</span></div><div class="line">truePort      <span class="keyword">int</span></div><div class="line">truePublicUrl <span class="keyword">string</span></div><div class="line">trueLastSeen  <span class="keyword">int64</span> <span class="comment">// unix time in seconds</span></div><div class="line">trueDead      <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> VolumeInfo <span class="keyword">struct</span> &#123;</div><div class="line">trueId               VolumeId</div><div class="line">trueSize             <span class="keyword">uint64</span></div><div class="line">trueReplicaPlacement *ReplicaPlacement</div><div class="line">trueTtl              *TTL</div><div class="line">trueCollection       <span class="keyword">string</span></div><div class="line">trueVersion          Version</div><div class="line">trueFileCount        <span class="keyword">int</span></div><div class="line">trueDeleteCount      <span class="keyword">int</span></div><div class="line">trueDeletedByteCount <span class="keyword">uint64</span></div><div class="line">trueReadOnly         <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过RaftServer的raft协议，完成多个weedmaster间投票选leader的事情,<br>当启动多个ServerMaster时，它们之间会进行通信，通过raft协议选举出一个Leader，对所有的master进行管理。<br>weed-fs中，通过使用raftServer完成上述选举过程；而raftServer则是用到了第三方资源，即goRaft（参照<a href="http://ayende.com/blog/165858/reviewing-go-raft-part-i）。" target="_blank" rel="external">http://ayende.com/blog/165858/reviewing-go-raft-part-i）。</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> RaftServer <span class="keyword">struct</span> &#123;</div><div class="line">truepeers      []<span class="keyword">string</span> <span class="comment">// initial peers to join with</span></div><div class="line">trueraftServer raft.Server  <span class="comment">//使用goraft //type Server interface 包含实现raft的方法</span></div><div class="line">truedataDir    <span class="keyword">string</span></div><div class="line">truehttpAddr   <span class="keyword">string</span></div><div class="line">truerouter     *mux.Router</div><div class="line">truetopo       *topology.Topology</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
     
     </summary>
     
@@ -1667,9 +1733,9 @@
     <link href="https://makeitpossible16.github.io/uncategorized/README/"/>
     <id>https://makeitpossible16.github.io/uncategorized/README/</id>
     <published>2016-01-01T00:00:00.000Z</published>
-    <updated>2017-03-26T03:45:50.816Z</updated>
+    <updated>2017-03-28T08:30:47.383Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="blogMarkdownFile"><a href="#blogMarkdownFile" class="headerlink" title="blogMarkdownFile"></a>blogMarkdownFile</h2><h2 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a><a href="https://www.makeitpossible16.github.io" target="_blank" rel="external">myblog</a></h2><h3 id="转-Leveldb实现原理Leveldb实现原理-md"><a href="#转-Leveldb实现原理Leveldb实现原理-md" class="headerlink" title="(转)Leveldb实现原理Leveldb实现原理.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/(转" target="_blank" rel="external">(转)Leveldb实现原理</a>Leveldb实现原理.md)</h3><h3 id="C-语法记录"><a href="#C-语法记录" class="headerlink" title="C++语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/C++语法记录.md" target="_blank" rel="external">C++语法记录</a></h3><h3 id="ELKStack搭建问题总结"><a href="#ELKStack搭建问题总结" class="headerlink" title="ELKStack搭建问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ELKStack搭建问题总结.md" target="_blank" rel="external">ELKStack搭建问题总结</a></h3><h3 id="LRU缓存淘汰算法"><a href="#LRU缓存淘汰算法" class="headerlink" title="LRU缓存淘汰算法"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LRU缓存淘汰算法.md" target="_blank" rel="external">LRU缓存淘汰算法</a></h3><h3 id="LeetCode解题-Next-Permutation-全排列生成算法-md"><a href="#LeetCode解题-Next-Permutation-全排列生成算法-md" class="headerlink" title="LeetCode解题-Next Permutation(全排列生成算法).md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Next Permutation(全排列生成算法" target="_blank" rel="external">LeetCode解题-Next Permutation(全排列生成算法)</a>.md)</h3><h3 id="LeetCode解题-Permutation-Sequence"><a href="#LeetCode解题-Permutation-Sequence" class="headerlink" title="LeetCode解题-Permutation Sequence"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Permutation Sequence.md" target="_blank" rel="external">LeetCode解题-Permutation Sequence</a></h3><h3 id="cloudstack搭建总结"><a href="#cloudstack搭建总结" class="headerlink" title="cloudstack搭建总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/cloudstack搭建总结.md" target="_blank" rel="external">cloudstack搭建总结</a></h3><h3 id="gdb调试错误-找不到文件"><a href="#gdb调试错误-找不到文件" class="headerlink" title="gdb调试错误-找不到文件"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/gdb调试错误-找不到文件.md" target="_blank" rel="external">gdb调试错误-找不到文件</a></h3><h3 id="golang-反射机制"><a href="#golang-反射机制" class="headerlink" title="golang 反射机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang 反射机制.md" target="_blank" rel="external">golang 反射机制</a></h3><h3 id="golang学习"><a href="#golang学习" class="headerlink" title="golang学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang学习.md" target="_blank" rel="external">golang学习</a></h3><h3 id="golang调试技巧"><a href="#golang调试技巧" class="headerlink" title="golang调试技巧"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang调试技巧.md" target="_blank" rel="external">golang调试技巧</a></h3><h3 id="kafka存储实现"><a href="#kafka存储实现" class="headerlink" title="kafka存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka存储实现.md" target="_blank" rel="external">kafka存储实现</a></h3><h3 id="kafka学习笔记"><a href="#kafka学习笔记" class="headerlink" title="kafka学习笔记"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka学习笔记.md" target="_blank" rel="external">kafka学习笔记</a></h3><h3 id="linux-IO学习"><a href="#linux-IO学习" class="headerlink" title="linux IO学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux IO学习.md" target="_blank" rel="external">linux IO学习</a></h3><h3 id="linux内核学习-数据结构"><a href="#linux内核学习-数据结构" class="headerlink" title="linux内核学习-数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux内核学习-数据结构.md" target="_blank" rel="external">linux内核学习-数据结构</a></h3><h3 id="linux单文件大小限制"><a href="#linux单文件大小限制" class="headerlink" title="linux单文件大小限制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux单文件大小限制.md" target="_blank" rel="external">linux单文件大小限制</a></h3><h3 id="linux命令学习"><a href="#linux命令学习" class="headerlink" title="linux命令学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux命令学习.md" target="_blank" rel="external">linux命令学习</a></h3><h3 id="linux学习-linux文件存储"><a href="#linux学习-linux文件存储" class="headerlink" title="linux学习-linux文件存储"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux学习-linux文件存储.md" target="_blank" rel="external">linux学习-linux文件存储</a></h3><h3 id="linux文件存储机制"><a href="#linux文件存储机制" class="headerlink" title="linux文件存储机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux文件存储机制.md" target="_blank" rel="external">linux文件存储机制</a></h3><h3 id="linux页缓存机制-Page-Cache"><a href="#linux页缓存机制-Page-Cache" class="headerlink" title="linux页缓存机制 Page Cache"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux页缓存机制 Page Cache.md" target="_blank" rel="external">linux页缓存机制 Page Cache</a></h3><h3 id="nodeJS入门总结"><a href="#nodeJS入门总结" class="headerlink" title="nodeJS入门总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/nodeJS入门总结.md" target="_blank" rel="external">nodeJS入门总结</a></h3><h3 id="openstack-swift源码阅读记录1-文件上传过程"><a href="#openstack-swift源码阅读记录1-文件上传过程" class="headerlink" title="openstack-swift源码阅读记录1-文件上传过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录1-文件上传过程.md" target="_blank" rel="external">openstack-swift源码阅读记录1-文件上传过程</a></h3><h3 id="openstack-swift源码阅读记录3-diskfile"><a href="#openstack-swift源码阅读记录3-diskfile" class="headerlink" title="openstack-swift源码阅读记录3-diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录3-diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录3-diskfile</a></h3><h3 id="openstack-swift源码阅读记录4-启用mem-diskfile"><a href="#openstack-swift源码阅读记录4-启用mem-diskfile" class="headerlink" title="openstack-swift源码阅读记录4-启用mem_diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录4-启用mem_diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录4-启用mem_diskfile</a></h3><h3 id="openstack-swift调试"><a href="#openstack-swift调试" class="headerlink" title="openstack-swift调试"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift调试.md" target="_blank" rel="external">openstack-swift调试</a></h3><h3 id="openstack源码阅读记录2-object-metadata"><a href="#openstack源码阅读记录2-object-metadata" class="headerlink" title="openstack源码阅读记录2-object metadata"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack源码阅读记录2-object metadata.md" target="_blank" rel="external">openstack源码阅读记录2-object metadata</a></h3><h3 id="python的多线程和Goroutine"><a href="#python的多线程和Goroutine" class="headerlink" title="python的多线程和Goroutine"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python的多线程和Goroutine.md" target="_blank" rel="external">python的多线程和Goroutine</a></h3><h3 id="python语法记录"><a href="#python语法记录" class="headerlink" title="python语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python语法记录.md" target="_blank" rel="external">python语法记录</a></h3><h3 id="seaweedfs源码阅读4-volume启动"><a href="#seaweedfs源码阅读4-volume启动" class="headerlink" title="seaweedfs源码阅读4-volume启动"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读4-volume启动.md" target="_blank" rel="external">seaweedfs源码阅读4-volume启动</a></h3><h3 id="seaweedfs源码阅读5-文件PUT过程"><a href="#seaweedfs源码阅读5-文件PUT过程" class="headerlink" title="seaweedfs源码阅读5-文件PUT过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读5-文件PUT过程.md" target="_blank" rel="external">seaweedfs源码阅读5-文件PUT过程</a></h3><h3 id="seaweedfs源码阅读6-文件存储格式"><a href="#seaweedfs源码阅读6-文件存储格式" class="headerlink" title="seaweedfs源码阅读6-文件存储格式"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读6-文件存储格式.md" target="_blank" rel="external">seaweedfs源码阅读6-文件存储格式</a></h3><h3 id="seaweedfs源码阅读7-文件存储过程"><a href="#seaweedfs源码阅读7-文件存储过程" class="headerlink" title="seaweedfs源码阅读7-文件存储过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读7-文件存储过程.md" target="_blank" rel="external">seaweedfs源码阅读7-文件存储过程</a></h3><h3 id="seaweedfs源码阅读8-GET-amp-HEAD获取文件过程"><a href="#seaweedfs源码阅读8-GET-amp-HEAD获取文件过程" class="headerlink" title="seaweedfs源码阅读8-GET&amp;HEAD获取文件过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程.md" target="_blank" rel="external">seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</a></h3><h3 id="seaweedfs源码阅读记录"><a href="#seaweedfs源码阅读记录" class="headerlink" title="seaweedfs源码阅读记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录.md" target="_blank" rel="external">seaweedfs源码阅读记录</a></h3><h3 id="seaweedfs源码阅读记录2"><a href="#seaweedfs源码阅读记录2" class="headerlink" title="seaweedfs源码阅读记录2"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录2.md" target="_blank" rel="external">seaweedfs源码阅读记录2</a></h3><h3 id="seaweedfs源码阅读记录3-raft协议理解"><a href="#seaweedfs源码阅读记录3-raft协议理解" class="headerlink" title="seaweedfs源码阅读记录3-raft协议理解"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录3-raft协议理解.md" target="_blank" rel="external">seaweedfs源码阅读记录3-raft协议理解</a></h3><h3 id="seaweedfs源码阅读记录9-生成fid过程"><a href="#seaweedfs源码阅读记录9-生成fid过程" class="headerlink" title="seaweedfs源码阅读记录9-生成fid过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录9-生成fid过程.md" target="_blank" rel="external">seaweedfs源码阅读记录9-生成fid过程</a></h3><h3 id="swift-weedfs-backend-diskfile代码实现"><a href="#swift-weedfs-backend-diskfile代码实现" class="headerlink" title="swift-weedfs-backend diskfile代码实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend diskfile代码实现.md" target="_blank" rel="external">swift-weedfs-backend diskfile代码实现</a></h3><h3 id="swift-weedfs-backend接口设计"><a href="#swift-weedfs-backend接口设计" class="headerlink" title="swift-weedfs-backend接口设计"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend接口设计.md" target="_blank" rel="external">swift-weedfs-backend接口设计</a></h3><h3 id="ubuntu下如何优雅地使用翻译"><a href="#ubuntu下如何优雅地使用翻译" class="headerlink" title="ubuntu下如何优雅地使用翻译"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu下如何优雅地使用翻译.md" target="_blank" rel="external">ubuntu下如何优雅地使用翻译</a></h3><h3 id="ubuntu使用问题总结"><a href="#ubuntu使用问题总结" class="headerlink" title="ubuntu使用问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu使用问题总结.md" target="_blank" rel="external">ubuntu使用问题总结</a></h3><h3 id="伪随机数"><a href="#伪随机数" class="headerlink" title="伪随机数"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/伪随机数.md" target="_blank" rel="external">伪随机数</a></h3><h3 id="在Openstack-Swift中使用多种后端存储实现"><a href="#在Openstack-Swift中使用多种后端存储实现" class="headerlink" title="在Openstack Swift中使用多种后端存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/在Openstack Swift中使用多种后端存储实现.md" target="_blank" rel="external">在Openstack Swift中使用多种后端存储实现</a></h3><h3 id="对象存储VS文件系统"><a href="#对象存储VS文件系统" class="headerlink" title="对象存储VS文件系统"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/对象存储VS文件系统.md" target="_blank" rel="external">对象存储VS文件系统</a></h3><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/数据结构.md" target="_blank" rel="external">数据结构</a></h3><h3 id="文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md"><a href="#文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md" class="headerlink" title="文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/文件系统(seaweedfs" target="_blank" rel="external">文件系统(seaweedfs)与关系型数据库优劣势分析</a>与关系型数据库优劣势分析.md)</h3><h3 id="用户态到内核态切换"><a href="#用户态到内核态切换" class="headerlink" title="用户态到内核态切换"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/用户态到内核态切换.md" target="_blank" rel="external">用户态到内核态切换</a></h3><h3 id="自旋锁spinlock剖析与改进"><a href="#自旋锁spinlock剖析与改进" class="headerlink" title="自旋锁spinlock剖析与改进"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/自旋锁spinlock剖析与改进.md" target="_blank" rel="external">自旋锁spinlock剖析与改进</a></h3>]]></content>
+    <content type="html"><![CDATA[<h2 id="blogMarkdownFile"><a href="#blogMarkdownFile" class="headerlink" title="blogMarkdownFile"></a>blogMarkdownFile</h2><h2 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a><a href="https://www.makeitpossible16.github.io" target="_blank" rel="external">myblog</a></h2><h3 id="转-Leveldb实现原理Leveldb实现原理-md"><a href="#转-Leveldb实现原理Leveldb实现原理-md" class="headerlink" title="(转)Leveldb实现原理Leveldb实现原理.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/(转" target="_blank" rel="external">(转)Leveldb实现原理</a>Leveldb实现原理.md)</h3><h3 id="C-语法记录"><a href="#C-语法记录" class="headerlink" title="C++语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/C++语法记录.md" target="_blank" rel="external">C++语法记录</a></h3><h3 id="ELKStack搭建问题总结"><a href="#ELKStack搭建问题总结" class="headerlink" title="ELKStack搭建问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ELKStack搭建问题总结.md" target="_blank" rel="external">ELKStack搭建问题总结</a></h3><h3 id="LRU缓存淘汰算法"><a href="#LRU缓存淘汰算法" class="headerlink" title="LRU缓存淘汰算法"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LRU缓存淘汰算法.md" target="_blank" rel="external">LRU缓存淘汰算法</a></h3><h3 id="LeetCode解题-Next-Permutation-全排列生成算法-md"><a href="#LeetCode解题-Next-Permutation-全排列生成算法-md" class="headerlink" title="LeetCode解题-Next Permutation(全排列生成算法).md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Next Permutation(全排列生成算法" target="_blank" rel="external">LeetCode解题-Next Permutation(全排列生成算法)</a>.md)</h3><h3 id="LeetCode解题-Permutation-Sequence"><a href="#LeetCode解题-Permutation-Sequence" class="headerlink" title="LeetCode解题-Permutation Sequence"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Permutation Sequence.md" target="_blank" rel="external">LeetCode解题-Permutation Sequence</a></h3><h3 id="cloudstack搭建总结"><a href="#cloudstack搭建总结" class="headerlink" title="cloudstack搭建总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/cloudstack搭建总结.md" target="_blank" rel="external">cloudstack搭建总结</a></h3><h3 id="gdb调试错误-找不到文件"><a href="#gdb调试错误-找不到文件" class="headerlink" title="gdb调试错误-找不到文件"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/gdb调试错误-找不到文件.md" target="_blank" rel="external">gdb调试错误-找不到文件</a></h3><h3 id="golang-反射机制"><a href="#golang-反射机制" class="headerlink" title="golang 反射机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang 反射机制.md" target="_blank" rel="external">golang 反射机制</a></h3><h3 id="golang学习"><a href="#golang学习" class="headerlink" title="golang学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang学习.md" target="_blank" rel="external">golang学习</a></h3><h3 id="golang调试技巧"><a href="#golang调试技巧" class="headerlink" title="golang调试技巧"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang调试技巧.md" target="_blank" rel="external">golang调试技巧</a></h3><h3 id="kafka存储实现"><a href="#kafka存储实现" class="headerlink" title="kafka存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka存储实现.md" target="_blank" rel="external">kafka存储实现</a></h3><h3 id="kafka学习笔记"><a href="#kafka学习笔记" class="headerlink" title="kafka学习笔记"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka学习笔记.md" target="_blank" rel="external">kafka学习笔记</a></h3><h3 id="linux-IO学习"><a href="#linux-IO学习" class="headerlink" title="linux IO学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux IO学习.md" target="_blank" rel="external">linux IO学习</a></h3><h3 id="linux内核学习-数据结构"><a href="#linux内核学习-数据结构" class="headerlink" title="linux内核学习-数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux内核学习-数据结构.md" target="_blank" rel="external">linux内核学习-数据结构</a></h3><h3 id="linux单文件大小限制"><a href="#linux单文件大小限制" class="headerlink" title="linux单文件大小限制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux单文件大小限制.md" target="_blank" rel="external">linux单文件大小限制</a></h3><h3 id="linux命令学习"><a href="#linux命令学习" class="headerlink" title="linux命令学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux命令学习.md" target="_blank" rel="external">linux命令学习</a></h3><h3 id="linux学习-linux文件存储"><a href="#linux学习-linux文件存储" class="headerlink" title="linux学习-linux文件存储"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux学习-linux文件存储.md" target="_blank" rel="external">linux学习-linux文件存储</a></h3><h3 id="linux文件存储机制"><a href="#linux文件存储机制" class="headerlink" title="linux文件存储机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux文件存储机制.md" target="_blank" rel="external">linux文件存储机制</a></h3><h3 id="linux页缓存机制-Page-Cache"><a href="#linux页缓存机制-Page-Cache" class="headerlink" title="linux页缓存机制 Page Cache"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux页缓存机制 Page Cache.md" target="_blank" rel="external">linux页缓存机制 Page Cache</a></h3><h3 id="nodeJS入门总结"><a href="#nodeJS入门总结" class="headerlink" title="nodeJS入门总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/nodeJS入门总结.md" target="_blank" rel="external">nodeJS入门总结</a></h3><h3 id="openstack-swift源码阅读记录1-文件上传过程"><a href="#openstack-swift源码阅读记录1-文件上传过程" class="headerlink" title="openstack-swift源码阅读记录1-文件上传过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录1-文件上传过程.md" target="_blank" rel="external">openstack-swift源码阅读记录1-文件上传过程</a></h3><h3 id="openstack-swift源码阅读记录3-diskfile"><a href="#openstack-swift源码阅读记录3-diskfile" class="headerlink" title="openstack-swift源码阅读记录3-diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录3-diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录3-diskfile</a></h3><h3 id="openstack-swift源码阅读记录4-启用mem-diskfile"><a href="#openstack-swift源码阅读记录4-启用mem-diskfile" class="headerlink" title="openstack-swift源码阅读记录4-启用mem_diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录4-启用mem_diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录4-启用mem_diskfile</a></h3><h3 id="openstack-swift调试"><a href="#openstack-swift调试" class="headerlink" title="openstack-swift调试"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift调试.md" target="_blank" rel="external">openstack-swift调试</a></h3><h3 id="openstack源码阅读记录2-object-metadata"><a href="#openstack源码阅读记录2-object-metadata" class="headerlink" title="openstack源码阅读记录2-object metadata"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack源码阅读记录2-object metadata.md" target="_blank" rel="external">openstack源码阅读记录2-object metadata</a></h3><h3 id="python-string-intern"><a href="#python-string-intern" class="headerlink" title="python string intern"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python string intern.md" target="_blank" rel="external">python string intern</a></h3><h3 id="python的多线程和Goroutine"><a href="#python的多线程和Goroutine" class="headerlink" title="python的多线程和Goroutine"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python的多线程和Goroutine.md" target="_blank" rel="external">python的多线程和Goroutine</a></h3><h3 id="python语法记录"><a href="#python语法记录" class="headerlink" title="python语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python语法记录.md" target="_blank" rel="external">python语法记录</a></h3><h3 id="seaweedfs源码阅读4-volume启动"><a href="#seaweedfs源码阅读4-volume启动" class="headerlink" title="seaweedfs源码阅读4-volume启动"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读4-volume启动.md" target="_blank" rel="external">seaweedfs源码阅读4-volume启动</a></h3><h3 id="seaweedfs源码阅读5-文件PUT过程"><a href="#seaweedfs源码阅读5-文件PUT过程" class="headerlink" title="seaweedfs源码阅读5-文件PUT过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读5-文件PUT过程.md" target="_blank" rel="external">seaweedfs源码阅读5-文件PUT过程</a></h3><h3 id="seaweedfs源码阅读6-文件存储格式"><a href="#seaweedfs源码阅读6-文件存储格式" class="headerlink" title="seaweedfs源码阅读6-文件存储格式"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读6-文件存储格式.md" target="_blank" rel="external">seaweedfs源码阅读6-文件存储格式</a></h3><h3 id="seaweedfs源码阅读7-文件存储过程"><a href="#seaweedfs源码阅读7-文件存储过程" class="headerlink" title="seaweedfs源码阅读7-文件存储过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读7-文件存储过程.md" target="_blank" rel="external">seaweedfs源码阅读7-文件存储过程</a></h3><h3 id="seaweedfs源码阅读8-GET-amp-HEAD获取文件过程"><a href="#seaweedfs源码阅读8-GET-amp-HEAD获取文件过程" class="headerlink" title="seaweedfs源码阅读8-GET&amp;HEAD获取文件过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程.md" target="_blank" rel="external">seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</a></h3><h3 id="seaweedfs源码阅读记录"><a href="#seaweedfs源码阅读记录" class="headerlink" title="seaweedfs源码阅读记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录.md" target="_blank" rel="external">seaweedfs源码阅读记录</a></h3><h3 id="seaweedfs源码阅读记录2"><a href="#seaweedfs源码阅读记录2" class="headerlink" title="seaweedfs源码阅读记录2"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录2.md" target="_blank" rel="external">seaweedfs源码阅读记录2</a></h3><h3 id="seaweedfs源码阅读记录3-raft协议理解"><a href="#seaweedfs源码阅读记录3-raft协议理解" class="headerlink" title="seaweedfs源码阅读记录3-raft协议理解"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录3-raft协议理解.md" target="_blank" rel="external">seaweedfs源码阅读记录3-raft协议理解</a></h3><h3 id="seaweedfs源码阅读记录9-生成fid过程"><a href="#seaweedfs源码阅读记录9-生成fid过程" class="headerlink" title="seaweedfs源码阅读记录9-生成fid过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录9-生成fid过程.md" target="_blank" rel="external">seaweedfs源码阅读记录9-生成fid过程</a></h3><h3 id="swift-weedfs-backend-diskfile代码实现"><a href="#swift-weedfs-backend-diskfile代码实现" class="headerlink" title="swift-weedfs-backend diskfile代码实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend diskfile代码实现.md" target="_blank" rel="external">swift-weedfs-backend diskfile代码实现</a></h3><h3 id="swift-weedfs-backend接口设计"><a href="#swift-weedfs-backend接口设计" class="headerlink" title="swift-weedfs-backend接口设计"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend接口设计.md" target="_blank" rel="external">swift-weedfs-backend接口设计</a></h3><h3 id="ubuntu下如何优雅地使用翻译"><a href="#ubuntu下如何优雅地使用翻译" class="headerlink" title="ubuntu下如何优雅地使用翻译"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu下如何优雅地使用翻译.md" target="_blank" rel="external">ubuntu下如何优雅地使用翻译</a></h3><h3 id="ubuntu使用问题总结"><a href="#ubuntu使用问题总结" class="headerlink" title="ubuntu使用问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu使用问题总结.md" target="_blank" rel="external">ubuntu使用问题总结</a></h3><h3 id="伪随机数"><a href="#伪随机数" class="headerlink" title="伪随机数"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/伪随机数.md" target="_blank" rel="external">伪随机数</a></h3><h3 id="在Openstack-Swift中使用多种后端存储实现"><a href="#在Openstack-Swift中使用多种后端存储实现" class="headerlink" title="在Openstack Swift中使用多种后端存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/在Openstack Swift中使用多种后端存储实现.md" target="_blank" rel="external">在Openstack Swift中使用多种后端存储实现</a></h3><h3 id="对象存储VS文件系统"><a href="#对象存储VS文件系统" class="headerlink" title="对象存储VS文件系统"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/对象存储VS文件系统.md" target="_blank" rel="external">对象存储VS文件系统</a></h3><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/数据结构.md" target="_blank" rel="external">数据结构</a></h3><h3 id="文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md"><a href="#文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md" class="headerlink" title="文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/文件系统(seaweedfs" target="_blank" rel="external">文件系统(seaweedfs)与关系型数据库优劣势分析</a>与关系型数据库优劣势分析.md)</h3><h3 id="用户态到内核态切换"><a href="#用户态到内核态切换" class="headerlink" title="用户态到内核态切换"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/用户态到内核态切换.md" target="_blank" rel="external">用户态到内核态切换</a></h3><h3 id="自旋锁spinlock剖析与改进"><a href="#自旋锁spinlock剖析与改进" class="headerlink" title="自旋锁spinlock剖析与改进"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/自旋锁spinlock剖析与改进.md" target="_blank" rel="external">自旋锁spinlock剖析与改进</a></h3>]]></content>
     
     <summary type="html">
     
