@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="go,seaweedfs," />
+  <meta name="keywords" content="C++,C," />
 
 
 
@@ -89,19 +89,28 @@
 
 
 
-<meta name="description" content="使用命令 : curl -X POST http://localhost:9333/dir/assign
-在topology.go 中12345678func (t *Topology) PickForWrite(count uint64, option *VolumeGrowOption) (string, uint64, *DataNode, error) &amp;#123;truevid, cou">
+<meta name="description" content="C语言里的malloc和CPP中的new的区别:参考In what cases do I use malloc vs new?
+new vs malloc()
+1) new is an operator, while malloc() is a function.
+2) new calls constructors, while malloc() does not.
+3) new returns">
 <meta property="og:type" content="article">
-<meta property="og:title" content="seaweedfs源码阅读记录9-生成fid过程">
-<meta property="og:url" content="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/index.html">
+<meta property="og:title" content="malloc vs new">
+<meta property="og:url" content="https://makeitpossible16.github.io/C/malloc vs new/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
-<meta property="og:description" content="使用命令 : curl -X POST http://localhost:9333/dir/assign
-在topology.go 中12345678func (t *Topology) PickForWrite(count uint64, option *VolumeGrowOption) (string, uint64, *DataNode, error) &amp;#123;truevid, cou">
-<meta property="og:updated_time" content="2016-12-16T14:27:23.010Z">
+<meta property="og:description" content="C语言里的malloc和CPP中的new的区别:参考In what cases do I use malloc vs new?
+new vs malloc()
+1) new is an operator, while malloc() is a function.
+2) new calls constructors, while malloc() does not.
+3) new returns">
+<meta property="og:updated_time" content="2017-03-28T08:51:09.500Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="seaweedfs源码阅读记录9-生成fid过程">
-<meta name="twitter:description" content="使用命令 : curl -X POST http://localhost:9333/dir/assign
-在topology.go 中12345678func (t *Topology) PickForWrite(count uint64, option *VolumeGrowOption) (string, uint64, *DataNode, error) &amp;#123;truevid, cou">
+<meta name="twitter:title" content="malloc vs new">
+<meta name="twitter:description" content="C语言里的malloc和CPP中的new的区别:参考In what cases do I use malloc vs new?
+new vs malloc()
+1) new is an operator, while malloc() is a function.
+2) new calls constructors, while malloc() does not.
+3) new returns">
 
 
 
@@ -129,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/"/>
+  <link rel="canonical" href="https://makeitpossible16.github.io/C/malloc vs new/"/>
 
 
 
 
 
-  <title> seaweedfs源码阅读记录9-生成fid过程 | MakeItPossible16 </title>
+  <title> malloc vs new | MakeItPossible16 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -304,7 +313,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/">
+  <link itemprop="mainEntityOfPage" href="https://makeitpossible16.github.io/C/malloc vs new/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="MakeItPossible16">
@@ -328,7 +337,7 @@
             
             
               
-                seaweedfs源码阅读记录9-生成fid过程
+                malloc vs new
               
             
           </h1>
@@ -343,8 +352,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-16T00:00:00Z">
-                2016-12-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-28T00:00:00Z">
+                2017-03-28
               &nbsp;&nbsp;</time>&nbsp;
             
 
@@ -359,8 +368,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2016-12-16T22:27:23+08:00">
-                2016-12-16
+              <time title="更新于" itemprop="dateModified" datetime="2017-03-28T08:51:09Z">
+                2017-03-28
               </time>
             
           </span>
@@ -378,8 +387,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/文件存储/" itemprop="url" rel="index">
-                    <span itemprop="name">文件存储</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C</span>
                   </a>
                 </span>
 
@@ -396,8 +405,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/文件存储/seaweedfs源码阅读记录9-生成fid过程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="文件存储/seaweedfs源码阅读记录9-生成fid过程/" itemprop="commentCount"></span>
+                <a href="/C/malloc vs new/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="C/malloc vs new/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -423,12 +432,19 @@
       
 
       
-        <p>使用命令 : curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a></p>
-<p>在topology.go 中<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Topology)</span> <span class="title">PickForWrite</span><span class="params">(count <span class="keyword">uint64</span>, option *VolumeGrowOption)</span> <span class="params">(<span class="keyword">string</span>, <span class="keyword">uint64</span>, *DataNode, error)</span></span> &#123;</div><div class="line">truevid, count, datanodes, err := t.GetVolumeLayout(option.Collection, option.ReplicaPlacement, option.Ttl).PickForWrite(count, option)</div><div class="line">true<span class="keyword">if</span> err != <span class="literal">nil</span> || datanodes.Length() == <span class="number">0</span> &#123;</div><div class="line">truetrue<span class="keyword">return</span> <span class="string">""</span>, <span class="number">0</span>, <span class="literal">nil</span>, errors.New(<span class="string">"No writable volumes available!"</span>)</div><div class="line">true&#125;</div><div class="line">truefileId, count := t.Sequence.NextFileId(count)   <span class="comment">// fileId = 1050682, count = 1</span></div><div class="line">true<span class="keyword">return</span> storage.NewFileId(*vid, fileId, rand.Uint32()).String(), count, datanodes.Head(), <span class="literal">nil</span>  <span class="comment">//调用file_id.go中的NewFileId函数</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>在file_id.go 中<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> FileId <span class="keyword">struct</span> &#123;</div><div class="line">trueVolumeId VolumeId</div><div class="line">trueKey      <span class="keyword">uint64</span> <span class="comment">// fileId = 1050682</span></div><div class="line">trueHashcode <span class="keyword">uint32</span> <span class="comment">// rand.Uint32()</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewFileId</span><span class="params">(VolumeId VolumeId, Key <span class="keyword">uint64</span>, Hashcode <span class="keyword">uint32</span>)</span> *<span class="title">FileId</span></span> &#123;</div><div class="line">true<span class="keyword">return</span> &amp;FileId&#123;VolumeId: VolumeId, Key: Key, Hashcode: Hashcode&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>使用memory_sequencer.go中的函数<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(m *MemorySequencer)</span> <span class="title">NextFileId</span><span class="params">(count <span class="keyword">uint64</span>)</span> <span class="params">(<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</span></span> &#123;  <span class="comment">// count = 1</span></div><div class="line">truem.sequenceLock.Lock()</div><div class="line">true<span class="keyword">defer</span> m.sequenceLock.Unlock()</div><div class="line">trueret := m.counter</div><div class="line">truem.counter += <span class="keyword">uint64</span>(count)</div><div class="line">true<span class="keyword">return</span> ret, count</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>调试信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(dlv) p m</div><div class="line">*github.com/chrislusf/seaweedfs/weed/sequence.MemorySequencer &#123;</div><div class="line">truecounter: 1050683,</div><div class="line">truesequenceLock: sync.Mutex &#123;state: 1, sema: 0&#125;,&#125;</div></pre></td></tr></table></figure></p>
-<p>在 master_server_handlers.go 中封装信息<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">fid, count, dn, err := ms.Topo.PickForWrite(requestedCount, option)</div><div class="line">true<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</div><div class="line">truetruewriteJsonQuiet(w, r, http.StatusOK, operation.AssignResult&#123;Fid: fid, Url: dn.Url(), PublicUrl: dn.PublicUrl, Count: count&#125;)</div><div class="line">true&#125; <span class="keyword">else</span> &#123;</div><div class="line">truetruewriteJsonQuiet(w, r, http.StatusNotAcceptable, operation.AssignResult&#123;Error: err.Error()&#125;)</div><div class="line">true&#125;</div></pre></td></tr></table></figure></p>
+        <p>C语言里的malloc和CPP中的new的区别:<br>参考<a href="http://stackoverflow.com/questions/184537/in-what-cases-do-i-use-malloc-vs-new" target="_blank" rel="external">In what cases do I use malloc vs new?</a></p>
+<p>new vs malloc()</p>
+<p>1) new is an operator, while malloc() is a function.</p>
+<p>2) new calls constructors, while malloc() does not.</p>
+<p>3) new returns exact data type, while malloc() returns void *.</p>
+<p>4) new never returns a NULL (will throw on failure) while malloc() returns NULL  &amp;&amp;  4) , new can be instructed to return NULL on failure. char* ptr = new (std::nothrow) char [323232];</p>
+<p>5) Reallocation of memory not handled by new while malloc() can</p>
+<p>6) new creates from constructor arguments, while malloc uses size.</p>
+<p>Unless you are forced to use C, you should never use malloc. Always use new. If you need a big chunk of data just do something like:</p>
+<p>char *pBuffer = new char[1024];<br>Be careful though this is not correct:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//This is incorrect - may delete only one element, may corrupt the heap, or worse...</span></div><div class="line"><span class="keyword">delete</span> pBuffer;</div></pre></td></tr></table></figure></p>
+<p>Instead you should do this when deleting an array of data:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//This deletes all items in the array</span></div><div class="line"><span class="keyword">delete</span>[] pBuffer;</div></pre></td></tr></table></figure></p>
+<p>The new keyword is the C++ way of doing it, and it will ensure that your type will have their constructor called. The new keyword is also more type safe whereas malloc is not typesafe at all.</p>
+<p>The only way I could think that would be beneficial to use malloc would be if you needed to change the size of your buffer of data. The new keyword does not have an analogous way like realloc. The realloc function might be able to extend the size of a chunk of memory for you more efficiently.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int* p_scalar = new int(5);//Does not create 5 elements, but initializes to 5</div><div class="line">int* p_array = new int[5];//Creates 5 elements</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -452,9 +468,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/go/" rel="tag"># go</a>
+            <a href="/tags/C/" rel="tag"># C++</a>
           
-            <a href="/tags/seaweedfs/" rel="tag"># seaweedfs</a>
+            <a href="/tags/C/" rel="tag"># C</a>
           
         </div>
       
@@ -467,8 +483,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/文件存储/seaweedfs源码阅读8-GET&HEAD获取文件过程/" rel="next" title="seaweedfs源码阅读8-GET&HEAD获取文件过程">
-                <i class="fa fa-chevron-left"></i> seaweedfs源码阅读8-GET&HEAD获取文件过程
+              <a href="/python/python string intern/" rel="next" title="python string intern">
+                <i class="fa fa-chevron-left"></i> python string intern
               </a>
             
           </div>
@@ -476,10 +492,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/文件存储/linux学习-linux文件存储/" rel="prev" title="linux学习-linux文件存储">
-                linux学习-linux文件存储 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -494,10 +506,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="文件存储/seaweedfs源码阅读记录9-生成fid过程/"
-     data-title="seaweedfs源码阅读记录9-生成fid过程"
+        <div class="ds-share flat" data-thread-key="C/malloc vs new/"
+     data-title="malloc vs new"
      data-content=""
-     data-url="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/">
+     data-url="https://makeitpossible16.github.io/C/malloc vs new/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -524,8 +536,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="文件存储/seaweedfs源码阅读记录9-生成fid过程/"
-           data-title="seaweedfs源码阅读记录9-生成fid过程" data-url="https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/">
+      <div class="ds-thread" data-thread-key="C/malloc vs new/"
+           data-title="malloc vs new" data-url="https://makeitpossible16.github.io/C/malloc vs new/">
       </div>
     
   </div>
