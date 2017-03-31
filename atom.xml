@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-03-29T11:39:25.571Z</updated>
+  <updated>2017-03-31T16:10:26.313Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -16,40 +16,78 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>malloc vs new</title>
-    <link href="https://makeitpossible16.github.io/C/malloc%20vs%20new/"/>
-    <id>https://makeitpossible16.github.io/C/malloc vs new/</id>
-    <published>2017-03-28T00:00:00.000Z</published>
-    <updated>2017-03-29T11:39:25.571Z</updated>
+    <title>linux IO学习</title>
+    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/%E7%BD%91%E7%BB%9C/linux%20IO%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://makeitpossible16.github.io/操作系统/文件存储/网络/linux IO学习/</id>
+    <published>2017-03-31T00:00:00.000Z</published>
+    <updated>2017-03-31T16:10:26.313Z</updated>
     
-    <content type="html"><![CDATA[<p>C语言里的malloc和CPP中的new的区别:<br>参考<a href="http://stackoverflow.com/questions/184537/in-what-cases-do-i-use-malloc-vs-new" target="_blank" rel="external">In what cases do I use malloc vs new?</a></p>
-<p>new vs malloc()</p>
-<p>1) new is an operator, while malloc() is a function.</p>
-<p>2) new calls constructors, while malloc() does not.</p>
-<p>3) new returns exact data type, while malloc() returns void *.</p>
-<p>4) new never returns a NULL (will throw on failure) while malloc() returns NULL  &amp;&amp;  4) , new can be instructed to return NULL on failure. char* ptr = new (std::nothrow) char [323232];</p>
-<p>5) Reallocation of memory not handled by new while malloc() can</p>
-<p>6) new creates from constructor arguments, while malloc uses size.</p>
-<p>Unless you are forced to use C, you should never use malloc. Always use new. If you need a big chunk of data just do something like:</p>
-<p>char *pBuffer = new char[1024];<br>Be careful though this is not correct:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//This is incorrect - may delete only one element, may corrupt the heap, or worse...</span></div><div class="line"><span class="keyword">delete</span> pBuffer;</div></pre></td></tr></table></figure></p>
-<p>Instead you should do this when deleting an array of data:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//This deletes all items in the array</span></div><div class="line"><span class="keyword">delete</span>[] pBuffer;</div></pre></td></tr></table></figure></p>
-<p>The new keyword is the C++ way of doing it, and it will ensure that your type will have their constructor called. The new keyword is also more type safe whereas malloc is not typesafe at all.</p>
-<p>The only way I could think that would be beneficial to use malloc would be if you needed to change the size of your buffer of data. The new keyword does not have an analogous way like realloc. The realloc function might be able to extend the size of a chunk of memory for you more efficiently.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int* p_scalar = new int(5);//Does not create 5 elements, but initializes to 5</div><div class="line">int* p_array = new int[5];//Creates 5 elements</div></pre></td></tr></table></figure></p>
-<p>1.new、delete、malloc、free关系<br>delete会调用对象的析构函数,和new对应free只会释放内存，new调用构造函数。malloc与free是C++/C语言的标准库函数，new/delete是C++的运算符。它们都可用于申请动态内存和释放内存。对于非内部数据类型的对象而言，光用maloc/free无法满足动态对象的要求。对象在创建的同时要自动执行构造函数，对象在消亡之前要自动执行析构函数。由于malloc/free是库函数而不是运算符，不在编译器控制权限之内，不能够把执行构造函数和析构函数的任务强加于malloc/free。因此C++语言需要一个能完成动态内存分配和初始化工作的运算符new，以及一个能完成清理与释放内存工作的运算符delete。注意new/delete不是库函数。</p>
+    <content type="html"><![CDATA[<p>参考<a href="https://segmentfault.com/a/1190000003063859" target="_blank" rel="external">Linux IO模式及 select、poll、epoll详解</a><br><a href="http://www.jianshu.com/p/dfd940e7fca2" target="_blank" rel="external">聊聊IO多路复用之select、poll、epoll详解</a><br><a href="http://www.cnblogs.com/Anker/p/3265058.html" target="_blank" rel="external">select、poll、epoll之间的区别总结[整理]</a></p>
+<h2 id="用户空间与内核空间"><a href="#用户空间与内核空间" class="headerlink" title="用户空间与内核空间"></a>用户空间与内核空间</h2><p>现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。</p>
+<h2 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h2><p>参考<a href="http://guojing.me/linux-kernel-architecture/posts/process-switch/" target="_blank" rel="external">进程切换</a><br>从一个进程的运行转到另一个进程上运行，这个过程中经过下面这些变化：</p>
+<ol>
+<li>保存处理机上下文，包括程序计数器和其他寄存器。</li>
+<li>更新PCB信息。</li>
+<li>把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列。</li>
+<li>选择另一个进程执行，并更新其PCB。</li>
+<li>更新内存管理的数据结构。</li>
+<li>恢复处理机上下文。<h2 id="缓存-I-O"><a href="#缓存-I-O" class="headerlink" title="缓存 I/O"></a>缓存 I/O</h2>缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。</li>
+</ol>
+<p>缓存 I/O 的缺点：<br>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<h2 id="IO模式"><a href="#IO模式" class="headerlink" title="IO模式"></a>IO模式</h2><p>对于一次IO访问（以read举例），数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。所以说，当一个read操作发生时，它会经历两个阶段：</p>
+<ol>
+<li>等待数据准备 (Waiting for the data to be ready)</li>
+<li>将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
+</ol>
+<p>正式因为这两个阶段，linux系统产生了下面五种网络模式的方案。</p>
+<ul>
+<li>阻塞 I/O（blocking IO）</li>
+<li>非阻塞 I/O（nonblocking IO）</li>
+<li>I/O 多路复用（ IO multiplexing）</li>
+<li>信号驱动 I/O（ signal driven IO）</li>
+<li>异步 I/O（asynchronous IO）</li>
+</ul>
+<p>注：由于signal driven IO在实际中并不常用，所以只提及剩下的四种IO Model。</p>
+<h3 id="阻塞-I-O（blocking-IO）"><a href="#阻塞-I-O（blocking-IO）" class="headerlink" title="阻塞 I/O（blocking IO）"></a>阻塞 I/O（blocking IO）</h3><p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样：<br><img src="/uploads/blockingIO.png" alt=""><br>当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据（对于网络IO来说，很多时候数据在一开始还没有到达。比如，还没有收到一个完整的UDP包。这个时候kernel就要等待足够的数据到来）。这个过程需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中是需要一个过程的。而在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当kernel一直等到数据准备好了，它就会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。<br>所以，blocking IO的特点就是在IO执行的两个阶段都被block了。</p>
+<h3 id="非阻塞-I-O（nonblocking-IO）"><a href="#非阻塞-I-O（nonblocking-IO）" class="headerlink" title="非阻塞 I/O（nonblocking IO）"></a>非阻塞 I/O（nonblocking IO）</h3><p>当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error。从用户进程角度讲 ，它发起一个read操作后，并不需要等待，而是马上就得到了一个结果。用户进程判断结果是一个error时，它就知道数据还没有准备好，于是它可以再次发送read操作。<br>nonblocking IO的特点是用户进程需要不断的主动询问kernel数据好了没有。</p>
+<h3 id="I-O-多路复用（-IO-multiplexing）"><a href="#I-O-多路复用（-IO-multiplexing）" class="headerlink" title="I/O 多路复用（ IO multiplexing）"></a>I/O 多路复用（ IO multiplexing）</h3><p>IO multiplexing就是我们说的select，poll，epoll，有些地方也称这种IO方式为event driven IO。select/epoll的好处就在于单个process就可以同时处理多个网络连接的IO。它的基本原理就是select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程。<br><img src="/uploads/IO_mutiplexing.png" alt=""><br>当用户进程调用了select，那么整个进程会被block，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程。</p>
+<p>所以，I/O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回。<br>这个图和blocking IO的图其实并没有太大的不同，事实上，还更差一些。因为这里需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection。</p>
+<p>所以，如果处理的连接数不是很高的话，使用select/epoll的web server不一定比使用multi-threading + blocking IO的web server性能更好，可能延迟还更大。select/epoll的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。）</p>
+<p>在IO multiplexing Model中，实际中，对于每一个socket，一般都设置成为non-blocking，但是，如上图所示，整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket IO给block。</p>
+<h3 id="异步-I-O（asynchronous-IO）"><a href="#异步-I-O（asynchronous-IO）" class="headerlink" title="异步 I/O（asynchronous IO）"></a>异步 I/O（asynchronous IO）</h3><p><img src="/uploads/asynchronousIO.png" alt=""><br>用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。</p>
+<h2 id="I-O-多路复用之select、poll、epoll详解"><a href="#I-O-多路复用之select、poll、epoll详解" class="headerlink" title="I/O 多路复用之select、poll、epoll详解"></a>I/O 多路复用之select、poll、epoll详解</h2><p>select，poll，epoll都是IO多路复用的机制。I/O多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I/O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I/O则无需自己负责进行读写，异步I/O的实现会负责把数据从内核拷贝到用户空间。</p>
+<h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p>select 函数监视的文件描述符分3类，分别是writefds、readfds、和exceptfds。调用后select函数会阻塞，直到有描述副就绪（有数据 可读、可写、或者有except），或者超时（timeout指定等待时间，如果立即返回设为null即可），函数返回。当select函数返回后，可以 通过遍历fdset，来找到就绪的描述符。</p>
+<p>select目前几乎在所有的平台上支持，其良好跨平台支持也是它的一个优点。select的一 个缺点在于单个进程能够监视的文件描述符的数量存在最大限制，在Linux上一般为1024，可以通过修改宏定义甚至重新编译内核的方式提升这一限制，但 是这样也会造成效率的降低。</p>
+<h3 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h3><p>int poll (struct pollfd *fds, unsigned int nfds, int timeout);<br>不同与select使用三个位图来表示三个fdset的方式，poll使用一个 pollfd的指针实现。</p>
+<p>struct pollfd {<br>    int fd; /<em> file descriptor \</em>/<br>    short events; /<em> requested events to watch \</em>/<br>    short revents; /<em> returned events witnessed \</em>/<br>};<br>pollfd结构包含了要监视的event和发生的event，不再使用select“参数-值”传递的方式。同时，pollfd并没有最大数量限制（但是数量过大后性能也是会下降）。 和select函数一样，poll返回后，需要轮询pollfd来获取就绪的描述符。</p>
+<p>从上面看，select和poll都需要在返回后，通过遍历文件描述符来获取已经就绪的socket。事实上，同时连接的大量客户端在一时刻可能只有很少的处于就绪状态，因此随着监视的描述符数量的增长，其效率也会线性下降。</p>
+<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h2><p>epoll是在2.6内核中提出的，是之前的select和poll的增强版本。相对于select和poll来说，epoll更加灵活，没有描述符限制。epoll使用一个文件描述符管理多个描述符，将用户关系的文件描述符的事件存放到内核的一个事件表中，这样在用户空间和内核空间的copy只需一次。</p>
+<h2 id="epoll总结"><a href="#epoll总结" class="headerlink" title="epoll总结"></a>epoll总结</h2><p>在 select/poll中，进程只有在调用一定的方法后，内核才对所有监视的文件描述符进行扫描，而epoll事先通过epoll_ctl()来注册一 个文件描述符，一旦基于某个文件描述符就绪时，内核会采用类似callback的回调机制，迅速激活这个文件描述符，当进程调用epoll_wait() 时便得到通知。(此处去掉了遍历文件描述符，而是通过监听回调的的机制。这正是epoll的魅力所在。)</p>
+<p>epoll的优点主要是一下几个方面：</p>
+<ol>
+<li>监视的描述符数量不受限制，它所支持的FD上限是最大可以打开文件的数目，这个数字一般远大于2048,举个例子,在1GB内存的机器上大约是10万左 右，具体数目可以cat /proc/sys/fs/file-max察看,一般来说这个数目和系统内存关系很大。select的最大缺点就是进程打开的fd是有数量限制的。这对 于连接数量比较大的服务器来说根本不能满足。虽然也可以选择多进程的解决方案( Apache就是这样实现的)，不过虽然linux上面创建进程的代价比较小，但仍旧是不可忽视的，加上进程间数据同步远比不上线程间同步的高效，所以也不是一种完美的方案。</li>
+</ol>
+<p>IO的效率不会随着监视fd的数量的增长而下降。epoll不同于select和poll轮询的方式，而是通过每个fd定义的回调函数来实现的。只有就绪的fd才会执行回调函数。<br>如果没有大量的idle -connection或者dead-connection，epoll的效率并不会比select/poll高很多，但是当遇到大量的idle- connection，就会发现epoll的效率大大高于select/poll。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;C语言里的malloc和CPP中的new的区别:&lt;br&gt;参考&lt;a href=&quot;http://stackoverflow.com/questions/184537/in-what-cases-do-i-use-malloc-vs-new&quot; target=&quot;_blank&quot; re
+      &lt;p&gt;参考&lt;a href=&quot;https://segmentfault.com/a/1190000003063859&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux IO模式及 select、poll、epoll详解&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
     
     </summary>
     
-      <category term="C" scheme="https://makeitpossible16.github.io/categories/C/"/>
+      <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+      <category term="网络" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/%E7%BD%91%E7%BB%9C/"/>
     
     
-      <category term="C++" scheme="https://makeitpossible16.github.io/tags/C/"/>
+      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="C" scheme="https://makeitpossible16.github.io/tags/C/"/>
+      <category term="网络" scheme="https://makeitpossible16.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
@@ -89,6 +127,44 @@
   </entry>
   
   <entry>
+    <title>malloc vs new</title>
+    <link href="https://makeitpossible16.github.io/C/malloc%20vs%20new/"/>
+    <id>https://makeitpossible16.github.io/C/malloc vs new/</id>
+    <published>2017-03-28T00:00:00.000Z</published>
+    <updated>2017-03-29T11:39:25.571Z</updated>
+    
+    <content type="html"><![CDATA[<p>C语言里的malloc和CPP中的new的区别:<br>参考<a href="http://stackoverflow.com/questions/184537/in-what-cases-do-i-use-malloc-vs-new" target="_blank" rel="external">In what cases do I use malloc vs new?</a></p>
+<p>new vs malloc()</p>
+<p>1) new is an operator, while malloc() is a function.</p>
+<p>2) new calls constructors, while malloc() does not.</p>
+<p>3) new returns exact data type, while malloc() returns void *.</p>
+<p>4) new never returns a NULL (will throw on failure) while malloc() returns NULL  &amp;&amp;  4) , new can be instructed to return NULL on failure. char* ptr = new (std::nothrow) char [323232];</p>
+<p>5) Reallocation of memory not handled by new while malloc() can</p>
+<p>6) new creates from constructor arguments, while malloc uses size.</p>
+<p>Unless you are forced to use C, you should never use malloc. Always use new. If you need a big chunk of data just do something like:</p>
+<p>char *pBuffer = new char[1024];<br>Be careful though this is not correct:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//This is incorrect - may delete only one element, may corrupt the heap, or worse...</span></div><div class="line"><span class="keyword">delete</span> pBuffer;</div></pre></td></tr></table></figure></p>
+<p>Instead you should do this when deleting an array of data:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//This deletes all items in the array</span></div><div class="line"><span class="keyword">delete</span>[] pBuffer;</div></pre></td></tr></table></figure></p>
+<p>The new keyword is the C++ way of doing it, and it will ensure that your type will have their constructor called. The new keyword is also more type safe whereas malloc is not typesafe at all.</p>
+<p>The only way I could think that would be beneficial to use malloc would be if you needed to change the size of your buffer of data. The new keyword does not have an analogous way like realloc. The realloc function might be able to extend the size of a chunk of memory for you more efficiently.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">int* p_scalar = new int(5);//Does not create 5 elements, but initializes to 5</div><div class="line">int* p_array = new int[5];//Creates 5 elements</div></pre></td></tr></table></figure></p>
+<p>1.new、delete、malloc、free关系<br>delete会调用对象的析构函数,和new对应free只会释放内存，new调用构造函数。malloc与free是C++/C语言的标准库函数，new/delete是C++的运算符。它们都可用于申请动态内存和释放内存。对于非内部数据类型的对象而言，光用maloc/free无法满足动态对象的要求。对象在创建的同时要自动执行构造函数，对象在消亡之前要自动执行析构函数。由于malloc/free是库函数而不是运算符，不在编译器控制权限之内，不能够把执行构造函数和析构函数的任务强加于malloc/free。因此C++语言需要一个能完成动态内存分配和初始化工作的运算符new，以及一个能完成清理与释放内存工作的运算符delete。注意new/delete不是库函数。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;C语言里的malloc和CPP中的new的区别:&lt;br&gt;参考&lt;a href=&quot;http://stackoverflow.com/questions/184537/in-what-cases-do-i-use-malloc-vs-new&quot; target=&quot;_blank&quot; re
+    
+    </summary>
+    
+      <category term="C" scheme="https://makeitpossible16.github.io/categories/C/"/>
+    
+    
+      <category term="C" scheme="https://makeitpossible16.github.io/tags/C/"/>
+    
+      <category term="C++" scheme="https://makeitpossible16.github.io/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>linux单文件大小限制</title>
     <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E5%8D%95%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6/"/>
     <id>https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/</id>
@@ -124,63 +200,6 @@
   </entry>
   
   <entry>
-    <title>linux IO学习</title>
-    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/%E7%BD%91%E7%BB%9C/linux%20IO%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/操作系统/文件存储/网络/linux IO学习/</id>
-    <published>2017-03-26T00:00:00.000Z</published>
-    <updated>2017-03-28T02:59:19.184Z</updated>
-    
-    <content type="html"><![CDATA[<p>参考<a href="https://segmentfault.com/a/1190000003063859" target="_blank" rel="external">Linux IO模式及 select、poll、epoll详解</a><br><a href="http://www.jianshu.com/p/dfd940e7fca2" target="_blank" rel="external">聊聊IO多路复用之select、poll、epoll详解</a><br><a href="http://www.cnblogs.com/Anker/p/3265058.html" target="_blank" rel="external">select、poll、epoll之间的区别总结[整理]</a></p>
-<h2 id="用户空间与内核空间"><a href="#用户空间与内核空间" class="headerlink" title="用户空间与内核空间"></a>用户空间与内核空间</h2><p>现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。</p>
-<h2 id="进程切换"><a href="#进程切换" class="headerlink" title="进程切换"></a>进程切换</h2><p>参考<a href="http://guojing.me/linux-kernel-architecture/posts/process-switch/" target="_blank" rel="external">进程切换</a><br>从一个进程的运行转到另一个进程上运行，这个过程中经过下面这些变化：</p>
-<ol>
-<li>保存处理机上下文，包括程序计数器和其他寄存器。</li>
-<li>更新PCB信息。</li>
-<li>把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列。</li>
-<li>选择另一个进程执行，并更新其PCB。</li>
-<li>更新内存管理的数据结构。</li>
-<li>恢复处理机上下文。<h2 id="缓存-I-O"><a href="#缓存-I-O" class="headerlink" title="缓存 I/O"></a>缓存 I/O</h2>缓存 I/O 又被称作标准 I/O，大多数文件系统的默认 I/O 操作都是缓存 I/O。在 Linux 的缓存 I/O 机制中，操作系统会将 I/O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。</li>
-</ol>
-<p>缓存 I/O 的缺点：<br>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
-<h2 id="IO模式"><a href="#IO模式" class="headerlink" title="IO模式"></a>IO模式</h2><p>对于一次IO访问（以read举例），数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。所以说，当一个read操作发生时，它会经历两个阶段：</p>
-<ol>
-<li>等待数据准备 (Waiting for the data to be ready)</li>
-<li>将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
-</ol>
-<p>正式因为这两个阶段，linux系统产生了下面五种网络模式的方案。</p>
-<ul>
-<li>阻塞 I/O（blocking IO）</li>
-<li>非阻塞 I/O（nonblocking IO）</li>
-<li>I/O 多路复用（ IO multiplexing）</li>
-<li>信号驱动 I/O（ signal driven IO）</li>
-<li>异步 I/O（asynchronous IO）</li>
-</ul>
-<p>注：由于signal driven IO在实际中并不常用，所以只提及剩下的四种IO Model。</p>
-<h3 id="阻塞-I-O（blocking-IO）"><a href="#阻塞-I-O（blocking-IO）" class="headerlink" title="阻塞 I/O（blocking IO）"></a>阻塞 I/O（blocking IO）</h3><p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样：</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;参考&lt;a href=&quot;https://segmentfault.com/a/1190000003063859&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux IO模式及 select、poll、epoll详解&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
-    
-    </summary>
-    
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-      <category term="网络" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/%E7%BD%91%E7%BB%9C/"/>
-    
-    
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-      <category term="网络" scheme="https://makeitpossible16.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
-    
-  </entry>
-  
-  <entry>
     <title>kafka存储实现</title>
     <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/kafka%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
     <id>https://makeitpossible16.github.io/操作系统/文件存储/kafka存储实现/</id>
@@ -203,9 +222,9 @@
     
       <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="kafka" scheme="https://makeitpossible16.github.io/tags/kafka/"/>
-    
       <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+      <category term="kafka" scheme="https://makeitpossible16.github.io/tags/kafka/"/>
     
   </entry>
   
@@ -593,6 +612,33 @@
   
   <entry>
     <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
+    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
+    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
+    <published>2017-02-26T00:00:00.000Z</published>
+    <updated>2017-02-27T12:41:08.472Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h2><p>给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">全排列:</div><div class="line">123</div><div class="line">132</div><div class="line">213</div><div class="line">231</div><div class="line">312</div><div class="line">321</div></pre></td></tr></table></figure></p>
+<p>结果为:213</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>使用逆康托编码展开,参考<a href="http://www.cnblogs.com/zhanjxcom/p/5596208.html" target="_blank" rel="external">全排列的编码与解码——康托展开</a></p>
+<h3 id="康托编码"><a href="#康托编码" class="headerlink" title="康托编码:"></a>康托编码:</h3><p>{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？<br>如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。<br>小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有2<em>2！=4种。<br>小于2的数只有一个1，所以有1</em>1！=1种情况，最后一位是1，没有比一小的数，所以是0<em>0！=0<br>综上：小于321的数有4+1=5个，所以321是第六小的数。<br>例如:排列3 5 7 4 1 2 9 6 8展开为98884<br>X=2</em>8!+3<em>7!+4</em>6!+2<em>5!+0</em>4!+0<em>3!+2</em>2!+0<em>1!+0</em>0!=98884.</p>
+<h3 id="逆康托展开"><a href="#逆康托展开" class="headerlink" title="逆康托展开:"></a>逆康托展开:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？</div><div class="line"></div><div class="line">1. 首先用16-1得到15</div><div class="line"></div><div class="line">2. 用15去除4! 得到0余15</div><div class="line"></div><div class="line">3. 用15去除3! 得到2余3</div><div class="line"></div><div class="line">4. 用3去除2! 得到1余1</div><div class="line"></div><div class="line">5. 用1去除1! 得到1余0</div><div class="line"></div><div class="line">有0个数比它小的数是1，所以第一位是1</div><div class="line"></div><div class="line">有2个数比它小的数是3，但1已经在之前出现过了所以是4</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1已经在之前出现过了所以是3</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1,3,4都出现过了所以是5</div><div class="line"></div><div class="line">最后一个数只能是2</div><div class="line"></div><div class="line">所以排列为1 4 3 5 2</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目:&quot;&gt;&lt;/a&gt;题目:&lt;/h2&gt;&lt;p&gt;给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3&lt;br&gt;&lt;figure class=&quot;highlight pla
+    
+    </summary>
+    
+      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
     <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Next%20Permutation(%E5%85%A8%E6%8E%92%E5%88%97%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95)/"/>
     <id>https://makeitpossible16.github.io/算法/LeetCode解题-Next Permutation(全排列生成算法)/</id>
     <published>2017-02-26T00:00:00.000Z</published>
@@ -640,33 +686,6 @@
       <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
     
       <category term="swift-weedfs-backend" scheme="https://makeitpossible16.github.io/tags/swift-weedfs-backend/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
-    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
-    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
-    <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-02-27T12:41:08.472Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h2><p>给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">全排列:</div><div class="line">123</div><div class="line">132</div><div class="line">213</div><div class="line">231</div><div class="line">312</div><div class="line">321</div></pre></td></tr></table></figure></p>
-<p>结果为:213</p>
-<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>使用逆康托编码展开,参考<a href="http://www.cnblogs.com/zhanjxcom/p/5596208.html" target="_blank" rel="external">全排列的编码与解码——康托展开</a></p>
-<h3 id="康托编码"><a href="#康托编码" class="headerlink" title="康托编码:"></a>康托编码:</h3><p>{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？<br>如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。<br>小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有2<em>2！=4种。<br>小于2的数只有一个1，所以有1</em>1！=1种情况，最后一位是1，没有比一小的数，所以是0<em>0！=0<br>综上：小于321的数有4+1=5个，所以321是第六小的数。<br>例如:排列3 5 7 4 1 2 9 6 8展开为98884<br>X=2</em>8!+3<em>7!+4</em>6!+2<em>5!+0</em>4!+0<em>3!+2</em>2!+0<em>1!+0</em>0!=98884.</p>
-<h3 id="逆康托展开"><a href="#逆康托展开" class="headerlink" title="逆康托展开:"></a>逆康托展开:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？</div><div class="line"></div><div class="line">1. 首先用16-1得到15</div><div class="line"></div><div class="line">2. 用15去除4! 得到0余15</div><div class="line"></div><div class="line">3. 用15去除3! 得到2余3</div><div class="line"></div><div class="line">4. 用3去除2! 得到1余1</div><div class="line"></div><div class="line">5. 用1去除1! 得到1余0</div><div class="line"></div><div class="line">有0个数比它小的数是1，所以第一位是1</div><div class="line"></div><div class="line">有2个数比它小的数是3，但1已经在之前出现过了所以是4</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1已经在之前出现过了所以是3</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1,3,4都出现过了所以是5</div><div class="line"></div><div class="line">最后一个数只能是2</div><div class="line"></div><div class="line">所以排列为1 4 3 5 2</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目:&quot;&gt;&lt;/a&gt;题目:&lt;/h2&gt;&lt;p&gt;给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3&lt;br&gt;&lt;figure class=&quot;highlight pla
-    
-    </summary>
-    
-      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
     
   </entry>
   
@@ -1051,6 +1070,31 @@
   </entry>
   
   <entry>
+    <title>linux文件存储机制</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
+    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
+    <published>2017-01-21T00:00:00.000Z</published>
+    <updated>2017-01-21T14:05:03.896Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>openstack-swift调试</title>
     <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E8%B0%83%E8%AF%95/"/>
     <id>https://makeitpossible16.github.io/对象存储/openstack-swift调试/</id>
@@ -1078,31 +1122,6 @@
     
     
       <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux文件存储机制</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
-    <published>2017-01-21T00:00:00.000Z</published>
-    <updated>2017-01-21T14:05:03.896Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://www.ibm.com/developerworks/cn/linux/l-cache/" target="_blank" rel="external">Linux 内核的文件 Cache 管理机制介绍</a><br><a href="http://www.cnblogs.com/huxiao-tee/p/4657851.html" target="_blank" rel="external">从内核文件系统看文件读写过程</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cache/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux 内核的文件 Cache 管理机制介绍&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;ht
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
     
   </entry>
   
@@ -1166,42 +1185,6 @@
   </entry>
   
   <entry>
-    <title>ELKStack搭建问题总结</title>
-    <link href="https://makeitpossible16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/ELKStack/ELKStack搭建问题总结/</id>
-    <published>2017-01-02T00:00:00.000Z</published>
-    <updated>2017-01-02T15:58:17.559Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用Docker搭建ELKStack时,elasticsearch自动退出,使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs [dockerName]</div></pre></td></tr></table></figure></p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>查看日志, 日志输出为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR: bootstrap checks failed</div><div class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</div></pre></td></tr></table></figure></p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a href="max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]">Elasticsearch5.0 安装问题集锦</a></p>
-<p>切换到root用户修改配置sysctl.conf</p>
-<p>vi /etc/sysctl.conf</p>
-<p>添加下面配置：</p>
-<p>vm.max_map_count=655360</p>
-<p>并执行命令：</p>
-<p>sysctl -p</p>
-<p>然后，重新启动elasticsearch，即可启动成功。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用Docker搭建ELKStack时,elasticsearch自动退出,使用&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/
-    
-    </summary>
-    
-      <category term="ELKStack" scheme="https://makeitpossible16.github.io/categories/ELKStack/"/>
-    
-    
-      <category term="ELKStack" scheme="https://makeitpossible16.github.io/tags/ELKStack/"/>
-    
-      <category term="日志分析" scheme="https://makeitpossible16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
-    
-      <category term="流处理" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
     <title>linux命令学习</title>
     <link href="https://makeitpossible16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
     <id>https://makeitpossible16.github.io/linux命令/linux命令学习/</id>
@@ -1234,6 +1217,42 @@
     
     
       <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ELKStack搭建问题总结</title>
+    <link href="https://makeitpossible16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://makeitpossible16.github.io/ELKStack/ELKStack搭建问题总结/</id>
+    <published>2017-01-02T00:00:00.000Z</published>
+    <updated>2017-01-02T15:58:17.559Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用Docker搭建ELKStack时,elasticsearch自动退出,使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs [dockerName]</div></pre></td></tr></table></figure></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>查看日志, 日志输出为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR: bootstrap checks failed</div><div class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</div></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a href="max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]">Elasticsearch5.0 安装问题集锦</a></p>
+<p>切换到root用户修改配置sysctl.conf</p>
+<p>vi /etc/sysctl.conf</p>
+<p>添加下面配置：</p>
+<p>vm.max_map_count=655360</p>
+<p>并执行命令：</p>
+<p>sysctl -p</p>
+<p>然后，重新启动elasticsearch，即可启动成功。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用Docker搭建ELKStack时,elasticsearch自动退出,使用&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/
+    
+    </summary>
+    
+      <category term="ELKStack" scheme="https://makeitpossible16.github.io/categories/ELKStack/"/>
+    
+    
+      <category term="ELKStack" scheme="https://makeitpossible16.github.io/tags/ELKStack/"/>
+    
+      <category term="日志分析" scheme="https://makeitpossible16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+      <category term="流处理" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
@@ -1377,6 +1396,35 @@
   </entry>
   
   <entry>
+    <title>seaweedfs源码阅读5-文件PUT过程</title>
+    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
+    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读5-文件PUT过程/</id>
+    <published>2016-12-11T00:00:00.000Z</published>
+    <updated>2016-12-11T13:30:05.384Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; curl -X POST http://localhost:9333/dir/assign</div><div class="line">&#123;<span class="string">"count"</span>:1,<span class="string">"fid"</span>:<span class="string">"3,01637037d6"</span>,<span class="string">"url"</span>:<span class="string">"127.0.0.1:8080"</span>,<span class="string">"publicUrl"</span>:<span class="string">"localhost:8080"</span>&#125;</div><div class="line">&gt; curl -X PUT -F file=@/home/chris/myphoto.jpg http://127.0.0.1:8080/3,01637037d6</div><div class="line">&#123;<span class="string">"size"</span>: 43234&#125;</div></pre></td></tr></table></figure></p>
+<p>上传文件,程序调用volume_server_handlers_write.go 中的PostHandler进行处理,根据URL,提取vid,生成新的volumeId<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vid, _, _, _, _ := parseURLPath(r.URL.Path) <span class="comment">//vid 为3</span></div><div class="line">volumeId, ve := storage.NewVolumeId(vid) <span class="comment">// volumeId : 7</span></div></pre></td></tr></table></figure></p>
+<p>根据请求参数,生成needle<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">needle, ne := storage.NewNeedle(r, vs.FixJpgOrientation)</div></pre></td></tr></table></figure></p>
+<p>使用multipartReader读取请求中的数据,有关multipart的介绍: <a href="http://wanlitian.github.io/2014/11/16/multipart_with_golang/" target="_blank" rel="external">golang的multipart包</a><br>使用needle.go 中的ParseUpload方法解析请求,得到上传的文件名和数据;<br>如果上传的数据类型是JPG或jpeg,调用 images.FixJpgOrientation(n.Data)对数据进行处理<br>生成needle过程<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewNeedle</span><span class="params">(r *http.Request, fixJpgOrientation <span class="keyword">bool</span>)</span> <span class="params">(n *Needle, e error)</span></span> &#123;</div><div class="line">truefname, mimeType, isGzipped, isChunkedFile := <span class="string">""</span>, <span class="string">""</span>, <span class="literal">false</span>, <span class="literal">false</span></div><div class="line">truen = <span class="built_in">new</span>(Needle)</div><div class="line">truefname, n.Data, mimeType, isGzipped, n.LastModified, n.Ttl, isChunkedFile, e = ParseUpload(r)</div><div class="line">true<span class="keyword">if</span> e != <span class="literal">nil</span> &#123;</div><div class="line">truetrue<span class="keyword">return</span></div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(fname) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Name = []<span class="keyword">byte</span>(fname)</div><div class="line">truetruen.SetHasName()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(mimeType) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Mime = []<span class="keyword">byte</span>(mimeType)</div><div class="line">truetruen.SetHasMime()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> isGzipped &#123;</div><div class="line">truetruen.SetGzipped()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> n.LastModified == <span class="number">0</span> &#123;</div><div class="line">truetruen.LastModified = <span class="keyword">uint64</span>(time.Now().Unix())</div><div class="line">true&#125;</div><div class="line">truen.SetHasLastModifiedDate()</div><div class="line">true<span class="keyword">if</span> n.Ttl != EMPTY_TTL &#123;</div><div class="line">truetruen.SetHasTtl()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> isChunkedFile &#123;</div><div class="line">truetruen.SetIsChunkManifest()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> fixJpgOrientation &#123;</div><div class="line">truetrueloweredName := strings.ToLower(fname)</div><div class="line">truetrue<span class="keyword">if</span> mimeType == <span class="string">"image/jpeg"</span> || strings.HasSuffix(loweredName, <span class="string">".jpg"</span>) || strings.HasSuffix(loweredName, <span class="string">".jpeg"</span>) &#123;</div><div class="line">truetruetruen.Data = images.FixJpgOrientation(n.Data)</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truen.Checksum = NewCRC(n.Data)</div><div class="line"></div><div class="line">truecommaSep := strings.LastIndex(r.URL.Path, <span class="string">","</span>)</div><div class="line">truedotSep := strings.LastIndex(r.URL.Path, <span class="string">"."</span>)</div><div class="line">truefid := r.URL.Path[commaSep+<span class="number">1</span>:]</div><div class="line">true<span class="keyword">if</span> dotSep &gt; <span class="number">0</span> &#123;</div><div class="line">truetruefid = r.URL.Path[commaSep+<span class="number">1</span> : dotSep]</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truee = n.ParsePath(fid)</div><div class="line"></div><div class="line">true<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>把数据及needle相关属性填充完成后,同步到其他volumeServer中,已needle作为传输载体<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size, errorStatus := topology.ReplicatedWrite(vs.GetMasterNode(),vs.store, volumeId, needle, r)</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用命令&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;l
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>seaweedfs源码阅读4-volume启动过程</title>
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
     <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读4-volume启动/</id>
@@ -1394,35 +1442,6 @@
     <summary type="html">
     
       &lt;p&gt;根据文章&lt;a href=&quot;http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;amp;utm_medium=referral&quot; target=&quot;_blank&quot; 
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>seaweedfs源码阅读5-文件PUT过程</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读5-文件PUT过程/</id>
-    <published>2016-12-11T00:00:00.000Z</published>
-    <updated>2016-12-11T13:30:05.384Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; curl -X POST http://localhost:9333/dir/assign</div><div class="line">&#123;<span class="string">"count"</span>:1,<span class="string">"fid"</span>:<span class="string">"3,01637037d6"</span>,<span class="string">"url"</span>:<span class="string">"127.0.0.1:8080"</span>,<span class="string">"publicUrl"</span>:<span class="string">"localhost:8080"</span>&#125;</div><div class="line">&gt; curl -X PUT -F file=@/home/chris/myphoto.jpg http://127.0.0.1:8080/3,01637037d6</div><div class="line">&#123;<span class="string">"size"</span>: 43234&#125;</div></pre></td></tr></table></figure></p>
-<p>上传文件,程序调用volume_server_handlers_write.go 中的PostHandler进行处理,根据URL,提取vid,生成新的volumeId<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vid, _, _, _, _ := parseURLPath(r.URL.Path) <span class="comment">//vid 为3</span></div><div class="line">volumeId, ve := storage.NewVolumeId(vid) <span class="comment">// volumeId : 7</span></div></pre></td></tr></table></figure></p>
-<p>根据请求参数,生成needle<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">needle, ne := storage.NewNeedle(r, vs.FixJpgOrientation)</div></pre></td></tr></table></figure></p>
-<p>使用multipartReader读取请求中的数据,有关multipart的介绍: <a href="http://wanlitian.github.io/2014/11/16/multipart_with_golang/" target="_blank" rel="external">golang的multipart包</a><br>使用needle.go 中的ParseUpload方法解析请求,得到上传的文件名和数据;<br>如果上传的数据类型是JPG或jpeg,调用 images.FixJpgOrientation(n.Data)对数据进行处理<br>生成needle过程<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewNeedle</span><span class="params">(r *http.Request, fixJpgOrientation <span class="keyword">bool</span>)</span> <span class="params">(n *Needle, e error)</span></span> &#123;</div><div class="line">truefname, mimeType, isGzipped, isChunkedFile := <span class="string">""</span>, <span class="string">""</span>, <span class="literal">false</span>, <span class="literal">false</span></div><div class="line">truen = <span class="built_in">new</span>(Needle)</div><div class="line">truefname, n.Data, mimeType, isGzipped, n.LastModified, n.Ttl, isChunkedFile, e = ParseUpload(r)</div><div class="line">true<span class="keyword">if</span> e != <span class="literal">nil</span> &#123;</div><div class="line">truetrue<span class="keyword">return</span></div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(fname) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Name = []<span class="keyword">byte</span>(fname)</div><div class="line">truetruen.SetHasName()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(mimeType) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Mime = []<span class="keyword">byte</span>(mimeType)</div><div class="line">truetruen.SetHasMime()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> isGzipped &#123;</div><div class="line">truetruen.SetGzipped()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> n.LastModified == <span class="number">0</span> &#123;</div><div class="line">truetruen.LastModified = <span class="keyword">uint64</span>(time.Now().Unix())</div><div class="line">true&#125;</div><div class="line">truen.SetHasLastModifiedDate()</div><div class="line">true<span class="keyword">if</span> n.Ttl != EMPTY_TTL &#123;</div><div class="line">truetruen.SetHasTtl()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> isChunkedFile &#123;</div><div class="line">truetruen.SetIsChunkManifest()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> fixJpgOrientation &#123;</div><div class="line">truetrueloweredName := strings.ToLower(fname)</div><div class="line">truetrue<span class="keyword">if</span> mimeType == <span class="string">"image/jpeg"</span> || strings.HasSuffix(loweredName, <span class="string">".jpg"</span>) || strings.HasSuffix(loweredName, <span class="string">".jpeg"</span>) &#123;</div><div class="line">truetruetruen.Data = images.FixJpgOrientation(n.Data)</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truen.Checksum = NewCRC(n.Data)</div><div class="line"></div><div class="line">truecommaSep := strings.LastIndex(r.URL.Path, <span class="string">","</span>)</div><div class="line">truedotSep := strings.LastIndex(r.URL.Path, <span class="string">"."</span>)</div><div class="line">truefid := r.URL.Path[commaSep+<span class="number">1</span>:]</div><div class="line">true<span class="keyword">if</span> dotSep &gt; <span class="number">0</span> &#123;</div><div class="line">truetruefid = r.URL.Path[commaSep+<span class="number">1</span> : dotSep]</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truee = n.ParsePath(fid)</div><div class="line"></div><div class="line">true<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>把数据及needle相关属性填充完成后,同步到其他volumeServer中,已needle作为传输载体<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size, errorStatus := topology.ReplicatedWrite(vs.GetMasterNode(),vs.store, volumeId, needle, r)</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用命令&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;l
     
     </summary>
     
@@ -1771,7 +1790,7 @@
     <link href="https://makeitpossible16.github.io/uncategorized/README/"/>
     <id>https://makeitpossible16.github.io/uncategorized/README/</id>
     <published>2016-01-01T00:00:00.000Z</published>
-    <updated>2017-03-28T08:51:17.160Z</updated>
+    <updated>2017-03-31T16:13:12.607Z</updated>
     
     <content type="html"><![CDATA[<h2 id="blogMarkdownFile"><a href="#blogMarkdownFile" class="headerlink" title="blogMarkdownFile"></a>blogMarkdownFile</h2><h2 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a><a href="https://www.makeitpossible16.github.io" target="_blank" rel="external">myblog</a></h2><h3 id="转-Leveldb实现原理Leveldb实现原理-md"><a href="#转-Leveldb实现原理Leveldb实现原理-md" class="headerlink" title="(转)Leveldb实现原理Leveldb实现原理.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/(转" target="_blank" rel="external">(转)Leveldb实现原理</a>Leveldb实现原理.md)</h3><h3 id="C-语法记录"><a href="#C-语法记录" class="headerlink" title="C++语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/C++语法记录.md" target="_blank" rel="external">C++语法记录</a></h3><h3 id="ELKStack搭建问题总结"><a href="#ELKStack搭建问题总结" class="headerlink" title="ELKStack搭建问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ELKStack搭建问题总结.md" target="_blank" rel="external">ELKStack搭建问题总结</a></h3><h3 id="LRU缓存淘汰算法"><a href="#LRU缓存淘汰算法" class="headerlink" title="LRU缓存淘汰算法"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LRU缓存淘汰算法.md" target="_blank" rel="external">LRU缓存淘汰算法</a></h3><h3 id="LeetCode解题-Next-Permutation-全排列生成算法-md"><a href="#LeetCode解题-Next-Permutation-全排列生成算法-md" class="headerlink" title="LeetCode解题-Next Permutation(全排列生成算法).md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Next Permutation(全排列生成算法" target="_blank" rel="external">LeetCode解题-Next Permutation(全排列生成算法)</a>.md)</h3><h3 id="LeetCode解题-Permutation-Sequence"><a href="#LeetCode解题-Permutation-Sequence" class="headerlink" title="LeetCode解题-Permutation Sequence"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/LeetCode解题-Permutation Sequence.md" target="_blank" rel="external">LeetCode解题-Permutation Sequence</a></h3><h3 id="cloudstack搭建总结"><a href="#cloudstack搭建总结" class="headerlink" title="cloudstack搭建总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/cloudstack搭建总结.md" target="_blank" rel="external">cloudstack搭建总结</a></h3><h3 id="gdb调试错误-找不到文件"><a href="#gdb调试错误-找不到文件" class="headerlink" title="gdb调试错误-找不到文件"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/gdb调试错误-找不到文件.md" target="_blank" rel="external">gdb调试错误-找不到文件</a></h3><h3 id="golang-反射机制"><a href="#golang-反射机制" class="headerlink" title="golang 反射机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang 反射机制.md" target="_blank" rel="external">golang 反射机制</a></h3><h3 id="golang学习"><a href="#golang学习" class="headerlink" title="golang学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang学习.md" target="_blank" rel="external">golang学习</a></h3><h3 id="golang调试技巧"><a href="#golang调试技巧" class="headerlink" title="golang调试技巧"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/golang调试技巧.md" target="_blank" rel="external">golang调试技巧</a></h3><h3 id="kafka存储实现"><a href="#kafka存储实现" class="headerlink" title="kafka存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka存储实现.md" target="_blank" rel="external">kafka存储实现</a></h3><h3 id="kafka学习笔记"><a href="#kafka学习笔记" class="headerlink" title="kafka学习笔记"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/kafka学习笔记.md" target="_blank" rel="external">kafka学习笔记</a></h3><h3 id="linux-IO学习"><a href="#linux-IO学习" class="headerlink" title="linux IO学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux IO学习.md" target="_blank" rel="external">linux IO学习</a></h3><h3 id="linux内核学习-数据结构"><a href="#linux内核学习-数据结构" class="headerlink" title="linux内核学习-数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux内核学习-数据结构.md" target="_blank" rel="external">linux内核学习-数据结构</a></h3><h3 id="linux单文件大小限制"><a href="#linux单文件大小限制" class="headerlink" title="linux单文件大小限制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux单文件大小限制.md" target="_blank" rel="external">linux单文件大小限制</a></h3><h3 id="linux命令学习"><a href="#linux命令学习" class="headerlink" title="linux命令学习"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux命令学习.md" target="_blank" rel="external">linux命令学习</a></h3><h3 id="linux学习-linux文件存储"><a href="#linux学习-linux文件存储" class="headerlink" title="linux学习-linux文件存储"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux学习-linux文件存储.md" target="_blank" rel="external">linux学习-linux文件存储</a></h3><h3 id="linux文件存储机制"><a href="#linux文件存储机制" class="headerlink" title="linux文件存储机制"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux文件存储机制.md" target="_blank" rel="external">linux文件存储机制</a></h3><h3 id="linux页缓存机制-Page-Cache"><a href="#linux页缓存机制-Page-Cache" class="headerlink" title="linux页缓存机制 Page Cache"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/linux页缓存机制 Page Cache.md" target="_blank" rel="external">linux页缓存机制 Page Cache</a></h3><h3 id="malloc-vs-new"><a href="#malloc-vs-new" class="headerlink" title="malloc vs new"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/malloc vs new.md" target="_blank" rel="external">malloc vs new</a></h3><h3 id="nodeJS入门总结"><a href="#nodeJS入门总结" class="headerlink" title="nodeJS入门总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/nodeJS入门总结.md" target="_blank" rel="external">nodeJS入门总结</a></h3><h3 id="openstack-swift源码阅读记录1-文件上传过程"><a href="#openstack-swift源码阅读记录1-文件上传过程" class="headerlink" title="openstack-swift源码阅读记录1-文件上传过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录1-文件上传过程.md" target="_blank" rel="external">openstack-swift源码阅读记录1-文件上传过程</a></h3><h3 id="openstack-swift源码阅读记录3-diskfile"><a href="#openstack-swift源码阅读记录3-diskfile" class="headerlink" title="openstack-swift源码阅读记录3-diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录3-diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录3-diskfile</a></h3><h3 id="openstack-swift源码阅读记录4-启用mem-diskfile"><a href="#openstack-swift源码阅读记录4-启用mem-diskfile" class="headerlink" title="openstack-swift源码阅读记录4-启用mem_diskfile"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift源码阅读记录4-启用mem_diskfile.md" target="_blank" rel="external">openstack-swift源码阅读记录4-启用mem_diskfile</a></h3><h3 id="openstack-swift调试"><a href="#openstack-swift调试" class="headerlink" title="openstack-swift调试"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack-swift调试.md" target="_blank" rel="external">openstack-swift调试</a></h3><h3 id="openstack源码阅读记录2-object-metadata"><a href="#openstack源码阅读记录2-object-metadata" class="headerlink" title="openstack源码阅读记录2-object metadata"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/openstack源码阅读记录2-object metadata.md" target="_blank" rel="external">openstack源码阅读记录2-object metadata</a></h3><h3 id="python-string-intern"><a href="#python-string-intern" class="headerlink" title="python string intern"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python string intern.md" target="_blank" rel="external">python string intern</a></h3><h3 id="python的多线程和Goroutine"><a href="#python的多线程和Goroutine" class="headerlink" title="python的多线程和Goroutine"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python的多线程和Goroutine.md" target="_blank" rel="external">python的多线程和Goroutine</a></h3><h3 id="python语法记录"><a href="#python语法记录" class="headerlink" title="python语法记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/python语法记录.md" target="_blank" rel="external">python语法记录</a></h3><h3 id="seaweedfs源码阅读4-volume启动"><a href="#seaweedfs源码阅读4-volume启动" class="headerlink" title="seaweedfs源码阅读4-volume启动"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读4-volume启动.md" target="_blank" rel="external">seaweedfs源码阅读4-volume启动</a></h3><h3 id="seaweedfs源码阅读5-文件PUT过程"><a href="#seaweedfs源码阅读5-文件PUT过程" class="headerlink" title="seaweedfs源码阅读5-文件PUT过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读5-文件PUT过程.md" target="_blank" rel="external">seaweedfs源码阅读5-文件PUT过程</a></h3><h3 id="seaweedfs源码阅读6-文件存储格式"><a href="#seaweedfs源码阅读6-文件存储格式" class="headerlink" title="seaweedfs源码阅读6-文件存储格式"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读6-文件存储格式.md" target="_blank" rel="external">seaweedfs源码阅读6-文件存储格式</a></h3><h3 id="seaweedfs源码阅读7-文件存储过程"><a href="#seaweedfs源码阅读7-文件存储过程" class="headerlink" title="seaweedfs源码阅读7-文件存储过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读7-文件存储过程.md" target="_blank" rel="external">seaweedfs源码阅读7-文件存储过程</a></h3><h3 id="seaweedfs源码阅读8-GET-amp-HEAD获取文件过程"><a href="#seaweedfs源码阅读8-GET-amp-HEAD获取文件过程" class="headerlink" title="seaweedfs源码阅读8-GET&amp;HEAD获取文件过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程.md" target="_blank" rel="external">seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</a></h3><h3 id="seaweedfs源码阅读记录"><a href="#seaweedfs源码阅读记录" class="headerlink" title="seaweedfs源码阅读记录"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录.md" target="_blank" rel="external">seaweedfs源码阅读记录</a></h3><h3 id="seaweedfs源码阅读记录2"><a href="#seaweedfs源码阅读记录2" class="headerlink" title="seaweedfs源码阅读记录2"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录2.md" target="_blank" rel="external">seaweedfs源码阅读记录2</a></h3><h3 id="seaweedfs源码阅读记录3-raft协议理解"><a href="#seaweedfs源码阅读记录3-raft协议理解" class="headerlink" title="seaweedfs源码阅读记录3-raft协议理解"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录3-raft协议理解.md" target="_blank" rel="external">seaweedfs源码阅读记录3-raft协议理解</a></h3><h3 id="seaweedfs源码阅读记录9-生成fid过程"><a href="#seaweedfs源码阅读记录9-生成fid过程" class="headerlink" title="seaweedfs源码阅读记录9-生成fid过程"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/seaweedfs源码阅读记录9-生成fid过程.md" target="_blank" rel="external">seaweedfs源码阅读记录9-生成fid过程</a></h3><h3 id="swift-weedfs-backend-diskfile代码实现"><a href="#swift-weedfs-backend-diskfile代码实现" class="headerlink" title="swift-weedfs-backend diskfile代码实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend diskfile代码实现.md" target="_blank" rel="external">swift-weedfs-backend diskfile代码实现</a></h3><h3 id="swift-weedfs-backend接口设计"><a href="#swift-weedfs-backend接口设计" class="headerlink" title="swift-weedfs-backend接口设计"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/swift-weedfs-backend接口设计.md" target="_blank" rel="external">swift-weedfs-backend接口设计</a></h3><h3 id="ubuntu下如何优雅地使用翻译"><a href="#ubuntu下如何优雅地使用翻译" class="headerlink" title="ubuntu下如何优雅地使用翻译"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu下如何优雅地使用翻译.md" target="_blank" rel="external">ubuntu下如何优雅地使用翻译</a></h3><h3 id="ubuntu使用问题总结"><a href="#ubuntu使用问题总结" class="headerlink" title="ubuntu使用问题总结"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/ubuntu使用问题总结.md" target="_blank" rel="external">ubuntu使用问题总结</a></h3><h3 id="伪随机数"><a href="#伪随机数" class="headerlink" title="伪随机数"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/伪随机数.md" target="_blank" rel="external">伪随机数</a></h3><h3 id="在Openstack-Swift中使用多种后端存储实现"><a href="#在Openstack-Swift中使用多种后端存储实现" class="headerlink" title="在Openstack Swift中使用多种后端存储实现"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/在Openstack Swift中使用多种后端存储实现.md" target="_blank" rel="external">在Openstack Swift中使用多种后端存储实现</a></h3><h3 id="对象存储VS文件系统"><a href="#对象存储VS文件系统" class="headerlink" title="对象存储VS文件系统"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/对象存储VS文件系统.md" target="_blank" rel="external">对象存储VS文件系统</a></h3><h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/数据结构.md" target="_blank" rel="external">数据结构</a></h3><h3 id="文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md"><a href="#文件系统-seaweedfs-与关系型数据库优劣势分析与关系型数据库优劣势分析-md" class="headerlink" title="文件系统(seaweedfs)与关系型数据库优劣势分析与关系型数据库优劣势分析.md)"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/文件系统(seaweedfs" target="_blank" rel="external">文件系统(seaweedfs)与关系型数据库优劣势分析</a>与关系型数据库优劣势分析.md)</h3><h3 id="用户态到内核态切换"><a href="#用户态到内核态切换" class="headerlink" title="用户态到内核态切换"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/用户态到内核态切换.md" target="_blank" rel="external">用户态到内核态切换</a></h3><h3 id="自旋锁spinlock剖析与改进"><a href="#自旋锁spinlock剖析与改进" class="headerlink" title="自旋锁spinlock剖析与改进"></a><a href="https://github.com/MakeItPossible16/blogMarkdownFile/blob/master/自旋锁spinlock剖析与改进.md" target="_blank" rel="external">自旋锁spinlock剖析与改进</a></h3>]]></content>
     
