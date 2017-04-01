@@ -92,11 +92,11 @@
 <meta name="description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则剖析 ext4ext4 维基百科对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux单文件大小限制">
-<meta property="og:url" content="https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/index.html">
+<meta property="og:url" content="https://makeitpossible16.github.io/文件存储/linux单文件大小限制/index.html">
 <meta property="og:site_name" content="MakeItPossible16">
 <meta property="og:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则剖析 ext4ext4 维基百科对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也">
 <meta property="og:image" content="https://makeitpossible16.github.io/uploads/inode-struct.jpg">
-<meta property="og:updated_time" content="2017-03-26T08:22:21.189Z">
+<meta property="og:updated_time" content="2017-04-01T12:33:23.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux单文件大小限制">
 <meta name="twitter:description" content="参考刨根问底：ext3/ext4文件系统最大空间及单个文件大小演算法则剖析 ext4ext4 维基百科对于ext3:1)ext3文件系统采用32bit的块地址索引空间；2)在inode条目中，引用一个块空间符号需要4byte的大小；3)对于一个inode来说，设计了12个直接指针索引，一个间接指针索引，一个双间接指针索引，以及一个三间接指针索引注：a.这些规定都是文件系统自身的程序代码所决定的，也">
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/"/>
+  <link rel="canonical" href="https://makeitpossible16.github.io/文件存储/linux单文件大小限制/"/>
 
 
 
@@ -303,7 +303,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/">
+  <link itemprop="mainEntityOfPage" href="https://makeitpossible16.github.io/文件存储/linux单文件大小限制/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="MakeItPossible16">
@@ -358,8 +358,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-03-26T16:22:21+08:00">
-                2017-03-26
+              <time title="更新于" itemprop="dateModified" datetime="2017-04-01T12:33:23Z">
+                2017-04-01
               </time>
             
           </span>
@@ -377,18 +377,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
-                    <span itemprop="name">操作系统</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/文件存储/" itemprop="url" rel="index">
+                  <a href="/categories/文件存储/" itemprop="url" rel="index">
                     <span itemprop="name">文件存储</span>
                   </a>
                 </span>
@@ -406,8 +395,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/操作系统/文件存储/linux单文件大小限制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="操作系统/文件存储/linux单文件大小限制/" itemprop="commentCount"></span>
+                <a href="/文件存储/linux单文件大小限制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="文件存储/linux单文件大小限制/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -480,7 +469,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/操作系统/文件存储/kafka存储实现/" rel="next" title="kafka存储实现">
+              <a href="/文件存储/kafka存储实现/" rel="next" title="kafka存储实现">
                 <i class="fa fa-chevron-left"></i> kafka存储实现
               </a>
             
@@ -507,10 +496,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="操作系统/文件存储/linux单文件大小限制/"
+        <div class="ds-share flat" data-thread-key="文件存储/linux单文件大小限制/"
      data-title="linux单文件大小限制"
      data-content=""
-     data-url="https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/">
+     data-url="https://makeitpossible16.github.io/文件存储/linux单文件大小限制/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -537,8 +526,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="操作系统/文件存储/linux单文件大小限制/"
-           data-title="linux单文件大小限制" data-url="https://makeitpossible16.github.io/操作系统/文件存储/linux单文件大小限制/">
+      <div class="ds-thread" data-thread-key="文件存储/linux单文件大小限制/"
+           data-title="linux单文件大小限制" data-url="https://makeitpossible16.github.io/文件存储/linux单文件大小限制/">
       </div>
     
   </div>
