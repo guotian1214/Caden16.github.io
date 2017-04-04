@@ -257,7 +257,7 @@
     <entry>
       <title><![CDATA[linux学习-linux文件存储]]></title>
       <url>%2F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%2Flinux%E5%AD%A6%E4%B9%A0-linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%2F</url>
-      <content type="text"><![CDATA[linux文件存储一直对文件存储过程不太理解,估计是操作系统没学好,今天看了这篇文章Linux文件存储结构，包括目录项、inode、数据块,感觉思路一下子清晰了. 根据linux一切皆文件的思想,目录项也作为一个文件存储,存储的内容为inode和文件名. linux文件查找文件系统中的目录查找Linux中文件名解析处理源码分析 linux 文件seek效率问题参考How to estimate the seek speed in file system]]></content>
+      <content type="text"><![CDATA[linux文件存储一直对文件存储过程不太理解,估计是操作系统没学好,今天看了这篇文章Linux文件存储结构，包括目录项、inode、数据块,感觉思路一下子清晰了. 根据linux一切皆文件的思想,目录项也作为一个文件存储,存储的内容为inode和文件名. linux文件查找文件系统中的目录查找Linux中文件名解析处理源码分析 linux 文件seek效率问题参考How to estimate the seek speed in file system 纠删码参考Erasure Coding（纠删码）深入分析小文件大问题——海量小文件解决方案初探]]></content>
     </entry>
 
     

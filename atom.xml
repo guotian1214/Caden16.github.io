@@ -1279,11 +1279,12 @@
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E5%AD%A6%E4%B9%A0-linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     <id>https://makeitpossible16.github.io/文件存储/linux学习-linux文件存储/</id>
     <published>2017-01-01T00:00:00.000Z</published>
-    <updated>2017-04-01T12:58:28.124Z</updated>
+    <updated>2017-04-04T14:11:08.565Z</updated>
     
     <content type="html"><![CDATA[<h2 id="linux文件存储"><a href="#linux文件存储" class="headerlink" title="linux文件存储"></a>linux文件存储</h2><p>一直对文件存储过程不太理解,估计是操作系统没学好,今天看了这篇文章<a href="http://c.biancheng.net/cpp/html/2780.html" target="_blank" rel="external">Linux文件存储结构，包括目录项、inode、数据块</a>,感觉思路一下子清晰了. 根据linux一切皆文件的思想,目录项也作为一个文件存储,存储的内容为inode和文件名.</p>
 <h2 id="linux文件查找"><a href="#linux文件查找" class="headerlink" title="linux文件查找"></a>linux文件查找</h2><p><a href="http://www.cnblogs.com/cobbliu/p/4888751.html" target="_blank" rel="external">文件系统中的目录查找</a><br><a href="http://alanwu.blog.51cto.com/3652632/1120652" target="_blank" rel="external">Linux中文件名解析处理源码分析</a></p>
 <h2 id="linux-文件seek效率问题"><a href="#linux-文件seek效率问题" class="headerlink" title="linux 文件seek效率问题"></a>linux 文件seek效率问题</h2><p>参考<a href="http://stackoverflow.com/questions/38024736/how-to-estimate-the-seek-speed-in-file-system" target="_blank" rel="external">How to estimate the seek speed in file system</a></p>
+<h2 id="纠删码"><a href="#纠删码" class="headerlink" title="纠删码"></a>纠删码</h2><p>参考<a href="http://blog.sina.com.cn/s/blog_57f61b490102viq9.html" target="_blank" rel="external">Erasure Coding（纠删码）深入分析</a><br><a href="http://www.infoq.com/cn/articles/solution-of-massive-small-files" target="_blank" rel="external">小文件大问题——海量小文件解决方案初探</a></p>
 ]]></content>
     
     <summary type="html">
