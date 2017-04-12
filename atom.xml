@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://makeitpossible16.github.io/"/>
-  <updated>2017-04-12T13:08:58.811Z</updated>
+  <updated>2017-04-12T13:14:53.955Z</updated>
   <id>https://makeitpossible16.github.io/</id>
   
   <author>
@@ -20,18 +20,20 @@
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/kafka%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
     <id>https://makeitpossible16.github.io/文件存储/kafka存储实现/</id>
     <published>2017-04-12T00:00:00.000Z</published>
-    <updated>2017-04-12T13:08:58.811Z</updated>
+    <updated>2017-04-12T13:14:53.955Z</updated>
     
     <content type="html"><![CDATA[<p>参考<a href="http://tech.meituan.com/kafka-fs-design-theory.html" target="_blank" rel="external">Kafka文件存储机制那些事</a><br><a href="https://wangzzu.github.io/2016/03/08/kafka-store/" target="_blank" rel="external">Kafka之数据存储</a><br><a href="http://blog.csdn.net/lizhitao/article/details/40543631" target="_blank" rel="external">apache kafka系列之文件系统设计那些</a><br><a href="http://blog.csdn.net/stark_summer/article/details/50144591" target="_blank" rel="external">kafka 高吞吐量性能揭秘</a><br><a href="http://blog.csdn.net/hnlyyk/article/details/50856268" target="_blank" rel="external">Linux网络编程–sendfile零拷贝高效率发送文件</a><br><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-zerocopy2/" target="_blank" rel="external">Linux 中的零拷贝技术，第 2 部分</a><br><a href="https://www.ibm.com/developerworks/cn/java/j-zerocopy/" target="_blank" rel="external">通过零拷贝实现有效数据传输</a><br>kafka实现高性能存储数据的方式：</p>
 <ol>
 <li>pageCache</li>
-<li>Sendfile (属于零拷贝技术的一种)<h3 id="pageCache"><a href="#pageCache" class="headerlink" title="pageCache"></a>pageCache</h3>当上层有写操作时，操作系统只是将数据写入PageCache，同时标记Page属性为Dirty。当读操作发生时，先从PageCache中查找，如果发生缺页才进行磁盘调度，最终返回需要的数据。<h3 id="Sendfile"><a href="#Sendfile" class="headerlink" title="Sendfile"></a>Sendfile</h3>Sendfile是Linux实现的系统调用，可以通过避免文件在内核态和用户态的拷贝来优化文件传输的效率<br>Linux中传统服务器进行数据传输的流程:<br>用户请求–&gt;服务器应用程序调用read读取文件–&gt;内核VFS read–&gt;文件系统read–&gt;DMA加载数据块到pagecache–&gt;用户进程把数据从内核区Copy到用户区–&gt;数据写到网络堆栈相关的内核缓冲区–&gt;数据传输<br><img src="/uploads/linuxSendFile.jpg" alt=""><blockquote>
+<li>Sendfile (属于零拷贝技术的一种)</li>
+</ol>
+<h3 id="pageCache"><a href="#pageCache" class="headerlink" title="pageCache"></a>pageCache</h3><p>当上层有写操作时，操作系统只是将数据写入PageCache，同时标记Page属性为Dirty。当读操作发生时，先从PageCache中查找，如果发生缺页才进行磁盘调度，最终返回需要的数据。</p>
+<h3 id="Sendfile"><a href="#Sendfile" class="headerlink" title="Sendfile"></a>Sendfile</h3><p>Sendfile是Linux实现的系统调用，可以通过避免文件在内核态和用户态的拷贝来优化文件传输的效率<br>Linux中传统服务器进行数据传输的流程:<br>用户请求–&gt;服务器应用程序调用read读取文件–&gt;内核VFS read–&gt;文件系统read–&gt;DMA加载数据块到pagecache–&gt;用户进程把数据从内核区Copy到用户区–&gt;数据写到网络堆栈相关的内核缓冲区–&gt;数据传输<br><img src="/uploads/linuxSendFile.jpg" alt=""></p>
+<blockquote>
 <blockquote>
 <p>当应用程序需要访问某块数据的时候，操作系统内核会先检查这块数据是不是因为前一次对相同文件的访问而已经被存放在操作系统内核地址空间的缓冲区内，如果在内核缓冲区中找不到这块数据，Linux 操作系统内核会先将这块数据从磁盘读出来放到操作系统内核的缓冲区里去。如果这个数据读取操作是由 DMA 完成的，那么在 DMA 进行数据读取的这一过程中，CPU 只是需要进行缓冲区管理，以及创建和处理 DMA ，除此之外，CPU 不需要再做更多的事情，DMA 执行完数据读取操作之后，会通知操作系统做进一步的处理。Linux 操作系统会根据 read() 系统调用指定的应用程序地址空间的地址，把这块数据存放到请求这块数据的应用程序的地址空间中去，在接下来的处理过程中，操作系统需要将数据再一次从用户应用程序地址空间的缓冲区拷贝到与网络堆栈相关的内核缓冲区中去，这个过程也是需要占用 CPU 的。数据拷贝操作结束以后，数据会被打包，然后发送到网络接口卡上去。在数据传输的过程中，应用程序可以先返回进而执行其他的操作。之后，在调用 write() 系统调用的时候，用户应用程序缓冲区中的数据内容可以被安全的丢弃或者更改，因为操作系统已经在内核缓冲区中保留了一份数据拷贝，当数据被成功传送到硬件上之后，这份数据拷贝就可以被丢弃。<br>从上面的描述可以看出，在这种传统的数据传输过程中，数据至少发生了四次拷贝操作，即便是使用了 DMA 来进行与硬件的通讯，CPU 仍然需要访问数据两次。在 read() 读数据的过程中，数据并不是直接来自于硬盘，而是必须先经过操作系统的文件系统层。在 write() 写数据的过程中，为了和要传输的数据包的大小相吻合，数据必须要先被分割成块，而且还要预先考虑包头，并且要进行数据校验和操作。</p>
 </blockquote>
 </blockquote>
-</li>
-</ol>
 <p>不使用sendfile时:<br><img src="/uploads/traditionalRead.png" alt=""><br>使用sendfile:<br><img src="/uploads/useSendfile.png" alt=""></p>
 ]]></content>
     
