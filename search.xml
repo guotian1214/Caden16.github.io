@@ -40,7 +40,7 @@
     <entry>
       <title><![CDATA[kafka存储实现]]></title>
       <url>%2F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%2Fkafka%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0%2F</url>
-      <content type="text"><![CDATA[参考Kafka文件存储机制那些事KafKa数据存储与数据一致性实现Kafka之数据存储]]></content>
+      <content type="text"><![CDATA[参考Kafka文件存储机制那些事KafKa数据存储与数据一致性实现Kafka之数据存储apache kafka系列之文件系统设计那些kafka 高吞吐量性能揭秘]]></content>
     </entry>
 
     
