@@ -63,7 +63,7 @@
     <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/kafka%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
     <id>https://makeitpossible16.github.io/文件存储/kafka存储实现/</id>
     <published>2017-04-12T00:00:00.000Z</published>
-    <updated>2017-04-24T02:52:26.710Z</updated>
+    <updated>2017-04-26T11:40:45.341Z</updated>
     
     <content type="html"><![CDATA[<p>参考<a href="http://tech.meituan.com/kafka-fs-design-theory.html" target="_blank" rel="external">Kafka文件存储机制那些事</a><br><a href="https://wangzzu.github.io/2016/03/08/kafka-store/" target="_blank" rel="external">Kafka之数据存储</a><br><a href="http://blog.csdn.net/lizhitao/article/details/40543631" target="_blank" rel="external">apache kafka系列之文件系统设计那些</a><br><a href="http://blog.csdn.net/stark_summer/article/details/50144591" target="_blank" rel="external">kafka 高吞吐量性能揭秘</a><br><a href="http://blog.csdn.net/hnlyyk/article/details/50856268" target="_blank" rel="external">Linux网络编程–sendfile零拷贝高效率发送文件</a><br><a href="https://www.ibm.com/developerworks/cn/linux/l-cn-zerocopy2/" target="_blank" rel="external">Linux 中的零拷贝技术，第 2 部分</a><br><a href="https://www.ibm.com/developerworks/cn/java/j-zerocopy/" target="_blank" rel="external">通过零拷贝实现有效数据传输</a><br><a href="http://mp.weixin.qq.com/s/ExzSzf0ue7d-_Qv8q6p9bw" target="_blank" rel="external">kafka数据可靠性深度解读</a><br>kafka实现高性能存储数据的方式：<br>1.pageCache<br>2.Sendfile (属于零拷贝技术的一种)</p>
 <h3 id="pageCache"><a href="#pageCache" class="headerlink" title="pageCache"></a>pageCache</h3><p>当上层有写操作时，操作系统只是将数据写入PageCache，同时标记Page属性为Dirty。当读操作发生时，先从PageCache中查找，如果发生缺页才进行磁盘调度，最终返回需要的数据。</p>
@@ -85,11 +85,7 @@
       <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-      <category term="kafka" scheme="https://makeitpossible16.github.io/tags/kafka/"/>
-    
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="操作系统,kafka,文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-kafka-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
