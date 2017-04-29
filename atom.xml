@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>MakeItPossible16</title>
+  <title>MakeItPossible</title>
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://makeitpossible16.github.io/"/>
+  <link href="https://Caden16.github.io/"/>
   <updated>2017-04-28T12:28:51.307Z</updated>
-  <id>https://makeitpossible16.github.io/</id>
+  <id>https://Caden16.github.io/</id>
   
   <author>
-    <name>MakeItPossible16</name>
+    <name>Caden</name>
     
   </author>
   
@@ -17,8 +17,8 @@
   
   <entry>
     <title>git使用</title>
-    <link href="https://makeitpossible16.github.io/git/git%E4%BD%BF%E7%94%A8/"/>
-    <id>https://makeitpossible16.github.io/git/git使用/</id>
+    <link href="https://Caden16.github.io/git/git%E4%BD%BF%E7%94%A8/"/>
+    <id>https://Caden16.github.io/git/git使用/</id>
     <published>2017-04-28T00:00:00.000Z</published>
     <updated>2017-04-28T12:28:51.307Z</updated>
     
@@ -44,17 +44,17 @@
     
     </summary>
     
-      <category term="git" scheme="https://makeitpossible16.github.io/categories/git/"/>
+      <category term="git" scheme="https://Caden16.github.io/categories/git/"/>
     
     
-      <category term="git" scheme="https://makeitpossible16.github.io/tags/git/"/>
+      <category term="git" scheme="https://Caden16.github.io/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>(转)自旋锁spinlock剖析与改进</title>
-    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81spinlock%E5%89%96%E6%9E%90%E4%B8%8E%E6%94%B9%E8%BF%9B/"/>
-    <id>https://makeitpossible16.github.io/操作系统/自旋锁spinlock剖析与改进/</id>
+    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81spinlock%E5%89%96%E6%9E%90%E4%B8%8E%E6%94%B9%E8%BF%9B/"/>
+    <id>https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/</id>
     <published>2017-04-26T11:55:24.089Z</published>
     <updated>2017-03-12T14:16:40.177Z</updated>
     
@@ -67,17 +67,17 @@
     
     </summary>
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
   <entry>
     <title>python inner function</title>
-    <link href="https://makeitpossible16.github.io/python/python%20inner%20function/"/>
-    <id>https://makeitpossible16.github.io/python/python inner function/</id>
+    <link href="https://Caden16.github.io/python/python%20inner%20function/"/>
+    <id>https://Caden16.github.io/python/python inner function/</id>
     <published>2017-04-26T00:00:00.000Z</published>
     <updated>2017-04-26T13:11:13.232Z</updated>
     
@@ -93,17 +93,17 @@
     
     </summary>
     
-      <category term="python" scheme="https://makeitpossible16.github.io/categories/python/"/>
+      <category term="python" scheme="https://Caden16.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+      <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>python网速控制</title>
-    <link href="https://makeitpossible16.github.io/python/python%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/python/python流量控制/</id>
+    <link href="https://Caden16.github.io/python/python%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/"/>
+    <id>https://Caden16.github.io/python/python流量控制/</id>
     <published>2017-04-17T00:00:00.000Z</published>
     <updated>2017-04-26T13:41:21.890Z</updated>
     
@@ -135,19 +135,19 @@
     
     </summary>
     
-      <category term="python" scheme="https://makeitpossible16.github.io/categories/python/"/>
+      <category term="python" scheme="https://Caden16.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+      <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
     
-      <category term="流量控制" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/"/>
+      <category term="流量控制" scheme="https://Caden16.github.io/tags/%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6/"/>
     
   </entry>
   
   <entry>
     <title>kafka存储实现</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/kafka%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://makeitpossible16.github.io/文件存储/kafka存储实现/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/kafka%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://Caden16.github.io/文件存储/kafka存储实现/</id>
     <published>2017-04-12T00:00:00.000Z</published>
     <updated>2017-04-26T11:40:45.341Z</updated>
     
@@ -168,17 +168,17 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="操作系统,kafka,文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-kafka-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="操作系统,kafka,文件存储" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-kafka-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
   <entry>
     <title>对大量的不重复数进行排序(查找)</title>
-    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/%E5%AF%B9%E5%A4%A7%E9%87%8F%E7%9A%84%E4%B8%8D%E9%87%8D%E5%A4%8D%E6%95%B0%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F(%E6%9F%A5%E6%89%BE)/"/>
-    <id>https://makeitpossible16.github.io/算法/对大量的不重复数进行排序(查找)/</id>
+    <link href="https://Caden16.github.io/%E7%AE%97%E6%B3%95/%E5%AF%B9%E5%A4%A7%E9%87%8F%E7%9A%84%E4%B8%8D%E9%87%8D%E5%A4%8D%E6%95%B0%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F(%E6%9F%A5%E6%89%BE)/"/>
+    <id>https://Caden16.github.io/算法/对大量的不重复数进行排序(查找)/</id>
     <published>2017-04-01T00:00:00.000Z</published>
     <updated>2017-04-01T08:11:54.469Z</updated>
     
@@ -191,17 +191,17 @@
     
     </summary>
     
-      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://Caden16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="算法" scheme="https://makeitpossible16.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://Caden16.github.io/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>linux IO学习</title>
-    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/linux%20IO%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/操作系统/linux IO学习/</id>
+    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/linux%20IO%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://Caden16.github.io/操作系统/linux IO学习/</id>
     <published>2017-03-31T00:00:00.000Z</published>
     <updated>2017-04-01T12:33:05.104Z</updated>
     
@@ -259,21 +259,21 @@
     
     </summary>
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="网络" scheme="https://makeitpossible16.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+      <category term="网络" scheme="https://Caden16.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
   <entry>
     <title>malloc vs new</title>
-    <link href="https://makeitpossible16.github.io/C/malloc%20vs%20new/"/>
-    <id>https://makeitpossible16.github.io/C/malloc vs new/</id>
+    <link href="https://Caden16.github.io/C/malloc%20vs%20new/"/>
+    <id>https://Caden16.github.io/C/malloc vs new/</id>
     <published>2017-03-28T00:00:00.000Z</published>
     <updated>2017-03-29T11:39:25.571Z</updated>
     
@@ -299,19 +299,19 @@
     
     </summary>
     
-      <category term="C" scheme="https://makeitpossible16.github.io/categories/C/"/>
+      <category term="C" scheme="https://Caden16.github.io/categories/C/"/>
     
     
-      <category term="C" scheme="https://makeitpossible16.github.io/tags/C/"/>
+      <category term="C" scheme="https://Caden16.github.io/tags/C/"/>
     
-      <category term="C++" scheme="https://makeitpossible16.github.io/tags/C/"/>
+      <category term="C++" scheme="https://Caden16.github.io/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>python string intern</title>
-    <link href="https://makeitpossible16.github.io/python/python%20string%20intern/"/>
-    <id>https://makeitpossible16.github.io/python/python string intern/</id>
+    <link href="https://Caden16.github.io/python/python%20string%20intern/"/>
+    <id>https://Caden16.github.io/python/python string intern/</id>
     <published>2017-03-28T00:00:00.000Z</published>
     <updated>2017-03-28T08:30:34.606Z</updated>
     
@@ -336,17 +336,17 @@
     
     </summary>
     
-      <category term="python" scheme="https://makeitpossible16.github.io/categories/python/"/>
+      <category term="python" scheme="https://Caden16.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+      <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>linux单文件大小限制</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E5%8D%95%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/文件存储/linux单文件大小限制/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E5%8D%95%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6/"/>
+    <id>https://Caden16.github.io/文件存储/linux单文件大小限制/</id>
     <published>2017-03-26T00:00:00.000Z</published>
     <updated>2017-04-01T12:33:23.312Z</updated>
     
@@ -367,19 +367,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
   <entry>
     <title>python的多线程和Goroutine</title>
-    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/python%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8CGoroutine/"/>
-    <id>https://makeitpossible16.github.io/操作系统/python的多线程和Goroutine/</id>
+    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/python%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8CGoroutine/"/>
+    <id>https://Caden16.github.io/操作系统/python的多线程和Goroutine/</id>
     <published>2017-03-22T00:00:00.000Z</published>
     <updated>2017-03-22T14:13:00.610Z</updated>
     
@@ -412,19 +412,19 @@
     
     </summary>
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+      <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
   </entry>
   
   <entry>
     <title>linux页缓存机制 Page Cache</title>
-    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/linux%E9%A1%B5%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6%20Page%20Cache/"/>
-    <id>https://makeitpossible16.github.io/操作系统/linux页缓存机制 Page Cache/</id>
+    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/linux%E9%A1%B5%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6%20Page%20Cache/"/>
+    <id>https://Caden16.github.io/操作系统/linux页缓存机制 Page Cache/</id>
     <published>2017-03-20T00:00:00.000Z</published>
     <updated>2017-03-25T16:06:05.768Z</updated>
     
@@ -440,19 +440,19 @@
     
     </summary>
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+      <category term="linux" scheme="https://Caden16.github.io/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>(转)Leveldb实现原理</title>
-    <link href="https://makeitpossible16.github.io/Leveldb/(%E8%BD%AC)Leveldb%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
-    <id>https://makeitpossible16.github.io/Leveldb/(转)Leveldb实现原理/</id>
+    <link href="https://Caden16.github.io/Leveldb/(%E8%BD%AC)Leveldb%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/"/>
+    <id>https://Caden16.github.io/Leveldb/(转)Leveldb实现原理/</id>
     <published>2017-03-19T00:00:00.000Z</published>
     <updated>2017-03-19T11:47:17.060Z</updated>
     
@@ -559,17 +559,17 @@
     
     </summary>
     
-      <category term="Leveldb" scheme="https://makeitpossible16.github.io/categories/Leveldb/"/>
+      <category term="Leveldb" scheme="https://Caden16.github.io/categories/Leveldb/"/>
     
     
-      <category term="Leveldb" scheme="https://makeitpossible16.github.io/tags/Leveldb/"/>
+      <category term="Leveldb" scheme="https://Caden16.github.io/tags/Leveldb/"/>
     
   </entry>
   
   <entry>
     <title>用户态到内核态切换</title>
-    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%94%A8%E6%88%B7%E6%80%81%E5%88%B0%E5%86%85%E6%A0%B8%E6%80%81%E5%88%87%E6%8D%A2/"/>
-    <id>https://makeitpossible16.github.io/操作系统/用户态到内核态切换/</id>
+    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%94%A8%E6%88%B7%E6%80%81%E5%88%B0%E5%86%85%E6%A0%B8%E6%80%81%E5%88%87%E6%8D%A2/"/>
+    <id>https://Caden16.github.io/操作系统/用户态到内核态切换/</id>
     <published>2017-03-16T00:00:00.000Z</published>
     <updated>2017-03-16T02:57:57.726Z</updated>
     
@@ -590,17 +590,17 @@
     
     </summary>
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
   <entry>
     <title>LRU缓存淘汰算法</title>
-    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LRU%E7%BC%93%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AE%97%E6%B3%95/"/>
-    <id>https://makeitpossible16.github.io/算法/LRU缓存淘汰算法/</id>
+    <link href="https://Caden16.github.io/%E7%AE%97%E6%B3%95/LRU%E7%BC%93%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AE%97%E6%B3%95/"/>
+    <id>https://Caden16.github.io/算法/LRU缓存淘汰算法/</id>
     <published>2017-03-08T00:00:00.000Z</published>
     <updated>2017-03-08T11:39:59.802Z</updated>
     
@@ -619,17 +619,17 @@
     
     </summary>
     
-      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://Caden16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="缓存" scheme="https://makeitpossible16.github.io/tags/%E7%BC%93%E5%AD%98/"/>
+      <category term="缓存" scheme="https://Caden16.github.io/tags/%E7%BC%93%E5%AD%98/"/>
     
   </entry>
   
   <entry>
     <title>伪随机数</title>
-    <link href="https://makeitpossible16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
-    <id>https://makeitpossible16.github.io/操作系统/伪随机数/</id>
+    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0/"/>
+    <id>https://Caden16.github.io/操作系统/伪随机数/</id>
     <published>2017-03-05T00:00:00.000Z</published>
     <updated>2017-03-05T08:56:55.648Z</updated>
     
@@ -645,17 +645,17 @@
     
     </summary>
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="操作系统" scheme="https://makeitpossible16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
   <entry>
     <title>(转)文件系统vs对象存储——选型和趋势</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8VS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
-    <id>https://makeitpossible16.github.io/对象存储/对象存储VS文件系统/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8VS%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://Caden16.github.io/对象存储/对象存储VS文件系统/</id>
     <published>2017-03-03T00:00:00.000Z</published>
     <updated>2017-03-03T11:25:09.854Z</updated>
     
@@ -670,17 +670,17 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="文件系统，对象存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%8C%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="文件系统，对象存储" scheme="https://Caden16.github.io/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%EF%BC%8C%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
   </entry>
   
   <entry>
     <title>C++语法记录</title>
-    <link href="https://makeitpossible16.github.io/C/C++%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/C/C++语法记录/</id>
+    <link href="https://Caden16.github.io/C/C++%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
+    <id>https://Caden16.github.io/C/C++语法记录/</id>
     <published>2017-03-01T00:00:00.000Z</published>
     <updated>2017-03-21T13:01:44.816Z</updated>
     
@@ -701,19 +701,19 @@
     
     </summary>
     
-      <category term="C++" scheme="https://makeitpossible16.github.io/categories/C/"/>
+      <category term="C++" scheme="https://Caden16.github.io/categories/C/"/>
     
     
-      <category term="C++" scheme="https://makeitpossible16.github.io/tags/C/"/>
+      <category term="C++" scheme="https://Caden16.github.io/tags/C/"/>
     
-      <category term="C++11" scheme="https://makeitpossible16.github.io/tags/C-11/"/>
+      <category term="C++11" scheme="https://Caden16.github.io/tags/C-11/"/>
     
   </entry>
   
   <entry>
     <title>gdb调试错误-找不到文件</title>
-    <link href="https://makeitpossible16.github.io/linux%E5%91%BD%E4%BB%A4/gdb%E8%B0%83%E8%AF%95%E9%94%99%E8%AF%AF-%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/"/>
-    <id>https://makeitpossible16.github.io/linux命令/gdb调试错误-找不到文件/</id>
+    <link href="https://Caden16.github.io/linux%E5%91%BD%E4%BB%A4/gdb%E8%B0%83%E8%AF%95%E9%94%99%E8%AF%AF-%E6%89%BE%E4%B8%8D%E5%88%B0%E6%96%87%E4%BB%B6/"/>
+    <id>https://Caden16.github.io/linux命令/gdb调试错误-找不到文件/</id>
     <published>2017-02-28T00:00:00.000Z</published>
     <updated>2017-02-28T09:09:13.116Z</updated>
     
@@ -728,17 +728,17 @@
     
     </summary>
     
-      <category term="linux命令" scheme="https://makeitpossible16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="https://Caden16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="gdb" scheme="https://makeitpossible16.github.io/tags/gdb/"/>
+      <category term="gdb" scheme="https://Caden16.github.io/tags/gdb/"/>
     
   </entry>
   
   <entry>
     <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
-    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
-    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
+    <link href="https://Caden16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
+    <id>https://Caden16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
     <published>2017-02-26T00:00:00.000Z</published>
     <updated>2017-02-27T12:41:08.472Z</updated>
     
@@ -755,17 +755,17 @@
     
     </summary>
     
-      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://Caden16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
+      <category term="LeetCode" scheme="https://Caden16.github.io/tags/LeetCode/"/>
     
   </entry>
   
   <entry>
     <title>swift-weedfs-backend diskfile代码实现</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://makeitpossible16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://Caden16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
     <published>2017-02-26T00:00:00.000Z</published>
     <updated>2017-03-02T02:46:55.297Z</updated>
     
@@ -778,21 +778,21 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
-      <category term="swift-weedfs-backend" scheme="https://makeitpossible16.github.io/tags/swift-weedfs-backend/"/>
+      <category term="swift-weedfs-backend" scheme="https://Caden16.github.io/tags/swift-weedfs-backend/"/>
     
   </entry>
   
   <entry>
     <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
-    <link href="https://makeitpossible16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Next%20Permutation(%E5%85%A8%E6%8E%92%E5%88%97%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95)/"/>
-    <id>https://makeitpossible16.github.io/算法/LeetCode解题-Next Permutation(全排列生成算法)/</id>
+    <link href="https://Caden16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Next%20Permutation(%E5%85%A8%E6%8E%92%E5%88%97%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95)/"/>
+    <id>https://Caden16.github.io/算法/LeetCode解题-Next Permutation(全排列生成算法)/</id>
     <published>2017-02-26T00:00:00.000Z</published>
     <updated>2017-02-27T07:37:20.507Z</updated>
     
@@ -807,17 +807,17 @@
     
     </summary>
     
-      <category term="算法" scheme="https://makeitpossible16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://Caden16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="LeetCode" scheme="https://makeitpossible16.github.io/tags/LeetCode/"/>
+      <category term="LeetCode" scheme="https://Caden16.github.io/tags/LeetCode/"/>
     
   </entry>
   
   <entry>
     <title>swift-weedfs-backend接口设计</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/"/>
-    <id>https://makeitpossible16.github.io/对象存储/swift-weedfs-backend接口设计/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1/"/>
+    <id>https://Caden16.github.io/对象存储/swift-weedfs-backend接口设计/</id>
     <published>2017-02-25T00:00:00.000Z</published>
     <updated>2017-02-26T13:41:57.679Z</updated>
     
@@ -871,19 +871,19 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
   </entry>
   
   <entry>
     <title>openstack-swift源码阅读记录4-启用mem_diskfile</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%954-%E5%90%AF%E7%94%A8mem_diskfile/"/>
-    <id>https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录4-启用mem_diskfile/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%954-%E5%90%AF%E7%94%A8mem_diskfile/"/>
+    <id>https://Caden16.github.io/对象存储/openstack-swift源码阅读记录4-启用mem_diskfile/</id>
     <published>2017-02-24T00:00:00.000Z</published>
     <updated>2017-02-25T11:46:46.271Z</updated>
     
@@ -899,17 +899,17 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
   </entry>
   
   <entry>
     <title>在Openstack Swift中使用多种后端存储实现</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/%E5%9C%A8Openstack%20Swift%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%A7%8D%E5%90%8E%E7%AB%AF%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://makeitpossible16.github.io/对象存储/在Openstack Swift中使用多种后端存储实现/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/%E5%9C%A8Openstack%20Swift%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%A7%8D%E5%90%8E%E7%AB%AF%E5%AD%98%E5%82%A8%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://Caden16.github.io/对象存储/在Openstack Swift中使用多种后端存储实现/</id>
     <published>2017-02-23T00:00:00.000Z</published>
     <updated>2017-02-24T06:04:21.796Z</updated>
     
@@ -940,19 +940,19 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
   </entry>
   
   <entry>
     <title>openstack-swift源码阅读记录3-diskfile</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%953-diskfile/"/>
-    <id>https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%953-diskfile/"/>
+    <id>https://Caden16.github.io/对象存储/openstack-swift源码阅读记录3-diskfile/</id>
     <published>2017-02-21T00:00:00.000Z</published>
     <updated>2017-02-21T07:19:05.819Z</updated>
     
@@ -969,17 +969,17 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
   </entry>
   
   <entry>
     <title>ubuntu使用问题总结</title>
-    <link href="https://makeitpossible16.github.io/ubuntu/ubuntu%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/ubuntu/ubuntu使用问题总结/</id>
+    <link href="https://Caden16.github.io/ubuntu/ubuntu%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://Caden16.github.io/ubuntu/ubuntu使用问题总结/</id>
     <published>2017-02-16T00:00:00.000Z</published>
     <updated>2017-02-16T13:48:09.980Z</updated>
     
@@ -995,17 +995,17 @@
     
     </summary>
     
-      <category term="ubuntu" scheme="https://makeitpossible16.github.io/categories/ubuntu/"/>
+      <category term="ubuntu" scheme="https://Caden16.github.io/categories/ubuntu/"/>
     
     
-      <category term="ubuntu" scheme="https://makeitpossible16.github.io/tags/ubuntu/"/>
+      <category term="ubuntu" scheme="https://Caden16.github.io/tags/ubuntu/"/>
     
   </entry>
   
   <entry>
     <title>openstack源码阅读记录2-object metadata</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952-object%20metadata/"/>
-    <id>https://makeitpossible16.github.io/对象存储/openstack源码阅读记录2-object metadata/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952-object%20metadata/"/>
+    <id>https://Caden16.github.io/对象存储/openstack源码阅读记录2-object metadata/</id>
     <published>2017-02-13T00:00:00.000Z</published>
     <updated>2017-02-13T09:06:16.572Z</updated>
     
@@ -1019,17 +1019,17 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
   </entry>
   
   <entry>
     <title>openstack-swift源码阅读记录1-文件上传过程</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%951-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/对象存储/openstack-swift源码阅读记录1-文件上传过程/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%951-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E8%BF%87%E7%A8%8B/"/>
+    <id>https://Caden16.github.io/对象存储/openstack-swift源码阅读记录1-文件上传过程/</id>
     <published>2017-02-12T00:00:00.000Z</published>
     <updated>2017-02-13T09:07:50.308Z</updated>
     
@@ -1048,17 +1048,17 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
   </entry>
   
   <entry>
     <title>文件合并存储与单个存储优劣势分析</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F(seaweedfs)%E4%B8%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8A%A3%E5%8A%BF%E5%88%86%E6%9E%90/"/>
-    <id>https://makeitpossible16.github.io/文件系统/文件系统(seaweedfs)与关系型数据库优劣势分析/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F(seaweedfs)%E4%B8%8E%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BC%98%E5%8A%A3%E5%8A%BF%E5%88%86%E6%9E%90/"/>
+    <id>https://Caden16.github.io/文件系统/文件系统(seaweedfs)与关系型数据库优劣势分析/</id>
     <published>2017-02-08T00:00:00.000Z</published>
     <updated>2017-02-10T15:24:26.352Z</updated>
     
@@ -1095,19 +1095,19 @@
     
     </summary>
     
-      <category term="文件系统" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
+      <category term="文件系统" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
-      <category term="文件系统" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
+      <category term="文件系统" scheme="https://Caden16.github.io/tags/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
   <entry>
     <title>python语法记录</title>
-    <link href="https://makeitpossible16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/python语法/python语法记录/</id>
+    <link href="https://Caden16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
+    <id>https://Caden16.github.io/python语法/python语法记录/</id>
     <published>2017-02-07T00:00:00.000Z</published>
     <updated>2017-04-18T09:01:31.886Z</updated>
     
@@ -1146,17 +1146,17 @@
     
     </summary>
     
-      <category term="python语法" scheme="https://makeitpossible16.github.io/categories/python%E8%AF%AD%E6%B3%95/"/>
+      <category term="python语法" scheme="https://Caden16.github.io/categories/python%E8%AF%AD%E6%B3%95/"/>
     
     
-      <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+      <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>数据结构</title>
-    <link href="https://makeitpossible16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://makeitpossible16.github.io/数据结构/数据结构/</id>
+    <link href="https://Caden16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://Caden16.github.io/数据结构/数据结构/</id>
     <published>2017-02-07T00:00:00.000Z</published>
     <updated>2017-03-19T09:45:44.501Z</updated>
     
@@ -1171,17 +1171,17 @@
     
     </summary>
     
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://Caden16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://Caden16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
   <entry>
     <title>ubuntu16.04搭建openstack-swift单机开发环境</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/ubuntu16.04%E6%90%AD%E5%BB%BAopenstack-swift%E5%8D%95%E6%9C%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
-    <id>https://makeitpossible16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/ubuntu16.04%E6%90%AD%E5%BB%BAopenstack-swift%E5%8D%95%E6%9C%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    <id>https://Caden16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/</id>
     <published>2017-01-30T00:00:00.000Z</published>
     <updated>2017-02-25T09:07:08.089Z</updated>
     
@@ -1203,17 +1203,17 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
   </entry>
   
   <entry>
     <title>linux文件存储机制</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/文件存储/linux文件存储机制/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%BA%E5%88%B6/"/>
+    <id>https://Caden16.github.io/文件存储/linux文件存储机制/</id>
     <published>2017-01-21T00:00:00.000Z</published>
     <updated>2017-04-01T08:54:53.099Z</updated>
     
@@ -1229,19 +1229,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+      <category term="linux" scheme="https://Caden16.github.io/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>openstack-swift调试</title>
-    <link href="https://makeitpossible16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E8%B0%83%E8%AF%95/"/>
-    <id>https://makeitpossible16.github.io/对象存储/openstack-swift调试/</id>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E8%B0%83%E8%AF%95/"/>
+    <id>https://Caden16.github.io/对象存储/openstack-swift调试/</id>
     <published>2017-01-21T00:00:00.000Z</published>
     <updated>2017-01-29T14:29:46.391Z</updated>
     
@@ -1262,17 +1262,17 @@
     
     </summary>
     
-      <category term="对象存储" scheme="https://makeitpossible16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="openstack-swift" scheme="https://makeitpossible16.github.io/tags/openstack-swift/"/>
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
   </entry>
   
   <entry>
     <title>kafka学习笔记</title>
-    <link href="https://makeitpossible16.github.io/kafka/kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>https://makeitpossible16.github.io/kafka/kafka学习笔记/</id>
+    <link href="https://Caden16.github.io/kafka/kafka%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://Caden16.github.io/kafka/kafka学习笔记/</id>
     <published>2017-01-11T00:00:00.000Z</published>
     <updated>2017-01-21T11:58:44.205Z</updated>
     
@@ -1290,17 +1290,17 @@
     
     </summary>
     
-      <category term="kafka" scheme="https://makeitpossible16.github.io/categories/kafka/"/>
+      <category term="kafka" scheme="https://Caden16.github.io/categories/kafka/"/>
     
     
-      <category term="kafka" scheme="https://makeitpossible16.github.io/tags/kafka/"/>
+      <category term="kafka" scheme="https://Caden16.github.io/tags/kafka/"/>
     
   </entry>
   
   <entry>
     <title>linux内核学习-数据结构</title>
-    <link href="https://makeitpossible16.github.io/linux%E5%86%85%E6%A0%B8/linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://makeitpossible16.github.io/linux内核/linux内核学习-数据结构/</id>
+    <link href="https://Caden16.github.io/linux%E5%86%85%E6%A0%B8/linux%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://Caden16.github.io/linux内核/linux内核学习-数据结构/</id>
     <published>2017-01-04T00:00:00.000Z</published>
     <updated>2017-01-21T13:35:37.846Z</updated>
     
@@ -1317,21 +1317,21 @@
     
     </summary>
     
-      <category term="linux内核" scheme="https://makeitpossible16.github.io/categories/linux%E5%86%85%E6%A0%B8/"/>
+      <category term="linux内核" scheme="https://Caden16.github.io/categories/linux%E5%86%85%E6%A0%B8/"/>
     
     
-      <category term="数据结构" scheme="https://makeitpossible16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://Caden16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+      <category term="linux" scheme="https://Caden16.github.io/tags/linux/"/>
     
-      <category term="内核" scheme="https://makeitpossible16.github.io/tags/%E5%86%85%E6%A0%B8/"/>
+      <category term="内核" scheme="https://Caden16.github.io/tags/%E5%86%85%E6%A0%B8/"/>
     
   </entry>
   
   <entry>
     <title>ELKStack搭建问题总结</title>
-    <link href="https://makeitpossible16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/ELKStack/ELKStack搭建问题总结/</id>
+    <link href="https://Caden16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://Caden16.github.io/ELKStack/ELKStack搭建问题总结/</id>
     <published>2017-01-02T00:00:00.000Z</published>
     <updated>2017-01-02T15:58:17.559Z</updated>
     
@@ -1353,21 +1353,21 @@
     
     </summary>
     
-      <category term="ELKStack" scheme="https://makeitpossible16.github.io/categories/ELKStack/"/>
+      <category term="ELKStack" scheme="https://Caden16.github.io/categories/ELKStack/"/>
     
     
-      <category term="ELKStack" scheme="https://makeitpossible16.github.io/tags/ELKStack/"/>
+      <category term="ELKStack" scheme="https://Caden16.github.io/tags/ELKStack/"/>
     
-      <category term="日志分析" scheme="https://makeitpossible16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+      <category term="日志分析" scheme="https://Caden16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
     
-      <category term="流处理" scheme="https://makeitpossible16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
+      <category term="流处理" scheme="https://Caden16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>linux命令学习</title>
-    <link href="https://makeitpossible16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/linux命令/linux命令学习/</id>
+    <link href="https://Caden16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://Caden16.github.io/linux命令/linux命令学习/</id>
     <published>2017-01-02T00:00:00.000Z</published>
     <updated>2017-04-24T12:29:32.739Z</updated>
     
@@ -1394,17 +1394,17 @@
     
     </summary>
     
-      <category term="linux命令" scheme="https://makeitpossible16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
+      <category term="linux命令" scheme="https://Caden16.github.io/categories/linux%E5%91%BD%E4%BB%A4/"/>
     
     
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+      <category term="linux" scheme="https://Caden16.github.io/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>linux学习-linux文件存储</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E5%AD%A6%E4%B9%A0-linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    <id>https://makeitpossible16.github.io/文件存储/linux学习-linux文件存储/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/linux%E5%AD%A6%E4%B9%A0-linux%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    <id>https://Caden16.github.io/文件存储/linux学习-linux文件存储/</id>
     <published>2017-01-01T00:00:00.000Z</published>
     <updated>2017-04-04T14:11:08.565Z</updated>
     
@@ -1420,17 +1420,17 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="linux" scheme="https://makeitpossible16.github.io/tags/linux/"/>
+      <category term="linux" scheme="https://Caden16.github.io/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>seaweedfs源码阅读记录9-生成fid过程</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%959-%E7%94%9F%E6%88%90fid%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%959-%E7%94%9F%E6%88%90fid%E8%BF%87%E7%A8%8B/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录9-生成fid过程/</id>
     <published>2016-12-16T00:00:00.000Z</published>
     <updated>2016-12-16T14:27:23.010Z</updated>
     
@@ -1449,19 +1449,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
   </entry>
   
   <entry>
     <title>seaweedfs源码阅读8-GET&amp;HEAD获取文件过程</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB8-GET&amp;HEAD%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB8-GET&amp;HEAD%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6%E8%BF%87%E7%A8%8B/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读8-GET&amp;HEAD获取文件过程/</id>
     <published>2016-12-15T00:00:00.000Z</published>
     <updated>2016-12-15T12:08:29.759Z</updated>
     
@@ -1482,19 +1482,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
   </entry>
   
   <entry>
     <title>go结构体大小</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/go%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F/"/>
-    <id>https://makeitpossible16.github.io/文件存储/go结构体大小/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/go%E7%BB%93%E6%9E%84%E4%BD%93%E5%A4%A7%E5%B0%8F/"/>
+    <id>https://Caden16.github.io/文件存储/go结构体大小/</id>
     <published>2016-12-14T00:00:00.000Z</published>
     <updated>2017-04-01T12:29:04.653Z</updated>
     
@@ -1513,19 +1513,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
   </entry>
   
   <entry>
     <title>seaweedfs源码阅读7-文件存储过程</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB7-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读7-文件存储过程/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB7-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读7-文件存储过程/</id>
     <published>2016-12-13T00:00:00.000Z</published>
     <updated>2017-04-01T12:55:01.553Z</updated>
     
@@ -1540,19 +1540,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
   </entry>
   
   <entry>
     <title>seaweedfs源码阅读6-文件存储格式</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB6-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB6-%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读6-文件存储格式/</id>
     <published>2016-12-12T00:00:00.000Z</published>
     <updated>2016-12-13T03:26:44.809Z</updated>
     
@@ -1566,19 +1566,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
   </entry>
   
   <entry>
     <title>seaweedfs源码阅读4-volume启动过程</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读4-volume启动/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读4-volume启动/</id>
     <published>2016-12-11T00:00:00.000Z</published>
     <updated>2017-02-08T12:23:41.872Z</updated>
     
@@ -1596,19 +1596,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
   </entry>
   
   <entry>
     <title>seaweedfs源码阅读5-文件PUT过程</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读5-文件PUT过程/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读5-文件PUT过程/</id>
     <published>2016-12-11T00:00:00.000Z</published>
     <updated>2016-12-11T13:30:05.384Z</updated>
     
@@ -1625,19 +1625,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
   </entry>
   
   <entry>
     <title>golang调试技巧</title>
-    <link href="https://makeitpossible16.github.io/go/golang%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/"/>
-    <id>https://makeitpossible16.github.io/go/golang调试技巧/</id>
+    <link href="https://Caden16.github.io/go/golang%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7/"/>
+    <id>https://Caden16.github.io/go/golang调试技巧/</id>
     <published>2016-12-10T00:00:00.000Z</published>
     <updated>2016-12-11T02:52:49.574Z</updated>
     
@@ -1664,17 +1664,17 @@
     
     </summary>
     
-      <category term="go" scheme="https://makeitpossible16.github.io/categories/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
   </entry>
   
   <entry>
     <title>golang 反射机制</title>
-    <link href="https://makeitpossible16.github.io/go/golang%20%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
-    <id>https://makeitpossible16.github.io/go/golang 反射机制/</id>
+    <link href="https://Caden16.github.io/go/golang%20%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+    <id>https://Caden16.github.io/go/golang 反射机制/</id>
     <published>2016-12-02T00:00:00.000Z</published>
     <updated>2016-12-04T07:55:20.022Z</updated>
     
@@ -1689,17 +1689,17 @@
     
     </summary>
     
-      <category term="go" scheme="https://makeitpossible16.github.io/categories/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
   </entry>
   
   <entry>
     <title>golang学习</title>
-    <link href="https://makeitpossible16.github.io/go/golang%E5%AD%A6%E4%B9%A0/"/>
-    <id>https://makeitpossible16.github.io/go/golang学习/</id>
+    <link href="https://Caden16.github.io/go/golang%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://Caden16.github.io/go/golang学习/</id>
     <published>2016-11-29T00:00:00.000Z</published>
     <updated>2016-12-15T03:15:17.470Z</updated>
     
@@ -1746,17 +1746,17 @@
     
     </summary>
     
-      <category term="go" scheme="https://makeitpossible16.github.io/categories/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
   </entry>
   
   <entry>
     <title>seaweedfs源码阅读记录3-raft协议理解</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%953-raft%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录3-raft协议理解/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%953-raft%E5%8D%8F%E8%AE%AE%E7%90%86%E8%A7%A3/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录3-raft协议理解/</id>
     <published>2016-11-28T00:00:00.000Z</published>
     <updated>2017-03-06T13:17:24.039Z</updated>
     
@@ -1772,21 +1772,21 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
-      <category term="raft" scheme="https://makeitpossible16.github.io/tags/raft/"/>
+      <category term="raft" scheme="https://Caden16.github.io/tags/raft/"/>
     
   </entry>
   
   <entry>
     <title>seaweedfs源码阅读记录1</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录/</id>
     <published>2016-11-22T00:00:00.000Z</published>
     <updated>2017-02-25T11:47:17.603Z</updated>
     
@@ -1806,19 +1806,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
   </entry>
   
   <entry>
     <title>seaweedfs源码阅读记录2</title>
-    <link href="https://makeitpossible16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
-    <id>https://makeitpossible16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
     <published>2016-11-22T00:00:00.000Z</published>
     <updated>2016-11-28T11:57:03.000Z</updated>
     
@@ -1838,19 +1838,19 @@
     
     </summary>
     
-      <category term="文件存储" scheme="https://makeitpossible16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
     
-      <category term="go" scheme="https://makeitpossible16.github.io/tags/go/"/>
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
     
-      <category term="seaweedfs" scheme="https://makeitpossible16.github.io/tags/seaweedfs/"/>
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
     
   </entry>
   
   <entry>
     <title>cloudstack 搭建总结</title>
-    <link href="https://makeitpossible16.github.io/cloudsatck%E6%90%AD%E5%BB%BA/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/cloudsatck搭建/cloudstack搭建总结/</id>
+    <link href="https://Caden16.github.io/cloudsatck%E6%90%AD%E5%BB%BA/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
+    <id>https://Caden16.github.io/cloudsatck搭建/cloudstack搭建总结/</id>
     <published>2016-11-20T00:00:00.000Z</published>
     <updated>2017-02-14T04:09:05.448Z</updated>
     
@@ -1873,17 +1873,17 @@
     
     </summary>
     
-      <category term="cloudsatck搭建" scheme="https://makeitpossible16.github.io/categories/cloudsatck%E6%90%AD%E5%BB%BA/"/>
+      <category term="cloudsatck搭建" scheme="https://Caden16.github.io/categories/cloudsatck%E6%90%AD%E5%BB%BA/"/>
     
     
-      <category term="cloudsatck" scheme="https://makeitpossible16.github.io/tags/cloudsatck/"/>
+      <category term="cloudsatck" scheme="https://Caden16.github.io/tags/cloudsatck/"/>
     
   </entry>
   
   <entry>
     <title>nodeJS入门总结</title>
-    <link href="https://makeitpossible16.github.io/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/nodeJS%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/"/>
-    <id>https://makeitpossible16.github.io/网站相关/nodeJS入门总结/</id>
+    <link href="https://Caden16.github.io/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/nodeJS%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/"/>
+    <id>https://Caden16.github.io/网站相关/nodeJS入门总结/</id>
     <published>2016-11-20T00:00:00.000Z</published>
     <updated>2016-11-24T14:55:44.836Z</updated>
     
@@ -1910,23 +1910,23 @@
     
     </summary>
     
-      <category term="网站相关" scheme="https://makeitpossible16.github.io/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/"/>
+      <category term="网站相关" scheme="https://Caden16.github.io/categories/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="nodeJS" scheme="https://makeitpossible16.github.io/tags/nodeJS/"/>
+      <category term="nodeJS" scheme="https://Caden16.github.io/tags/nodeJS/"/>
     
-      <category term="mongodb" scheme="https://makeitpossible16.github.io/tags/mongodb/"/>
+      <category term="mongodb" scheme="https://Caden16.github.io/tags/mongodb/"/>
     
-      <category term="Express" scheme="https://makeitpossible16.github.io/tags/Express/"/>
+      <category term="Express" scheme="https://Caden16.github.io/tags/Express/"/>
     
-      <category term="mongoose" scheme="https://makeitpossible16.github.io/tags/mongoose/"/>
+      <category term="mongoose" scheme="https://Caden16.github.io/tags/mongoose/"/>
     
   </entry>
   
   <entry>
     <title>ubuntu下如何优雅地使用翻译</title>
-    <link href="https://makeitpossible16.github.io/%E6%9C%89%E9%81%93%E5%AD%97%E5%85%B8%E4%BF%AE%E6%94%B9/ubuntu%E4%B8%8B%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8%E7%BF%BB%E8%AF%91/"/>
-    <id>https://makeitpossible16.github.io/有道字典修改/ubuntu下如何优雅地使用翻译/</id>
+    <link href="https://Caden16.github.io/%E6%9C%89%E9%81%93%E5%AD%97%E5%85%B8%E4%BF%AE%E6%94%B9/ubuntu%E4%B8%8B%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E4%BD%BF%E7%94%A8%E7%BF%BB%E8%AF%91/"/>
+    <id>https://Caden16.github.io/有道字典修改/ubuntu下如何优雅地使用翻译/</id>
     <published>2016-10-26T00:00:00.000Z</published>
     <updated>2017-03-01T03:03:27.140Z</updated>
     
@@ -1956,19 +1956,19 @@
     
     </summary>
     
-      <category term="有道字典修改" scheme="https://makeitpossible16.github.io/categories/%E6%9C%89%E9%81%93%E5%AD%97%E5%85%B8%E4%BF%AE%E6%94%B9/"/>
+      <category term="有道字典修改" scheme="https://Caden16.github.io/categories/%E6%9C%89%E9%81%93%E5%AD%97%E5%85%B8%E4%BF%AE%E6%94%B9/"/>
     
     
-      <category term="python" scheme="https://makeitpossible16.github.io/tags/python/"/>
+      <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
     
-      <category term="ubuntu" scheme="https://makeitpossible16.github.io/tags/ubuntu/"/>
+      <category term="ubuntu" scheme="https://Caden16.github.io/tags/ubuntu/"/>
     
   </entry>
   
   <entry>
     <title>github目录</title>
-    <link href="https://makeitpossible16.github.io/uncategorized/README/"/>
-    <id>https://makeitpossible16.github.io/uncategorized/README/</id>
+    <link href="https://Caden16.github.io/uncategorized/README/"/>
+    <id>https://Caden16.github.io/uncategorized/README/</id>
     <published>2016-01-01T00:00:00.000Z</published>
     <updated>2017-04-28T12:29:02.172Z</updated>
     
