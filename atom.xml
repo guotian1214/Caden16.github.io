@@ -43,7 +43,7 @@
     <link href="https://Caden16.github.io/git/git%E4%BD%BF%E7%94%A8/"/>
     <id>https://Caden16.github.io/git/git使用/</id>
     <published>2017-04-28T00:00:00.000Z</published>
-    <updated>2017-04-29T14:21:22.212Z</updated>
+    <updated>2017-04-30T12:35:18.186Z</updated>
     
     <content type="html"><![CDATA[<h3 id="修改已提交commit"><a href="#修改已提交commit" class="headerlink" title="修改已提交commit"></a>修改已提交commit</h3><p>参考<a href="http://stackoverflow.com/questions/179123/how-to-modify-existing-unpushed-commits" target="_blank" rel="external">How to modify existing, unpushed commits?</a><br>修改最近一次commit<br>git commit –amend<br>修改多次commit</p>
 <ol>
@@ -56,7 +56,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="修改远程仓库地址"><a href="#修改远程仓库地址" class="headerlink" title="修改远程仓库地址"></a>修改远程仓库地址</h3><p>查看已连接远程仓库<br>git remote -v<br>修改:<br>git remote set-url origin [url]<br>或:<br>git remote rm origin<br>git remote add origin [url]</p>
+<h3 id="修改远程仓库地址"><a href="#修改远程仓库地址" class="headerlink" title="修改远程仓库地址"></a>修改远程仓库地址</h3><p>查看已连接远程仓库<br>git remote -v<br>修改:<br>git remote set-url origin [url]<br>或:<br>git remote rm origin<br>git remote add origin [url]   </p>
 ]]></content>
     
     <summary type="html">
