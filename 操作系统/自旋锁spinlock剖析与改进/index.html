@@ -91,13 +91,13 @@
 
 <meta name="description" content="遇到题目：运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLockSpinLockMutexSemaphoreCondition variable对SpinLock 以及Mutex不太了解，参考自旋锁spinlock剖析与改进,得到比较全面的认识。spinlock又称自旋锁，线程通过busy-wait-loo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(转)自旋锁spinlock剖析与改进">
+<meta property="og:title" content="自旋锁spinlock剖析与改进">
 <meta property="og:url" content="https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/index.html">
 <meta property="og:site_name" content="MakeItPossible">
 <meta property="og:description" content="遇到题目：运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLockSpinLockMutexSemaphoreCondition variable对SpinLock 以及Mutex不太了解，参考自旋锁spinlock剖析与改进,得到比较全面的认识。spinlock又称自旋锁，线程通过busy-wait-loo">
-<meta property="og:updated_time" content="2017-03-12T14:16:40.177Z">
+<meta property="og:updated_time" content="2017-05-04T08:44:35.260Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="(转)自旋锁spinlock剖析与改进">
+<meta name="twitter:title" content="自旋锁spinlock剖析与改进">
 <meta name="twitter:description" content="遇到题目：运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLockSpinLockMutexSemaphoreCondition variable对SpinLock 以及Mutex不太了解，参考自旋锁spinlock剖析与改进,得到比较全面的认识。spinlock又称自旋锁，线程通过busy-wait-loo">
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <title> (转)自旋锁spinlock剖析与改进 | MakeItPossible </title>
+  <title> 自旋锁spinlock剖析与改进 | MakeItPossible </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -325,7 +325,7 @@
             
             
               
-                (转)自旋锁spinlock剖析与改进
+                自旋锁spinlock剖析与改进
               
             
           </h1>
@@ -340,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-29T13:36:43Z">
-                2017-04-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-16T00:00:00Z">
+                2017-03-16
               &nbsp;&nbsp;</time>&nbsp;
             
 
@@ -356,8 +356,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-03-12T22:16:40+08:00">
-                2017-03-12
+              <time title="更新于" itemprop="dateModified" datetime="2017-05-04T16:44:35+08:00">
+                2017-05-04
               </time>
             
           </span>
@@ -457,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/git/git使用/" rel="next" title="git使用">
-                <i class="fa fa-chevron-left"></i> git使用
+              <a href="/算法/LRU缓存淘汰算法/" rel="next" title="LRU缓存淘汰算法">
+                <i class="fa fa-chevron-left"></i> LRU缓存淘汰算法
               </a>
             
           </div>
@@ -466,6 +466,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/操作系统/用户态到内核态切换/" rel="prev" title="用户态到内核态切换">
+                用户态到内核态切换 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -481,7 +485,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="操作系统/自旋锁spinlock剖析与改进/"
-     data-title="(转)自旋锁spinlock剖析与改进"
+     data-title="自旋锁spinlock剖析与改进"
      data-content=""
      data-url="https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/">
   <div class="ds-share-inline">
@@ -511,7 +515,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="操作系统/自旋锁spinlock剖析与改进/"
-           data-title="(转)自旋锁spinlock剖析与改进" data-url="https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/">
+           data-title="自旋锁spinlock剖析与改进" data-url="https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/">
       </div>
     
   </div>
