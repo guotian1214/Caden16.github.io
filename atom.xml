@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Caden16.github.io/"/>
-  <updated>2017-05-04T09:36:09.962Z</updated>
+  <updated>2017-05-09T14:37:06.037Z</updated>
   <id>https://Caden16.github.io/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python多进程,多线程</title>
+    <link href="https://Caden16.github.io/python/python%E5%A4%9A%E8%BF%9B%E7%A8%8B,%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    <id>https://Caden16.github.io/python/python多进程,多线程/</id>
+    <published>2017-05-05T00:00:00.000Z</published>
+    <updated>2017-05-09T14:37:06.037Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="python-Can’t-pickle-type-‘instancemethod’-问题"><a href="#python-Can’t-pickle-type-‘instancemethod’-问题" class="headerlink" title="python Can’t pickle type ‘instancemethod’ 问题"></a>python Can’t pickle type ‘instancemethod’ 问题</h3><p>在类中使用多进程时,错误提示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cPickle.PicklingError: Can\&apos;t pickle &lt;type \&apos;instancemethod\&apos;&gt;: attribute lookup __builtin__.instancemethod failed</div></pre></td></tr></table></figure></p>
+<p>参考<a href="https://blog.tankywoo.com/2015/09/06/cant-pickle-instancemethod.html" target="_blank" rel="external">Python Can\’t pickle type \’instancemethod\’ 问题</a><br><a href="http://bbs.chinaunix.net/thread-4111379-1-1.html" target="_blank" rel="external">python multiprocessing关于PicklingError的问题</a></p>
+<h3 id="Multiprocessing基础"><a href="#Multiprocessing基础" class="headerlink" title="Multiprocessing基础"></a>Multiprocessing基础</h3><p>参考<a href="http://thief.one/2016/11/23/Python-multiprocessing/" target="_blank" rel="external">Multiprocessing基础</a><br><a href="http://blog.csdn.net/seetheworld518/article/details/49639651" target="_blank" rel="external">Python 多进程 multiprocessing.Pool类详解</a><br><a href="http://crazy123.blog.51cto.com/1029610/1691367" target="_blank" rel="external">SFTP基于Key多进程批量并发上传文件实现案例</a></p>
+<h3 id="多进程显示tqdm"><a href="#多进程显示tqdm" class="headerlink" title="多进程显示tqdm"></a>多进程显示tqdm</h3><p><a href="http://lorexxar.cn/2016/07/21/python-tqdm/" target="_blank" rel="external">python tqdm模块分析</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;python-Can’t-pickle-type-‘instancemethod’-问题&quot;&gt;&lt;a href=&quot;#python-Can’t-pickle-type-‘instancemethod’-问题&quot; class=&quot;headerlink&quot; title=&quot;pyth
+    
+    </summary>
+    
+      <category term="python" scheme="https://Caden16.github.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>rsync文件增量同步</title>
@@ -45,7 +71,7 @@
     <link href="https://Caden16.github.io/git/git%E4%BD%BF%E7%94%A8/"/>
     <id>https://Caden16.github.io/git/git使用/</id>
     <published>2017-04-28T00:00:00.000Z</published>
-    <updated>2017-04-30T12:35:18.186Z</updated>
+    <updated>2017-05-06T03:30:04.121Z</updated>
     
     <content type="html"><![CDATA[<h3 id="修改已提交commit"><a href="#修改已提交commit" class="headerlink" title="修改已提交commit"></a>修改已提交commit</h3><p>参考<a href="http://stackoverflow.com/questions/179123/how-to-modify-existing-unpushed-commits" target="_blank" rel="external">How to modify existing, unpushed commits?</a><br>修改最近一次commit<br>git commit –amend<br>修改多次commit</p>
 <ol>
@@ -59,6 +85,7 @@
 </li>
 </ol>
 <h3 id="修改远程仓库地址"><a href="#修改远程仓库地址" class="headerlink" title="修改远程仓库地址"></a>修改远程仓库地址</h3><p>查看已连接远程仓库<br>git remote -v<br>修改:<br>git remote set-url origin [url]<br>或:<br>git remote rm origin<br>git remote add origin [url]   </p>
+<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000" target="_blank" rel="external">创建与合并分支</a></p>
 ]]></content>
     
     <summary type="html">
@@ -567,6 +594,29 @@
   </entry>
   
   <entry>
+    <title>自旋锁spinlock剖析与改进</title>
+    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81spinlock%E5%89%96%E6%9E%90%E4%B8%8E%E6%94%B9%E8%BF%9B/"/>
+    <id>https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/</id>
+    <published>2017-03-16T00:00:00.000Z</published>
+    <updated>2017-05-04T08:44:35.260Z</updated>
+    
+    <content type="html"><![CDATA[<p>遇到题目：<br>运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock<br>SpinLock<br>Mutex<br>Semaphore<br>Condition variable<br>对SpinLock 以及Mutex不太了解，参考<a href="http://kb.cnblogs.com/page/105657/" target="_blank" rel="external">自旋锁spinlock剖析与改进</a>,得到比较全面的认识。<br>spinlock又称自旋锁，线程通过busy-wait-loop的方式来获取锁，任时刻只有一个线程能够获得锁，其他线程忙等待直到获得锁。spinlock在多处理器多线程环境的场景中有很广泛的使用，一般要求使用spinlock的临界区尽量简短，这样获取的锁可以尽快释放，以满足其他忙等的线程。Spinlock和mutex不同，spinlock不会导致线程的状态切换(用户态-&gt;内核态)，但是spinlock使用不当(如临界区执行时间过长)会导致cpu busy飙高。<br>spinlock不会使线程状态发生切换，mutex在获取不到锁的时候会选择sleep。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;遇到题目：&lt;br&gt;运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock&lt;br&gt;SpinLock&lt;br&gt;Mutex&lt;br&gt;Semaphore&lt;br&gt;Condition variabl
+    
+    </summary>
+    
+      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>用户态到内核态切换</title>
     <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%94%A8%E6%88%B7%E6%80%81%E5%88%B0%E5%86%85%E6%A0%B8%E6%80%81%E5%88%87%E6%8D%A2/"/>
     <id>https://Caden16.github.io/操作系统/用户态到内核态切换/</id>
@@ -587,29 +637,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;用户态-内核态概念&quot;&gt;&lt;a href=&quot;#用户态-内核态概念&quot; class=&quot;headerlink&quot; title=&quot;用户态 内核态概念&quot;&gt;&lt;/a&gt;用户态 内核态概念&lt;/h2&gt;&lt;p&gt;引用《深入理解LINUX内核》的一段话:&lt;br&gt;类UNIX操作系统把与计算机物理组织
-    
-    </summary>
-    
-      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>自旋锁spinlock剖析与改进</title>
-    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81spinlock%E5%89%96%E6%9E%90%E4%B8%8E%E6%94%B9%E8%BF%9B/"/>
-    <id>https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/</id>
-    <published>2017-03-16T00:00:00.000Z</published>
-    <updated>2017-05-04T08:44:35.260Z</updated>
-    
-    <content type="html"><![CDATA[<p>遇到题目：<br>运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock<br>SpinLock<br>Mutex<br>Semaphore<br>Condition variable<br>对SpinLock 以及Mutex不太了解，参考<a href="http://kb.cnblogs.com/page/105657/" target="_blank" rel="external">自旋锁spinlock剖析与改进</a>,得到比较全面的认识。<br>spinlock又称自旋锁，线程通过busy-wait-loop的方式来获取锁，任时刻只有一个线程能够获得锁，其他线程忙等待直到获得锁。spinlock在多处理器多线程环境的场景中有很广泛的使用，一般要求使用spinlock的临界区尽量简短，这样获取的锁可以尽快释放，以满足其他忙等的线程。Spinlock和mutex不同，spinlock不会导致线程的状态切换(用户态-&gt;内核态)，但是spinlock使用不当(如临界区执行时间过长)会导致cpu busy飙高。<br>spinlock不会使线程状态发生切换，mutex在获取不到锁的时候会选择sleep。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;遇到题目：&lt;br&gt;运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock&lt;br&gt;SpinLock&lt;br&gt;Mutex&lt;br&gt;Semaphore&lt;br&gt;Condition variabl
     
     </summary>
     
@@ -759,33 +786,6 @@
   </entry>
   
   <entry>
-    <title>swift-weedfs-backend diskfile代码实现</title>
-    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://Caden16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
-    <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-03-02T02:46:55.297Z</updated>
-    
-    <content type="html"><![CDATA[<p>主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现<a href="https://github.com/MakeItPossible16/swift-weedfs-backend" target="_blank" rel="external">swift-weedfs-backend</a><br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryFileSystem</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    A very simplistic in-memory file system scheme.</div><div class="line"></div><div class="line">    There is one dictionary mapping a given object name to a tuple. The first</div><div class="line">    entry in the tuple is the cStringIO buffer representing the file contents,</div><div class="line">    the second entry is the metadata dictionary.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._filesystem = &#123;&#125;</div><div class="line">        self.seaweedfs = Seaweedfs_operation()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return back an file-like object and its metadata</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :return (fp, metadata): fp is `StringIO` in-memory representation</div><div class="line">                                object (or None). metadata is a dictionary</div><div class="line">                                of metadata (or None)</div><div class="line">        """</div><div class="line">        <span class="comment"># val = self._filesystem.get(name)</span></div><div class="line">        val = self.seaweedfs.GET(name)</div><div class="line">        <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            fp, metadata = <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            fp, metadata = self.parse_seaweedfs_file(val)</div><div class="line">        <span class="comment"># else:</span></div><div class="line">        <span class="comment">#     fp, metadata = val</span></div><div class="line">        <span class="keyword">return</span> fp, metadata</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_seaweedfs_file</span><span class="params">(self,val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        parse file download from seaweedfs</div><div class="line">        :param val: seaweedfs file,fomat: str(metadata) + '\n' + obj_content</div><div class="line">        :return: StringIO obj_content, python dict metadata</div><div class="line">        """</div><div class="line">        metadata_index = val.find(<span class="string">'\n'</span>)</div><div class="line">        val = val.split(<span class="string">'\n'</span>,<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span>  StringIO.StringIO(val[<span class="number">1</span>]),eval(val[<span class="number">0</span>])</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put_object</span><span class="params">(self, name, fp, metadata)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Store object into seaweedfs</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :param fp: `StringIO` in-memory representation object</div><div class="line">        :param metadata: dictionary of metadata to be written</div><div class="line">        """</div><div class="line">        <span class="comment"># self._filesystem[name] = (fp, metadata)</span></div><div class="line">        fp.seek(<span class="number">0</span>)</div><div class="line">        self.seaweedfs.PUT(name,str(metadata) + <span class="string">'\n'</span> + fp.read())</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Delete object from memory</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        """</div><div class="line">        <span class="comment"># import pydevd</span></div><div class="line">        <span class="comment"># pydevd.settrace('127.0.0.1', port=54321, stdoutToServer=True, stderrToServer=True)</span></div><div class="line">        self.seaweedfs.DELETE(name)</div><div class="line">        <span class="comment"># del self._filesystem[name]</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_diskfile</span><span class="params">(self, account, container, obj, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">return</span> DiskFile(self, account, container, obj)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pickle_async_update</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        For now don't handle async updates.</div><div class="line">        """</div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现&lt;a href=&quot;https://github.com/MakeItPossible16/swift-weedfs-backend&quot;&gt;swift-weedfs-backend&lt;/a&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
-    
-      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
-    
-      <category term="swift-weedfs-backend" scheme="https://Caden16.github.io/tags/swift-weedfs-backend/"/>
-    
-  </entry>
-  
-  <entry>
     <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
     <link href="https://Caden16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Next%20Permutation(%E5%85%A8%E6%8E%92%E5%88%97%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95)/"/>
     <id>https://Caden16.github.io/算法/LeetCode解题-Next Permutation(全排列生成算法)/</id>
@@ -834,6 +834,33 @@
     
     
       <category term="LeetCode" scheme="https://Caden16.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>swift-weedfs-backend diskfile代码实现</title>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://Caden16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
+    <published>2017-02-26T00:00:00.000Z</published>
+    <updated>2017-03-02T02:46:55.297Z</updated>
+    
+    <content type="html"><![CDATA[<p>主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现<a href="https://github.com/MakeItPossible16/swift-weedfs-backend" target="_blank" rel="external">swift-weedfs-backend</a><br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryFileSystem</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    A very simplistic in-memory file system scheme.</div><div class="line"></div><div class="line">    There is one dictionary mapping a given object name to a tuple. The first</div><div class="line">    entry in the tuple is the cStringIO buffer representing the file contents,</div><div class="line">    the second entry is the metadata dictionary.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._filesystem = &#123;&#125;</div><div class="line">        self.seaweedfs = Seaweedfs_operation()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return back an file-like object and its metadata</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :return (fp, metadata): fp is `StringIO` in-memory representation</div><div class="line">                                object (or None). metadata is a dictionary</div><div class="line">                                of metadata (or None)</div><div class="line">        """</div><div class="line">        <span class="comment"># val = self._filesystem.get(name)</span></div><div class="line">        val = self.seaweedfs.GET(name)</div><div class="line">        <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            fp, metadata = <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            fp, metadata = self.parse_seaweedfs_file(val)</div><div class="line">        <span class="comment"># else:</span></div><div class="line">        <span class="comment">#     fp, metadata = val</span></div><div class="line">        <span class="keyword">return</span> fp, metadata</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_seaweedfs_file</span><span class="params">(self,val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        parse file download from seaweedfs</div><div class="line">        :param val: seaweedfs file,fomat: str(metadata) + '\n' + obj_content</div><div class="line">        :return: StringIO obj_content, python dict metadata</div><div class="line">        """</div><div class="line">        metadata_index = val.find(<span class="string">'\n'</span>)</div><div class="line">        val = val.split(<span class="string">'\n'</span>,<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span>  StringIO.StringIO(val[<span class="number">1</span>]),eval(val[<span class="number">0</span>])</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put_object</span><span class="params">(self, name, fp, metadata)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Store object into seaweedfs</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :param fp: `StringIO` in-memory representation object</div><div class="line">        :param metadata: dictionary of metadata to be written</div><div class="line">        """</div><div class="line">        <span class="comment"># self._filesystem[name] = (fp, metadata)</span></div><div class="line">        fp.seek(<span class="number">0</span>)</div><div class="line">        self.seaweedfs.PUT(name,str(metadata) + <span class="string">'\n'</span> + fp.read())</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Delete object from memory</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        """</div><div class="line">        <span class="comment"># import pydevd</span></div><div class="line">        <span class="comment"># pydevd.settrace('127.0.0.1', port=54321, stdoutToServer=True, stderrToServer=True)</span></div><div class="line">        self.seaweedfs.DELETE(name)</div><div class="line">        <span class="comment"># del self._filesystem[name]</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_diskfile</span><span class="params">(self, account, container, obj, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">return</span> DiskFile(self, account, container, obj)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pickle_async_update</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        For now don't handle async updates.</div><div class="line">        """</div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现&lt;a href=&quot;https://github.com/MakeItPossible16/swift-weedfs-backend&quot;&gt;swift-weedfs-backend&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
+    
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
+    
+      <category term="swift-weedfs-backend" scheme="https://Caden16.github.io/tags/swift-weedfs-backend/"/>
     
   </entry>
   
@@ -1132,7 +1159,7 @@
     <link href="https://Caden16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://Caden16.github.io/python语法/python语法记录/</id>
     <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-04-18T09:01:31.886Z</updated>
+    <updated>2017-05-07T13:09:46.121Z</updated>
     
     <content type="html"><![CDATA[<p>记录一下忘记的Python语法</p>
 <h3 id="StringIO"><a href="#StringIO" class="headerlink" title="StringIO"></a>StringIO</h3><p>负责在内存中读写string,其中在openstack-swift的mem_diskfile.py中提到::param fp: <code>StringIO</code> in-memory representation object<br><a href="StringIO和BytesIO">StringIO和BytesIO</a></p>
@@ -1160,6 +1187,7 @@
 <h3 id="python-列表切片"><a href="#python-列表切片" class="headerlink" title="python 列表切片"></a>python 列表切片</h3><p>切片的下标0代表顺序的第一个元素，-1代表倒序的第一个元素；且切片不包括右边界，例如[0:3]代表元素0、1、2不包括3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">l=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,5]</div><div class="line">&gt;&gt;&gt; l[0:3]</div><div class="line">[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]</div><div class="line">&gt;&gt;&gt; l[:3]</div><div class="line">[&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]</div></pre></td></tr></table></figure></p>
 <h3 id="all"><a href="#all" class="headerlink" title="all"></a><strong>all</strong></h3><p>参考<a href="http://python-china.org/t/725" target="_blank" rel="external">用 <strong>all</strong> 暴露接口</a><br>用 <strong>all</strong> 暴露接口,如:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line">__all__ = [<span class="string">"process_xxx"</span>]  <span class="comment"># 排除了 `os` 和 `sys`</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_xxx</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">pass</span>  <span class="comment"># omit</span></div></pre></td></tr></table></figure></p>
 <p>如果显式声明了 <strong>all</strong>，import * 就只会导入 <strong>all</strong> 列出的成员。如果 <strong>all</strong> 定义有误，列出的成员不存在，还会明确地抛出异常，而不是默默忽略。</p>
+<h3 id="error-invalid-command-‘bdist-wheel’"><a href="#error-invalid-command-‘bdist-wheel’" class="headerlink" title="error: invalid command ‘bdist_wheel’"></a>error: invalid command ‘bdist_wheel’</h3><p>解决: pip install wheel</p>
 ]]></content>
     
     <summary type="html">
@@ -1352,42 +1380,6 @@
   </entry>
   
   <entry>
-    <title>ELKStack搭建问题总结</title>
-    <link href="https://Caden16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
-    <id>https://Caden16.github.io/ELKStack/ELKStack搭建问题总结/</id>
-    <published>2017-01-02T00:00:00.000Z</published>
-    <updated>2017-01-02T15:58:17.559Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用Docker搭建ELKStack时,elasticsearch自动退出,使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs [dockerName]</div></pre></td></tr></table></figure></p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>查看日志, 日志输出为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR: bootstrap checks failed</div><div class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</div></pre></td></tr></table></figure></p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a href="max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]">Elasticsearch5.0 安装问题集锦</a></p>
-<p>切换到root用户修改配置sysctl.conf</p>
-<p>vi /etc/sysctl.conf</p>
-<p>添加下面配置：</p>
-<p>vm.max_map_count=655360</p>
-<p>并执行命令：</p>
-<p>sysctl -p</p>
-<p>然后，重新启动elasticsearch，即可启动成功。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用Docker搭建ELKStack时,elasticsearch自动退出,使用&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/
-    
-    </summary>
-    
-      <category term="ELKStack" scheme="https://Caden16.github.io/categories/ELKStack/"/>
-    
-    
-      <category term="ELKStack" scheme="https://Caden16.github.io/tags/ELKStack/"/>
-    
-      <category term="日志分析" scheme="https://Caden16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
-    
-      <category term="流处理" scheme="https://Caden16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
     <title>linux命令学习</title>
     <link href="https://Caden16.github.io/linux%E5%91%BD%E4%BB%A4/linux%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
     <id>https://Caden16.github.io/linux命令/linux命令学习/</id>
@@ -1421,6 +1413,42 @@
     
     
       <category term="linux" scheme="https://Caden16.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ELKStack搭建问题总结</title>
+    <link href="https://Caden16.github.io/ELKStack/ELKStack%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>https://Caden16.github.io/ELKStack/ELKStack搭建问题总结/</id>
+    <published>2017-01-02T00:00:00.000Z</published>
+    <updated>2017-01-02T15:58:17.559Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用Docker搭建ELKStack时,elasticsearch自动退出,使用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker logs [dockerName]</div></pre></td></tr></table></figure></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>查看日志, 日志输出为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ERROR: bootstrap checks failed</div><div class="line">max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</div></pre></td></tr></table></figure></p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p><a href="max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]">Elasticsearch5.0 安装问题集锦</a></p>
+<p>切换到root用户修改配置sysctl.conf</p>
+<p>vi /etc/sysctl.conf</p>
+<p>添加下面配置：</p>
+<p>vm.max_map_count=655360</p>
+<p>并执行命令：</p>
+<p>sysctl -p</p>
+<p>然后，重新启动elasticsearch，即可启动成功。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用Docker搭建ELKStack时,elasticsearch自动退出,使用&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/
+    
+    </summary>
+    
+      <category term="ELKStack" scheme="https://Caden16.github.io/categories/ELKStack/"/>
+    
+    
+      <category term="ELKStack" scheme="https://Caden16.github.io/tags/ELKStack/"/>
+    
+      <category term="日志分析" scheme="https://Caden16.github.io/tags/%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/"/>
+    
+      <category term="流处理" scheme="https://Caden16.github.io/tags/%E6%B5%81%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
@@ -1599,6 +1627,35 @@
   </entry>
   
   <entry>
+    <title>seaweedfs源码阅读5-文件PUT过程</title>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读5-文件PUT过程/</id>
+    <published>2016-12-11T00:00:00.000Z</published>
+    <updated>2016-12-11T13:30:05.384Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; curl -X POST http://localhost:9333/dir/assign</div><div class="line">&#123;<span class="string">"count"</span>:1,<span class="string">"fid"</span>:<span class="string">"3,01637037d6"</span>,<span class="string">"url"</span>:<span class="string">"127.0.0.1:8080"</span>,<span class="string">"publicUrl"</span>:<span class="string">"localhost:8080"</span>&#125;</div><div class="line">&gt; curl -X PUT -F file=@/home/chris/myphoto.jpg http://127.0.0.1:8080/3,01637037d6</div><div class="line">&#123;<span class="string">"size"</span>: 43234&#125;</div></pre></td></tr></table></figure></p>
+<p>上传文件,程序调用volume_server_handlers_write.go 中的PostHandler进行处理,根据URL,提取vid,生成新的volumeId<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vid, _, _, _, _ := parseURLPath(r.URL.Path) <span class="comment">//vid 为3</span></div><div class="line">volumeId, ve := storage.NewVolumeId(vid) <span class="comment">// volumeId : 7</span></div></pre></td></tr></table></figure></p>
+<p>根据请求参数,生成needle<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">needle, ne := storage.NewNeedle(r, vs.FixJpgOrientation)</div></pre></td></tr></table></figure></p>
+<p>使用multipartReader读取请求中的数据,有关multipart的介绍: <a href="http://wanlitian.github.io/2014/11/16/multipart_with_golang/" target="_blank" rel="external">golang的multipart包</a><br>使用needle.go 中的ParseUpload方法解析请求,得到上传的文件名和数据;<br>如果上传的数据类型是JPG或jpeg,调用 images.FixJpgOrientation(n.Data)对数据进行处理<br>生成needle过程<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewNeedle</span><span class="params">(r *http.Request, fixJpgOrientation <span class="keyword">bool</span>)</span> <span class="params">(n *Needle, e error)</span></span> &#123;</div><div class="line">truefname, mimeType, isGzipped, isChunkedFile := <span class="string">""</span>, <span class="string">""</span>, <span class="literal">false</span>, <span class="literal">false</span></div><div class="line">truen = <span class="built_in">new</span>(Needle)</div><div class="line">truefname, n.Data, mimeType, isGzipped, n.LastModified, n.Ttl, isChunkedFile, e = ParseUpload(r)</div><div class="line">true<span class="keyword">if</span> e != <span class="literal">nil</span> &#123;</div><div class="line">truetrue<span class="keyword">return</span></div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(fname) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Name = []<span class="keyword">byte</span>(fname)</div><div class="line">truetruen.SetHasName()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(mimeType) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Mime = []<span class="keyword">byte</span>(mimeType)</div><div class="line">truetruen.SetHasMime()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> isGzipped &#123;</div><div class="line">truetruen.SetGzipped()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> n.LastModified == <span class="number">0</span> &#123;</div><div class="line">truetruen.LastModified = <span class="keyword">uint64</span>(time.Now().Unix())</div><div class="line">true&#125;</div><div class="line">truen.SetHasLastModifiedDate()</div><div class="line">true<span class="keyword">if</span> n.Ttl != EMPTY_TTL &#123;</div><div class="line">truetruen.SetHasTtl()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> isChunkedFile &#123;</div><div class="line">truetruen.SetIsChunkManifest()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> fixJpgOrientation &#123;</div><div class="line">truetrueloweredName := strings.ToLower(fname)</div><div class="line">truetrue<span class="keyword">if</span> mimeType == <span class="string">"image/jpeg"</span> || strings.HasSuffix(loweredName, <span class="string">".jpg"</span>) || strings.HasSuffix(loweredName, <span class="string">".jpeg"</span>) &#123;</div><div class="line">truetruetruen.Data = images.FixJpgOrientation(n.Data)</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truen.Checksum = NewCRC(n.Data)</div><div class="line"></div><div class="line">truecommaSep := strings.LastIndex(r.URL.Path, <span class="string">","</span>)</div><div class="line">truedotSep := strings.LastIndex(r.URL.Path, <span class="string">"."</span>)</div><div class="line">truefid := r.URL.Path[commaSep+<span class="number">1</span>:]</div><div class="line">true<span class="keyword">if</span> dotSep &gt; <span class="number">0</span> &#123;</div><div class="line">truetruefid = r.URL.Path[commaSep+<span class="number">1</span> : dotSep]</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truee = n.ParsePath(fid)</div><div class="line"></div><div class="line">true<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>把数据及needle相关属性填充完成后,同步到其他volumeServer中,已needle作为传输载体<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size, errorStatus := topology.ReplicatedWrite(vs.GetMasterNode(),vs.store, volumeId, needle, r)</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用命令&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;l
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>seaweedfs源码阅读4-volume启动过程</title>
     <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB4-volume%E5%90%AF%E5%8A%A8/"/>
     <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读4-volume启动/</id>
@@ -1616,35 +1673,6 @@
     <summary type="html">
     
       &lt;p&gt;根据文章&lt;a href=&quot;http://www.cppblog.com/sunicdavy/archive/2016/09/03/214254.html?utm_source=tuicool&amp;amp;utm_medium=referral&quot; target=&quot;_blank&quot; 
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>seaweedfs源码阅读5-文件PUT过程</title>
-    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB5-%E6%96%87%E4%BB%B6PUT%E8%BF%87%E7%A8%8B/"/>
-    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读5-文件PUT过程/</id>
-    <published>2016-12-11T00:00:00.000Z</published>
-    <updated>2016-12-11T13:30:05.384Z</updated>
-    
-    <content type="html"><![CDATA[<p>使用命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; curl -X POST http://localhost:9333/dir/assign</div><div class="line">&#123;<span class="string">"count"</span>:1,<span class="string">"fid"</span>:<span class="string">"3,01637037d6"</span>,<span class="string">"url"</span>:<span class="string">"127.0.0.1:8080"</span>,<span class="string">"publicUrl"</span>:<span class="string">"localhost:8080"</span>&#125;</div><div class="line">&gt; curl -X PUT -F file=@/home/chris/myphoto.jpg http://127.0.0.1:8080/3,01637037d6</div><div class="line">&#123;<span class="string">"size"</span>: 43234&#125;</div></pre></td></tr></table></figure></p>
-<p>上传文件,程序调用volume_server_handlers_write.go 中的PostHandler进行处理,根据URL,提取vid,生成新的volumeId<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vid, _, _, _, _ := parseURLPath(r.URL.Path) <span class="comment">//vid 为3</span></div><div class="line">volumeId, ve := storage.NewVolumeId(vid) <span class="comment">// volumeId : 7</span></div></pre></td></tr></table></figure></p>
-<p>根据请求参数,生成needle<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">needle, ne := storage.NewNeedle(r, vs.FixJpgOrientation)</div></pre></td></tr></table></figure></p>
-<p>使用multipartReader读取请求中的数据,有关multipart的介绍: <a href="http://wanlitian.github.io/2014/11/16/multipart_with_golang/" target="_blank" rel="external">golang的multipart包</a><br>使用needle.go 中的ParseUpload方法解析请求,得到上传的文件名和数据;<br>如果上传的数据类型是JPG或jpeg,调用 images.FixJpgOrientation(n.Data)对数据进行处理<br>生成needle过程<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewNeedle</span><span class="params">(r *http.Request, fixJpgOrientation <span class="keyword">bool</span>)</span> <span class="params">(n *Needle, e error)</span></span> &#123;</div><div class="line">truefname, mimeType, isGzipped, isChunkedFile := <span class="string">""</span>, <span class="string">""</span>, <span class="literal">false</span>, <span class="literal">false</span></div><div class="line">truen = <span class="built_in">new</span>(Needle)</div><div class="line">truefname, n.Data, mimeType, isGzipped, n.LastModified, n.Ttl, isChunkedFile, e = ParseUpload(r)</div><div class="line">true<span class="keyword">if</span> e != <span class="literal">nil</span> &#123;</div><div class="line">truetrue<span class="keyword">return</span></div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(fname) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Name = []<span class="keyword">byte</span>(fname)</div><div class="line">truetruen.SetHasName()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> <span class="built_in">len</span>(mimeType) &lt; <span class="number">256</span> &#123;</div><div class="line">truetruen.Mime = []<span class="keyword">byte</span>(mimeType)</div><div class="line">truetruen.SetHasMime()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> isGzipped &#123;</div><div class="line">truetruen.SetGzipped()</div><div class="line">true&#125;</div><div class="line">true<span class="keyword">if</span> n.LastModified == <span class="number">0</span> &#123;</div><div class="line">truetruen.LastModified = <span class="keyword">uint64</span>(time.Now().Unix())</div><div class="line">true&#125;</div><div class="line">truen.SetHasLastModifiedDate()</div><div class="line">true<span class="keyword">if</span> n.Ttl != EMPTY_TTL &#123;</div><div class="line">truetruen.SetHasTtl()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> isChunkedFile &#123;</div><div class="line">truetruen.SetIsChunkManifest()</div><div class="line">true&#125;</div><div class="line"></div><div class="line">true<span class="keyword">if</span> fixJpgOrientation &#123;</div><div class="line">truetrueloweredName := strings.ToLower(fname)</div><div class="line">truetrue<span class="keyword">if</span> mimeType == <span class="string">"image/jpeg"</span> || strings.HasSuffix(loweredName, <span class="string">".jpg"</span>) || strings.HasSuffix(loweredName, <span class="string">".jpeg"</span>) &#123;</div><div class="line">truetruetruen.Data = images.FixJpgOrientation(n.Data)</div><div class="line">truetrue&#125;</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truen.Checksum = NewCRC(n.Data)</div><div class="line"></div><div class="line">truecommaSep := strings.LastIndex(r.URL.Path, <span class="string">","</span>)</div><div class="line">truedotSep := strings.LastIndex(r.URL.Path, <span class="string">"."</span>)</div><div class="line">truefid := r.URL.Path[commaSep+<span class="number">1</span>:]</div><div class="line">true<span class="keyword">if</span> dotSep &gt; <span class="number">0</span> &#123;</div><div class="line">truetruefid = r.URL.Path[commaSep+<span class="number">1</span> : dotSep]</div><div class="line">true&#125;</div><div class="line"></div><div class="line">truee = n.ParsePath(fid)</div><div class="line"></div><div class="line">true<span class="keyword">return</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>把数据及needle相关属性填充完成后,同步到其他volumeServer中,已needle作为传输载体<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">size, errorStatus := topology.ReplicatedWrite(vs.GetMasterNode(),vs.store, volumeId, needle, r)</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;使用命令&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;l
     
     </summary>
     
@@ -1807,6 +1835,38 @@
   </entry>
   
   <entry>
+    <title>seaweedfs源码阅读记录2</title>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
+    <published>2016-11-22T00:00:00.000Z</published>
+    <updated>2016-11-28T11:57:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="master启动过程"><a href="#master启动过程" class="headerlink" title="master启动过程"></a>master启动过程</h2><p>使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.<br>opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,<br>参考文章： <a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+<p><img src="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg" alt="master启动-20161128"><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">trueNextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">trueSetMax(<span class="keyword">uint64</span>)</div><div class="line">truePeek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>topology中包含Sequencer , sequence 负责FileID的全局有序生成</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Topology <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl   <span class="comment">//指向NodeImpl对象，即Topology和node相互指向</span></div><div class="line"></div><div class="line">truecollectionMap *util.ConcurrentReadMap</div><div class="line"></div><div class="line">truepulse <span class="keyword">int64</span></div><div class="line"></div><div class="line">truevolumeSizeLimit <span class="keyword">uint64</span></div><div class="line"></div><div class="line">trueSequence sequence.Sequencer</div><div class="line"></div><div class="line">truechanDeadDataNodes      <span class="keyword">chan</span> *DataNode</div><div class="line">truechanRecoveredDataNodes <span class="keyword">chan</span> *DataNode</div><div class="line">truechanFullVolumes        <span class="keyword">chan</span> storage.VolumeInfo</div><div class="line"></div><div class="line">trueconfiguration *Configuration</div><div class="line"></div><div class="line">trueRaftServer raft.Server</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>NodeImpl结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> NodeImpl <span class="keyword">struct</span> &#123;</div><div class="line">trueid                NodeId</div><div class="line">truevolumeCount       <span class="keyword">int</span></div><div class="line">trueactiveVolumeCount <span class="keyword">int</span></div><div class="line">truemaxVolumeCount    <span class="keyword">int</span></div><div class="line">trueparent            Node</div><div class="line">truesync.RWMutex      <span class="comment">// lock children</span></div><div class="line">truechildren          <span class="keyword">map</span>[NodeId]Node</div><div class="line">truemaxVolumeId       storage.VolumeId</div><div class="line"></div><div class="line">true<span class="comment">//for rack, data center, topology</span></div><div class="line">truenodeType <span class="keyword">string</span></div><div class="line">truevalue    <span class="keyword">interface</span>&#123;&#125;  <span class="comment">//指向Topology对象，即Topology和node相互指向</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>DataNode数据结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> DataNode <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl</div><div class="line">truevolumes   <span class="keyword">map</span>[storage.VolumeId]storage.VolumeInfo</div><div class="line">trueIp        <span class="keyword">string</span></div><div class="line">truePort      <span class="keyword">int</span></div><div class="line">truePublicUrl <span class="keyword">string</span></div><div class="line">trueLastSeen  <span class="keyword">int64</span> <span class="comment">// unix time in seconds</span></div><div class="line">trueDead      <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> VolumeInfo <span class="keyword">struct</span> &#123;</div><div class="line">trueId               VolumeId</div><div class="line">trueSize             <span class="keyword">uint64</span></div><div class="line">trueReplicaPlacement *ReplicaPlacement</div><div class="line">trueTtl              *TTL</div><div class="line">trueCollection       <span class="keyword">string</span></div><div class="line">trueVersion          Version</div><div class="line">trueFileCount        <span class="keyword">int</span></div><div class="line">trueDeleteCount      <span class="keyword">int</span></div><div class="line">trueDeletedByteCount <span class="keyword">uint64</span></div><div class="line">trueReadOnly         <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过RaftServer的raft协议，完成多个weedmaster间投票选leader的事情,<br>当启动多个ServerMaster时，它们之间会进行通信，通过raft协议选举出一个Leader，对所有的master进行管理。<br>weed-fs中，通过使用raftServer完成上述选举过程；而raftServer则是用到了第三方资源，即goRaft（参照<a href="http://ayende.com/blog/165858/reviewing-go-raft-part-i）。" target="_blank" rel="external">http://ayende.com/blog/165858/reviewing-go-raft-part-i）。</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> RaftServer <span class="keyword">struct</span> &#123;</div><div class="line">truepeers      []<span class="keyword">string</span> <span class="comment">// initial peers to join with</span></div><div class="line">trueraftServer raft.Server  <span class="comment">//使用goraft //type Server interface 包含实现raft的方法</span></div><div class="line">truedataDir    <span class="keyword">string</span></div><div class="line">truehttpAddr   <span class="keyword">string</span></div><div class="line">truerouter     *mux.Router</div><div class="line">truetopo       *topology.Topology</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>seaweedfs源码阅读记录1</title>
     <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
     <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录/</id>
@@ -1839,34 +1899,35 @@
   </entry>
   
   <entry>
-    <title>seaweedfs源码阅读记录2</title>
-    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
-    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
-    <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2016-11-28T11:57:03.000Z</updated>
+    <title>cloudstack 搭建总结</title>
+    <link href="https://Caden16.github.io/cloudsatck%E6%90%AD%E5%BB%BA/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
+    <id>https://Caden16.github.io/cloudsatck搭建/cloudstack搭建总结/</id>
+    <published>2016-11-20T00:00:00.000Z</published>
+    <updated>2017-02-14T04:09:05.448Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="master启动过程"><a href="#master启动过程" class="headerlink" title="master启动过程"></a>master启动过程</h2><p>使用pycharm , 入口为weed.go, 根据参数调用command文件夹下的文件.<br>opology 核心模块，主要包括 【DataCenter, Rack, DataNode】 三层拓扑结构,<br>参考文章： <a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-<p><img src="http://oh56h8a9l.bkt.clouddn.com/master启动-20161128.svg" alt="master启动-20161128"><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Sequencer <span class="keyword">interface</span> &#123;</div><div class="line">trueNextFileId(count <span class="keyword">uint64</span>) (<span class="keyword">uint64</span>, <span class="keyword">uint64</span>)</div><div class="line">trueSetMax(<span class="keyword">uint64</span>)</div><div class="line">truePeek() <span class="keyword">uint64</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>topology中包含Sequencer , sequence 负责FileID的全局有序生成</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> Topology <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl   <span class="comment">//指向NodeImpl对象，即Topology和node相互指向</span></div><div class="line"></div><div class="line">truecollectionMap *util.ConcurrentReadMap</div><div class="line"></div><div class="line">truepulse <span class="keyword">int64</span></div><div class="line"></div><div class="line">truevolumeSizeLimit <span class="keyword">uint64</span></div><div class="line"></div><div class="line">trueSequence sequence.Sequencer</div><div class="line"></div><div class="line">truechanDeadDataNodes      <span class="keyword">chan</span> *DataNode</div><div class="line">truechanRecoveredDataNodes <span class="keyword">chan</span> *DataNode</div><div class="line">truechanFullVolumes        <span class="keyword">chan</span> storage.VolumeInfo</div><div class="line"></div><div class="line">trueconfiguration *Configuration</div><div class="line"></div><div class="line">trueRaftServer raft.Server</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>NodeImpl结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> NodeImpl <span class="keyword">struct</span> &#123;</div><div class="line">trueid                NodeId</div><div class="line">truevolumeCount       <span class="keyword">int</span></div><div class="line">trueactiveVolumeCount <span class="keyword">int</span></div><div class="line">truemaxVolumeCount    <span class="keyword">int</span></div><div class="line">trueparent            Node</div><div class="line">truesync.RWMutex      <span class="comment">// lock children</span></div><div class="line">truechildren          <span class="keyword">map</span>[NodeId]Node</div><div class="line">truemaxVolumeId       storage.VolumeId</div><div class="line"></div><div class="line">true<span class="comment">//for rack, data center, topology</span></div><div class="line">truenodeType <span class="keyword">string</span></div><div class="line">truevalue    <span class="keyword">interface</span>&#123;&#125;  <span class="comment">//指向Topology对象，即Topology和node相互指向</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>DataNode数据结构<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> DataNode <span class="keyword">struct</span> &#123;</div><div class="line">trueNodeImpl</div><div class="line">truevolumes   <span class="keyword">map</span>[storage.VolumeId]storage.VolumeInfo</div><div class="line">trueIp        <span class="keyword">string</span></div><div class="line">truePort      <span class="keyword">int</span></div><div class="line">truePublicUrl <span class="keyword">string</span></div><div class="line">trueLastSeen  <span class="keyword">int64</span> <span class="comment">// unix time in seconds</span></div><div class="line">trueDead      <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> VolumeInfo <span class="keyword">struct</span> &#123;</div><div class="line">trueId               VolumeId</div><div class="line">trueSize             <span class="keyword">uint64</span></div><div class="line">trueReplicaPlacement *ReplicaPlacement</div><div class="line">trueTtl              *TTL</div><div class="line">trueCollection       <span class="keyword">string</span></div><div class="line">trueVersion          Version</div><div class="line">trueFileCount        <span class="keyword">int</span></div><div class="line">trueDeleteCount      <span class="keyword">int</span></div><div class="line">trueDeletedByteCount <span class="keyword">uint64</span></div><div class="line">trueReadOnly         <span class="keyword">bool</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过RaftServer的raft协议，完成多个weedmaster间投票选leader的事情,<br>当启动多个ServerMaster时，它们之间会进行通信，通过raft协议选举出一个Leader，对所有的master进行管理。<br>weed-fs中，通过使用raftServer完成上述选举过程；而raftServer则是用到了第三方资源，即goRaft（参照<a href="http://ayende.com/blog/165858/reviewing-go-raft-part-i）。" target="_blank" rel="external">http://ayende.com/blog/165858/reviewing-go-raft-part-i）。</a><br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">type</span> RaftServer <span class="keyword">struct</span> &#123;</div><div class="line">truepeers      []<span class="keyword">string</span> <span class="comment">// initial peers to join with</span></div><div class="line">trueraftServer raft.Server  <span class="comment">//使用goraft //type Server interface 包含实现raft的方法</span></div><div class="line">truedataDir    <span class="keyword">string</span></div><div class="line">truehttpAddr   <span class="keyword">string</span></div><div class="line">truerouter     *mux.Router</div><div class="line">truetopo       *topology.Topology</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
+    <content type="html"><![CDATA[<p>按照官网的教程搭建<a href="http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html" target="_blank" rel="external">cloudstack</a>,稍不注意,就出现错误.总结一下.</p>
+<h2 id="子节点状态不对"><a href="#子节点状态不对" class="headerlink" title="子节点状态不对"></a>子节点状态不对</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@node3 ~]<span class="comment"># service cloudstack-agent status</span></div><div class="line"></div><div class="line">cloudstack-agent dead but subsys locked</div></pre></td></tr></table></figure>
+<p>解决：管理节点防火墙问题，正常状态下计算节点应通过NFS挂载主存储,管理节点应开放8250端口</p>
+<p>执行完后把cloudstack-agent 重启一下，其状态应为running</p>
+<h2 id="系统VM-状态为Starting"><a href="#系统VM-状态为Starting" class="headerlink" title="系统VM 状态为Starting"></a>系统VM 状态为Starting</h2><p>解决：在数据库中将这个虚拟机的状态由“Starting”更改成“Stopped”，重新启动虚拟机即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MySQL -uroot -p -e "<span class="keyword">update</span> cloud.vm_instance <span class="keyword">set</span> state=<span class="string">'Stopped'</span> <span class="keyword">where</span> <span class="keyword">name</span>=VMNAME</div></pre></td></tr></table></figure>
+<h2 id="系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）"><a href="#系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）" class="headerlink" title="系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）"></a>系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）</h2><p>防火墙问题</p>
+<p>管理节点也用作计算节点，防火墙状态应为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [187042:40599771]</div><div class="line">:POSTROUTING ACCEPT [36644:2281945]</div><div class="line">:OUTPUT ACCEPT [36644:2281945]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [13422:54204084]</div><div class="line">:BF-cloud0 - [0:0]</div><div class="line">:BF-cloud0-IN - [0:0]</div><div class="line">:BF-cloud0-OUT - [0:0]</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5902 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 2049 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 32803 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 32769 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 662 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 662 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -o cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -i cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -o cloud0 -j DROP</div><div class="line">-A FORWARD -i cloud0 -j DROP</div><div class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A BF-cloud0 -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-in --physdev-is-bridged -j BF-cloud0-IN</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-out --physdev-is-bridged -j BF-cloud0-OUT</div><div class="line">-A BF-cloud0 -m physdev --physdev-out vnet0 --physdev-is-bridged -j ACCEPT</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div></pre></td></tr></table></figure>
+<p>计算节点防火墙状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*mangle</div><div class="line">:PREROUTING ACCEPT [654:130068]</div><div class="line">:INPUT ACCEPT [210:107800]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [143:8276]</div><div class="line">:POSTROUTING ACCEPT [143:8276]</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [0:0]</div><div class="line">:POSTROUTING ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p udp -m state --state NEW -m udp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -i virbr0 -o virbr0 -j ACCEPT</div><div class="line">-A FORWARD -o virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">-A FORWARD -i virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div></pre></td></tr></table></figure>
+<h2 id="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"><a href="#二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件" class="headerlink" title="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"></a>二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件</h2><h2 id="注意看日志文件，里面有详细的输出说明"><a href="#注意看日志文件，里面有详细的输出说明" class="headerlink" title="注意看日志文件，里面有详细的输出说明"></a>注意看日志文件，里面有详细的输出说明</h2>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
+      &lt;p&gt;按照官网的教程搭建&lt;a href=&quot;http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html&quot; target=&quot;_blank&quot; rel=&quot;ext
     
     </summary>
     
-      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+      <category term="cloudsatck搭建" scheme="https://Caden16.github.io/categories/cloudsatck%E6%90%AD%E5%BB%BA/"/>
     
     
-      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
+      <category term="cloudsatck" scheme="https://Caden16.github.io/tags/cloudsatck/"/>
     
   </entry>
   
@@ -1910,39 +1971,6 @@
       <category term="Express" scheme="https://Caden16.github.io/tags/Express/"/>
     
       <category term="mongoose" scheme="https://Caden16.github.io/tags/mongoose/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cloudstack 搭建总结</title>
-    <link href="https://Caden16.github.io/cloudsatck%E6%90%AD%E5%BB%BA/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
-    <id>https://Caden16.github.io/cloudsatck搭建/cloudstack搭建总结/</id>
-    <published>2016-11-20T00:00:00.000Z</published>
-    <updated>2017-02-14T04:09:05.448Z</updated>
-    
-    <content type="html"><![CDATA[<p>按照官网的教程搭建<a href="http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html" target="_blank" rel="external">cloudstack</a>,稍不注意,就出现错误.总结一下.</p>
-<h2 id="子节点状态不对"><a href="#子节点状态不对" class="headerlink" title="子节点状态不对"></a>子节点状态不对</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@node3 ~]<span class="comment"># service cloudstack-agent status</span></div><div class="line"></div><div class="line">cloudstack-agent dead but subsys locked</div></pre></td></tr></table></figure>
-<p>解决：管理节点防火墙问题，正常状态下计算节点应通过NFS挂载主存储,管理节点应开放8250端口</p>
-<p>执行完后把cloudstack-agent 重启一下，其状态应为running</p>
-<h2 id="系统VM-状态为Starting"><a href="#系统VM-状态为Starting" class="headerlink" title="系统VM 状态为Starting"></a>系统VM 状态为Starting</h2><p>解决：在数据库中将这个虚拟机的状态由“Starting”更改成“Stopped”，重新启动虚拟机即可。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MySQL -uroot -p -e "<span class="keyword">update</span> cloud.vm_instance <span class="keyword">set</span> state=<span class="string">'Stopped'</span> <span class="keyword">where</span> <span class="keyword">name</span>=VMNAME</div></pre></td></tr></table></figure>
-<h2 id="系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）"><a href="#系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）" class="headerlink" title="系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）"></a>系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）</h2><p>防火墙问题</p>
-<p>管理节点也用作计算节点，防火墙状态应为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [187042:40599771]</div><div class="line">:POSTROUTING ACCEPT [36644:2281945]</div><div class="line">:OUTPUT ACCEPT [36644:2281945]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [13422:54204084]</div><div class="line">:BF-cloud0 - [0:0]</div><div class="line">:BF-cloud0-IN - [0:0]</div><div class="line">:BF-cloud0-OUT - [0:0]</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5902 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 2049 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 32803 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 32769 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 662 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 662 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -o cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -i cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -o cloud0 -j DROP</div><div class="line">-A FORWARD -i cloud0 -j DROP</div><div class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A BF-cloud0 -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-in --physdev-is-bridged -j BF-cloud0-IN</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-out --physdev-is-bridged -j BF-cloud0-OUT</div><div class="line">-A BF-cloud0 -m physdev --physdev-out vnet0 --physdev-is-bridged -j ACCEPT</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div></pre></td></tr></table></figure>
-<p>计算节点防火墙状态</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*mangle</div><div class="line">:PREROUTING ACCEPT [654:130068]</div><div class="line">:INPUT ACCEPT [210:107800]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [143:8276]</div><div class="line">:POSTROUTING ACCEPT [143:8276]</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [0:0]</div><div class="line">:POSTROUTING ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p udp -m state --state NEW -m udp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -i virbr0 -o virbr0 -j ACCEPT</div><div class="line">-A FORWARD -o virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">-A FORWARD -i virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div></pre></td></tr></table></figure>
-<h2 id="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"><a href="#二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件" class="headerlink" title="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"></a>二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件</h2><h2 id="注意看日志文件，里面有详细的输出说明"><a href="#注意看日志文件，里面有详细的输出说明" class="headerlink" title="注意看日志文件，里面有详细的输出说明"></a>注意看日志文件，里面有详细的输出说明</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;按照官网的教程搭建&lt;a href=&quot;http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html&quot; target=&quot;_blank&quot; rel=&quot;ext
-    
-    </summary>
-    
-      <category term="cloudsatck搭建" scheme="https://Caden16.github.io/categories/cloudsatck%E6%90%AD%E5%BB%BA/"/>
-    
-    
-      <category term="cloudsatck" scheme="https://Caden16.github.io/tags/cloudsatck/"/>
     
   </entry>
   
