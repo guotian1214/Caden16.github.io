@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Caden16.github.io/"/>
-  <updated>2017-05-09T14:37:06.037Z</updated>
+  <updated>2017-05-10T13:40:45.798Z</updated>
   <id>https://Caden16.github.io/</id>
   
   <author>
@@ -20,12 +20,12 @@
     <link href="https://Caden16.github.io/python/python%E5%A4%9A%E8%BF%9B%E7%A8%8B,%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     <id>https://Caden16.github.io/python/python多进程,多线程/</id>
     <published>2017-05-05T00:00:00.000Z</published>
-    <updated>2017-05-09T14:37:06.037Z</updated>
+    <updated>2017-05-10T13:40:45.798Z</updated>
     
     <content type="html"><![CDATA[<h3 id="python-Can’t-pickle-type-‘instancemethod’-问题"><a href="#python-Can’t-pickle-type-‘instancemethod’-问题" class="headerlink" title="python Can’t pickle type ‘instancemethod’ 问题"></a>python Can’t pickle type ‘instancemethod’ 问题</h3><p>在类中使用多进程时,错误提示:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cPickle.PicklingError: Can\&apos;t pickle &lt;type \&apos;instancemethod\&apos;&gt;: attribute lookup __builtin__.instancemethod failed</div></pre></td></tr></table></figure></p>
 <p>参考<a href="https://blog.tankywoo.com/2015/09/06/cant-pickle-instancemethod.html" target="_blank" rel="external">Python Can\’t pickle type \’instancemethod\’ 问题</a><br><a href="http://bbs.chinaunix.net/thread-4111379-1-1.html" target="_blank" rel="external">python multiprocessing关于PicklingError的问题</a></p>
 <h3 id="Multiprocessing基础"><a href="#Multiprocessing基础" class="headerlink" title="Multiprocessing基础"></a>Multiprocessing基础</h3><p>参考<a href="http://thief.one/2016/11/23/Python-multiprocessing/" target="_blank" rel="external">Multiprocessing基础</a><br><a href="http://blog.csdn.net/seetheworld518/article/details/49639651" target="_blank" rel="external">Python 多进程 multiprocessing.Pool类详解</a><br><a href="http://crazy123.blog.51cto.com/1029610/1691367" target="_blank" rel="external">SFTP基于Key多进程批量并发上传文件实现案例</a></p>
-<h3 id="多进程显示tqdm"><a href="#多进程显示tqdm" class="headerlink" title="多进程显示tqdm"></a>多进程显示tqdm</h3><p><a href="http://lorexxar.cn/2016/07/21/python-tqdm/" target="_blank" rel="external">python tqdm模块分析</a></p>
+<h3 id="多进程显示tqdm"><a href="#多进程显示tqdm" class="headerlink" title="多进程显示tqdm"></a>多进程显示tqdm</h3><p><a href="http://lorexxar.cn/2016/07/21/python-tqdm/" target="_blank" rel="external">python tqdm模块分析</a><br><a href="http://stackoverflow.com/questions/36986929/redirect-print-command-in-python-script-through-tqdm-write" target="_blank" rel="external">Redirect print command in python script through tqdm.write()</a></p>
 ]]></content>
     
     <summary type="html">
@@ -1159,7 +1159,7 @@
     <link href="https://Caden16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://Caden16.github.io/python语法/python语法记录/</id>
     <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-05-07T13:09:46.121Z</updated>
+    <updated>2017-05-10T03:44:52.864Z</updated>
     
     <content type="html"><![CDATA[<p>记录一下忘记的Python语法</p>
 <h3 id="StringIO"><a href="#StringIO" class="headerlink" title="StringIO"></a>StringIO</h3><p>负责在内存中读写string,其中在openstack-swift的mem_diskfile.py中提到::param fp: <code>StringIO</code> in-memory representation object<br><a href="StringIO和BytesIO">StringIO和BytesIO</a></p>
@@ -1188,6 +1188,7 @@
 <h3 id="all"><a href="#all" class="headerlink" title="all"></a><strong>all</strong></h3><p>参考<a href="http://python-china.org/t/725" target="_blank" rel="external">用 <strong>all</strong> 暴露接口</a><br>用 <strong>all</strong> 暴露接口,如:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line">__all__ = [<span class="string">"process_xxx"</span>]  <span class="comment"># 排除了 `os` 和 `sys`</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_xxx</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">pass</span>  <span class="comment"># omit</span></div></pre></td></tr></table></figure></p>
 <p>如果显式声明了 <strong>all</strong>，import * 就只会导入 <strong>all</strong> 列出的成员。如果 <strong>all</strong> 定义有误，列出的成员不存在，还会明确地抛出异常，而不是默默忽略。</p>
 <h3 id="error-invalid-command-‘bdist-wheel’"><a href="#error-invalid-command-‘bdist-wheel’" class="headerlink" title="error: invalid command ‘bdist_wheel’"></a>error: invalid command ‘bdist_wheel’</h3><p>解决: pip install wheel</p>
+<h3 id="Python-中的-classmethod-和-staticmethod-有什么具体用途？"><a href="#Python-中的-classmethod-和-staticmethod-有什么具体用途？" class="headerlink" title="Python 中的 classmethod 和 staticmethod 有什么具体用途？"></a>Python 中的 classmethod 和 staticmethod 有什么具体用途？</h3><p>参考<a href="https://www.zhihu.com/question/20021164" target="_blank" rel="external">Python 中的 classmethod 和 staticmethod 有什么具体用途？</a></p>
 ]]></content>
     
     <summary type="html">
