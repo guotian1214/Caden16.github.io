@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Caden16.github.io/"/>
-  <updated>2017-05-24T14:13:14.938Z</updated>
+  <updated>2017-05-25T03:55:32.812Z</updated>
   <id>https://Caden16.github.io/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rsync文件增量同步</title>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/rsync%E6%96%87%E4%BB%B6%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5/"/>
+    <id>https://Caden16.github.io/文件存储/rsync文件增量同步/</id>
+    <published>2017-05-25T00:00:00.000Z</published>
+    <updated>2017-05-25T03:55:32.812Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考<a href="http://tech.meituan.com/incre-sync-use-rsync.html" target="_blank" rel="external">基于rsync的文件增量同步方案</a><br><a href="https://github.com/ncw/rclone" target="_blank" rel="external">rclone</a></p>
+<p>rsync增量传输算法实现增量传输的主要过程，就是差异检测和差异数据组织及传输，前者是rsync增量传输算法的核心。<br>rsync增量传输算法是一种滑动块差异检测算法。以检测文件A和B的差异为例，首先对A按固定长度L划分为若干块，并对每一块生成弱摘要（Adler-32：速度快）和强摘要（MD5：鉴别度高），然后对B从第一个字节开始，以长度为L的滑动窗口，遍历整个文件，计算每个窗口块的弱、强摘要，并与A中的摘要值进行比较，弱、强摘要都相同者，即视为相同数据块，否即为差异块。如下图所示：<br><img src="/uploads/rsync-base.png" alt=""></p>
+<h3 id="rsync工具的工作机制"><a href="#rsync工具的工作机制" class="headerlink" title="rsync工具的工作机制"></a>rsync工具的工作机制</h3><p>rsync工具的工作机制，如下阐述。</p>
+<p>目标：主机A、B，A要同步文件F-new给B，B上已有文件F-old，跟F-new相似度高。</p>
+<p>步骤：</p>
+<p>B对文件F-old分块计算强弱摘要，链接起来生成sign文件，此过程简称sign，把sign文件发送给A；<br>A根据sign文件和本地文件F-new比较，滑动块进行差异检测，把相同块的序号和不同块的内容拼装为delta文件，此过程也简称delta，发送给B；<br>B拿到delta文件，并与本地源文件F-old结合，生成F-new文件，此过程简称patch。<br>如果目标是B要同步文件给A，那就是步骤中把A、B换一下位置。</p>
+<p>小结：同步的双方A、B基本是对等的，一方计算sign和合并文件，一方计算delta。 双方都有较大计算量，这在一个服务器多客户端场景下，服务端压力会过大。</p>
+<h3 id="zsync工具的工作机制"><a href="#zsync工具的工作机制" class="headerlink" title="zsync工具的工作机制"></a>zsync工具的工作机制</h3><p>服务器提供最新文件和sign文件, 客户端下载sign文件，自己计算delta文件，同时自己合并出新版本镜像。合并过程是，发现相同块就从本地旧版本读取，不同的块，则使用HTTP Range的方式从服务端下载。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考&lt;a href=&quot;http://tech.meituan.com/incre-sync-use-rsync.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;基于rsync的文件增量同步方案&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://git
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="文件存储" scheme="https://Caden16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+      <category term="linux" scheme="https://Caden16.github.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>yum卸载、安装、调试</title>
@@ -66,31 +98,6 @@
     
     
       <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>rsync文件增量同步</title>
-    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/rsync%E6%96%87%E4%BB%B6%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5/"/>
-    <id>https://Caden16.github.io/文件存储/rsync文件增量同步/</id>
-    <published>2017-05-04T00:00:00.000Z</published>
-    <updated>2017-05-04T09:36:09.962Z</updated>
-    
-    <content type="html"><![CDATA[<p>参考<a href="http://tech.meituan.com/incre-sync-use-rsync.html" target="_blank" rel="external">基于rsync的文件增量同步方案</a><br><a href="https://github.com/ncw/rclone" target="_blank" rel="external">rclone</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;参考&lt;a href=&quot;http://tech.meituan.com/incre-sync-use-rsync.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;基于rsync的文件增量同步方案&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https://git
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="文件存储" scheme="https://Caden16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-      <category term="linux" scheme="https://Caden16.github.io/tags/linux/"/>
     
   </entry>
   

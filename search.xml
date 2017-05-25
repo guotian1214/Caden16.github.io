@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[rsync文件增量同步]]></title>
+      <url>%2F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%2Frsync%E6%96%87%E4%BB%B6%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5%2F</url>
+      <content type="text"><![CDATA[参考基于rsync的文件增量同步方案rclone rsync增量传输算法实现增量传输的主要过程，就是差异检测和差异数据组织及传输，前者是rsync增量传输算法的核心。rsync增量传输算法是一种滑动块差异检测算法。以检测文件A和B的差异为例，首先对A按固定长度L划分为若干块，并对每一块生成弱摘要（Adler-32：速度快）和强摘要（MD5：鉴别度高），然后对B从第一个字节开始，以长度为L的滑动窗口，遍历整个文件，计算每个窗口块的弱、强摘要，并与A中的摘要值进行比较，弱、强摘要都相同者，即视为相同数据块，否即为差异块。如下图所示： rsync工具的工作机制rsync工具的工作机制，如下阐述。 目标：主机A、B，A要同步文件F-new给B，B上已有文件F-old，跟F-new相似度高。 步骤： B对文件F-old分块计算强弱摘要，链接起来生成sign文件，此过程简称sign，把sign文件发送给A；A根据sign文件和本地文件F-new比较，滑动块进行差异检测，把相同块的序号和不同块的内容拼装为delta文件，此过程也简称delta，发送给B；B拿到delta文件，并与本地源文件F-old结合，生成F-new文件，此过程简称patch。如果目标是B要同步文件给A，那就是步骤中把A、B换一下位置。 小结：同步的双方A、B基本是对等的，一方计算sign和合并文件，一方计算delta。 双方都有较大计算量，这在一个服务器多客户端场景下，服务端压力会过大。 zsync工具的工作机制服务器提供最新文件和sign文件, 客户端下载sign文件，自己计算delta文件，同时自己合并出新版本镜像。合并过程是，发现相同块就从本地旧版本读取，不同的块，则使用HTTP Range的方式从服务端下载。]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[yum卸载、安装、调试]]></title>
       <url>%2Fpython%2Fyum%E5%8D%B8%E8%BD%BD%E3%80%81%E5%AE%89%E8%A3%85%E3%80%81%E8%B0%83%E8%AF%95%2F</url>
       <content type="text"><![CDATA[卸载rpm -qa|grep yum然后用下面的命令删除出现的xxx包：rpm -e –nodeps xxx 安装wget http://yum.baseurl.org/download/3.4/yum-3.4.3.tar.gztar zxf yum-3.4.3.tar.gzcd yum-3.4.3yummain.py install yum 调试进入yum所在目录(/usr/bin):python -m pdb yum]]></content>
@@ -13,13 +20,6 @@
       <title><![CDATA[python多进程,多线程]]></title>
       <url>%2Fpython%2Fpython%E5%A4%9A%E8%BF%9B%E7%A8%8B%2C%E5%A4%9A%E7%BA%BF%E7%A8%8B%2F</url>
       <content type="text"><![CDATA[python Can’t pickle type ‘instancemethod’ 问题在类中使用多进程时,错误提示:1cPickle.PicklingError: Can\&apos;t pickle &lt;type \&apos;instancemethod\&apos;&gt;: attribute lookup __builtin__.instancemethod failed 参考Python Can\’t pickle type \’instancemethod\’ 问题python multiprocessing关于PicklingError的问题 Multiprocessing基础参考Multiprocessing基础Python 多进程 multiprocessing.Pool类详解SFTP基于Key多进程批量并发上传文件实现案例 多进程显示tqdmpython tqdm模块分析Redirect print command in python script through tqdm.write()]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[rsync文件增量同步]]></title>
-      <url>%2F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%2Frsync%E6%96%87%E4%BB%B6%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5%2F</url>
-      <content type="text"><![CDATA[参考基于rsync的文件增量同步方案rclone]]></content>
     </entry>
 
     
