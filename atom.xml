@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Caden16.github.io/"/>
-  <updated>2017-05-25T03:55:32.812Z</updated>
+  <updated>2017-06-01T12:57:57.331Z</updated>
   <id>https://Caden16.github.io/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>(转)阿里中间件性能挑战赛内部赛全记录</title>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/%E9%98%BF%E9%87%8C%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%80%A7%E8%83%BD%E6%8C%91%E6%88%98%E8%B5%9B%E5%86%85%E9%83%A8%E8%B5%9B%E5%85%A8%E8%AE%B0%E5%BD%95/"/>
+    <id>https://Caden16.github.io/文件存储/阿里中间件性能挑战赛内部赛全记录/</id>
+    <published>2017-05-31T00:00:00.000Z</published>
+    <updated>2017-06-01T12:57:57.331Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文转自<a href="http://jm.taobao.org/2017/05/11/20170511/" target="_blank" rel="external">阿里中间件性能挑战赛内部赛全记录</a></p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>主要的技术挑战为”分布式”的策略，赛题中使用多个文件模拟多个数据分片。简单来说，就是通过10个文件模拟了数据的分片，每个分片1GB的数据大小，给定的机器配置是24核，JVM堆内存限制2.5G，磁盘读写为490-500MB/s左右。在这样给定资源限制的情况下，如何快速建索引支持分页查询top(k,n)场景。</p>
+<h3 id="算法设计"><a href="#算法设计" class="headerlink" title="算法设计"></a>算法设计</h3><p>借鉴Lucene的方法，skip list + sequence file。<br>具体算法是这样：原始文件切割成小分片，喂给24个worker；每个worker读数据，处理数据，定期批量写索引出去；最后查询会去读每个worker生成的所有索引文件，通过跳表快速seek。<br><img src="/uploads/aliware-1.png" alt=""><br>本地索引的格式如下：每个分片的随机数通过Array.sort排序成一个有序数组，直接写入一个顺序文件里，采用delta encoding和变长整数方法压缩，long型随机数可以从8字节压到6字节。为了提高查询效率，还加了一个skip list支持索引文件里随机seek。<br><img src="/uploads/aliware-index.png" alt=""></p>
+<h3 id="IO上的优化："><a href="#IO上的优化：" class="headerlink" title="IO上的优化："></a>IO上的优化：</h3><p>这套算法实现完后，第一次跑花了30s时间，主要原因是一旦开始写盘时，SSD的读能力就下降的很厉害，我就开始想方法去压制写盘。首先是要搞清楚为什么会写盘，这台机器的内存应该是蛮大的，我们阿里的内核一般配置的脏页回写超时时间是30s，理论上page cache能buffer住所有的脏页，那为什么程序运行过程中还会写盘呢？</p>
+<p>最后找到原因了，和ext4文件系统的挂载参数有关，从ext3开始起，文件系统开始支持日志（journal），文件的inode被修改后，需要刷到journal里，这样系统crash了文件系统能恢复过来，阿里内核配置默认5s刷一次journal，ext4还有一个配置项叫挂载方式，有ordered和writeback两个选项，区别是ordered在把inode刷到journal里之前，会把inode的所有脏页先回写到磁盘里。不错，我们的评测机器就是配的ordered，这样脏页写入page cache，5s后就被回写到SSD里，从而影响了SSD读性能。</p>
+<p>在搞清楚IO机制后，问题就简化为如何利用这个机制规避写盘。一个简单的方法就是控制程序流程，倒数5s才开始写文件。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>用page cache来做IO还是蛮不靠谱的，所以在开发重IO的服务器，比如数据库时，我们一般都不依赖于page cache，更多使用DIO来写文件，自己管理buffer，java里可以多看看堆外内存。IO发起也建议用AIO来代替堵塞IO模型，甚至我们现在在操作NVMe盘时都旁路掉Linux kernel，直接使用用户态驱动和用户态文件系统。</p>
+<p>应用服务器的文件系统挂载选项可以考虑换成writeback，小文件读访问比较多的话，加上noatime，对提升IO性能是有好处的。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文转自&lt;a href=&quot;http://jm.taobao.org/2017/05/11/20170511/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;阿里中间件性能挑战赛内部赛全记录&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot;
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="文件存储" scheme="https://Caden16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+      <category term="分布式" scheme="https://Caden16.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>rsync文件增量同步</title>
@@ -106,7 +139,7 @@
     <link href="https://Caden16.github.io/git/git%E4%BD%BF%E7%94%A8/"/>
     <id>https://Caden16.github.io/git/git使用/</id>
     <published>2017-04-28T00:00:00.000Z</published>
-    <updated>2017-05-24T14:05:44.235Z</updated>
+    <updated>2017-05-30T07:16:49.773Z</updated>
     
     <content type="html"><![CDATA[<h3 id="修改已提交commit"><a href="#修改已提交commit" class="headerlink" title="修改已提交commit"></a>修改已提交commit</h3><p>参考<a href="http://stackoverflow.com/questions/179123/how-to-modify-existing-unpushed-commits" target="_blank" rel="external">How to modify existing, unpushed commits?</a><br>修改最近一次commit<br>git commit –amend<br>修改多次commit</p>
 <ol>
@@ -120,9 +153,9 @@
 </li>
 </ol>
 <h3 id="修改远程仓库地址"><a href="#修改远程仓库地址" class="headerlink" title="修改远程仓库地址"></a>修改远程仓库地址</h3><p>查看已连接远程仓库<br>git remote -v<br>修改:<br>git remote set-url origin [url]<br>或:<br>git remote rm origin<br>git remote add origin [url]   </p>
-<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000" target="_blank" rel="external">创建与合并分支</a></p>
+<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><p><a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000" target="_blank" rel="external">创建与合并分支</a><br>git checkout -b <new_branch_name><br>git checkout命令加上-b参数表示创建并切换，相当于以下两条命令：<br>$ git branch <new_branch_name><br>$ git checkout <new_branch_name><br>Switched to branch <new_branch_name></new_branch_name></new_branch_name></new_branch_name></new_branch_name></p>
 <h3 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h3><p>参考<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013744142037508cf42e51debf49668810645e02887691000" target="_blank" rel="external">版本回退</a><br>git reset <commit id=""><br>查看commit ID:<br>git log   查看提交历史，以便确定要回退到哪个版本<br>git reflog   查看命令历史，以便确定要回到未来的哪个版本</commit></p>
-<h3 id="使用远程版本覆盖本地版本"><a href="#使用远程版本覆盖本地版本" class="headerlink" title="使用远程版本覆盖本地版本"></a>使用远程版本覆盖本地版本</h3><p>git remote update <remote_repository_name><br>git checkout <need_to_update_branch><br>git rebase <remote_repository_name>/<branch_name></branch_name></remote_repository_name></need_to_update_branch></remote_repository_name></p>
+<h3 id="使用远程版本覆盖本地版本"><a href="#使用远程版本覆盖本地版本" class="headerlink" title="使用远程版本覆盖本地版本"></a>使用远程版本覆盖本地版本</h3><p>git remote update <remote_repository_name><br>git checkout <need_to_update_branch>   # 切换到需要覆盖分支<br>git rebase <remote_repository_name>/<branch_name></branch_name></remote_repository_name></need_to_update_branch></remote_repository_name></p>
 ]]></content>
     
     <summary type="html">
@@ -824,33 +857,6 @@
   
   <entry>
     <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
-    <link href="https://Caden16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
-    <id>https://Caden16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
-    <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-02-27T12:41:08.472Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h2><p>给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">全排列:</div><div class="line">123</div><div class="line">132</div><div class="line">213</div><div class="line">231</div><div class="line">312</div><div class="line">321</div></pre></td></tr></table></figure></p>
-<p>结果为:213</p>
-<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>使用逆康托编码展开,参考<a href="http://www.cnblogs.com/zhanjxcom/p/5596208.html" target="_blank" rel="external">全排列的编码与解码——康托展开</a></p>
-<h3 id="康托编码"><a href="#康托编码" class="headerlink" title="康托编码:"></a>康托编码:</h3><p>{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？<br>如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。<br>小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有2<em>2！=4种。<br>小于2的数只有一个1，所以有1</em>1！=1种情况，最后一位是1，没有比一小的数，所以是0<em>0！=0<br>综上：小于321的数有4+1=5个，所以321是第六小的数。<br>例如:排列3 5 7 4 1 2 9 6 8展开为98884<br>X=2</em>8!+3<em>7!+4</em>6!+2<em>5!+0</em>4!+0<em>3!+2</em>2!+0<em>1!+0</em>0!=98884.</p>
-<h3 id="逆康托展开"><a href="#逆康托展开" class="headerlink" title="逆康托展开:"></a>逆康托展开:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？</div><div class="line"></div><div class="line">1. 首先用16-1得到15</div><div class="line"></div><div class="line">2. 用15去除4! 得到0余15</div><div class="line"></div><div class="line">3. 用15去除3! 得到2余3</div><div class="line"></div><div class="line">4. 用3去除2! 得到1余1</div><div class="line"></div><div class="line">5. 用1去除1! 得到1余0</div><div class="line"></div><div class="line">有0个数比它小的数是1，所以第一位是1</div><div class="line"></div><div class="line">有2个数比它小的数是3，但1已经在之前出现过了所以是4</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1已经在之前出现过了所以是3</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1,3,4都出现过了所以是5</div><div class="line"></div><div class="line">最后一个数只能是2</div><div class="line"></div><div class="line">所以排列为1 4 3 5 2</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目:&quot;&gt;&lt;/a&gt;题目:&lt;/h2&gt;&lt;p&gt;给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3&lt;br&gt;&lt;figure class=&quot;highlight pla
-    
-    </summary>
-    
-      <category term="算法" scheme="https://Caden16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="LeetCode" scheme="https://Caden16.github.io/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
     <link href="https://Caden16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Next%20Permutation(%E5%85%A8%E6%8E%92%E5%88%97%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95)/"/>
     <id>https://Caden16.github.io/算法/LeetCode解题-Next Permutation(全排列生成算法)/</id>
     <published>2017-02-26T00:00:00.000Z</published>
@@ -898,6 +904,33 @@
       <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
       <category term="swift-weedfs-backend" scheme="https://Caden16.github.io/tags/swift-weedfs-backend/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
+    <link href="https://Caden16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
+    <id>https://Caden16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
+    <published>2017-02-26T00:00:00.000Z</published>
+    <updated>2017-02-27T12:41:08.472Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目:"></a>题目:</h2><p>给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">全排列:</div><div class="line">123</div><div class="line">132</div><div class="line">213</div><div class="line">231</div><div class="line">312</div><div class="line">321</div></pre></td></tr></table></figure></p>
+<p>结果为:213</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>使用逆康托编码展开,参考<a href="http://www.cnblogs.com/zhanjxcom/p/5596208.html" target="_blank" rel="external">全排列的编码与解码——康托展开</a></p>
+<h3 id="康托编码"><a href="#康托编码" class="headerlink" title="康托编码:"></a>康托编码:</h3><p>{1,2,3,4,…,n}的排列总共有n!种，将它们从小到大排序，怎样知道其中一种排列是有序序列中的第几个？<br>如 {1,2,3} 按从小到大排列一共6个：123 132 213 231 312 321。想知道321是{1,2,3}中第几个大的数。<br>小于3的数有1和2 两个，首位确定之后后面两位有2！中情况，所以共有2<em>2！=4种。<br>小于2的数只有一个1，所以有1</em>1！=1种情况，最后一位是1，没有比一小的数，所以是0<em>0！=0<br>综上：小于321的数有4+1=5个，所以321是第六小的数。<br>例如:排列3 5 7 4 1 2 9 6 8展开为98884<br>X=2</em>8!+3<em>7!+4</em>6!+2<em>5!+0</em>4!+0<em>3!+2</em>2!+0<em>1!+0</em>0!=98884.</p>
+<h3 id="逆康托展开"><a href="#逆康托展开" class="headerlink" title="逆康托展开:"></a>逆康托展开:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">如何找出第16个（按字典序的）&#123;1,2,3,4,5&#125;的全排列？</div><div class="line"></div><div class="line">1. 首先用16-1得到15</div><div class="line"></div><div class="line">2. 用15去除4! 得到0余15</div><div class="line"></div><div class="line">3. 用15去除3! 得到2余3</div><div class="line"></div><div class="line">4. 用3去除2! 得到1余1</div><div class="line"></div><div class="line">5. 用1去除1! 得到1余0</div><div class="line"></div><div class="line">有0个数比它小的数是1，所以第一位是1</div><div class="line"></div><div class="line">有2个数比它小的数是3，但1已经在之前出现过了所以是4</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1已经在之前出现过了所以是3</div><div class="line"></div><div class="line">有1个数比它小的数是2，但1,3,4都出现过了所以是5</div><div class="line"></div><div class="line">最后一个数只能是2</div><div class="line"></div><div class="line">所以排列为1 4 3 5 2</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目:&quot;&gt;&lt;/a&gt;题目:&lt;/h2&gt;&lt;p&gt;给出数字n,在1…n的全排列组合中找到第k个,如: n = 3, k=3&lt;br&gt;&lt;figure class=&quot;highlight pla
+    
+    </summary>
+    
+      <category term="算法" scheme="https://Caden16.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="LeetCode" scheme="https://Caden16.github.io/tags/LeetCode/"/>
     
   </entry>
   
@@ -1192,31 +1225,6 @@
   </entry>
   
   <entry>
-    <title>数据结构</title>
-    <link href="https://Caden16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://Caden16.github.io/数据结构/数据结构/</id>
-    <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-03-19T09:45:44.501Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
-<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
-<h2 id="跳表-SkipList"><a href="#跳表-SkipList" class="headerlink" title="跳表 SkipList"></a>跳表 SkipList</h2><p>在leveldb、redis中, 为了提高数据的查找效率,使用了SkipList,参考<a href="http://blog.sina.com.cn/s/blog_72995dcc01017w1t.html" target="_blank" rel="external">SkipList跳表基本原理</a>, <a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html" target="_blank" rel="external">跳表SkipList</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fansongy/article/details/679
-    
-    </summary>
-    
-      <category term="数据结构" scheme="https://Caden16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="https://Caden16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>python语法记录</title>
     <link href="https://Caden16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://Caden16.github.io/python语法/python语法记录/</id>
@@ -1264,6 +1272,31 @@
     
     
       <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构</title>
+    <link href="https://Caden16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://Caden16.github.io/数据结构/数据结构/</id>
+    <published>2017-02-07T00:00:00.000Z</published>
+    <updated>2017-03-19T09:45:44.501Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
+<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
+<h2 id="跳表-SkipList"><a href="#跳表-SkipList" class="headerlink" title="跳表 SkipList"></a>跳表 SkipList</h2><p>在leveldb、redis中, 为了提高数据的查找效率,使用了SkipList,参考<a href="http://blog.sina.com.cn/s/blog_72995dcc01017w1t.html" target="_blank" rel="external">SkipList跳表基本原理</a>, <a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html" target="_blank" rel="external">跳表SkipList</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fansongy/article/details/679
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://Caden16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://Caden16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -1937,6 +1970,39 @@
   </entry>
   
   <entry>
+    <title>cloudstack 搭建总结</title>
+    <link href="https://Caden16.github.io/cloudsatck%E6%90%AD%E5%BB%BA/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
+    <id>https://Caden16.github.io/cloudsatck搭建/cloudstack搭建总结/</id>
+    <published>2016-11-20T00:00:00.000Z</published>
+    <updated>2017-02-14T04:09:05.448Z</updated>
+    
+    <content type="html"><![CDATA[<p>按照官网的教程搭建<a href="http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html" target="_blank" rel="external">cloudstack</a>,稍不注意,就出现错误.总结一下.</p>
+<h2 id="子节点状态不对"><a href="#子节点状态不对" class="headerlink" title="子节点状态不对"></a>子节点状态不对</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@node3 ~]<span class="comment"># service cloudstack-agent status</span></div><div class="line"></div><div class="line">cloudstack-agent dead but subsys locked</div></pre></td></tr></table></figure>
+<p>解决：管理节点防火墙问题，正常状态下计算节点应通过NFS挂载主存储,管理节点应开放8250端口</p>
+<p>执行完后把cloudstack-agent 重启一下，其状态应为running</p>
+<h2 id="系统VM-状态为Starting"><a href="#系统VM-状态为Starting" class="headerlink" title="系统VM 状态为Starting"></a>系统VM 状态为Starting</h2><p>解决：在数据库中将这个虚拟机的状态由“Starting”更改成“Stopped”，重新启动虚拟机即可。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MySQL -uroot -p -e "<span class="keyword">update</span> cloud.vm_instance <span class="keyword">set</span> state=<span class="string">'Stopped'</span> <span class="keyword">where</span> <span class="keyword">name</span>=VMNAME</div></pre></td></tr></table></figure>
+<h2 id="系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）"><a href="#系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）" class="headerlink" title="系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）"></a>系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）</h2><p>防火墙问题</p>
+<p>管理节点也用作计算节点，防火墙状态应为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [187042:40599771]</div><div class="line">:POSTROUTING ACCEPT [36644:2281945]</div><div class="line">:OUTPUT ACCEPT [36644:2281945]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [13422:54204084]</div><div class="line">:BF-cloud0 - [0:0]</div><div class="line">:BF-cloud0-IN - [0:0]</div><div class="line">:BF-cloud0-OUT - [0:0]</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5902 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 2049 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 32803 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 32769 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 662 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 662 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -o cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -i cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -o cloud0 -j DROP</div><div class="line">-A FORWARD -i cloud0 -j DROP</div><div class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A BF-cloud0 -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-in --physdev-is-bridged -j BF-cloud0-IN</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-out --physdev-is-bridged -j BF-cloud0-OUT</div><div class="line">-A BF-cloud0 -m physdev --physdev-out vnet0 --physdev-is-bridged -j ACCEPT</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div></pre></td></tr></table></figure>
+<p>计算节点防火墙状态</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*mangle</div><div class="line">:PREROUTING ACCEPT [654:130068]</div><div class="line">:INPUT ACCEPT [210:107800]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [143:8276]</div><div class="line">:POSTROUTING ACCEPT [143:8276]</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [0:0]</div><div class="line">:POSTROUTING ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p udp -m state --state NEW -m udp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -i virbr0 -o virbr0 -j ACCEPT</div><div class="line">-A FORWARD -o virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">-A FORWARD -i virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div></pre></td></tr></table></figure>
+<h2 id="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"><a href="#二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件" class="headerlink" title="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"></a>二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件</h2><h2 id="注意看日志文件，里面有详细的输出说明"><a href="#注意看日志文件，里面有详细的输出说明" class="headerlink" title="注意看日志文件，里面有详细的输出说明"></a>注意看日志文件，里面有详细的输出说明</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;按照官网的教程搭建&lt;a href=&quot;http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html&quot; target=&quot;_blank&quot; rel=&quot;ext
+    
+    </summary>
+    
+      <category term="cloudsatck搭建" scheme="https://Caden16.github.io/categories/cloudsatck%E6%90%AD%E5%BB%BA/"/>
+    
+    
+      <category term="cloudsatck" scheme="https://Caden16.github.io/tags/cloudsatck/"/>
+    
+  </entry>
+  
+  <entry>
     <title>nodeJS入门总结</title>
     <link href="https://Caden16.github.io/%E7%BD%91%E7%AB%99%E7%9B%B8%E5%85%B3/nodeJS%E5%85%A5%E9%97%A8%E6%80%BB%E7%BB%93/"/>
     <id>https://Caden16.github.io/网站相关/nodeJS入门总结/</id>
@@ -1976,39 +2042,6 @@
       <category term="Express" scheme="https://Caden16.github.io/tags/Express/"/>
     
       <category term="mongoose" scheme="https://Caden16.github.io/tags/mongoose/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>cloudstack 搭建总结</title>
-    <link href="https://Caden16.github.io/cloudsatck%E6%90%AD%E5%BB%BA/cloudstack%E6%90%AD%E5%BB%BA%E6%80%BB%E7%BB%93/"/>
-    <id>https://Caden16.github.io/cloudsatck搭建/cloudstack搭建总结/</id>
-    <published>2016-11-20T00:00:00.000Z</published>
-    <updated>2017-02-14T04:09:05.448Z</updated>
-    
-    <content type="html"><![CDATA[<p>按照官网的教程搭建<a href="http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html" target="_blank" rel="external">cloudstack</a>,稍不注意,就出现错误.总结一下.</p>
-<h2 id="子节点状态不对"><a href="#子节点状态不对" class="headerlink" title="子节点状态不对"></a>子节点状态不对</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@node3 ~]<span class="comment"># service cloudstack-agent status</span></div><div class="line"></div><div class="line">cloudstack-agent dead but subsys locked</div></pre></td></tr></table></figure>
-<p>解决：管理节点防火墙问题，正常状态下计算节点应通过NFS挂载主存储,管理节点应开放8250端口</p>
-<p>执行完后把cloudstack-agent 重启一下，其状态应为running</p>
-<h2 id="系统VM-状态为Starting"><a href="#系统VM-状态为Starting" class="headerlink" title="系统VM 状态为Starting"></a>系统VM 状态为Starting</h2><p>解决：在数据库中将这个虚拟机的状态由“Starting”更改成“Stopped”，重新启动虚拟机即可。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MySQL -uroot -p -e "<span class="keyword">update</span> cloud.vm_instance <span class="keyword">set</span> state=<span class="string">'Stopped'</span> <span class="keyword">where</span> <span class="keyword">name</span>=VMNAME</div></pre></td></tr></table></figure>
-<h2 id="系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）"><a href="#系统VM-状态为Running-代理状态为空（centos6-5-图形化界面下的防火墙重启会清空iptables-文件下的规则）" class="headerlink" title="系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）"></a>系统VM 状态为Running , 代理状态为空（centos6.5 图形化界面下的防火墙重启会清空iptables 文件下的规则）</h2><p>防火墙问题</p>
-<p>管理节点也用作计算节点，防火墙状态应为</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [187042:40599771]</div><div class="line">:POSTROUTING ACCEPT [36644:2281945]</div><div class="line">:OUTPUT ACCEPT [36644:2281945]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Thu Jun  2 13:23:26 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [13422:54204084]</div><div class="line">:BF-cloud0 - [0:0]</div><div class="line">:BF-cloud0-IN - [0:0]</div><div class="line">:BF-cloud0-OUT - [0:0]</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5902 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 111 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 2049 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 32803 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 32769 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 892 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 875 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p tcp -m state --state NEW -m tcp --dport 662 -j ACCEPT</div><div class="line">-A INPUT <span class="_">-s</span> 172.31.156.0/24 -p udp -m state --state NEW -m udp --dport 662 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -o cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -i cloud0 -m physdev --physdev-is-bridged -j BF-cloud0</div><div class="line">-A FORWARD -o cloud0 -j DROP</div><div class="line">-A FORWARD -i cloud0 -j DROP</div><div class="line">-A FORWARD -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A BF-cloud0 -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-in --physdev-is-bridged -j BF-cloud0-IN</div><div class="line">-A BF-cloud0 -m physdev --physdev-is-out --physdev-is-bridged -j BF-cloud0-OUT</div><div class="line">-A BF-cloud0 -m physdev --physdev-out vnet0 --physdev-is-bridged -j ACCEPT</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Thu Jun  2 13:23:26 2016</span></div></pre></td></tr></table></figure>
-<p>计算节点防火墙状态</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*mangle</div><div class="line">:PREROUTING ACCEPT [654:130068]</div><div class="line">:INPUT ACCEPT [210:107800]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [143:8276]</div><div class="line">:POSTROUTING ACCEPT [143:8276]</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">-A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*nat</div><div class="line">:PREROUTING ACCEPT [0:0]</div><div class="line">:POSTROUTING ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div><div class="line"><span class="comment"># Generated by iptables-save v1.4.7 on Wed Jun  1 19:37:24 2016</span></div><div class="line">*filter</div><div class="line">:INPUT ACCEPT [0:0]</div><div class="line">:FORWARD ACCEPT [0:0]</div><div class="line">:OUTPUT ACCEPT [0:0]</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 49152:49216 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 5900:6100 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 16509 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 1798 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT</div><div class="line">-A INPUT -p icmp -j ACCEPT</div><div class="line">-A INPUT -i lo -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT</div><div class="line">-A INPUT -p udp -m state --state NEW -m udp --dport 5900 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 5901 -j ACCEPT</div><div class="line">-A INPUT -p tcp -m state --state NEW -m tcp --dport 8250 -j ACCEPT</div><div class="line">-A INPUT -j REJECT --reject-with icmp-host-prohibited</div><div class="line">-A FORWARD -i virbr0 -o virbr0 -j ACCEPT</div><div class="line">-A FORWARD -o virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">-A FORWARD -i virbr0 -j REJECT --reject-with icmp-port-unreachable</div><div class="line">COMMIT</div><div class="line"><span class="comment"># Completed on Wed Jun  1 19:37:24 2016</span></div></pre></td></tr></table></figure>
-<h2 id="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"><a href="#二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件" class="headerlink" title="二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件"></a>二级存储及主存储路径需要设置权限，否则二级存储虽能挂载，但无法写入文件</h2><h2 id="注意看日志文件，里面有详细的输出说明"><a href="#注意看日志文件，里面有详细的输出说明" class="headerlink" title="注意看日志文件，里面有详细的输出说明"></a>注意看日志文件，里面有详细的输出说明</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;按照官网的教程搭建&lt;a href=&quot;http://docs.cloudstack.apache.org/projects/cloudstack-installation/en/4.8/overview/index.html&quot; target=&quot;_blank&quot; rel=&quot;ext
-    
-    </summary>
-    
-      <category term="cloudsatck搭建" scheme="https://Caden16.github.io/categories/cloudsatck%E6%90%AD%E5%BB%BA/"/>
-    
-    
-      <category term="cloudsatck" scheme="https://Caden16.github.io/tags/cloudsatck/"/>
     
   </entry>
   
