@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Caden16.github.io/"/>
-  <updated>2017-06-01T12:57:57.331Z</updated>
+  <updated>2017-06-08T13:37:20.343Z</updated>
   <id>https://Caden16.github.io/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IntelliJ IDEA+Maven+SpringMVC+Hibernate基本开发环境搭建</title>
+    <link href="https://Caden16.github.io/Web/IntelliJ%20IDEA+Maven+SpringMVC+Hibernate%E5%9F%BA%E6%9C%AC%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>https://Caden16.github.io/Web/IntelliJ IDEA+Maven+SpringMVC+Hibernate基本开发环境搭建/</id>
+    <published>2017-06-08T00:00:00.000Z</published>
+    <updated>2017-06-08T13:37:20.343Z</updated>
+    
+    <content type="html"><![CDATA[<p>参考<a href="https://my.oschina.net/gaussik/blog/385697" target="_blank" rel="external">使用IntelliJ IDEA开发SpringMVC网站（一）开发环境</a><br>返回Json数据配置<br>参考<a href="http://www.cnblogs.com/ssslinppp/p/4675495.html" target="_blank" rel="external">【Spring学习笔记-MVC-3.1】SpringMVC返回Json数据-方式1-扩展</a><br>遇到问题:<br>No converter found for return value of type: class java.util.HashMap<br>解决方案: <a href="http://www.itnose.net/detail/6403852.html" target="_blank" rel="external">java的json问题遇到以下问题怎么解决？</a></p>
+<blockquote>
+<blockquote>
+<p>-servlet.xml 文件中加上这个配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- rest json related... start --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"mappingJacksonHttpMessageConverter"</span></span></div><div class="line">        <span class="attr">class</span>=<span class="string">"org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"</span>&gt;</div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"supportedMediaTypes"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">list</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">value</span>&gt;</span>application/json;charset=UTF-8<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">list</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"messageConverters"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">list</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"mappingJacksonHttpMessageConverter"</span>/&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">list</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">  <span class="comment">&lt;!-- rest json related... end --&gt;</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+<p>导入相关依赖包:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.jackson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-mapper-asl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-annotations<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.6.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.json<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>json<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">true<span class="tag">&lt;<span class="name">version</span>&gt;</span>20140107<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>返回Json示例代码:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/testJson"</span>, method = RequestMethod.GET)</div><div class="line"><span class="meta">@ResponseBody</span></div><div class="line"><span class="function"><span class="keyword">public</span> List&lt;UserEntity&gt; <span class="title">getUsersInJson</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="comment">// 查询user表中所有记录</span></div><div class="line">    List&lt;UserEntity&gt; userList = userRepository.findAll();</div><div class="line">    <span class="keyword">return</span> userList;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;参考&lt;a href=&quot;https://my.oschina.net/gaussik/blog/385697&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;使用IntelliJ IDEA开发SpringMVC网站（一）开发环境&lt;/a&gt;&lt;br&gt;返回Json数据
+    
+    </summary>
+    
+      <category term="Web" scheme="https://Caden16.github.io/categories/Web/"/>
+    
+    
+      <category term="Web" scheme="https://Caden16.github.io/tags/Web/"/>
+    
+  </entry>
   
   <entry>
     <title>(转)阿里中间件性能挑战赛内部赛全记录</title>
@@ -664,29 +694,6 @@
   </entry>
   
   <entry>
-    <title>自旋锁spinlock剖析与改进</title>
-    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81spinlock%E5%89%96%E6%9E%90%E4%B8%8E%E6%94%B9%E8%BF%9B/"/>
-    <id>https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/</id>
-    <published>2017-03-16T00:00:00.000Z</published>
-    <updated>2017-05-04T08:44:35.260Z</updated>
-    
-    <content type="html"><![CDATA[<p>遇到题目：<br>运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock<br>SpinLock<br>Mutex<br>Semaphore<br>Condition variable<br>对SpinLock 以及Mutex不太了解，参考<a href="http://kb.cnblogs.com/page/105657/" target="_blank" rel="external">自旋锁spinlock剖析与改进</a>,得到比较全面的认识。<br>spinlock又称自旋锁，线程通过busy-wait-loop的方式来获取锁，任时刻只有一个线程能够获得锁，其他线程忙等待直到获得锁。spinlock在多处理器多线程环境的场景中有很广泛的使用，一般要求使用spinlock的临界区尽量简短，这样获取的锁可以尽快释放，以满足其他忙等的线程。Spinlock和mutex不同，spinlock不会导致线程的状态切换(用户态-&gt;内核态)，但是spinlock使用不当(如临界区执行时间过长)会导致cpu busy飙高。<br>spinlock不会使线程状态发生切换，mutex在获取不到锁的时候会选择sleep。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;遇到题目：&lt;br&gt;运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock&lt;br&gt;SpinLock&lt;br&gt;Mutex&lt;br&gt;Semaphore&lt;br&gt;Condition variabl
-    
-    </summary>
-    
-      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>用户态到内核态切换</title>
     <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%94%A8%E6%88%B7%E6%80%81%E5%88%B0%E5%86%85%E6%A0%B8%E6%80%81%E5%88%87%E6%8D%A2/"/>
     <id>https://Caden16.github.io/操作系统/用户态到内核态切换/</id>
@@ -707,6 +714,29 @@
     <summary type="html">
     
       &lt;h2 id=&quot;用户态-内核态概念&quot;&gt;&lt;a href=&quot;#用户态-内核态概念&quot; class=&quot;headerlink&quot; title=&quot;用户态 内核态概念&quot;&gt;&lt;/a&gt;用户态 内核态概念&lt;/h2&gt;&lt;p&gt;引用《深入理解LINUX内核》的一段话:&lt;br&gt;类UNIX操作系统把与计算机物理组织
+    
+    </summary>
+    
+      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>自旋锁spinlock剖析与改进</title>
+    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81spinlock%E5%89%96%E6%9E%90%E4%B8%8E%E6%94%B9%E8%BF%9B/"/>
+    <id>https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/</id>
+    <published>2017-03-16T00:00:00.000Z</published>
+    <updated>2017-05-04T08:44:35.260Z</updated>
+    
+    <content type="html"><![CDATA[<p>遇到题目：<br>运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock<br>SpinLock<br>Mutex<br>Semaphore<br>Condition variable<br>对SpinLock 以及Mutex不太了解，参考<a href="http://kb.cnblogs.com/page/105657/" target="_blank" rel="external">自旋锁spinlock剖析与改进</a>,得到比较全面的认识。<br>spinlock又称自旋锁，线程通过busy-wait-loop的方式来获取锁，任时刻只有一个线程能够获得锁，其他线程忙等待直到获得锁。spinlock在多处理器多线程环境的场景中有很广泛的使用，一般要求使用spinlock的临界区尽量简短，这样获取的锁可以尽快释放，以满足其他忙等的线程。Spinlock和mutex不同，spinlock不会导致线程的状态切换(用户态-&gt;内核态)，但是spinlock使用不当(如临界区执行时间过长)会导致cpu busy飙高。<br>spinlock不会使线程状态发生切换，mutex在获取不到锁的时候会选择sleep。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;遇到题目：&lt;br&gt;运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock&lt;br&gt;SpinLock&lt;br&gt;Mutex&lt;br&gt;Semaphore&lt;br&gt;Condition variabl
     
     </summary>
     
@@ -1225,6 +1255,31 @@
   </entry>
   
   <entry>
+    <title>数据结构</title>
+    <link href="https://Caden16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://Caden16.github.io/数据结构/数据结构/</id>
+    <published>2017-02-07T00:00:00.000Z</published>
+    <updated>2017-03-19T09:45:44.501Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
+<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
+<h2 id="跳表-SkipList"><a href="#跳表-SkipList" class="headerlink" title="跳表 SkipList"></a>跳表 SkipList</h2><p>在leveldb、redis中, 为了提高数据的查找效率,使用了SkipList,参考<a href="http://blog.sina.com.cn/s/blog_72995dcc01017w1t.html" target="_blank" rel="external">SkipList跳表基本原理</a>, <a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html" target="_blank" rel="external">跳表SkipList</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fansongy/article/details/679
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://Caden16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://Caden16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>python语法记录</title>
     <link href="https://Caden16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://Caden16.github.io/python语法/python语法记录/</id>
@@ -1276,31 +1331,6 @@
   </entry>
   
   <entry>
-    <title>数据结构</title>
-    <link href="https://Caden16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://Caden16.github.io/数据结构/数据结构/</id>
-    <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-03-19T09:45:44.501Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
-<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
-<h2 id="跳表-SkipList"><a href="#跳表-SkipList" class="headerlink" title="跳表 SkipList"></a>跳表 SkipList</h2><p>在leveldb、redis中, 为了提高数据的查找效率,使用了SkipList,参考<a href="http://blog.sina.com.cn/s/blog_72995dcc01017w1t.html" target="_blank" rel="external">SkipList跳表基本原理</a>, <a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html" target="_blank" rel="external">跳表SkipList</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fansongy/article/details/679
-    
-    </summary>
-    
-      <category term="数据结构" scheme="https://Caden16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="https://Caden16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ubuntu16.04搭建openstack-swift单机开发环境</title>
     <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/ubuntu16.04%E6%90%AD%E5%BB%BAopenstack-swift%E5%8D%95%E6%9C%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
     <id>https://Caden16.github.io/对象存储/ubuntu16.04搭建openstack-swift单机开发环境/</id>
@@ -1322,37 +1352,6 @@
     <summary type="html">
     
       &lt;p&gt;使用虚拟机进行远程调试电脑太卡，用着不爽，所以搭建单机板环境，按照&lt;a href=&quot;http://docs.openstack.org/developer/swift/development_saio.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;
-    
-    </summary>
-    
-      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>openstack-swift调试</title>
-    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E8%B0%83%E8%AF%95/"/>
-    <id>https://Caden16.github.io/对象存储/openstack-swift调试/</id>
-    <published>2017-01-21T00:00:00.000Z</published>
-    <updated>2017-01-29T14:29:46.391Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。</p>
-<h2 id="启用调试"><a href="#启用调试" class="headerlink" title="启用调试"></a>启用调试</h2><p>按照swift all in one的方式搭建，没遇到啥问题。<br>调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。<br>禁用多线程：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eventlet.patcher.monkey_patch(all=<span class="keyword">False</span>, socket=<span class="keyword">True</span>, time=<span class="keyword">True</span>, thread=<span class="keyword">False</span>)</div></pre></td></tr></table></figure></p>
-<h3 id="使用pydevd调试"><a href="#使用pydevd调试" class="headerlink" title="使用pydevd调试"></a>使用pydevd调试</h3><p> 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参照这两篇文章：<a href="http://yikun.github.io/2016/02/23/%E4%BC%98%E9%9B%85%E5%9C%B0%E8%B0%83%E8%AF%95OpenStack/#4-_启动调试服务器" target="_blank" rel="external">openstack调试</a><br><a href="http://debugopenstack.blogspot.com.tr/" target="_blank" rel="external">远程调试</a><br>其实只要使用NFS把代码挂载到本地，在pycharm中设置远程调试，代码中加入断点即可。加入断点代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import pydevd</div><div class="line">pydevd.settrace(&lt;pycharm所在机子IP&gt;, 设置端口, stdoutToServer=True, stderrToServer=True)</div></pre></td></tr></table></figure>
-<h3 id="使用winpdb调试"><a href="#使用winpdb调试" class="headerlink" title="使用winpdb调试"></a>使用winpdb调试</h3><p>在代码中加入断点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import rpdb2</div><div class="line">rpdb2.start_embedded_debugger(&apos;12345&apos;,fAllowRemote=True)</div></pre></td></tr></table></figure>
-<p>start_embedded_debugger第一个参数为密码，在winpdb中attach时输入，第二个参数启用远程调试，启用远程调试时，在远程调试的机子上启动winpdb，attach时输入密码，并输入swift部署机子IP即可。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我喜欢用方式一，可以把调试的信息直接标注在代码旁。方式二支持分布式调试，但太轻量化，只能看，不能添加，各有优缺点，按需选择。<br>修改代码后需要重启swift才能生效。<br>调试记录信息会放到github上，<a href="https://github.com/MakeItPossible16/openstack-swift" target="_blank" rel="external">github地址</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。&lt;/p&gt;
-&lt;h2 id=&quot;启用调试&quot;&gt;&lt;a href=&quot;#启用调试&quot; class=&quot;headerlink&quot; title=&quot;启用调试&quot;&gt;&lt;/a&gt;启用调试&lt;/h2&gt;&lt;p&gt;
     
     </summary>
     
@@ -1388,6 +1387,37 @@
       <category term="文件存储" scheme="https://Caden16.github.io/tags/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
     
       <category term="linux" scheme="https://Caden16.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openstack-swift调试</title>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/openstack-swift%E8%B0%83%E8%AF%95/"/>
+    <id>https://Caden16.github.io/对象存储/openstack-swift调试/</id>
+    <published>2017-01-21T00:00:00.000Z</published>
+    <updated>2017-01-29T14:29:46.391Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。</p>
+<h2 id="启用调试"><a href="#启用调试" class="headerlink" title="启用调试"></a>启用调试</h2><p>按照swift all in one的方式搭建，没遇到啥问题。<br>调试的方案有两种（都支持远程调试），一种是采用pydev,这种方式需要禁用swift的多线程；另一种采用winpdb，这种方式支持多线程。<br>禁用多线程：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eventlet.patcher.monkey_patch(all=<span class="keyword">False</span>, socket=<span class="keyword">True</span>, time=<span class="keyword">True</span>, thread=<span class="keyword">False</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="使用pydevd调试"><a href="#使用pydevd调试" class="headerlink" title="使用pydevd调试"></a>使用pydevd调试</h3><p> 我主要采用pycharm + pydevd + NFS的方式远程调试，具体操作参照这两篇文章：<a href="http://yikun.github.io/2016/02/23/%E4%BC%98%E9%9B%85%E5%9C%B0%E8%B0%83%E8%AF%95OpenStack/#4-_启动调试服务器" target="_blank" rel="external">openstack调试</a><br><a href="http://debugopenstack.blogspot.com.tr/" target="_blank" rel="external">远程调试</a><br>其实只要使用NFS把代码挂载到本地，在pycharm中设置远程调试，代码中加入断点即可。加入断点代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import pydevd</div><div class="line">pydevd.settrace(&lt;pycharm所在机子IP&gt;, 设置端口, stdoutToServer=True, stderrToServer=True)</div></pre></td></tr></table></figure>
+<h3 id="使用winpdb调试"><a href="#使用winpdb调试" class="headerlink" title="使用winpdb调试"></a>使用winpdb调试</h3><p>在代码中加入断点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import rpdb2</div><div class="line">rpdb2.start_embedded_debugger(&apos;12345&apos;,fAllowRemote=True)</div></pre></td></tr></table></figure>
+<p>start_embedded_debugger第一个参数为密码，在winpdb中attach时输入，第二个参数启用远程调试，启用远程调试时，在远程调试的机子上启动winpdb，attach时输入密码，并输入swift部署机子IP即可。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我喜欢用方式一，可以把调试的信息直接标注在代码旁。方式二支持分布式调试，但太轻量化，只能看，不能添加，各有优缺点，按需选择。<br>修改代码后需要重启swift才能生效。<br>调试记录信息会放到github上，<a href="https://github.com/MakeItPossible16/openstack-swift" target="_blank" rel="external">github地址</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在学习openstack-swift的源码，想通过调试的方式弄清楚它的运行方式，记录一下，提高一下效率。&lt;/p&gt;
+&lt;h2 id=&quot;启用调试&quot;&gt;&lt;a href=&quot;#启用调试&quot; class=&quot;headerlink&quot; title=&quot;启用调试&quot;&gt;&lt;/a&gt;启用调试&lt;/h2&gt;&lt;p&gt;
+    
+    </summary>
+    
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
     
   </entry>
   
