@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Caden16.github.io/"/>
-  <updated>2017-06-08T14:25:57.718Z</updated>
+  <updated>2017-06-19T16:31:58.513Z</updated>
   <id>https://Caden16.github.io/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android/Java/SpringMVC记录</title>
+    <link href="https://Caden16.github.io/Android/Java%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
+    <id>https://Caden16.github.io/Android/Java语法记录/</id>
+    <published>2017-06-08T00:00:00.000Z</published>
+    <updated>2017-06-19T16:31:58.513Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Bundle"><a href="#Bundle" class="headerlink" title="Bundle"></a>Bundle</h2><p>参考<a href="http://blog.csdn.net/randyjiawenjie/article/details/6651437" target="_blank" rel="external">Android Bundle类</a><br>Bundle类是一个key-value对,两个activity之间的通讯可以通过bundle类来实现<br>使用方法:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 新建一个bundle类</span></div><div class="line">Bundle mBundle = <span class="keyword">new</span> Bundle();</div><div class="line"><span class="comment">// bundle类中加入数据（key -value的形式，另一个activity里面取数据的时候，就要用到key，找出对应的value）</span></div><div class="line">mBundle.putString(<span class="string">"Data"</span>, <span class="string">"data from TestBundle"</span>);</div></pre></td></tr></table></figure></p>
+<p>在另一个activity中:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Activity activity, Class&lt;?&gt; cls, Bundle bundle)</span> </span>&#123;</div><div class="line">        Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">        intent.putExtras(bundle);</div><div class="line">        intent.setClass(activity, cls);</div><div class="line">        activity.startActivity(intent);</div><div class="line">        ActivityTransitionUtil.startActivityTransition(activity);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h2 id="AndroidManifest作用"><a href="#AndroidManifest作用" class="headerlink" title="AndroidManifest作用"></a>AndroidManifest作用</h2><p>参考<a href="http://blog.csdn.net/weiguang_123/article/details/8374187" target="_blank" rel="external">AndroidManifest.xml文件的作用和简单使用</a><br>参考<a href="http://blog.csdn.net/ccpat/article/details/54706753" target="_blank" rel="external">Android应用的默认Activity配置</a><br>当Android启动一个应用程序组件之前，它必须知道哪些个组件是存在的，所以开发人员在开发过程中，必须将应用程序中出现的组件一一在 AndroidManifest.xml文件中申明，最终这个AndroidManifest.xml文件也会被一起打包到.apk文件中去。<br>Android的四大组件分别是：Activity、BroadCast receiver、service、Content Provider，所以我们如果在程序中用到了这些组件，我们一定要在AndroidManifest.xml文件中申明，否则Android应用程序在运行时，在需要跳转到、或者需要用到组件找不到时报错。<br>可通过AndroidManifest.xml文件配置默认启动Activity,方式是在AndroidManifest.xml中为Activity添加intent-filter，并将action设置为android.intent.action.MAIN，category设置为android.intent.category.LAUNCHE。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".MainActivity"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.MAIN"</span>/&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">"android.intent.category.LAUNCHER"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="could-not-autowired"><a href="#could-not-autowired" class="headerlink" title="could not autowired"></a>could not autowired</h2><p>Error: could not autowired.No Bean of … find.<br>解决:</p>
+<p>添加注解扫描:</p>
+<p><context:component-scan base-package="com.mobile.controller"></context:component-scan></p>
+<p><context:component-scan base-package="com.mobile.Service"><br>在Service类中使用@Service注解</context:component-scan></p>
+<h2 id="springMVC对静态资源访问的处理"><a href="#springMVC对静态资源访问的处理" class="headerlink" title="springMVC对静态资源访问的处理"></a>springMVC对静态资源访问的处理</h2><p>参考<a href="https://my.oschina.net/hnqingping1255/blog/415575" target="_blank" rel="external">springMVC对静态资源访问的处理</a><br>使用mvc:resources , 把图片存放在/webapp/images/下<br> <mvc:resources mapping="/images/\*\*" location="/images/"></mvc:resources></p>
+<h2 id="springmvc-jpa-data"><a href="#springmvc-jpa-data" class="headerlink" title="springmvc jpa data"></a>springmvc jpa data</h2><p>Modifying queries can only use void or int/Integer as return type!<br>返回值不能为boolean<br>javax.persistence.TransactionRequiredException: Executing an update/delete query<br>需要添加Transactional<br>在JpaRepository接口类前加入@Transactional注解<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Transactional</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserInforRepository</span> <span class="keyword">extends</span> <span class="title">JpaRepository</span>&lt;<span class="title">UserInforEntity</span>, <span class="title">Integer</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Query</span>(<span class="string">"select u from UserInforEntity u where u.userEmail=:pEmail"</span>)</div><div class="line">    <span class="function">UserInforEntity <span class="title">getByUserEmail</span><span class="params">(@Param(<span class="string">"pEmail"</span>)</span> String email)</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Modifying</span>()</div><div class="line">    <span class="meta">@Query</span>(<span class="string">"update UserInforEntity u set u.userAddress=:pAddress, "</span> +</div><div class="line">            <span class="string">"u.userName=:pUserName, u.userPhone=:pPhone where u.userEmail=:pEmail"</span>)</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateUserInfor</span><span class="params">(@Param(<span class="string">"pEmail"</span>)</span> String email, @<span class="title">Param</span><span class="params">(<span class="string">"pUserName"</span>)</span> String userName,</span></div><div class="line">                            @<span class="title">Param</span><span class="params">(<span class="string">"pPhone"</span>)</span> String phone, @<span class="title">Param</span><span class="params">(<span class="string">"pAddress"</span>)</span> String address);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Bundle&quot;&gt;&lt;a href=&quot;#Bundle&quot; class=&quot;headerlink&quot; title=&quot;Bundle&quot;&gt;&lt;/a&gt;Bundle&lt;/h2&gt;&lt;p&gt;参考&lt;a href=&quot;http://blog.csdn.net/randyjiawenjie/article
+    
+    </summary>
+    
+      <category term="Android" scheme="https://Caden16.github.io/categories/Android/"/>
+    
+    
+      <category term="Android" scheme="https://Caden16.github.io/tags/Android/"/>
+    
+      <category term="Java" scheme="https://Caden16.github.io/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>delta encoding和变长整数压缩</title>
@@ -717,6 +750,29 @@
   </entry>
   
   <entry>
+    <title>自旋锁spinlock剖析与改进</title>
+    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81spinlock%E5%89%96%E6%9E%90%E4%B8%8E%E6%94%B9%E8%BF%9B/"/>
+    <id>https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/</id>
+    <published>2017-03-16T00:00:00.000Z</published>
+    <updated>2017-05-04T08:44:35.260Z</updated>
+    
+    <content type="html"><![CDATA[<p>遇到题目：<br>运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock<br>SpinLock<br>Mutex<br>Semaphore<br>Condition variable<br>对SpinLock 以及Mutex不太了解，参考<a href="http://kb.cnblogs.com/page/105657/" target="_blank" rel="external">自旋锁spinlock剖析与改进</a>,得到比较全面的认识。<br>spinlock又称自旋锁，线程通过busy-wait-loop的方式来获取锁，任时刻只有一个线程能够获得锁，其他线程忙等待直到获得锁。spinlock在多处理器多线程环境的场景中有很广泛的使用，一般要求使用spinlock的临界区尽量简短，这样获取的锁可以尽快释放，以满足其他忙等的线程。Spinlock和mutex不同，spinlock不会导致线程的状态切换(用户态-&gt;内核态)，但是spinlock使用不当(如临界区执行时间过长)会导致cpu busy飙高。<br>spinlock不会使线程状态发生切换，mutex在获取不到锁的时候会选择sleep。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;遇到题目：&lt;br&gt;运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock&lt;br&gt;SpinLock&lt;br&gt;Mutex&lt;br&gt;Semaphore&lt;br&gt;Condition variabl
+    
+    </summary>
+    
+      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>用户态到内核态切换</title>
     <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%94%A8%E6%88%B7%E6%80%81%E5%88%B0%E5%86%85%E6%A0%B8%E6%80%81%E5%88%87%E6%8D%A2/"/>
     <id>https://Caden16.github.io/操作系统/用户态到内核态切换/</id>
@@ -737,29 +793,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;用户态-内核态概念&quot;&gt;&lt;a href=&quot;#用户态-内核态概念&quot; class=&quot;headerlink&quot; title=&quot;用户态 内核态概念&quot;&gt;&lt;/a&gt;用户态 内核态概念&lt;/h2&gt;&lt;p&gt;引用《深入理解LINUX内核》的一段话:&lt;br&gt;类UNIX操作系统把与计算机物理组织
-    
-    </summary>
-    
-      <category term="操作系统" scheme="https://Caden16.github.io/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-      <category term="操作系统" scheme="https://Caden16.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>自旋锁spinlock剖析与改进</title>
-    <link href="https://Caden16.github.io/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81spinlock%E5%89%96%E6%9E%90%E4%B8%8E%E6%94%B9%E8%BF%9B/"/>
-    <id>https://Caden16.github.io/操作系统/自旋锁spinlock剖析与改进/</id>
-    <published>2017-03-16T00:00:00.000Z</published>
-    <updated>2017-05-04T08:44:35.260Z</updated>
-    
-    <content type="html"><![CDATA[<p>遇到题目：<br>运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock<br>SpinLock<br>Mutex<br>Semaphore<br>Condition variable<br>对SpinLock 以及Mutex不太了解，参考<a href="http://kb.cnblogs.com/page/105657/" target="_blank" rel="external">自旋锁spinlock剖析与改进</a>,得到比较全面的认识。<br>spinlock又称自旋锁，线程通过busy-wait-loop的方式来获取锁，任时刻只有一个线程能够获得锁，其他线程忙等待直到获得锁。spinlock在多处理器多线程环境的场景中有很广泛的使用，一般要求使用spinlock的临界区尽量简短，这样获取的锁可以尽快释放，以满足其他忙等的线程。Spinlock和mutex不同，spinlock不会导致线程的状态切换(用户态-&gt;内核态)，但是spinlock使用不当(如临界区执行时间过长)会导致cpu busy飙高。<br>spinlock不会使线程状态发生切换，mutex在获取不到锁的时候会选择sleep。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;遇到题目：&lt;br&gt;运行在多核处理器上的Linux环境中,若临界区非常短,且不允许线程上下文切换的情况下,使用下列哪种机制满足上述需求并且性能最好? SpinLock&lt;br&gt;SpinLock&lt;br&gt;Mutex&lt;br&gt;Semaphore&lt;br&gt;Condition variabl
     
     </summary>
     
@@ -909,33 +942,6 @@
   </entry>
   
   <entry>
-    <title>swift-weedfs-backend diskfile代码实现</title>
-    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
-    <id>https://Caden16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
-    <published>2017-02-26T00:00:00.000Z</published>
-    <updated>2017-03-02T02:46:55.297Z</updated>
-    
-    <content type="html"><![CDATA[<p>主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现<a href="https://github.com/MakeItPossible16/swift-weedfs-backend" target="_blank" rel="external">swift-weedfs-backend</a><br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryFileSystem</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    A very simplistic in-memory file system scheme.</div><div class="line"></div><div class="line">    There is one dictionary mapping a given object name to a tuple. The first</div><div class="line">    entry in the tuple is the cStringIO buffer representing the file contents,</div><div class="line">    the second entry is the metadata dictionary.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._filesystem = &#123;&#125;</div><div class="line">        self.seaweedfs = Seaweedfs_operation()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return back an file-like object and its metadata</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :return (fp, metadata): fp is `StringIO` in-memory representation</div><div class="line">                                object (or None). metadata is a dictionary</div><div class="line">                                of metadata (or None)</div><div class="line">        """</div><div class="line">        <span class="comment"># val = self._filesystem.get(name)</span></div><div class="line">        val = self.seaweedfs.GET(name)</div><div class="line">        <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            fp, metadata = <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            fp, metadata = self.parse_seaweedfs_file(val)</div><div class="line">        <span class="comment"># else:</span></div><div class="line">        <span class="comment">#     fp, metadata = val</span></div><div class="line">        <span class="keyword">return</span> fp, metadata</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_seaweedfs_file</span><span class="params">(self,val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        parse file download from seaweedfs</div><div class="line">        :param val: seaweedfs file,fomat: str(metadata) + '\n' + obj_content</div><div class="line">        :return: StringIO obj_content, python dict metadata</div><div class="line">        """</div><div class="line">        metadata_index = val.find(<span class="string">'\n'</span>)</div><div class="line">        val = val.split(<span class="string">'\n'</span>,<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span>  StringIO.StringIO(val[<span class="number">1</span>]),eval(val[<span class="number">0</span>])</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put_object</span><span class="params">(self, name, fp, metadata)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Store object into seaweedfs</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :param fp: `StringIO` in-memory representation object</div><div class="line">        :param metadata: dictionary of metadata to be written</div><div class="line">        """</div><div class="line">        <span class="comment"># self._filesystem[name] = (fp, metadata)</span></div><div class="line">        fp.seek(<span class="number">0</span>)</div><div class="line">        self.seaweedfs.PUT(name,str(metadata) + <span class="string">'\n'</span> + fp.read())</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Delete object from memory</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        """</div><div class="line">        <span class="comment"># import pydevd</span></div><div class="line">        <span class="comment"># pydevd.settrace('127.0.0.1', port=54321, stdoutToServer=True, stderrToServer=True)</span></div><div class="line">        self.seaweedfs.DELETE(name)</div><div class="line">        <span class="comment"># del self._filesystem[name]</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_diskfile</span><span class="params">(self, account, container, obj, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">return</span> DiskFile(self, account, container, obj)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pickle_async_update</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        For now don't handle async updates.</div><div class="line">        """</div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现&lt;a href=&quot;https://github.com/MakeItPossible16/swift-weedfs-backend&quot;&gt;swift-weedfs-backend&lt;/a&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
-    
-      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
-    
-      <category term="swift-weedfs-backend" scheme="https://Caden16.github.io/tags/swift-weedfs-backend/"/>
-    
-  </entry>
-  
-  <entry>
     <title>LeetCode解题-Next Permutation(全排列生成算法)</title>
     <link href="https://Caden16.github.io/%E7%AE%97%E6%B3%95/LeetCode%E8%A7%A3%E9%A2%98-Permutation%20Sequence/"/>
     <id>https://Caden16.github.io/算法/LeetCode解题-Permutation Sequence/</id>
@@ -984,6 +990,33 @@
     
     
       <category term="LeetCode" scheme="https://Caden16.github.io/tags/LeetCode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>swift-weedfs-backend diskfile代码实现</title>
+    <link href="https://Caden16.github.io/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/swift-weedfs-backend%20diskfile%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/"/>
+    <id>https://Caden16.github.io/对象存储/swift-weedfs-backend diskfile代码实现/</id>
+    <published>2017-02-26T00:00:00.000Z</published>
+    <updated>2017-03-02T02:46:55.297Z</updated>
+    
+    <content type="html"><![CDATA[<p>主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现<a href="https://github.com/MakeItPossible16/swift-weedfs-backend" target="_blank" rel="external">swift-weedfs-backend</a><br><a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">InMemoryFileSystem</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    A very simplistic in-memory file system scheme.</div><div class="line"></div><div class="line">    There is one dictionary mapping a given object name to a tuple. The first</div><div class="line">    entry in the tuple is the cStringIO buffer representing the file contents,</div><div class="line">    the second entry is the metadata dictionary.</div><div class="line">    """</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._filesystem = &#123;&#125;</div><div class="line">        self.seaweedfs = Seaweedfs_operation()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Return back an file-like object and its metadata</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :return (fp, metadata): fp is `StringIO` in-memory representation</div><div class="line">                                object (or None). metadata is a dictionary</div><div class="line">                                of metadata (or None)</div><div class="line">        """</div><div class="line">        <span class="comment"># val = self._filesystem.get(name)</span></div><div class="line">        val = self.seaweedfs.GET(name)</div><div class="line">        <span class="keyword">if</span> val <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            fp, metadata = <span class="keyword">None</span>, <span class="keyword">None</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            fp, metadata = self.parse_seaweedfs_file(val)</div><div class="line">        <span class="comment"># else:</span></div><div class="line">        <span class="comment">#     fp, metadata = val</span></div><div class="line">        <span class="keyword">return</span> fp, metadata</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse_seaweedfs_file</span><span class="params">(self,val)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        parse file download from seaweedfs</div><div class="line">        :param val: seaweedfs file,fomat: str(metadata) + '\n' + obj_content</div><div class="line">        :return: StringIO obj_content, python dict metadata</div><div class="line">        """</div><div class="line">        metadata_index = val.find(<span class="string">'\n'</span>)</div><div class="line">        val = val.split(<span class="string">'\n'</span>,<span class="number">1</span>)</div><div class="line">        <span class="keyword">return</span>  StringIO.StringIO(val[<span class="number">1</span>]),eval(val[<span class="number">0</span>])</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">put_object</span><span class="params">(self, name, fp, metadata)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Store object into seaweedfs</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        :param fp: `StringIO` in-memory representation object</div><div class="line">        :param metadata: dictionary of metadata to be written</div><div class="line">        """</div><div class="line">        <span class="comment"># self._filesystem[name] = (fp, metadata)</span></div><div class="line">        fp.seek(<span class="number">0</span>)</div><div class="line">        self.seaweedfs.PUT(name,str(metadata) + <span class="string">'\n'</span> + fp.read())</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del_object</span><span class="params">(self, name)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Delete object from memory</div><div class="line"></div><div class="line">        :param name: standard object name</div><div class="line">        """</div><div class="line">        <span class="comment"># import pydevd</span></div><div class="line">        <span class="comment"># pydevd.settrace('127.0.0.1', port=54321, stdoutToServer=True, stderrToServer=True)</span></div><div class="line">        self.seaweedfs.DELETE(name)</div><div class="line">        <span class="comment"># del self._filesystem[name]</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_diskfile</span><span class="params">(self, account, container, obj, **kwargs)</span>:</span></div><div class="line">        <span class="keyword">return</span> DiskFile(self, account, container, obj)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pickle_async_update</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        For now don't handle async updates.</div><div class="line">        """</div><div class="line">        <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;主要修改InMemoryFileSystem中的代码,使用seaweedfs进行数据持久化,完整代码实现&lt;a href=&quot;https://github.com/MakeItPossible16/swift-weedfs-backend&quot;&gt;swift-weedfs-backend&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="对象存储" scheme="https://Caden16.github.io/categories/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
+    
+      <category term="openstack-swift" scheme="https://Caden16.github.io/tags/openstack-swift/"/>
+    
+      <category term="swift-weedfs-backend" scheme="https://Caden16.github.io/tags/swift-weedfs-backend/"/>
     
   </entry>
   
@@ -1278,6 +1311,31 @@
   </entry>
   
   <entry>
+    <title>数据结构</title>
+    <link href="https://Caden16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <id>https://Caden16.github.io/数据结构/数据结构/</id>
+    <published>2017-02-07T00:00:00.000Z</published>
+    <updated>2017-03-19T09:45:44.501Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
+<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
+<h2 id="跳表-SkipList"><a href="#跳表-SkipList" class="headerlink" title="跳表 SkipList"></a>跳表 SkipList</h2><p>在leveldb、redis中, 为了提高数据的查找效率,使用了SkipList,参考<a href="http://blog.sina.com.cn/s/blog_72995dcc01017w1t.html" target="_blank" rel="external">SkipList跳表基本原理</a>, <a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html" target="_blank" rel="external">跳表SkipList</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fansongy/article/details/679
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://Caden16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="数据结构" scheme="https://Caden16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>python语法记录</title>
     <link href="https://Caden16.github.io/python%E8%AF%AD%E6%B3%95/python%E8%AF%AD%E6%B3%95%E8%AE%B0%E5%BD%95/"/>
     <id>https://Caden16.github.io/python语法/python语法记录/</id>
@@ -1325,31 +1383,6 @@
     
     
       <category term="python" scheme="https://Caden16.github.io/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构</title>
-    <link href="https://Caden16.github.io/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    <id>https://Caden16.github.io/数据结构/数据结构/</id>
-    <published>2017-02-07T00:00:00.000Z</published>
-    <updated>2017-03-19T09:45:44.501Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h2><p><a href="http://blog.csdn.net/fansongy/article/details/6798278/" target="_blank" rel="external">数据结构（六）——二叉树 前序、中序、后序、层次遍历及非递归实现 查找、统计个数、比较、求深度的递归实现</a><br>前序遍历：根节点-&gt;左子树-&gt;右子树<br>中序遍历：左子树-&gt;根节点-&gt;右子树<br>后序遍历：左子树-&gt;右子树-&gt;根节点</p>
-<h2 id="简单清晰的B树、Trie树详解"><a href="#简单清晰的B树、Trie树详解" class="headerlink" title="简单清晰的B树、Trie树详解"></a>简单清晰的B树、Trie树详解</h2><p><a href="http://blog.csdn.net/yang_yulei/article/details/26104921" target="_blank" rel="external">简单清晰的B树、Trie树详解</a></p>
-<h2 id="跳表-SkipList"><a href="#跳表-SkipList" class="headerlink" title="跳表 SkipList"></a>跳表 SkipList</h2><p>在leveldb、redis中, 为了提高数据的查找效率,使用了SkipList,参考<a href="http://blog.sina.com.cn/s/blog_72995dcc01017w1t.html" target="_blank" rel="external">SkipList跳表基本原理</a>, <a href="http://www.cnblogs.com/xuqiang/archive/2011/05/22/2053516.html" target="_blank" rel="external">跳表SkipList</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;二叉树遍历&quot;&gt;&lt;a href=&quot;#二叉树遍历&quot; class=&quot;headerlink&quot; title=&quot;二叉树遍历&quot;&gt;&lt;/a&gt;二叉树遍历&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/fansongy/article/details/679
-    
-    </summary>
-    
-      <category term="数据结构" scheme="https://Caden16.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构" scheme="https://Caden16.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -1959,38 +1992,6 @@
   </entry>
   
   <entry>
-    <title>seaweedfs源码阅读记录1</title>
-    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
-    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录/</id>
-    <published>2016-11-22T00:00:00.000Z</published>
-    <updated>2017-02-25T11:47:17.603Z</updated>
-    
-    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
-<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
-<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
-<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333”  -port=8080<br>启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter1 -master=localhost:9333<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid</p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
-<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
-<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
-<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
-    
-    </summary>
-    
-      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
-    
-    
-      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
-    
-      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>seaweedfs源码阅读记录2</title>
     <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%952/"/>
     <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录2/</id>
@@ -2010,6 +2011,38 @@
     <summary type="html">
     
       &lt;h2 id=&quot;master启动过程&quot;&gt;&lt;a href=&quot;#master启动过程&quot; class=&quot;headerlink&quot; title=&quot;master启动过程&quot;&gt;&lt;/a&gt;master启动过程&lt;/h2&gt;&lt;p&gt;使用pycharm , 入口为weed.go, 根据参数调用command文
+    
+    </summary>
+    
+      <category term="文件存储" scheme="https://Caden16.github.io/categories/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/"/>
+    
+    
+      <category term="go" scheme="https://Caden16.github.io/tags/go/"/>
+    
+      <category term="seaweedfs" scheme="https://Caden16.github.io/tags/seaweedfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>seaweedfs源码阅读记录1</title>
+    <link href="https://Caden16.github.io/%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8/seaweedfs%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/"/>
+    <id>https://Caden16.github.io/文件存储/seaweedfs源码阅读记录/</id>
+    <published>2016-11-22T00:00:00.000Z</published>
+    <updated>2017-02-25T11:47:17.603Z</updated>
+    
+    <content type="html"><![CDATA[<p>接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:<a href="https://github.com/chrislusf/seaweedfs" target="_blank" rel="external">seaweedfs</a>.</p>
+<h2 id="目标-学习seaweedfs-的文件合并存储"><a href="#目标-学习seaweedfs-的文件合并存储" class="headerlink" title="目标:学习seaweedfs 的文件合并存储"></a>目标:学习seaweedfs 的文件合并存储</h2><p>文件合并后必然会带来的一堆问题待解决,比如文件索引,响应速率等.</p>
+<h2 id="学习方式-google-调试"><a href="#学习方式-google-调试" class="headerlink" title="学习方式: google + 调试"></a>学习方式: google + 调试</h2><p>github 上能找到项目的wiki文档,会介绍简单的使用.调试方案: IDEA/pycharm , 需要结合atom/vscode 的delve调试go程序,各有利弊,结合使用.</p>
+<h2 id="测试用命令"><a href="#测试用命令" class="headerlink" title="测试用命令"></a>测试用命令</h2><p>启动:<br>master : weed master -mdir=/home/ubuntu/weedfs<br>volume : weed volume -dir=”/home/ubuntu/weedfs/data1” -mserver=”localhost:9333”  -port=8080<br>启用目录filter: weed filer -port=8888 -dir=/home/ubuntu/weedfs/filter1 -master=localhost:9333<br>使用:<br>curl -X POST <a href="http://localhost:9333/dir/assign" target="_blank" rel="external">http://localhost:9333/dir/assign</a> 获取fid</p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://yanyiwu.com/work/2015/01/09/weed-fs-source-analysis.html" target="_blank" rel="external">分布式存储Seaweedfs源码分析</a></p>
+<p><a href="http://tonybai.com/2015/08/22/intro-of-using-weedfs/" target="_blank" rel="external">tonybai的个人blog</a></p>
+<p><a href="http://www.tuicool.com/articles/yyUr2e" target="_blank" rel="external">weed-fs 源码解读—分布式处理过程</a></p>
+<p><a href="http://blog.csdn.net/baogang409/article/details/42105367" target="_blank" rel="external">weed-fs 源码解读</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;接下来的日子都会抽出部分时间学习文件存储,目标是修改openstack-swift的源码,通过源码学习文件存储知识.目前学习对象:&lt;a href=&quot;https://github.com/chrislusf/seaweedfs&quot; target=&quot;_blank&quot; rel=&quot;ex
     
     </summary>
     
